@@ -1,0 +1,55 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: xor - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP1300.BAT" with contents
+[
+@echo off
+%QTDIR%\bin\moc.exe xorwindow.h -o moc_xorwindow.cpp
+]
+Creating command line "C:\WINDOWS\TEMP\RSP1300.BAT"
+Creating temporary file "C:\WINDOWS\TEMP\RSP1301.TMP" with contents
+[
+/nologo /MD /W3 /GX /ZI /I "c:\programme\qt\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "QT_DLL" /D "UNICODE" /D "QT_THREAD_SUPPORT" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\xor\graphics.cpp"
+"C:\xor\main.cpp"
+"C:\xor\moc_xorwindow.cpp"
+"C:\xor\playground.cpp"
+"C:\xor\sound.cpp"
+"C:\xor\xorwindow.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP1301.TMP" 
+Moc'ing xorwindow.h...
+Creating temporary file "C:\WINDOWS\TEMP\RSP1311.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib winmm.lib wsock32.lib imm32.lib wsock32.lib winmm.lib c:\programme\qt\lib\qt-mt230nc.lib c:\programme\qt\lib\qtmain.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/xor.pdb" /debug /machine:I386 /nodefaultlib:"libc" /out:"Debug/xor.exe" /pdbtype:sept 
+.\Debug\graphics.obj
+.\Debug\main.obj
+.\Debug\moc_xorwindow.obj
+.\Debug\playground.obj
+.\Debug\sound.obj
+.\Debug\xorwindow.obj
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP1311.TMP"
+<h3>Output Window</h3>
+Compiling...
+graphics.cpp
+main.cpp
+moc_xorwindow.cpp
+playground.cpp
+sound.cpp
+xorwindow.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+xor.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

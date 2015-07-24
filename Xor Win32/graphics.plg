@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Erstellungsprotokoll</h1>
+<h3>
+--------------------Konfiguration: graphics - Win32 Debug--------------------
+</h3>
+<h3>Befehlszeilen</h3>
+Erstellen der temporären Datei  "C:\WINDOWS\TEMP\RSPA042.TMP" mit Inhalten
+[
+kernel32.lib user32.lib gdi32.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib imm32.lib winmm.lib wsock32.lib imm32.lib wsock32.lib winmm.lib c:\programme\qt\lib\qt-mt230nc.lib c:\programme\qt\lib\qtmain.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/xorwindow.pdb" /debug /machine:I386 /nodefaultlib:"libc" /out:"Debug/xorwindow.exe" /pdbtype:sept 
+.\Debug\graphics.obj
+.\Debug\playground.obj
+.\Debug\xorwindow.obj
+]
+Erstellen der Befehlzeile "link.exe @C:\WINDOWS\TEMP\RSPA042.TMP"
+<h3>Ausgabefenster</h3>
+Linker-Vorgang läuft...
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "protected: virtual void __thiscall XorWindowCanvas::initMetaObject(void)" (?initMetaObject@XorWindowCanvas@@MAEXXZ)
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "public: virtual char const * __thiscall XorWindowCanvas::className(void)const " (?className@XorWindowCanvas@@UBEPBDXZ)
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "protected: virtual void __thiscall XorWindow::initMetaObject(void)" (?initMetaObject@XorWindow@@MAEXXZ)
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "public: virtual char const * __thiscall XorWindow::className(void)const " (?className@XorWindow@@UBEPBDXZ)
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "public: static class QMetaObject * __cdecl XorWindowCanvas::staticMetaObject(void)" (?staticMetaObject@XorWindowCanvas@@SAPAVQMetaObject@@XZ)
+xorwindow.obj : error LNK2001: Nichtaufgeloestes externes Symbol "public: static class QMetaObject * __cdecl XorWindow::staticMetaObject(void)" (?staticMetaObject@XorWindow@@SAPAVQMetaObject@@XZ)
+qtmain.lib(qtmain_win.obj) : error LNK2001: Nichtaufgeloestes externes Symbol _main
+Debug/xorwindow.exe : fatal error LNK1120: 7 unaufgeloeste externe Verweise
+Fehler beim Ausführen von link.exe.
+
+
+
+<h3>Ergebnisse</h3>
+xorwindow.exe - 8 Fehler, 0 Warnung(en)
+</pre>
+</body>
+</html>
