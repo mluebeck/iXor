@@ -27,7 +27,7 @@ class XorGameViewController: UIViewController {
         return true
     }
     
-    @IBOutlet let stepsLabel : UILabel!
+    @IBOutlet var stepsLabel : UILabel!
     
     override var shouldAutorotate: Bool {
         return true

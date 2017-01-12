@@ -25,8 +25,6 @@
 		8C24165D1DF9FFA30009FCC6 /* level14.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164E1DF9FFA30009FCC6 /* level14.xor */; };
 		8C24165E1DF9FFA30009FCC6 /* level15.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164F1DF9FFA30009FCC6 /* level15.xor */; };
 		8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312AA1DF4717800E80996 /* AppDelegate.swift */; };
-		8C4312AD1DF4717800E80996 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312AC1DF4717800E80996 /* GameScene.sks */; };
-		8C4312AF1DF4717800E80996 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312AE1DF4717800E80996 /* Actions.sks */; };
 		8C4312B11DF4717800E80996 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B01DF4717800E80996 /* GameScene.swift */; };
 		8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B21DF4717800E80996 /* XorGameViewController.swift */; };
 		8C4312B61DF4717800E80996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B41DF4717800E80996 /* Main.storyboard */; };
@@ -66,8 +64,6 @@
 		8C24164F1DF9FFA30009FCC6 /* level15.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level15.xor; sourceTree = "<group>"; };
 		8C4312A71DF4717800E80996 /* iXor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iXor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4312AA1DF4717800E80996 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C4312AC1DF4717800E80996 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		8C4312AE1DF4717800E80996 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		8C4312B01DF4717800E80996 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		8C4312B21DF4717800E80996 /* XorGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XorGameViewController.swift; sourceTree = "<group>"; };
 		8C4312B51DF4717800E80996 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,8 +139,6 @@
 			children = (
 				8C44EBED1E26FFC900229C93 /* Classes */,
 				8C2416401DF9FF850009FCC6 /* Level */,
-				8C4312AC1DF4717800E80996 /* GameScene.sks */,
-				8C4312AE1DF4717800E80996 /* Actions.sks */,
 				8C4312B41DF4717800E80996 /* Main.storyboard */,
 				8C4312B71DF4717800E80996 /* Assets.xcassets */,
 				8C4312B91DF4717800E80996 /* LaunchScreen.storyboard */,
@@ -266,7 +260,6 @@
 				8C2416571DF9FFA30009FCC6 /* level08.xor in Resources */,
 				8C4312B61DF4717800E80996 /* Main.storyboard in Resources */,
 				8C2416501DF9FFA30009FCC6 /* level01.xor in Resources */,
-				8C4312AD1DF4717800E80996 /* GameScene.sks in Resources */,
 				8C2416591DF9FFA30009FCC6 /* level10.xor in Resources */,
 				8C24165D1DF9FFA30009FCC6 /* level14.xor in Resources */,
 				8C2416581DF9FFA30009FCC6 /* level09.xor in Resources */,
@@ -277,7 +270,6 @@
 				8C24165B1DF9FFA30009FCC6 /* level12.xor in Resources */,
 				8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */,
 				8C2416551DF9FFA30009FCC6 /* level06.xor in Resources */,
-				8C4312AF1DF4717800E80996 /* Actions.sks in Resources */,
 				8C24165C1DF9FFA30009FCC6 /* level13.xor in Resources */,
 				8C2416541DF9FFA30009FCC6 /* level05.xor in Resources */,
 			);
