@@ -28,12 +28,12 @@
 		8C4312AD1DF4717800E80996 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312AC1DF4717800E80996 /* GameScene.sks */; };
 		8C4312AF1DF4717800E80996 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312AE1DF4717800E80996 /* Actions.sks */; };
 		8C4312B11DF4717800E80996 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B01DF4717800E80996 /* GameScene.swift */; };
-		8C4312B31DF4717800E80996 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B21DF4717800E80996 /* GameViewController.swift */; };
+		8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B21DF4717800E80996 /* XorGameViewController.swift */; };
 		8C4312B61DF4717800E80996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B41DF4717800E80996 /* Main.storyboard */; };
 		8C4312B81DF4717800E80996 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B71DF4717800E80996 /* Assets.xcassets */; };
 		8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B91DF4717800E80996 /* LaunchScreen.storyboard */; };
 		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
-		8C44EBEC1E26C0CC00229C93 /* LevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* LevelTableViewController.swift */; };
+		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,7 @@
 		8C4312AC1DF4717800E80996 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8C4312AE1DF4717800E80996 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		8C4312B01DF4717800E80996 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		8C4312B21DF4717800E80996 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		8C4312B21DF4717800E80996 /* XorGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XorGameViewController.swift; sourceTree = "<group>"; };
 		8C4312B51DF4717800E80996 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C4312B71DF4717800E80996 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C4312BA1DF4717800E80996 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 		8C4312C11DF4717900E80996 /* iXorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iXorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4312C51DF4717900E80996 /* iXorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iXorTests.swift; sourceTree = "<group>"; };
 		8C4312C71DF4717900E80996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C44EBEB1E26C0CC00229C93 /* LevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewController.swift; sourceTree = "<group>"; };
+		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,19 +141,14 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				8C44EBED1E26FFC900229C93 /* Classes */,
 				8C2416401DF9FF850009FCC6 /* Level */,
-				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
 				8C4312AC1DF4717800E80996 /* GameScene.sks */,
 				8C4312AE1DF4717800E80996 /* Actions.sks */,
-				8C4312B01DF4717800E80996 /* GameScene.swift */,
-				8C4312B21DF4717800E80996 /* GameViewController.swift */,
-				8C44EBEB1E26C0CC00229C93 /* LevelTableViewController.swift */,
 				8C4312B41DF4717800E80996 /* Main.storyboard */,
 				8C4312B71DF4717800E80996 /* Assets.xcassets */,
 				8C4312B91DF4717800E80996 /* LaunchScreen.storyboard */,
-				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
 				8C4312BC1DF4717800E80996 /* Info.plist */,
-				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
 			);
 			path = iXor;
 			sourceTree = "<group>";
@@ -165,6 +160,19 @@
 				8C4312C71DF4717900E80996 /* Info.plist */,
 			);
 			path = iXorTests;
+			sourceTree = "<group>";
+		};
+		8C44EBED1E26FFC900229C93 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
+				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
+				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
+				8C4312B01DF4717800E80996 /* GameScene.swift */,
+				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
+				8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,7 +220,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = MarioRotz;
 				TargetAttributes = {
 					8C4312A61DF4717800E80996 = {
@@ -289,10 +297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C44EBEC1E26C0CC00229C93 /* LevelTableViewController.swift in Sources */,
+				8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */,
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
-				8C4312B31DF4717800E80996 /* GameViewController.swift in Sources */,
+				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,
 				8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */,
 			);
@@ -354,6 +362,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -404,6 +413,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

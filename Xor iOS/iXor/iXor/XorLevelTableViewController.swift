@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LevelTableViewController: UITableViewController {
+class XorLevelTableViewController: UITableViewController {
 
     var playgrounds : Array<Playground>?
 
@@ -44,23 +44,25 @@ class LevelTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return playgrounds!.count
     }
 
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
-
+        let playground = playgrounds?[indexPath.row]
+        print("adding playground \(playground?.title) to Cell")
+        cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.title)!
+        cell.detailTextLabel?.text = "Unfinished!"
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

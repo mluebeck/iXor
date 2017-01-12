@@ -40,6 +40,7 @@ class Playground: NSObject {
                                                               "o":MazeElementType.map_3,
                                                               "p":MazeElementType.map_4,
                                                               "M":MazeElementType.mask,
+                                                              "X":MazeElementType.bad_mask,
                                                               "H":MazeElementType.h_wave,
                                                               "V":MazeElementType.v_wave,
                                                               "P":MazeElementType.puppet,
@@ -56,16 +57,22 @@ class Playground: NSObject {
     var transporterCoordinates : Array<Array<MazeElementType>> = Array()
     
     var levelSuccess : [Int : (Int,Bool)] =  [Int : (Int,Bool)]() // level no : (number of moves, successful finished)
+
     
-    func readLevel(number: Int) {
-        var file : String = ""
-        if number>9 {
-            file = "level\(number)"
-        } else {
-            file = "level0\(number)"
+    var beam_from = Array<Array<Int>>()
+    var beam_to =   Array<Array<Int>>()
+    
+    override init() {
+        super.init()
+        for _ in 0..<20 {
+            beam_from.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
+            beam_to.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
         }
-        
-        let s = try! String(contentsOfFile: Bundle.main.path(forResource: file, ofType: "xor")!)
+    }
+    
+    
+    func readLevelString(filepath: String) {
+        let s = try! String(contentsOfFile: filepath)
         print(s)
         var commentMode = false
         var titel : String = ""
@@ -91,6 +98,10 @@ class Playground: NSObject {
         print(mazeString)
         var i = 0
         var localArray = Array<MazeElementType>()
+        
+       
+        var x=0
+        var index = 0
         for char in mazeString.characters {
             if char == "\n" {
                 print("newline")
@@ -104,13 +115,52 @@ class Playground: NSObject {
             else
             if !(char == " ")
             {
-                if let element = mazeElementToString[char]! as MazeElementType? {
-                    localArray.append(element)
-                    print("add element: \(element)")
+                if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
+                    if let element = mazeElementToString[char]! as MazeElementType? {
+                        localArray.append(element)
+                        print("add element: \(element)")
+                    }
+                } else {
+                    // Transporter coordinates!
+                    
+                    let kl = Int(String(char))
+                    if x % 4 == 0 {
+                        print("add beam from beam_from[\(index)][0]=\(kl):")
+                        beam_from[index][0] = kl!;
+                    } else
+                    if x % 4 == 1 {
+                        print("add beam from beam_from[\(index)][1]=\(kl):")
+                        beam_from[index][1] = kl!;
+                    }
+                    else
+                    if x % 4 == 2 {
+                        print("add beam from beam_to[\(index)][0]=\(kl):")
+                        beam_to[index][0] = kl!;
+                    }
+                    else
+                    if x % 4 == 3 {
+                        print("add beam from beam_to[\(index)][1]=\(kl):")
+                        beam_to[index][1] = kl!;
+                        index=index+1
+                    }
+                    x=x+1
                 }
             }
         }
         self.title = titel
+    }
+    
+    
+    func readLevel(number: Int) {
+        var file : String = ""
+        if number>9 {
+            file = "level\(number)"
+        } else {
+            file = "level0\(number)"
+        }
+        
+        let s = try! String(contentsOfFile: Bundle.main.path(forResource: file, ofType: "xor")!)
+        readLevelString(filepath: s)
     }
 }
 

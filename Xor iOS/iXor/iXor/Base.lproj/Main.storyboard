@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Game View Controller-->
+        <!--Xor Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="XorGameViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -46,6 +46,9 @@
                                         <state key="normal" title="Forward">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="forwardButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="TMu-DF-Xqk"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0d-1a-mjQ">
                                         <rect key="frame" x="243.5" y="256" width="111.5" height="30"/>
@@ -56,6 +59,9 @@
                                         <state key="normal" title="Back">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="vsB-Yc-fgt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNQ-MT-zeI">
                                         <rect key="frame" x="0.0" y="256" width="111.5" height="30"/>
@@ -66,6 +72,9 @@
                                         <state key="normal" title="Replay">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="replayButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="gQi-8G-57y"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 Steps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrF-DL-XeI">
                                         <rect key="frame" x="121.5" y="0.0" width="112" height="30"/>
@@ -86,6 +95,9 @@
                                         <state key="normal" title="Map">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="switchMaskButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="ha8-Mn-awB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vT5-3V-aIL">
                                         <rect key="frame" x="243.5" y="0.0" width="111.5" height="30"/>
@@ -114,6 +126,9 @@
                                                 <state key="normal" title="Right">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="rightGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="xBA-Ha-Mxd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Pr-ugY">
                                                 <rect key="frame" x="0.0" y="84" width="111.5" height="30"/>
@@ -124,6 +139,9 @@
                                                 <state key="normal" title="Left">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="leftGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="Ws1-WP-5ry"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbD-9B-DyD">
                                                 <rect key="frame" x="121.5" y="0.0" width="112" height="30"/>
@@ -135,6 +153,9 @@
                                                 <state key="normal" title="Up">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="upGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="xgi-1d-WG3"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhH-4i-AGq">
                                                 <rect key="frame" x="121.5" y="168" width="112" height="30"/>
@@ -146,6 +167,9 @@
                                                 <state key="normal" title="Down">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="downGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="o7h-Bg-lhi"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zW3-VS-TiF">
                                                 <rect key="frame" x="121.5" y="84" width="112" height="30"/>
@@ -153,9 +177,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Lt3-ll-jm4"/>
                                                 </constraints>
-                                                <state key="normal" title="Switch Player">
+                                                <state key="normal" title="Switch Mask">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="switchMaskButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="PoS-SW-17r"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -220,16 +247,17 @@
                         <outlet property="playerButtonsViewHeightConstraint" destination="gI4-2p-Vfi" id="3L0-Hk-v61"/>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="mhv-aJ-ap6"/>
                         <outlet property="playgroundViewConstraint" destination="F3G-0e-RbR" id="NTZ-i0-V0z"/>
+                        <outlet property="stepsLabel" destination="yrF-DL-XeI" id="edg-oJ-Zb2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="141.59999999999999" y="103.89805097451276"/>
         </scene>
-        <!--Level Table View Controller-->
+        <!--Xor Level Table View Controller-->
         <scene sceneID="K07-aM-b1g">
             <objects>
-                <tableViewController id="uMF-bP-LeY" customClass="LevelTableViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="uMF-bP-LeY" customClass="XorLevelTableViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="59n-7u-dfu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,13 +276,30 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Uai-03-lx7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="D9y-Mb-GOs" detailTextLabel="RqV-m3-9qz" style="IBUITableViewCellStyleValue1" id="Uai-03-lx7">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9y-Mb-GOs">
+                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqV-m3-9qz">
+                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" hint="Hint" identifier="reuseIdentifier" label="Label"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -265,7 +310,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sc0-p1-LhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1119" y="130"/>
+            <point key="canvasLocation" x="1114" y="104"/>
         </scene>
     </scenes>
 </document>

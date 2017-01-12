@@ -16,7 +16,7 @@ enum Orientation {
 }
 
 
-class GameViewController: UIViewController {
+class XorGameViewController: UIViewController {
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
@@ -26,6 +26,8 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    @IBOutlet let stepsLabel : UILabel!
     
     override var shouldAutorotate: Bool {
         return true
@@ -86,12 +88,23 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let playground = Playground()
-        playground.readLevel(number: 1)
+        var playground : Playground?
+        
+        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
+        //let filesFromBundle = try fileManager.contentsOfDirectory(atPath: path)
+        //print(filesFromBundle)
+        print(paths)
         
         playgrounds = Array<Playground>()
 
-        playgrounds?.append(playground)
+        for path in paths {
+            playground = Playground()
+            playground?.readLevelString(filepath:path)
+            playgrounds?.append(playground!)
+            
+        }
+        
+
         
         // Configure the view.
         let skView = view as! SKView
@@ -113,9 +126,24 @@ class GameViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination
-        if viewController is LevelTableViewController {
-            let levelTableViewController = viewController as! LevelTableViewController
+        if viewController is XorLevelTableViewController {
+            let levelTableViewController = viewController as! XorLevelTableViewController
             levelTableViewController.playgrounds = self.playgrounds
         }
     }
+    
+    @IBAction func leftGameButtonPressed(){}
+    @IBAction func rightGameButtonPressed(){}
+    @IBAction func upGameButtonPressed(){}
+    @IBAction func downGameButtonPressed(){}
+    
+    @IBAction func switchMaskButtonPressed(){}
+    
+    @IBAction func replayButtonPressed(){}
+    @IBAction func forwardButtonPressed(){}
+    @IBAction func backButtonPressed(){}
+    
+    @IBAction func mapButtonPressed(){}
+    
+    
 }
