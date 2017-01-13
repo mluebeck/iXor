@@ -11,7 +11,9 @@ import UIKit
 class XorLevelTableViewController: UITableViewController {
 
     var playgrounds : Array<Playground>?
-
+    var selectionFinishedClosure : ((Int) -> ())?
+    var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
+    
     @IBAction func backButtonPressed()
     {
         self.dismiss(animated: true, completion: {});
@@ -54,16 +56,33 @@ class XorLevelTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         let playground = playgrounds?[indexPath.row]
-        print("adding playground \(playground?.title) to Cell")
-        cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.title)!
-        cell.detailTextLabel?.text = "Unfinished!"
+        print("adding playground \(playground?.level_name) to Cell")
+        cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
+        if playground?.successfulFinished == true {
+            cell.detailTextLabel?.text = "Completed!"
+        } else {
+            cell.detailTextLabel?.text = "Unfinished!"
+        }
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let isEnabled = enabled(level: indexPath.row)
+        if isEnabled == true {
+            self.selectedItem = indexPath as NSIndexPath
+            if let s = selectionFinishedClosure {
+                s((self.selectedItem.row))
+            }
+            self.dismiss(animated: true, completion: {});
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -108,5 +127,16 @@ class XorLevelTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func enabled(level:Int) -> Bool {
+        var previousLevelFinished=true
+        if level>1 && level<(playgrounds?.count)! {
+            let playground = playgrounds?[level-1]
+            if playground?.successfulFinished==false {
+                previousLevelFinished = false
+            }
+        }
+        return previousLevelFinished
+    }
 
 }

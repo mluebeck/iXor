@@ -20,14 +20,21 @@ class XorGameViewController: UIViewController {
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
+    
+    @IBOutlet var playgroundView : SKView!
+    @IBOutlet var stepsLabel : UILabel!
+    @IBOutlet var collectedMasksLabel : UILabel!
+    
+    
     var currentOrientation : Orientation!
     var scene: GameScene!
     var playgrounds : Array<Playground>?
+    var currentPlayground : Playground?
+    
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    @IBOutlet var stepsLabel : UILabel!
     
     override var shouldAutorotate: Bool {
         return true
@@ -88,7 +95,6 @@ class XorGameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var playground : Playground?
         
         let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
         //let filesFromBundle = try fileManager.contentsOfDirectory(atPath: path)
@@ -96,26 +102,24 @@ class XorGameViewController: UIViewController {
         print(paths)
         
         playgrounds = Array<Playground>()
-
+        var playground : Playground?
         for path in paths {
             playground = Playground()
             playground?.readLevelString(filepath:path)
             playgrounds?.append(playground!)
-            
         }
-        
-
+    
+        currentPlayground = playgrounds?[0]
         
         // Configure the view.
-        let skView = view as! SKView
-        skView.isMultipleTouchEnabled = false
+        playgroundView.isMultipleTouchEnabled = false
         
         // Create and configure the scene.
-        scene = GameScene(size: skView.bounds.size)
+        scene = GameScene(size: playgroundView.bounds.size, playground:self.currentPlayground!)
         scene.scaleMode = .aspectFill
-        
+        scene.backgroundColor = UIColor.lightGray
         // Present the scene.
-        skView.presentScene(scene)
+        playgroundView.presentScene(scene)
     }
     
     override func viewDidLayoutSubviews()
@@ -129,6 +133,18 @@ class XorGameViewController: UIViewController {
         if viewController is XorLevelTableViewController {
             let levelTableViewController = viewController as! XorLevelTableViewController
             levelTableViewController.playgrounds = self.playgrounds
+            levelTableViewController.selectionFinishedClosure = {
+                selectedPlaygroundLevel in
+                if selectedPlaygroundLevel >= 0 {
+                    if self.currentPlayground?.level_number==selectedPlaygroundLevel {
+                    }
+                    else
+                    {
+                        self.currentPlayground = self.playgrounds?[selectedPlaygroundLevel]
+                    }
+                }
+                return
+            }
         }
     }
     

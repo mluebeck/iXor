@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SpriteKit
+
 enum MazeElementType: Int {
     case space = 0,
     fish,
@@ -34,14 +36,23 @@ struct PlaygroundPosition {
     var positionY : Int
 }
 
+struct MazeType {
+    var mazeElementType : MazeElementType?
+    var sprite : SKSpriteNode?
+}
+
 class Playground: NSObject {
     
     struct Constants {
-        static let groesse = 32;         // playground dimensions (=32x32)
-        static let sichtbareGroesse = 8  // visible playground
+        static let groesseX = 32;         // playground dimensions (=32x32)
+        static let groesseY = 32;         // playground dimensions (=32x32)
+        static let sichtbareGroesseX = 8  // visible playground
+        static let sichtbareGroesseY = 8  // visible playground
+        
     }
     
-    let mazeElementToString : [Character : MazeElementType]=[ "_":MazeElementType.space,
+    static let mazeElementToString : [Character : MazeElementType]=[
+                                                              "_":MazeElementType.space,
                                                               "F":MazeElementType.fish,
                                                               "C":MazeElementType.chicken,
                                                               "m":MazeElementType.map_1,
@@ -61,15 +72,10 @@ class Playground: NSObject {
                                                               "E":MazeElementType.exit,
                                                               "W":MazeElementType.wall   ]
 
-    var title : String = ""
-    var playgroundArray : Array<Array<MazeElementType>> = Array()  // Das spielfeld
-    
-    var successfulFinished = false
-    var numberOfMoves = 0
+    var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
     var beam_to =   Array<Array<Int>>() // transporter target co-ordinates
-    
     
     
     
@@ -94,10 +100,14 @@ class Playground: NSObject {
     //playgroundArray : var spielfeld = Array<Array<Int>>() //= new byte[32][32];              // the playground
     var names  = Array<String>()      //new String[25];                    // Die file names of the bitmaps
     //var level = ""                  // the level file name(e.g. level01.xor)
+
     var level_name: String?           // the 'official' level name (e.g. "The Decoder")
     var level_geschafft = 0           // how many level have you completed ??
+    var level_number : Int = 0
+    var successfulFinished = false
+    var numberOfMoves = 0
     
-    // screen co-ordinates of the player
+    // screen co-ordinates of the current player
     var playerCoordinates : PlaygroundPosition
     
     // old screen co-ordinates
@@ -141,14 +151,14 @@ class Playground: NSObject {
         var positionY = 0
         
         var commentMode = false
-        var titel : String = ""
+        var levelTitleWithNumber : String = ""
         var mazeString : String = ""
         for char in s.characters {
             if commentMode == true {
                 if char == "#" {
                     commentMode = false
                 } else {
-                    titel.append(char)
+                    levelTitleWithNumber.append(char)
                 }
             } else
             {
@@ -161,22 +171,28 @@ class Playground: NSObject {
             }
             
         }
-        print(mazeString)
+        
+        let arr = levelTitleWithNumber.components(separatedBy:":")
+        if arr.count==2 {
+            self.level_name = arr[1]
+            let numberStr = arr[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            self.level_number = Int(numberStr)!
+        }
+        
         var i = 0
-        var localArray = Array<MazeElementType>()
+        var localArray = Array<MazeType>()
         
         var x=0
         var index = 0
         for char in mazeString.characters {
             if char == "\n" {
-                print("newline")
                 positionX = 0
                 positionY = positionY + 1
                 if localArray.count>0
                 {
                     self.playgroundArray.append(localArray)
                     i += 1;
-                    localArray = Array<MazeElementType>()
+                    localArray = Array<MazeType>()
                 }
             }
             else
@@ -189,32 +205,34 @@ class Playground: NSObject {
                 if char == "b" {
                     self.playerTwo.positionX = positionX
                     self.playerTwo.positionY = positionY
-                } else
+                }
                 if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
-                    if let element = mazeElementToString[char]! as MazeElementType? {
-                        localArray.append(element)
-                        print("add element: \(element)")
+                    if let element = Playground.mazeElementToString[char]! as MazeElementType? {
+                        if element == MazeElementType.space {
+                            let mazeElement = MazeType(mazeElementType: nil, sprite:nil)
+                            localArray.append(mazeElement)
+                        } else {
+                            let sprite = SKSpriteNode(imageNamed:GameScene.MazeElementToFilename[element]!)
+                            let mazeElement = MazeType(mazeElementType: element, sprite:sprite)
+                            localArray.append(mazeElement)
+                        }
                     }
                 } else {
                     // Transporter coordinates!
                     
                     let kl = Int(String(char))
                     if x % 4 == 0 {
-                        print("add beam from beam_from[\(index)][0]=\(kl):")
                         beam_from[index][0] = kl!;
                     } else
                     if x % 4 == 1 {
-                        print("add beam from beam_from[\(index)][1]=\(kl):")
                         beam_from[index][1] = kl!;
                     }
                     else
                     if x % 4 == 2 {
-                        print("add beam from beam_to[\(index)][0]=\(kl):")
                         beam_to[index][0] = kl!;
                     }
                     else
                     if x % 4 == 3 {
-                        print("add beam from beam_to[\(index)][1]=\(kl):")
                         beam_to[index][1] = kl!;
                         index=index+1
                     }
@@ -224,7 +242,6 @@ class Playground: NSObject {
             positionX = positionX + 1
 
         }
-        self.title = titel
     }
     
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
+		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
 		8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */; };
 		8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24163E1DF9FF490009FCC6 /* Playground.swift */; };
 		8C2416501DF9FFA30009FCC6 /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416411DF9FFA30009FCC6 /* level01.xor */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
+		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
 		8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeElement.swift; sourceTree = "<group>"; };
 		8C24163E1DF9FF490009FCC6 /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		8C2416411DF9FFA30009FCC6 /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
@@ -94,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C04831E1E285BFD00F29B4D /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8C0483231E285DC000F29B4D /* acid.caf */,
+				8C0483241E285DC000F29B4D /* bomb.caf */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
 		8C2416401DF9FF850009FCC6 /* Level */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +150,7 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				8C04831E1E285BFD00F29B4D /* sounds */,
 				8C44EBED1E26FFC900229C93 /* Classes */,
 				8C2416401DF9FF850009FCC6 /* Level */,
 				8C4312B41DF4717800E80996 /* Main.storyboard */,
@@ -254,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C0483261E285DC000F29B4D /* bomb.caf in Resources */,
 				8C2416511DF9FFA30009FCC6 /* level02.xor in Resources */,
 				8C2416561DF9FFA30009FCC6 /* level07.xor in Resources */,
 				8C2416531DF9FFA30009FCC6 /* level04.xor in Resources */,
@@ -270,6 +285,7 @@
 				8C24165B1DF9FFA30009FCC6 /* level12.xor in Resources */,
 				8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */,
 				8C2416551DF9FFA30009FCC6 /* level06.xor in Resources */,
+				8C0483251E285DC000F29B4D /* acid.caf in Resources */,
 				8C24165C1DF9FFA30009FCC6 /* level13.xor in Resources */,
 				8C2416541DF9FFA30009FCC6 /* level05.xor in Resources */,
 			);
