@@ -148,12 +148,31 @@ class XorGameViewController: UIViewController {
         }
     }
     
-    @IBAction func leftGameButtonPressed(){}
-    @IBAction func rightGameButtonPressed(){}
-    @IBAction func upGameButtonPressed(){}
-    @IBAction func downGameButtonPressed(){}
+    @IBAction func leftGameButtonPressed(){
+        scene.movePlayerLeft()
+    }
+    @IBAction func rightGameButtonPressed(){
+        scene.movePlayerRight()
+    }
+    @IBAction func upGameButtonPressed(){
+        scene.movePlayerUp()
+    }
+    @IBAction func downGameButtonPressed(){
+        scene.movePlayerDown()
+    }
     
-    @IBAction func switchMaskButtonPressed(){}
+    @IBAction func switchMaskButtonPressed(){
+        if currentPlayground?.akt_spieler_ist_playerOne == true
+        {
+            scene.switchToPlayerTwo()
+            currentPlayground?.akt_spieler_ist_playerOne = false
+        }
+        else
+        {
+            scene.switchToPlayerOne()
+            currentPlayground?.akt_spieler_ist_playerOne = true
+        }
+    }
     
     @IBAction func replayButtonPressed(){}
     @IBAction func forwardButtonPressed(){}

@@ -14,12 +14,12 @@ import SpriteKit
 class MazeElement {
     var column: Int
     var row: Int
-    let mazeElementType: MazeElementType
+    let theMazeElementType: MazeElementType
     var sprite: SKSpriteNode?
     
-    init(column: Int, row: Int, cookieType: MazeElementType) {
+    init(column: Int, row: Int, mazeElementType: MazeElementType) {
         self.column = column
         self.row = row
-        self.mazeElementType = cookieType
+        self.theMazeElementType = mazeElementType
     }
 }

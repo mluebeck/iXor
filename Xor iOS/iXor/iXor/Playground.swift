@@ -31,10 +31,18 @@ enum MazeElementType: Int {
     wall
 }
 
+enum PlayerMoveDirection  : Int {
+    case UP = 0,
+    DOWN,
+    LEFT,
+    RIGHT
+}
+
 struct PlaygroundPosition {
     var positionX : Int
     var positionY : Int
 }
+
 
 struct MazeType {
     var mazeElementType : MazeElementType?
@@ -52,36 +60,62 @@ class Playground: NSObject {
     }
     
     static let mazeElementToString : [Character : MazeElementType]=[
-                                                              "_":MazeElementType.space,
-                                                              "F":MazeElementType.fish,
-                                                              "C":MazeElementType.chicken,
-                                                              "m":MazeElementType.map_1,
-                                                              "n":MazeElementType.map_2,
-                                                              "o":MazeElementType.map_3,
-                                                              "p":MazeElementType.map_4,
-                                                              "M":MazeElementType.mask,
-                                                              "X":MazeElementType.bad_mask,
-                                                              "H":MazeElementType.h_wave,
-                                                              "V":MazeElementType.v_wave,
-                                                              "P":MazeElementType.puppet,
-                                                              "B":MazeElementType.bomb,
-                                                              "S":MazeElementType.acid,
-                                                              "T":MazeElementType.transporter,
-                                                              "a":MazeElementType.player_1,
-                                                              "b":MazeElementType.player_2,
-                                                              "E":MazeElementType.exit,
-                                                              "W":MazeElementType.wall   ]
+        "_":MazeElementType.space,
+        "F":MazeElementType.fish,
+        "C":MazeElementType.chicken,
+        "m":MazeElementType.map_1,
+        "n":MazeElementType.map_2,
+        "o":MazeElementType.map_3,
+        "p":MazeElementType.map_4,
+        "M":MazeElementType.mask,
+        "X":MazeElementType.bad_mask,
+        "H":MazeElementType.h_wave,
+        "V":MazeElementType.v_wave,
+        "P":MazeElementType.puppet,
+        "B":MazeElementType.bomb,
+        "S":MazeElementType.acid,
+        "T":MazeElementType.transporter,
+        "a":MazeElementType.player_1,
+        "b":MazeElementType.player_2,
+        "E":MazeElementType.exit,
+        "W":MazeElementType.wall   ]
+    
+    static let MazeElementToFilename : [MazeElementType:String] = [
+        MazeElementType.space:      "space_gelb",
+        MazeElementType.fish:       "fisch",
+        MazeElementType.chicken:    "huhn",
+        MazeElementType.map_1:      "karte",
+        MazeElementType.map_2:      "karte",
+        MazeElementType.map_3:      "karte",
+        MazeElementType.map_4:      "karte",
+        MazeElementType.mask:       "maske",
+        MazeElementType.bad_mask:   "maske_trauer",
+        MazeElementType.h_wave:     "wellen",
+        MazeElementType.v_wave:     "wellen_vertikal",
+        MazeElementType.puppet:     "puppe",
+        MazeElementType.bomb:       "bombe",
+        MazeElementType.acid:       "saeure",
+        MazeElementType.transporter:"kompass",
+        MazeElementType.player_1:   "spieler1",
+        MazeElementType.player_2:   "spieler2",
+        MazeElementType.exit:       "ausgang",
+        MazeElementType.wall:       "wand"
+    ]
+    
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
     var beam_to =   Array<Array<Int>>() // transporter target co-ordinates
     
+    var playerOneSprite : SKSpriteNode?
+    var playerTwoSprite : SKSpriteNode?
+    
     
     
     var nothing_loaded = true         // =1:show start level, else greeting screen
     var karten_flag = false;          // =1: a map has been collected, so update the status display
-    var akt_spieler = false;          // =0:player 1,  1:player 2
+    var akt_spieler_ist_playerOne = true;          // =0:player 1,  1:player 2
     var ende_erreicht = false;        // =0: start
     // =1: all masks collected !
     // =99: one player is dead and one has just been killed
@@ -113,9 +147,9 @@ class Playground: NSObject {
     // old screen co-ordinates
     var playerCoordinatesOld : PlaygroundPosition
     
-    var clipper : PlaygroundPosition  // the part of the playground, which should be shown
-    var playerOne : PlaygroundPosition // current and startposition of Player One
-    var playerTwo : PlaygroundPosition // current and startposition of Player Two
+    var cameraPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper 
+    var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
+    var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     var replay = Array<PlaygroundPosition>()         // stores all moves to enable replay. (-1,-1) means: change Player !
 
 /*
@@ -129,9 +163,9 @@ class Playground: NSObject {
 */
     
     override init() {
-        self.playerOne = PlaygroundPosition(positionX: 0,positionY: 0)
-        self.playerTwo = PlaygroundPosition(positionX: 0,positionY: 0)
-        self.clipper   = PlaygroundPosition(positionX: 0, positionY: 0)
+        self.positionPlayerOne = PlaygroundPosition(positionX: 0,positionY: 0)
+        self.positionPlayerTwo = PlaygroundPosition(positionX: 0,positionY: 0)
+        self.cameraPosition   = PlaygroundPosition(positionX: 0, positionY: 0)
         self.playerCoordinates = PlaygroundPosition(positionX: -1, positionY: -1)
         self.playerCoordinatesOld = PlaygroundPosition(positionX: -1, positionY: -1)
 
@@ -142,7 +176,18 @@ class Playground: NSObject {
             beam_to.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
         }
     }
-    
+    func changePlayer()
+    {
+        if !boolean_death {
+            if akt_spieler_ist_playerOne {
+                playerCoordinates = positionPlayerOne
+            }
+            else
+            {
+                playerCoordinates = positionPlayerTwo
+            }
+        }
+    }
     func readLevelString(filepath: String) {
         let s = try! String(contentsOfFile: filepath)
         print(s)
@@ -166,7 +211,10 @@ class Playground: NSObject {
                     commentMode = true
                 }
                 else {
-                    mazeString.append(char)
+                    if !(char == "\n" && mazeString.characters.count == 0)
+                    {
+                        mazeString.append(char)
+                    }
                 }
             }
             
@@ -199,12 +247,12 @@ class Playground: NSObject {
             if !(char == " ")
             {
                 if char == "a" {
-                    self.playerOne.positionX = positionX
-                    self.playerOne.positionY = positionY
+                    self.positionPlayerOne.positionX = positionX
+                    self.positionPlayerOne.positionY = positionY
                 } else
                 if char == "b" {
-                    self.playerTwo.positionX = positionX
-                    self.playerTwo.positionY = positionY
+                    self.positionPlayerTwo.positionX = positionX
+                    self.positionPlayerTwo.positionY = positionY
                 }
                 if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
                     if let element = Playground.mazeElementToString[char]! as MazeElementType? {
@@ -212,9 +260,16 @@ class Playground: NSObject {
                             let mazeElement = MazeType(mazeElementType: nil, sprite:nil)
                             localArray.append(mazeElement)
                         } else {
-                            let sprite = SKSpriteNode(imageNamed:GameScene.MazeElementToFilename[element]!)
+                            let sprite = SKSpriteNode(imageNamed:Playground.MazeElementToFilename[element]!)
+                            if char == "a" {
+                                playerOneSprite = sprite
+                            } else
+                            if char == "b" {
+                                playerTwoSprite = sprite
+                            }
                             let mazeElement = MazeType(mazeElementType: element, sprite:sprite)
                             localArray.append(mazeElement)
+                            print("add element \(mazeElement) at position \(positionX) \(positionY)")
                         }
                     }
                 } else {
@@ -238,8 +293,8 @@ class Playground: NSObject {
                     }
                     x=x+1
                 }
+                positionX = positionX + 1
             }
-            positionX = positionX + 1
 
         }
     }
