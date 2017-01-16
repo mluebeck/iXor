@@ -28,7 +28,7 @@ class XorGameViewController: UIViewController {
     @IBOutlet var mapLeftDown : UIView!
     @IBOutlet var mapRightUp : UIView!
     @IBOutlet var mapRightDown : UIView!
-    
+    @IBOutlet var mapTextLabel: UILabel! 
     @IBOutlet var xorNavigationItem: UINavigationItem!
     
     var currentOrientation : Orientation!
@@ -163,6 +163,14 @@ class XorGameViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if currentPlayground?.map_flag == false
+        {
+            mapTextLabel.isHidden = true
+        }
+    }
+    
     @IBAction func leftGameButtonPressed(){
         scene.movePlayerLeft()
     }
@@ -203,7 +211,31 @@ class XorGameViewController: UIViewController {
     @IBAction func forwardButtonPressed(){}
     @IBAction func backButtonPressed(){}
     
-    @IBAction func mapButtonPressed(){}
+    @IBAction func mapButtonPressed(){
+        
+        mapTextVisible()
+        if currentPlayground?.map_flag==false {
+            scene.showMap()
+            currentPlayground?.map_flag = true
+        }
+        else
+        {
+            scene.hideMap()
+            mapTextLabel.isHidden=true
+            currentPlayground?.map_flag = false 
+        }
+    }
     
+    func mapTextVisible(){
+        if currentPlayground?.mapsFound.count == 0
+        {
+            mapTextLabel.isHidden = false
+        }
+        else
+        {
+            mapTextLabel.isHidden = true
+        }
+
+    }
     
 }

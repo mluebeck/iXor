@@ -26,10 +26,23 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-CJ-XDb" userLabel="Playground View" customClass="SKView">
                                 <rect key="frame" x="10" y="10" width="355" height="355"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
+                                        <rect key="frame" x="35" y="138.5" width="286" height="79"/>
+                                        <string key="text">No Map available. 
+Collect four Map Items to
+unlock all parts of the Map!</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.98515519679999997" green="1" blue="0.33110773090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerY" secondItem="mOW-CJ-XDb" secondAttribute="centerY" id="3KY-0F-IrU"/>
                                     <constraint firstAttribute="width" constant="355" id="F3G-0e-RbR"/>
                                     <constraint firstAttribute="width" secondItem="mOW-CJ-XDb" secondAttribute="height" multiplier="1:1" id="ZIw-8p-sIA"/>
+                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerX" secondItem="mOW-CJ-XDb" secondAttribute="centerX" id="dXs-Qp-EBy"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vrw-AF-AtW" userLabel="Player Buttons View">
@@ -257,6 +270,9 @@
                                                                 <state key="normal">
                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="mapButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZWw-lf-crn"/>
+                                                                </connections>
                                                             </button>
                                                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="karte_lo" translatesAutoresizingMaskIntoConstraints="NO" id="rG9-v4-g3s">
                                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
@@ -409,6 +425,7 @@
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
                         <outlet property="mapRightUp" destination="FQx-Am-3X7" id="NmI-V9-pL2"/>
+                        <outlet property="mapTextLabel" destination="gqB-Sb-UYk" id="NsX-En-Esa"/>
                         <outlet property="playerButtonsViewHeightConstraint" destination="gI4-2p-Vfi" id="LvP-4l-dfH"/>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="jzI-IL-TzW"/>
                         <outlet property="playerChangeButton" destination="fiK-qK-abw" id="uwn-zB-Ku5"/>

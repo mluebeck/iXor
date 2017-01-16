@@ -242,10 +242,17 @@ class Playground: NSObject {
                         } else {
                             let sprite = SKSpriteNode(imageNamed:Playground.MazeElementToFilename[element]!)
                             if char == "a" {
+                                sprite.zPosition = 1.0
                                 playerOneSprite = sprite
+                                
                             } else
                             if char == "b" {
+                                sprite.zPosition = 1.0
                                 playerTwoSprite = sprite
+                            }
+                            else
+                            {
+                                sprite.zPosition = 0.0
                             }
                             let mazeElement = MazeType(mazeElementType: element, sprite:sprite)
                             localArray.append(mazeElement)
