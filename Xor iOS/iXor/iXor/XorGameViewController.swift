@@ -20,11 +20,16 @@ class XorGameViewController: UIViewController {
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
-    
+    @IBOutlet var playerChangeButton : UIButton!
+    @IBOutlet var playerChangeImage: UIImageView!
     @IBOutlet var playgroundView : SKView!
-    @IBOutlet var stepsLabel : UILabel!
     @IBOutlet var collectedMasksLabel : UILabel!
+    @IBOutlet var mapLeftUp : UIView!
+    @IBOutlet var mapLeftDown : UIView!
+    @IBOutlet var mapRightUp : UIView!
+    @IBOutlet var mapRightDown : UIView!
     
+    @IBOutlet var xorNavigationItem: UINavigationItem!
     
     var currentOrientation : Orientation!
     var scene: GameScene!
@@ -53,71 +58,81 @@ class XorGameViewController: UIViewController {
             orientation = Orientation.MyViewOrientationPortrait
         }
         if self.currentOrientation != orientation && orientation != Orientation.MyViewOrientationUnspecified {
-            //self.currentLayoutConstriants.autoRemoveConstraints()
             if orientation == Orientation.MyViewOrientationPortrait {
-                print("orientation Portrait")
+                playerButtonsViewWidthConstraint.constant = self.view.bounds.width
+                playerButtonsViewHeightConstraint.constant = self.view.bounds.height / CGFloat(2.25)
                 
-                print(self.view.bounds.width)
-                print(self.view.bounds.height)
-                
-                playerButtonsViewWidthConstraint.constant = self.view.bounds.width-20
-                playerButtonsViewHeightConstraint.constant = 286
-                
-                //self.currentLayoutConstriants = self.constraintsForPortrait()
             } else {
-                print("orientation Landscape")
-                
-                print(self.view.bounds.width)
-                print(self.view.bounds.height)
-                
-                playerButtonsViewWidthConstraint.constant = self.view.bounds.width - playgroundViewConstraint.constant - 30
-                playerButtonsViewHeightConstraint.constant = self.view.bounds.height - 20
-                //self.currentLayoutConstriants = self.constraintsForLandscape();
+                playerButtonsViewWidthConstraint.constant = self.view.bounds.width - playgroundViewConstraint.constant - 15
+                playerButtonsViewHeightConstraint.constant = self.view.bounds.height
             }
             self.currentOrientation = orientation;
-            /*
-            if (coordinator) {
-                self.swipeView.hidden = true
-                let swipeViewPage = self.swipeView.currentPage
-    
-                [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-                    [self.currentLayoutConstriants autoInstallConstraints];
-                    [self.view layoutIfNeeded];
-                } completion:nil];
-            } else {
-                [self.currentLayoutConstriants autoInstallConstraints];
-                [self.view layoutIfNeeded];
-                [self.swipeView reloadData];
-            }
-             */
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
-        //let filesFromBundle = try fileManager.contentsOfDirectory(atPath: path)
-        //print(filesFromBundle)
-        print(paths)
+        collectedMasksLabel.text = String("0")
+
+        mapLeftUp.alpha = 0.5
+        mapLeftDown.alpha = 0.5
+        mapRightUp.alpha = 0.5
+        mapRightDown.alpha = 0.5
         
+        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
         playgrounds = Array<Playground>()
-        var playground : Playground?
         for path in paths {
-            playground = Playground()
-            playground?.readLevelString(filepath:path)
-            playgrounds?.append(playground!)
+            let playground = Playground()
+            playground.readLevelString(filepath:path)
+            playgrounds?.append(playground)
         }
     
         currentPlayground = playgrounds?[0]
-        
-        // Configure the view.
+        if let gesMask = self.currentPlayground?.anzahl_masken {
+            collectedMasksLabel!.text! = "0 of \(gesMask)"
+        }
         playgroundView.isMultipleTouchEnabled = false
         
-        // Create and configure the scene.
         scene = GameScene(size: playgroundView.bounds.size, playground:self.currentPlayground!)
         scene.scaleMode = .aspectFill
         scene.backgroundColor = UIColor.lightGray
+        scene.updateViewController = {
+            mazeElementType in
+            switch(mazeElementType)
+            {
+                case MazeElementType.map_1:
+                    self.mapLeftUp.alpha = 1.0
+                    break;
+                case MazeElementType.map_2:
+                    self.mapRightUp.alpha = 1.0
+                    break;
+                case MazeElementType.map_3:
+                    self.mapLeftDown.alpha = 1.0
+                    break;
+                case MazeElementType.map_4:
+                    self.mapRightDown.alpha = 1.0
+                    break;
+                case MazeElementType.mask:
+                    if let masken = self.currentPlayground?.anzahl_gesammelter_masken {
+                        if let maskenTotal = self.currentPlayground?.anzahl_masken {
+                            self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
+                            
+                        }
+                    }
+                    break;
+            default:
+                    break;
+            }
+            if let zuege = self.currentPlayground?.anzahl_spielzuege {
+                if zuege == 1 {
+                    self.xorNavigationItem.title = String("One of 1000 Steps.")
+                } else {
+                    self.xorNavigationItem.title = String("\(zuege) of 1000 Steps.")
+                }
+            }
+        }
+        
         // Present the scene.
         playgroundView.presentScene(scene)
     }
@@ -166,11 +181,21 @@ class XorGameViewController: UIViewController {
         {
             scene.switchToPlayerTwo()
             currentPlayground?.akt_spieler_ist_playerOne = false
+            
+            let playerOneImage = UIImage(named:"spieler1")
+            playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+            playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+            playerChangeImage.image = playerOneImage
         }
         else
         {
             scene.switchToPlayerOne()
             currentPlayground?.akt_spieler_ist_playerOne = true
+            let playerOneImage = UIImage(named:"spieler2")
+            playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+            playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+            playerChangeImage.image = playerOneImage
+
         }
     }
     

@@ -63,11 +63,26 @@ class XorLevelTableViewController: UITableViewController {
 
         let playground = playgrounds?[indexPath.row]
         print("adding playground \(playground?.level_name) to Cell")
-        cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
-        if playground?.successfulFinished == true {
-            cell.detailTextLabel?.text = "Completed!"
-        } else {
-            cell.detailTextLabel?.text = "Unfinished!"
+        if indexPath.row == 0
+        {
+            cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
+            cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
+            if playground?.successfulFinished == true
+            {
+                cell.detailTextLabel?.text = "Completed!"
+            } else {
+                cell.detailTextLabel?.text = "Pending"
+            }
+        }
+        else {
+            cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
+            cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
+            if playground?.successfulFinished == true
+            {
+                cell.detailTextLabel?.text = "Completed!"
+            } else {
+                cell.detailTextLabel?.text = "Locked!"
+            }
         }
         return cell
     }

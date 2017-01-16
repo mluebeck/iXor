@@ -9,27 +9,8 @@
 import UIKit
 import SpriteKit
 
-enum MazeElementType: Int {
-    case space = 0,
-    fish,
-    chicken,
-    map_1,
-    map_2,
-    map_3,
-    map_4,
-    mask,
-    bad_mask,
-    h_wave,
-    v_wave,
-    puppet,
-    bomb,
-    acid,
-    transporter,
-    player_1,
-    player_2,
-    exit,
-    wall
-}
+
+
 
 enum PlayerMoveDirection  : Int {
     case UP = 0,
@@ -123,9 +104,9 @@ class Playground: NSObject {
     // =98: one player is dead and the other alive
     var anzahl_spielzuege = 0                    // How many moves have you done ?
     var anzahl_masken = 0             // Number of masks available in a level
+    var anzahl_gesammelter_masken = 0 //
     var invisible = false             // have you collected a 'bad mask' all walls becomes invisible
     var karten = 0                    // how many map parts have you collected ?
-    var gesammelte_masken = 0         // how many masks have you collected ?
     var map_flag = false              // =1: show map and not the playground
     var masken_gefunden = false       // you have found a mask
     var boolean_death = false         // false: 2 Spieler übrig, true : 1 Spieler übrig
@@ -140,7 +121,7 @@ class Playground: NSObject {
     var level_number : Int = 0
     var successfulFinished = false
     var numberOfMoves = 0
-    
+    var mapsFound = Array<MazeElementType>()
     // screen co-ordinates of the current player
     var playerCoordinates : PlaygroundPosition
     
@@ -190,11 +171,8 @@ class Playground: NSObject {
     }
     func readLevelString(filepath: String) {
         let s = try! String(contentsOfFile: filepath)
-        print(s)
-        
         var positionX = 0
         var positionY = 0
-        
         var commentMode = false
         var levelTitleWithNumber : String = ""
         var mazeString : String = ""
@@ -217,7 +195,6 @@ class Playground: NSObject {
                     }
                 }
             }
-            
         }
         
         let arr = levelTitleWithNumber.components(separatedBy:":")
@@ -254,6 +231,9 @@ class Playground: NSObject {
                     self.positionPlayerTwo.positionX = positionX
                     self.positionPlayerTwo.positionY = positionY
                 }
+                else if char == "M" {
+                    anzahl_masken += 1
+                }
                 if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
                     if let element = Playground.mazeElementToString[char]! as MazeElementType? {
                         if element == MazeElementType.space {
@@ -269,7 +249,6 @@ class Playground: NSObject {
                             }
                             let mazeElement = MazeType(mazeElementType: element, sprite:sprite)
                             localArray.append(mazeElement)
-                            print("add element \(mazeElement) at position \(positionX) \(positionY)")
                         }
                     }
                 } else {
@@ -310,6 +289,14 @@ class Playground: NSObject {
         
         let s = try! String(contentsOfFile: Bundle.main.path(forResource: file, ofType: "xor")!)
         readLevelString(filepath: s)
+    }
+    
+    func element(position:PlaygroundPosition) -> MazeType? {
+        return playgroundArray[position.positionY][position.positionX]
+    }
+    
+    func changeElement(position:PlaygroundPosition,element:MazeType) {
+        playgroundArray[position.positionY][position.positionX] = element
     }
 }
 
