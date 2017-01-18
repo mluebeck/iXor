@@ -30,6 +30,7 @@ class XorGameViewController: UIViewController {
     @IBOutlet var mapRightDown : UIView!
     @IBOutlet var mapTextLabel: UILabel! 
     @IBOutlet var xorNavigationItem: UINavigationItem!
+    @IBOutlet var successView: UIView!
     
     var currentOrientation : Orientation!
     var scene: GameScene!
@@ -73,8 +74,6 @@ class XorGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectedMasksLabel.text = String("0")
-
         mapLeftUp.alpha = 0.5
         mapLeftDown.alpha = 0.5
         mapRightUp.alpha = 0.5
@@ -87,8 +86,17 @@ class XorGameViewController: UIViewController {
             playground.readLevelString(filepath:path)
             playgrounds?.append(playground)
         }
+        presentPlayground()
+        
+        
+    }
     
-        currentPlayground = playgrounds?[0]
+    
+    func presentPlayground() {
+        successView.isHidden = true
+        collectedMasksLabel.text = String("0")
+        
+        currentPlayground = playgrounds?[Playground.currentPlaygroundLevel-1]
         if let gesMask = self.currentPlayground?.anzahl_masken {
             collectedMasksLabel!.text! = "0 of \(gesMask)"
         }
@@ -101,28 +109,36 @@ class XorGameViewController: UIViewController {
             mazeElementType in
             switch(mazeElementType)
             {
-                case MazeElementType.map_1:
-                    self.mapLeftUp.alpha = 1.0
-                    break;
-                case MazeElementType.map_2:
-                    self.mapRightUp.alpha = 1.0
-                    break;
-                case MazeElementType.map_3:
-                    self.mapLeftDown.alpha = 1.0
-                    break;
-                case MazeElementType.map_4:
-                    self.mapRightDown.alpha = 1.0
-                    break;
-                case MazeElementType.mask:
-                    if let masken = self.currentPlayground?.anzahl_gesammelter_masken {
-                        if let maskenTotal = self.currentPlayground?.anzahl_masken {
-                            self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
-                            
-                        }
+            case MazeElementType.map_1:
+                self.mapLeftUp.alpha = 1.0
+                break;
+            case MazeElementType.map_2:
+                self.mapRightUp.alpha = 1.0
+                break;
+            case MazeElementType.map_3:
+                self.mapLeftDown.alpha = 1.0
+                break;
+            case MazeElementType.map_4:
+                self.mapRightDown.alpha = 1.0
+                break;
+            case MazeElementType.mask:
+                if let masken = self.currentPlayground?.anzahl_gesammelter_masken {
+                    if let maskenTotal = self.currentPlayground?.anzahl_masken {
+                        self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
+                        
                     }
-                    break;
+                }
+                break;
+            case MazeElementType.exit:
+                // Hier Erfolg animieren und Level freischalten
+                self.successView.isHidden = false
+                self.scene.removeAllChildren()
+                Playground.currentPlaygroundLevel += 1
+                self.currentPlayground?.justFinished = false
+                break
+                
             default:
-                    break;
+                break;
             }
             if let zuege = self.currentPlayground?.anzahl_spielzuege {
                 if zuege == 1 {
@@ -148,15 +164,16 @@ class XorGameViewController: UIViewController {
         if viewController is XorLevelTableViewController {
             let levelTableViewController = viewController as! XorLevelTableViewController
             levelTableViewController.playgrounds = self.playgrounds
+            levelTableViewController.currentLevel = self.currentPlayground?.level_number
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    if self.currentPlayground?.level_number==selectedPlaygroundLevel {
-                    }
-                    else
-                    {
-                        self.currentPlayground = self.playgrounds?[selectedPlaygroundLevel]
-                    }
+                    self.currentPlayground = self.playgrounds?[selectedPlaygroundLevel]
+                    self.currentPlayground?.readLevel(number: selectedPlaygroundLevel+1)
+                    Playground.currentPlaygroundLevel=selectedPlaygroundLevel+1
+                    //self.scene = GameScene()
+                    //self.scene.drawWholePlayground()
+                    self.presentPlayground()
                 }
                 return
             }
@@ -238,4 +255,7 @@ class XorGameViewController: UIViewController {
 
     }
     
+    @IBAction func nextLevelButtonPressed() {
+        presentPlayground()
+    }
 }

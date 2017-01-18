@@ -37,9 +37,9 @@ class Playground: NSObject {
         static let groesseY = 32;         // playground dimensions (=32x32)
         static let sichtbareGroesseX = 8  // visible playground
         static let sichtbareGroesseY = 8  // visible playground
-        
+        static let maximumMoves = 1000
     }
-    
+
     static let mazeElementToString : [Character : MazeElementType]=[
         "_":MazeElementType.space,
         "F":MazeElementType.fish,
@@ -83,6 +83,7 @@ class Playground: NSObject {
         MazeElementType.wall:       "wand"
     ]
     
+    static var currentPlaygroundLevel = 1
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     
@@ -119,7 +120,8 @@ class Playground: NSObject {
     var level_name: String?           // the 'official' level name (e.g. "The Decoder")
     var level_geschafft = 0           // how many level have you completed ??
     var level_number : Int = 0
-    var successfulFinished = false
+    var justFinished = false
+    var finished = false
     var numberOfMoves = 0
     var mapsFound = Array<MazeElementType>()
     // screen co-ordinates of the current player
@@ -176,6 +178,7 @@ class Playground: NSObject {
         var commentMode = false
         var levelTitleWithNumber : String = ""
         var mazeString : String = ""
+        self.playgroundArray.removeAll()
         for char in s.characters {
             if commentMode == true {
                 if char == "#" {
@@ -294,8 +297,9 @@ class Playground: NSObject {
             file = "level0\(number)"
         }
         
-        let s = try! String(contentsOfFile: Bundle.main.path(forResource: file, ofType: "xor")!)
-        readLevelString(filepath: s)
+        if let s = Bundle.main.path(forResource: file, ofType: "xor") {
+            readLevelString(filepath: s)
+        }
     }
     
     func element(position:PlaygroundPosition) -> MazeType? {
@@ -304,6 +308,10 @@ class Playground: NSObject {
     
     func changeElement(position:PlaygroundPosition,element:MazeType) {
         playgroundArray[position.positionY][position.positionX] = element
+    }
+    
+    func allMasksCollected() -> Bool {
+        return true ;//anzahl_masken == anzahl_gesammelter_masken
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 class XorLevelTableViewController: UITableViewController {
 
     var playgrounds : Array<Playground>?
+    var currentLevel : Int?
     var selectionFinishedClosure : ((Int) -> ())?
     var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
     
@@ -63,11 +64,11 @@ class XorLevelTableViewController: UITableViewController {
 
         let playground = playgrounds?[indexPath.row]
         print("adding playground \(playground?.level_name) to Cell")
-        if indexPath.row == 0
+        if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
             cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
             cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
-            if playground?.successfulFinished == true
+            if playground?.finished == true
             {
                 cell.detailTextLabel?.text = "Completed!"
             } else {
@@ -77,7 +78,7 @@ class XorLevelTableViewController: UITableViewController {
         else {
             cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
             cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
-            if playground?.successfulFinished == true
+            if playground?.finished == true
             {
                 cell.detailTextLabel?.text = "Completed!"
             } else {
@@ -147,7 +148,7 @@ class XorLevelTableViewController: UITableViewController {
         var previousLevelFinished=true
         if level>1 && level<(playgrounds?.count)! {
             let playground = playgrounds?[level-1]
-            if playground?.successfulFinished==false {
+            if playground?.finished==false {
                 previousLevelFinished = false
             }
         }

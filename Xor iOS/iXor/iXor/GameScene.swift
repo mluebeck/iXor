@@ -12,7 +12,7 @@ class GameScene: SKScene {
     
     var segmentX : CGFloat?
     var segmentY : CGFloat?
-
+    var exitDone = false
     var updateViewController : ((MazeElementType)->Void)?
     
     let factorX = CGFloat(Playground.Constants.groesseX-Playground.Constants.sichtbareGroesseX)*CGFloat(-1.0)
@@ -40,9 +40,11 @@ class GameScene: SKScene {
     
     
     func drawWholePlayground() {
+        worldNode.removeAllChildren()
         for x in 0..<Playground.Constants.groesseX {
             for y in 0..<Playground.Constants.groesseY {
                 if let sprite = spriteNode(position: PlaygroundPosition(positionX: y, positionY: x)) {
+                    sprite.removeFromParent()
                     worldNode.addChild(sprite)
                     sprite.xScale = segmentX! / CGFloat(40.0)
                     sprite.yScale = segmentY! / CGFloat(40.0)
@@ -58,6 +60,9 @@ class GameScene: SKScene {
         let moveAction = SKAction.move(to: point, duration: 0.25)
         sprite.run(moveAction, completion: {
             self.spriteToRemove?.removeFromParent()
+            if self.playground.justFinished == true {
+                self.updateViewController!(MazeElementType.exit)
+            }
         })
         
     }
@@ -222,10 +227,21 @@ class GameScene: SKScene {
                 newPosition = PlaygroundPosition(positionX:coordinate.positionX , positionY: coordinate.positionY-1)
                 mazeElementType = playground.element(position: newPosition!)?.mazeElementType
                 
+                
+                if playground.anzahl_spielzuege <= Playground.Constants.maximumMoves &&
+                    playground.allMasksCollected() &&
+                mazeElementType == MazeElementType.exit
+                {
+                    playground.justFinished=true
+                    playground.finished = true
+                    return true
+                }
+                
                 if mazeElementType == MazeElementType.player_1 ||
                     mazeElementType == MazeElementType.player_2 ||
                     mazeElementType == MazeElementType.wall ||
-                    mazeElementType == MazeElementType.v_wave
+                    mazeElementType == MazeElementType.v_wave ||
+                    mazeElementType == MazeElementType.exit
                 {
                     print("ein Hindernis at \(newPosition)")
                     return false
@@ -246,10 +262,20 @@ class GameScene: SKScene {
                 }
                 newPosition = PlaygroundPosition(positionX:coordinate.positionX , positionY: coordinate.positionY+1)
                 mazeElementType = playground.element(position: newPosition!)?.mazeElementType
+                if playground.anzahl_spielzuege <= Playground.Constants.maximumMoves &&
+                    playground.allMasksCollected() &&
+                    mazeElementType == MazeElementType.exit
+                {
+                    playground.justFinished=true
+                    playground.finished = true
+
+                    return true
+                }
                 if mazeElementType == MazeElementType.player_1 ||
                     mazeElementType == MazeElementType.player_2 ||
                     mazeElementType == MazeElementType.wall ||
-                    mazeElementType == MazeElementType.v_wave
+                    mazeElementType == MazeElementType.v_wave ||
+                    mazeElementType == MazeElementType.exit
                 {
                     print("ein Hindernis at \(newPosition)")
                     return false
@@ -272,10 +298,25 @@ class GameScene: SKScene {
                 newPosition = PlaygroundPosition(positionX:coordinate.positionX-1 , positionY: coordinate.positionY)
                 mazeElementType = playground.element(position: newPosition!)?.mazeElementType
                 
+                print("new Item:")
+                print(mazeElementType)
+                print("at position:")
+                print(newPosition)
+              
+                if playground.anzahl_spielzuege <= Playground.Constants.maximumMoves &&
+                    playground.allMasksCollected() &&
+                    mazeElementType == MazeElementType.exit
+                {
+                    playground.justFinished=true
+                    playground.finished = true
+
+                    return true
+                }
                 if mazeElementType == MazeElementType.player_1 ||
                     mazeElementType == MazeElementType.player_2 ||
                     mazeElementType == MazeElementType.wall ||
-                    mazeElementType == MazeElementType.h_wave
+                    mazeElementType == MazeElementType.h_wave ||
+                    mazeElementType == MazeElementType.exit
                 {
                     print("ein Hindernis at \(newPosition)")
 
@@ -298,10 +339,20 @@ class GameScene: SKScene {
                 }
                 newPosition = PlaygroundPosition(positionX:coordinate.positionX+1 , positionY: coordinate.positionY)
                 mazeElementType = playground.element(position: newPosition!)?.mazeElementType
+                if playground.anzahl_spielzuege <= Playground.Constants.maximumMoves &&
+                    playground.allMasksCollected() &&
+                    mazeElementType == MazeElementType.exit
+                {
+                    playground.justFinished=true
+                    playground.finished = true
+
+                    return true
+                }
                 if mazeElementType == MazeElementType.player_1 ||
                     mazeElementType == MazeElementType.player_2 ||
                     mazeElementType == MazeElementType.wall ||
-                    mazeElementType == MazeElementType.h_wave
+                    mazeElementType == MazeElementType.h_wave ||
+                    mazeElementType == MazeElementType.exit
                 {
                     print("ein Hindernis at \(newPosition)")
                     return false
@@ -334,6 +385,8 @@ class GameScene: SKScene {
         }
 
         if canMoveToDirection(coordinate: playerCoordinate, direction: direction) {
+            
+        
             // old position : draw a space
             let mazeType = playground.playgroundArray[playerCoordinate.positionY][playerCoordinate.positionX];
             let mazeSpace = MazeType(mazeElementType: nil, sprite:nil)
@@ -380,6 +433,9 @@ class GameScene: SKScene {
             }
             
             moveCameraToPlaygroundCoordinates(coordinate: newCameraPosition)
+            /*if playground.successfulFinished == true {
+                updateViewController!(MazeElementType.exit)
+            }*/
         }
     } // func movePlayer
     
