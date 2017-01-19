@@ -34,6 +34,7 @@
 		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
+		8CF054951E302BE100771C7B /* Playground.java in Sources */ = {isa = PBXBuildFile; fileRef = 8CF054941E302BE100771C7B /* Playground.java */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		8C4312C71DF4717900E80996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CF054941E302BE100771C7B /* Playground.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Playground.java; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		8C564AA91E2BF38F00C89298 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8CF054941E302BE100771C7B /* Playground.java */,
 				8C2416401DF9FF850009FCC6 /* Level */,
 				8C04831E1E285BFD00F29B4D /* sounds */,
 				8C4312B41DF4717800E80996 /* Main.storyboard */,
@@ -313,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF054951E302BE100771C7B /* Playground.java in Sources */,
 				8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */,
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,

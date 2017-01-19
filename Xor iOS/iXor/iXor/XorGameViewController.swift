@@ -189,16 +189,16 @@ class XorGameViewController: UIViewController {
     }
     
     @IBAction func leftGameButtonPressed(){
-        scene.movePlayerLeft()
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT, scene: scene)
     }
     @IBAction func rightGameButtonPressed(){
-        scene.movePlayerRight()
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT, scene: scene)
     }
     @IBAction func upGameButtonPressed(){
-        scene.movePlayerUp()
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP, scene: scene)
     }
     @IBAction func downGameButtonPressed(){
-        scene.movePlayerDown()
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN, scene: scene)
     }
     
     @IBAction func switchMaskButtonPressed(){

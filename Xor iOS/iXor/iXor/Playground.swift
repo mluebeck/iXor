@@ -32,6 +32,23 @@ struct MazeType {
 
 class Playground: NSObject {
     
+    static func up(position:PlaygroundPosition)->PlaygroundPosition {
+        return PlaygroundPosition(positionX:position.positionX,positionY:position.positionY-1)
+    }
+    
+    static func down(position:PlaygroundPosition)->PlaygroundPosition {
+        return PlaygroundPosition(positionX:position.positionX,positionY:position.positionY+1)
+    }
+    
+    
+    static func left(position:PlaygroundPosition)->PlaygroundPosition {
+        return PlaygroundPosition(positionX:position.positionX-1,positionY:position.positionY)
+    }
+    static func right(position:PlaygroundPosition)->PlaygroundPosition {
+        return PlaygroundPosition(positionX:position.positionX+1,positionY:position.positionY)
+    }
+    
+    
     struct Constants {
         static let groesseX = 32;         // playground dimensions (=32x32)
         static let groesseY = 32;         // playground dimensions (=32x32)
@@ -303,7 +320,9 @@ class Playground: NSObject {
     }
     
     func element(position:PlaygroundPosition) -> MazeType? {
-        return playgroundArray[position.positionY][position.positionX]
+        let a = playgroundArray[position.positionY][position.positionX]
+        print("Element:\(a) at position : \(position)")
+        return a
     }
     
     func changeElement(position:PlaygroundPosition,element:MazeType) {
@@ -313,6 +332,288 @@ class Playground: NSObject {
     func allMasksCollected() -> Bool {
         return true ;//anzahl_masken == anzahl_gesammelter_masken
     }
+    // fish, bombe fällt runter von selbst
+    // chicken, acid fliegen nach links von selbst
+    // puppet in jede richtung, aber nur wenn sie angeschubst werden
+    
+    func leftOrRightIsFishBombPuppet(position:PlaygroundPosition,direction:PlayerMoveDirection) -> Bool
+    {
+        var lposition : PlaygroundPosition?
+        if direction == PlayerMoveDirection.LEFT
+        {
+            lposition = PlaygroundPosition(positionX: position.positionX-1, positionY: position.positionY)
+        }
+        else
+        if direction == PlayerMoveDirection.RIGHT
+        {
+            lposition = PlaygroundPosition(positionX: position.positionX+1, positionY: position.positionY)
+        }
+        else
+        {
+            return false
+        }
+        let element = self.element(position: lposition!)
+        if element?.mazeElementType == MazeElementType.fish
+        {
+            return true
+        }
+        return false
+    }
+    
+    func upOrDownIsChickenAcidPuppet(position:PlaygroundPosition,direction:PlayerMoveDirection) -> Bool
+    {
+        var lposition : PlaygroundPosition?
+        if direction == PlayerMoveDirection.UP
+        {
+            lposition = PlaygroundPosition(positionX: position.positionX, positionY: position.positionY+1)
+        }
+        else
+        if direction == PlayerMoveDirection.DOWN
+        {
+            lposition = PlaygroundPosition(positionX: position.positionX, positionY: position.positionY-1)
+        }
+        else
+        {
+            return false
+        }
+        let element = self.element(position: lposition!)
+        if element?.mazeElementType == MazeElementType.fish
+        {
+            return true
+        }
+        return false
+    }
+    
+    func numberOfMovesNotExceeded() -> Bool {
+        return anzahl_spielzuege <= Playground.Constants.maximumMoves
+    }
+    
+    func levelFinished(item:MazeElementType?) -> Bool{
+        if let mazeitem = item {
+            if numberOfMovesNotExceeded() && allMasksCollected() && mazeitem  == MazeElementType.exit
+            {
+                justFinished=true
+                finished = true
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    
+    
+    
+    
+    func movePlayer(direction:PlayerMoveDirection, scene:GameScene) {
+        let cameraCoordinate = cameraPosition
+        var coordinate = positionPlayerTwo
+        var playerOne = false
+        if akt_spieler_ist_playerOne == true
+        {
+            playerOne = true
+            coordinate = positionPlayerOne
+        }
+        var canMoveToDirection = true
+        var mazeElementType : MazeElementType?
+        var newPosition : PlaygroundPosition?
+        
+        if direction == PlayerMoveDirection.UP  || direction == PlayerMoveDirection.DOWN
+        {
+            
+            if direction == PlayerMoveDirection.UP && coordinate.positionY > 0
+            {
+                newPosition = Playground.up(position: coordinate)
+            }
+            else
+                if direction == PlayerMoveDirection.DOWN && coordinate.positionY < Playground.Constants.groesseY-1
+                {
+                    newPosition = Playground.down(position: coordinate)
+            }
+            
+            mazeElementType = element(position: newPosition!)?.mazeElementType
+            if !levelFinished(item:mazeElementType)
+            {
+                if  MazeElement.is_v_wave(item: mazeElementType)
+                {
+                    canMoveToDirection = false
+                }
+                else
+                {
+                    anzahl_spielzuege += 1
+                    
+                    if checkIfWaveFound(mazeElementType: mazeElementType, position: newPosition!,scene: scene) == false
+                    {
+                        checkIfMapOrMaskFound(mazeElementType: mazeElementType, position: newPosition!,scene: scene)
+                    }
+                    scene.updateViewController!(MazeElementType.step)
+                }
+            }
+        }
+        else
+            if direction == PlayerMoveDirection.LEFT || direction == PlayerMoveDirection.RIGHT
+            {
+                if direction == PlayerMoveDirection.LEFT && coordinate.positionX > 0
+                {
+                    newPosition = Playground.left(position: coordinate)
+                }
+                else
+                    if direction == PlayerMoveDirection.RIGHT && coordinate.positionX < Playground.Constants.groesseX-1
+                    {
+                        newPosition = Playground.right(position: coordinate)
+                }
+                
+                mazeElementType = element(position: newPosition!)?.mazeElementType
+                if !levelFinished(item:mazeElementType)
+                {
+                    if  MazeElement.is_h_wave(item: mazeElementType)
+                    {
+                        canMoveToDirection = false
+                    }
+                    else
+                    {
+                        anzahl_spielzuege += 1
+                        if checkIfWaveFound(mazeElementType: mazeElementType, position: newPosition!,scene: scene) == false {
+                            checkIfMapOrMaskFound(mazeElementType: mazeElementType, position: newPosition!,scene: scene)
+                        }
+                        scene.updateViewController!(MazeElementType.step)
+                    }
+                }
+        }
+        
+        // WE CAN MOVE!
+        if canMoveToDirection==true
+        {
+            // old position : draw a space
+            let mazeType = playgroundArray[coordinate.positionY][coordinate.positionX];
+            let mazeSpace = MazeType(mazeElementType: nil, sprite:nil)
+            playgroundArray[coordinate.positionY][coordinate.positionX] = mazeSpace
+            
+            switch (direction) {
+            case PlayerMoveDirection.DOWN:
+                coordinate.positionY = coordinate.positionY + 1
+                break
+            case PlayerMoveDirection.UP:
+                coordinate.positionY = coordinate.positionY - 1
+                break
+            case PlayerMoveDirection.LEFT:
+                coordinate.positionX = coordinate.positionX - 1
+                break
+            case PlayerMoveDirection.RIGHT:
+                coordinate.positionX = coordinate.positionX + 1
+                break
+            }
+            // move player 1 to new position in the playground array
+            playgroundArray[coordinate.positionY][coordinate.positionX] = mazeType
+            
+            scene.drawPlayer(coordinate: coordinate, player: playerOne)
+            
+            // CAMERA
+            // we moved the player, now check if we have to move the camera
+            var newCameraPosition = cameraCoordinate
+            
+            if (cameraCoordinate.positionX == (coordinate.positionX) && direction==PlayerMoveDirection.LEFT) ||
+                (cameraCoordinate.positionX == (coordinate.positionX - 7) && direction==PlayerMoveDirection.RIGHT) {
+                newCameraPosition.positionX = coordinate.positionX - 3
+            }
+            else
+                if (cameraCoordinate.positionY == (coordinate.positionY) && direction==PlayerMoveDirection.UP) ||
+                    (cameraCoordinate.positionY == (coordinate.positionY - 7) && direction==PlayerMoveDirection.DOWN) {
+                    newCameraPosition.positionY = coordinate.positionY - 3
+            }
+            scene.moveCameraToPlaygroundCoordinates(coordinate: newCameraPosition)
+        }
+    } // func movePlayer
+    
+    
+    
+    func checkIfWaveFound(mazeElementType:MazeElementType?,position:PlaygroundPosition,scene:GameScene) -> Bool {
+        if !(mazeElementType==nil) && (mazeElementType == MazeElementType.v_wave || mazeElementType == MazeElementType.h_wave)
+        {
+            let mazeType = element(position: position)
+            scene.spriteToRemove = mazeType?.sprite //.removeFromParent()
+            changeElement(position: position, element: MazeType(mazeElementType: nil, sprite:nil))
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func checkIfMapOrMaskFound(mazeElementType:MazeElementType?, position:PlaygroundPosition,scene:GameScene)
+    {
+        if !(mazeElementType==nil) {
+            if mapFound(mazeElementType: mazeElementType!, position: position,scene:scene) == false
+            {
+                if happyMaskFound(mazeElementType: mazeElementType!, position: position,scene:scene) == false
+                {
+                    if badMaskFound(mazeElementType :mazeElementType!,position:position,scene:scene) == false
+                    {
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    func mapFound(mazeElementType:MazeElementType,position:PlaygroundPosition,scene:GameScene) -> Bool {
+        if MazeElement.isMap(item:mazeElementType)
+        {
+            mapsFound.append(mazeElementType)
+            let mazeType = element(position: position)
+            
+            scene.spriteToRemove = mazeType?.sprite //.removeFromParent()
+            
+            changeElement(position: position,element: MazeType(mazeElementType: nil, sprite:nil))
+            scene.updateViewController!(mazeElementType)
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func happyMaskFound(mazeElementType:MazeElementType,position:PlaygroundPosition,scene:GameScene) -> Bool {
+        if mazeElementType == MazeElementType.mask
+        {
+            anzahl_gesammelter_masken += 1
+            scene.updateViewController!(MazeElementType.step)
+            let mazeType = element(position: position)
+            scene.spriteToRemove = mazeType?.sprite //.removeFromParent()
+            changeElement(position: position, element: MazeType(mazeElementType: nil, sprite:nil))
+            scene.updateViewController!(mazeElementType)
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    func badMaskFound(mazeElementType:MazeElementType,position:PlaygroundPosition,scene:GameScene) -> Bool {
+        if mazeElementType == MazeElementType.bad_mask
+        {
+            if invisible==true {
+                invisible = false
+            }
+            else {
+                invisible = false
+            }
+            let mazeType = element(position: position)
+            scene.spriteToRemove = mazeType?.sprite //.removeFromParent()
+            
+            changeElement(position: position, element: MazeType(mazeElementType: nil, sprite:nil))
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+
 }
 
 
