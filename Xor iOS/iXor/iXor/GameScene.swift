@@ -20,7 +20,7 @@ class GameScene: SKScene {
 
     var playground : Playground
     
-    var spriteToRemove : SKSpriteNode?
+    var spritesToRemove = Array<SKSpriteNode?>()
     
     let worldNode : SKNode = SKNode()
     let mapMode : SKNode = SKNode()
@@ -31,8 +31,41 @@ class GameScene: SKScene {
     init(size: CGSize, playground:Playground) {
         self.playground = playground
         super.init(size:size)
+        self.playground.scene = self
         segmentX = self.size.width / CGFloat(Playground.Constants.sichtbareGroesseX)
         segmentY = self.size.height / CGFloat(Playground.Constants.sichtbareGroesseY)
+        
+        let sceneShallChange : (SceneNotification,PlaygroundPosition?,MazeType?,Bool) -> Void =
+        {
+            sceneNotification, playgroundposition, mazetype,player in
+            if sceneNotification==SceneNotification.UPDATE_VIEWCONTROLLER {
+                self.updateViewController!((mazetype?.mazeElementType)!)
+            } else
+            if sceneNotification==SceneNotification.DRAW_PLAYER {
+                self.drawPlayer(position: playgroundposition!, player: player)
+            }
+            else
+            if sceneNotification==SceneNotification.MOVE_CAMERA {
+                self.moveCameraToPlaygroundCoordinates(position:playgroundposition!)
+            } else
+            if sceneNotification==SceneNotification.SPRITE_TO_REMOVE {
+                print("sceneShallChange : remove old position\n")
+                let mazeType = self.playground.element(position: playgroundposition!)
+                self.spritesToRemove.append(mazeType?.sprite)
+                self.playground.createEmptySpaceOnPlayground(position: playgroundposition!)
+                print("sceneShallChange : remove old position finished\n")
+
+            }
+            else
+            if sceneNotification==SceneNotification.SPRITE_OVERWRITE {
+                self.spritesToRemove.append(mazetype?.sprite)
+            }
+            
+        }
+
+        self.playground.sceneShallChange = sceneShallChange
+        
+        
         addChild(worldNode)
         drawWholePlayground() //position:PlaygroundPosition(positionX: 0,positionY: 0))
     }
@@ -41,12 +74,12 @@ class GameScene: SKScene {
         worldNode.removeAllChildren()
         for x in 0..<Playground.Constants.groesseX {
             for y in 0..<Playground.Constants.groesseY {
-                if let sprite = spriteNode(position: PlaygroundPosition(positionX: y, positionY: x)) {
+                if let sprite = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
                     sprite.removeFromParent()
                     worldNode.addChild(sprite)
                     sprite.xScale = segmentX! / CGFloat(40.0)
                     sprite.yScale = segmentY! / CGFloat(40.0)
-                    drawSprite(sprite:sprite,position:PlaygroundPosition(positionX:x,positionY:y))
+                    drawSprite(sprite:sprite,position:PlaygroundPosition(x:x,y:y))
                 }
             }
         }
@@ -54,10 +87,18 @@ class GameScene: SKScene {
     }
     
     func drawSprite(sprite:SKSpriteNode ,position:PlaygroundPosition) {
-        let point = CGPoint(x: CGFloat(position.positionX)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.positionY)*segmentY!-segmentY!/2.0)
+        if self.spritesToRemove.count == 0 {
+            print("sprite to remove ist leer!")
+        }
+        let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
         let moveAction = SKAction.move(to: point, duration: 0.25)
         sprite.run(moveAction, completion: {
-            self.spriteToRemove?.removeFromParent()
+            
+            for sprite in self.spritesToRemove
+            {
+                sprite?.removeFromParent()
+            }
+            self.spritesToRemove.removeAll()
             if self.playground.justFinished == true {
                 self.updateViewController!(MazeElementType.exit)
             }
@@ -67,54 +108,58 @@ class GameScene: SKScene {
     
     func spriteNode(position:PlaygroundPosition) -> SKSpriteNode?
     {
-        let mazeElement = playground.playgroundArray[position.positionX][position.positionY]
+        let mazeElement = playground.playgroundArray[position.x][position.y]
         return mazeElement.sprite
     }
     
     func switchToPlayerOne() {
-        let coordinate = PlaygroundPosition(positionX:playground.positionPlayerOne.positionX-4,
-                                            positionY:playground.positionPlayerOne.positionY-4)
-        
-        moveCameraToPlaygroundCoordinates(coordinate:coordinate)
+        let position = PlaygroundPosition(x:playground.positionPlayerOne.x-4,
+                                          y:playground.positionPlayerOne.y-4)
+        self.playground.playerPosition = self.playground.positionPlayerOne
+        self.playground.oldPlayerPosition = self.playground.positionPlayerOne
+        moveCameraToPlaygroundCoordinates(position:position)
     }
     
     func switchToPlayerTwo() {
-        let coordinate = PlaygroundPosition(positionX:playground.positionPlayerTwo.positionX-4,
-                                            positionY:playground.positionPlayerTwo.positionY-4)
-        moveCameraToPlaygroundCoordinates(coordinate:coordinate)
+        let position = PlaygroundPosition(x:playground.positionPlayerTwo.x-4,
+                                          y:playground.positionPlayerTwo.y-4)
+        self.playground.playerPosition = self.playground.positionPlayerTwo
+        self.playground.oldPlayerPosition = self.playground.positionPlayerTwo
+        moveCameraToPlaygroundCoordinates(position:position)
     }
     
-    func moveCameraToPlaygroundCoordinates(coordinate:PlaygroundPosition){
-        var coord = coordinate
-        if coord.positionX<0 {
-            coord.positionX = 0
+    func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition){
+        var coord = position
+        if coord.x<0 {
+            coord.x = 0
         }
-        if coord.positionY<0 {
-            coord.positionY = 0
+        if coord.y<0 {
+            coord.y = 0
         }
-        if coord.positionX>(Playground.Constants.groesseX-Playground.Constants.sichtbareGroesseX)
+        if coord.x>(Playground.Constants.groesseX-Playground.Constants.sichtbareGroesseX)
         {
-            coord.positionX = Playground.Constants.groesseX - Playground.Constants.sichtbareGroesseX
+            coord.x = Playground.Constants.groesseX - Playground.Constants.sichtbareGroesseX
         }
-        if coord.positionY>(Playground.Constants.groesseY-Playground.Constants.sichtbareGroesseY)
+        if coord.y>(Playground.Constants.groesseY-Playground.Constants.sichtbareGroesseY)
         {
-            coord.positionY = Playground.Constants.groesseY - Playground.Constants.sichtbareGroesseY
+            coord.y = Playground.Constants.groesseY - Playground.Constants.sichtbareGroesseY
         }
-        let xCoord = (CGFloat(coord.positionX)*CGFloat(segmentX!))*CGFloat(-1)
-        let yCoord = CGFloat(coord.positionY)*segmentY!
+        let xCoord = (CGFloat(coord.x)*CGFloat(segmentX!))*CGFloat(-1)
+        let yCoord = CGFloat(coord.y)*segmentY!
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
         self.playground.cameraPosition = coord
     }
     
-    func drawPlayer(coordinate:PlaygroundPosition,player:Bool) {
+    func drawPlayer(position:PlaygroundPosition,player:Bool) {
+        print("zeichne player an position \(position)")
         if player==true {
-            playground.positionPlayerOne = coordinate
-            drawSprite(sprite:(playground.playerOneSprite)!,position:coordinate)
+            playground.positionPlayerOne = position
+            drawSprite(sprite:(playground.playerOneSprite)!,position:position)
         }
         else
         {
-            playground.positionPlayerTwo = coordinate
-            drawSprite(sprite:(playground.playerTwoSprite)!,position:coordinate)
+            playground.positionPlayerTwo = position
+            drawSprite(sprite:(playground.playerTwoSprite)!,position:position)
         }
     }
     

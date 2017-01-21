@@ -45,31 +45,26 @@ class MazeElement {
         self.theMazeElementType = mazeElementType
     }
     
-    static func isMap(item:MazeElementType) -> Bool {
+    static func isMap(_ item:MazeElementType) -> Bool {
         return item==MazeElementType.map_1 || item==MazeElementType.map_2  || item==MazeElementType.map_3 || item==MazeElementType.map_4
     }
     
-    static func is_v_wave(item:MazeElementType?) -> Bool {
+    static func canMoveUpDown(item:MazeElementType?) -> Bool {
         if let mazeitem = item  {
-            return mazeitem == MazeElementType.player_1 ||
-                mazeitem == MazeElementType.player_2 ||
-                mazeitem == MazeElementType.wall ||
-                mazeitem == MazeElementType.v_wave ||
-                mazeitem == MazeElementType.exit
+            let canMove = isMap(mazeitem) || mazeitem == MazeElementType.h_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
+            return canMove
         } else {
-            return false
+            return true
         }
     }
     
-    static func is_h_wave(item:MazeElementType?) -> Bool {
+    static func canMoveLeftRight(item:MazeElementType?) -> Bool {
         if let mazeitem = item  {
-            return mazeitem == MazeElementType.player_1 ||
-                mazeitem == MazeElementType.player_2 ||
-                mazeitem == MazeElementType.wall ||
-                mazeitem == MazeElementType.h_wave ||
-                mazeitem == MazeElementType.exit
+            let canMove = isMap(mazeitem) || mazeitem == MazeElementType.v_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
+            return canMove
+            
         } else {
-            return false
+            return true
         }
     }
 

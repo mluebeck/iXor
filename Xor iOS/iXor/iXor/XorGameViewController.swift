@@ -136,10 +136,15 @@ class XorGameViewController: UIViewController {
                 Playground.currentPlaygroundLevel += 1
                 self.currentPlayground?.justFinished = false
                 break
+            
+            case MazeElementType.bad_mask:
+                self.currentPlayground?.badMaskOperation()
+                break
                 
             default:
                 break;
             }
+            // always : one step further 
             if let zuege = self.currentPlayground?.anzahl_spielzuege {
                 if zuege == 1 {
                     self.xorNavigationItem.title = String("One of 1000 Steps.")
@@ -189,16 +194,16 @@ class XorGameViewController: UIViewController {
     }
     
     @IBAction func leftGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT, scene: scene)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT)
     }
     @IBAction func rightGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT, scene: scene)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT)
     }
     @IBAction func upGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP, scene: scene)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP)
     }
     @IBAction func downGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN, scene: scene)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN)
     }
     
     @IBAction func switchMaskButtonPressed(){
