@@ -473,10 +473,9 @@ class Playground: NSObject {
             mazeElementType = element(position: newPosition!)?.mazeElementType
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
-                if MazeElement.canMoveUpDown(item: mazeElementType) == true
+                if MazeElement.canMoveUpDown(item: mazeElementType) == true || canMoveChickenAcidPuppetUpDown(direction:direction)
                 {
                     anzahl_spielzuege += 1
-                    
                     // Alte position löschen und den View Controller updaten.
                     if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
                     {
@@ -484,6 +483,11 @@ class Playground: NSObject {
                         scene?.updateViewController!(MazeElementType.step)
                     }
                 }
+                else
+                {
+                    return
+                }
+                /*
                 else
                 {
                     
@@ -518,7 +522,7 @@ class Playground: NSObject {
                     else {
                         return
                     }
-                }
+                }*/
             }
         }
         else
@@ -539,7 +543,7 @@ class Playground: NSObject {
             mazeElementType = element(position: newPosition!)?.mazeElementType
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
-                if  MazeElement.canMoveLeftRight(item: mazeElementType) == true
+                if  MazeElement.canMoveLeftRight(item: mazeElementType) == true || canMoveFishBombPuppetLeftOrRight(direction:direction)
                 {
                     anzahl_spielzuege += 1
                     if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
@@ -556,6 +560,103 @@ class Playground: NSObject {
         }
         updateScene(direction:direction)
     }
+    
+    func canMoveFishBombPuppetLeftOrRight(direction:PlayerMoveDirection) -> Bool {
+        if direction==PlayerMoveDirection.LEFT {
+            let leftPosition = Playground.left(position: self.playerPosition)
+            let leftElement = element(position: leftPosition)
+            let item = leftElement?.mazeElementType
+            if item == MazeElementType.fish || item == MazeElementType.bomb || item == MazeElementType.puppet {
+                let leftleftPosition = Playground.left(position:leftPosition)
+                let leftleftElement = element(position: leftleftPosition)
+                if leftleftElement?.mazeElementType == MazeElementType.space {
+                    changeElement(position:leftleftPosition , element: leftElement!)
+                    createEmptySpaceOnPlayground(position:leftPosition)
+                    scene?.drawSprite(sprite: (leftElement?.sprite)!, position: leftleftPosition)
+                }
+                else
+                {
+                    return false
+                }
+            }
+            else
+            {
+                return false
+            }
+        } else
+        if direction==PlayerMoveDirection.RIGHT {
+            let rightPosition = Playground.right(position: self.playerPosition)
+            let rightElement = element(position: rightPosition)
+            let item = rightElement?.mazeElementType
+            if item == MazeElementType.fish || item == MazeElementType.bomb || item == MazeElementType.puppet {
+                let rightrightPosition = Playground.right(position:rightPosition)
+                let rightrightElement = element(position: rightrightPosition)
+                if rightrightElement?.mazeElementType == MazeElementType.space {
+                    changeElement(position:rightrightPosition , element: rightElement!)
+                    createEmptySpaceOnPlayground(position:rightPosition)
+                    scene?.drawSprite(sprite: (rightElement?.sprite)!, position: rightrightPosition)
+                }
+                else
+                {
+                    return false
+                }
+            }
+            else
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func canMoveChickenAcidPuppetUpDown(direction:PlayerMoveDirection) -> Bool {
+        if direction==PlayerMoveDirection.UP {
+            let upPosition = Playground.up(position: self.playerPosition)
+            let upElement = element(position: upPosition)
+            let item = upElement?.mazeElementType
+            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet {
+                let upupPosition = Playground.up(position:upPosition)
+                let upupElement = element(position: upupPosition)
+                if upupElement?.mazeElementType == MazeElementType.space {
+                    changeElement(position:upupPosition , element: upElement!)
+                    createEmptySpaceOnPlayground(position:upPosition)
+                    scene?.drawSprite(sprite: (upElement?.sprite)!, position: upupPosition)
+                }
+                else
+                {
+                    return false
+                }
+            }
+            else
+            {
+                return false
+            }
+        } else
+        if direction==PlayerMoveDirection.DOWN {
+            let downPosition = Playground.down(position: self.playerPosition)
+            let downElement = element(position: downPosition)
+            let item = downElement?.mazeElementType
+            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet {
+                let downdownPosition = Playground.down(position:downPosition)
+                let downdownElement = element(position: downdownPosition)
+                if downdownElement?.mazeElementType == MazeElementType.space {
+                    changeElement(position:downdownPosition , element: downElement!)
+                        createEmptySpaceOnPlayground(position:downPosition)
+                    scene?.drawSprite(sprite: (downElement?.sprite)!, position: downdownPosition)
+                }
+                else
+                {
+                    return false
+                }
+            }
+            else
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     
     func updateScene(direction:PlayerMoveDirection){
@@ -652,13 +753,9 @@ class Playground: NSObject {
             }
             else
             {
-                //self.sceneShallChange!(SceneNotification.SPRITE_TO_REMOVE,position,nil,player)
-                //print("SPRITE_TO_REMOVElösche Element an Position \(position)")
                 let mazeType = element(position:position)
                 scene?.spritesToRemove.append(mazeType?.sprite)
-                //createEmptySpaceOnPlayground(position:oldPlayerPosition)
                 createEmptySpaceOnPlayground(position:position)
-                
             }
         }
         return false

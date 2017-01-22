@@ -122,12 +122,6 @@ class XorGameViewController: UIViewController {
                 self.mapRightDown.alpha = 1.0
                 break;
             case MazeElementType.mask:
-                if let masken = self.currentPlayground?.anzahl_gesammelter_masken {
-                    if let maskenTotal = self.currentPlayground?.anzahl_masken {
-                        self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
-                        
-                    }
-                }
                 break;
             case MazeElementType.exit:
                 // Hier Erfolg animieren und Level freischalten
@@ -150,6 +144,12 @@ class XorGameViewController: UIViewController {
                     self.xorNavigationItem.title = String("One of 1000 Steps.")
                 } else {
                     self.xorNavigationItem.title = String("\(zuege) of 1000 Steps.")
+                }
+            }
+            if let masken = self.currentPlayground?.anzahl_gesammelter_masken {
+                if let maskenTotal = self.currentPlayground?.anzahl_masken {
+                    self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
+                    
                 }
             }
         }
