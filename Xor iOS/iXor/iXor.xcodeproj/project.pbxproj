@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
 		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
 		8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */; };
@@ -34,7 +35,6 @@
 		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
-		8CF054951E302BE100771C7B /* Playground.java in Sources */ = {isa = PBXBuildFile; fileRef = 8CF054941E302BE100771C7B /* Playground.java */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
 		8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeElement.swift; sourceTree = "<group>"; };
@@ -172,6 +173,7 @@
 			children = (
 				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
 				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
+				8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */,
 				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
 				8C4312B01DF4717800E80996 /* GameScene.swift */,
 				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
@@ -316,12 +318,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF054951E302BE100771C7B /* Playground.java in Sources */,
 				8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */,
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,
+				8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */,
 				8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

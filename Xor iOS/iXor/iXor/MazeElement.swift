@@ -30,7 +30,9 @@ enum MazeElementType: Int {
     player_2,
     exit,
     wall,
-    step
+    step,
+    death,
+    death_both
 }
 
 class MazeElement {
@@ -67,5 +69,7 @@ class MazeElement {
             return true
         }
     }
+    
+    
 
 }

@@ -36,7 +36,7 @@ class XorGameViewController: UIViewController {
     var scene: GameScene!
     var playgrounds : Array<Playground>?
     var currentPlayground : Playground?
-    
+    var playerkilled = false
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -82,13 +82,10 @@ class XorGameViewController: UIViewController {
         let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
         playgrounds = Array<Playground>()
         for path in paths {
-            let playground = Playground()
-            playground.readLevelString(filepath:path)
+            let playground = PlaygroundBuilder.readLevelString(filepath:path)
             playgrounds?.append(playground)
         }
         presentPlayground()
-        
-        
     }
     
     
@@ -134,7 +131,12 @@ class XorGameViewController: UIViewController {
             case MazeElementType.bad_mask:
                 self.currentPlayground?.badMaskOperation()
                 break
+            case MazeElementType.death:
+                self.playerKilled()
+                break
+            case MazeElementType.death_both:
                 
+                break
             default:
                 break;
             }
@@ -174,7 +176,7 @@ class XorGameViewController: UIViewController {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
                     self.currentPlayground = self.playgrounds?[selectedPlaygroundLevel]
-                    self.currentPlayground?.readLevel(number: selectedPlaygroundLevel+1)
+                    self.currentPlayground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel+1,playground:self.currentPlayground)
                     Playground.currentPlaygroundLevel=selectedPlaygroundLevel+1
                     //self.scene = GameScene()
                     //self.scene.drawWholePlayground()
@@ -207,6 +209,9 @@ class XorGameViewController: UIViewController {
     }
     
     @IBAction func switchMaskButtonPressed(){
+        if playerkilled == true {
+            return
+        }
         if currentPlayground?.akt_spieler_ist_playerOne == true
         {
             scene.switchToPlayerTwo()
@@ -228,6 +233,12 @@ class XorGameViewController: UIViewController {
 
         }
     }
+    
+    func playerKilled() {
+        switchMaskButtonPressed()
+        playerkilled=true
+    }
+    
     
     @IBAction func replayButtonPressed(){}
     @IBAction func forwardButtonPressed(){}
