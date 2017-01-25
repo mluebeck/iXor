@@ -22,19 +22,6 @@ struct PlaygroundPosition {
     
 }
 
-struct MazeType {
-    var mazeElementType : MazeElementType?
-    var sprite : SKSpriteNode?
-    
-    func removeSprite() {
-        let fadeOut = SKAction.fadeOut(withDuration: 0.25)
-        sprite?.run(fadeOut, completion: {
-            self.sprite?.removeFromParent()
-        })
-     }
-}
-
-
 class Playground: NSObject {
     
     static func up(position:PlaygroundPosition)->PlaygroundPosition {
@@ -61,37 +48,22 @@ class Playground: NSObject {
     static var currentPlaygroundLevel = 1
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
-    
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
     var beam_to =   Array<Array<Int>>() // transporter target co-ordinates
-    
     var playerOneSprite : SKSpriteNode?
     var playerTwoSprite : SKSpriteNode?
-    
     var scene : GameScene?
-    
-    var nothing_loaded = true         // =1:show start level, else greeting screen
-    var karten_flag = false;          // =1: a map has been collected, so update the status display
+    var contentAsString = ""
     var akt_spieler_ist_playerOne = true;          // =0:player 1,  1:player 2
     var ende_erreicht = false;        // =0: start
-    // =1: all masks collected !
-    // =99: one player is dead and one has just been killed
-    //      OR >1000 moves: You failed !
-    // =98: one player is dead and the other alive
     var anzahl_spielzuege = 0                    // How many moves have you done ?
-    var anzahl_masken = 0             // Number of masks available in a level
-    var anzahl_gesammelter_masken = 0 //
+    var masken_gesamtanzahl = 0             // Number of masks available in a level
+    var masken_gesammelt    = 0 //
     var invisible = false             // have you collected a 'bad mask' all walls becomes invisible
-    var karten = 0                    // how many map parts have you collected ?
-    var map_flag = false              // =1: show map and not the playground
-    var masken_gefunden = false       // you have found a mask
-    var playerKilled = false         // false: 2 Spieler übrig, true : 1 Spieler übrig
+    var karten_gesammelt = 0                    // how many map parts have you collected ?
+    var numberOfKilledPlayer = 0
     var next_step = 0                 // number of moves ( max. 1000)
-    //var spieler = Array<Array<Int>>() //new byte[2][2];                // spieler[0][0]: 1. player, Pos. X, spieler[0][1] : Y
-    //playgroundArray : var spielfeld = Array<Array<Int>>() //= new byte[32][32];              // the playground
     var names  = Array<String>()      //new String[25];                    // Die file names of the bitmaps
-    //var level = ""                  // the level file name(e.g. level01.xor)
-
     var level_name: String?           // the 'official' level name (e.g. "The Decoder")
     var level_geschafft = 0           // how many level have you completed ??
     var level_number : Int = 0
@@ -122,6 +94,43 @@ class Playground: NSObject {
     MediaTracker mtracker;                             // Observer for all loaded images
 */
     
+   override func copy() -> Any {
+        let playground = Playground()
+        playground.playgroundArray = self.playgroundArray.map{$0}
+        playground.beam_to = self.beam_to
+        playground.beam_from = self.beam_from
+        playground.playerOneSprite = nil
+        playground.playerTwoSprite = nil
+        playground.scene = self.scene
+        playground.akt_spieler_ist_playerOne = self.akt_spieler_ist_playerOne
+        playground.ende_erreicht = self.ende_erreicht
+        playground.anzahl_spielzuege = self.anzahl_spielzuege
+        playground.masken_gesammelt = self.masken_gesammelt
+        playground.masken_gesamtanzahl = self.masken_gesamtanzahl
+        playground.invisible = self.invisible
+        playground.numberOfKilledPlayer = self.numberOfKilledPlayer
+        playground.next_step = self.next_step
+        playground.names = self.names
+        playground.level_name = self.level_name
+        playground.level_geschafft = self.level_geschafft
+        playground.level_number = self.level_number
+        playground.justFinished = self.justFinished
+        playground.numberOfMoves = self.numberOfMoves
+        playground.mapsFound = self.mapsFound
+        playground.playerPosition = self.playerPosition
+        playground.oldPlayerPosition = self.oldPlayerPosition
+        playground.cameraPosition = self.cameraPosition
+        playground.positionPlayerOne = self.positionPlayerOne
+        playground.positionPlayerTwo = self.positionPlayerTwo
+        playground.replay = self.replay
+        playground.playerOneSprite = self.playerOneSprite
+        playground.playerTwoSprite = self.playerTwoSprite
+    
+        return playground
+    }
+    
+    
+    
     override init() {
         self.positionPlayerOne = PlaygroundPosition(x: 0, y: 0)
         self.positionPlayerTwo = PlaygroundPosition(x: 0, y: 0)
@@ -136,9 +145,44 @@ class Playground: NSObject {
             beam_to.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
         }
     }
+    
+//    func reset() {
+//        //self.playgroundArray = playground.playgroundArray
+//        
+//        //self.playerOneSprite = nil
+//        //self.playerTwoSprite = nil
+//        //self.scene = playground.scene
+//        
+//        self.akt_spieler_ist_playerOne = true
+//        self.ende_erreicht = false
+//        self.anzahl_spielzuege = 0
+//        self.masken_gesamtanzahl = 0
+//        self.masken_gesammelt = 0
+//        self.invisible = false
+//        self.karten_gesammelt = 0
+//        /*
+//        self.masken_gefunden = playground.masken_gefunden
+//        self.numberOfKilledPlayer = playground.numberOfKilledPlayer
+//        self.next_step = playground.next_step
+//        self.names = playground.names
+//        self.level_name = playground.level_name
+//        self.level_geschafft = playground.level_geschafft
+//        self.level_number = playground.level_number
+//        self.justFinished = playground.justFinished
+//        self.numberOfMoves = playground.numberOfMoves
+//        self.mapsFound = playground.mapsFound
+//        self.playerPosition = playground.playerPosition
+//        self.oldPlayerPosition = playground.oldPlayerPosition
+//        self.cameraPosition = playground.cameraPosition
+//        self.positionPlayerOne = playground.positionPlayerOne
+//        self.positionPlayerTwo = playground.positionPlayerTwo
+//        self.replay = playground.replay
+// }
+    
+    
     func changePlayer()
     {
-        if !playerKilled {
+        if numberOfKilledPlayer==0 {
             if akt_spieler_ist_playerOne {
                 positionPlayerTwo = playerPosition
                 playerPosition = positionPlayerOne
@@ -265,13 +309,13 @@ class Playground: NSObject {
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
                 canMoveChicken = canMoveChickenAcidPuppetUpDown(direction:direction)
-                if MazeElement.canMoveUpDown(item: mazeElementType) == true || canMoveChicken
+                if MazeType.canMoveUpDown(item: mazeElementType) == true || canMoveChicken
                 {
                     anzahl_spielzuege += 1
                     // Alte position löschen und den View Controller updaten.
                     if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
                     {
-                        scene?.updateViewController!(MazeElementType.step)
+                        scene?.updateViewController!(MazeEvent.step_done)
                     }
                 }
                 else
@@ -314,12 +358,12 @@ class Playground: NSObject {
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
                 canMoveFish = canMoveFishBombPuppetLeftOrRight(direction:direction)
-                if  MazeElement.canMoveLeftRight(item: mazeElementType) == true || canMoveFish == true
+                if  MazeType.canMoveLeftRight(item: mazeElementType) == true || canMoveFish == true
                 {
                     anzahl_spielzuege += 1
                     if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
                     {
-                        scene?.updateViewController!(MazeElementType.step)
+                        scene?.updateViewController!(MazeEvent.step_done)
                     }
                 }
                 else
@@ -474,7 +518,7 @@ class Playground: NSObject {
         // move player 1 to new position in the playground array
         changeElement(position: playerPosition, element: mazeType!)
         scene?.drawPlayer(position: playerPosition, player: self.akt_spieler_ist_playerOne)
-        scene?.updateViewController!(MazeElementType.step)
+        scene?.updateViewController!(MazeEvent.step_done)
         
         // CAMERA
         // we moved the player, now check if we have to move the camera
@@ -500,14 +544,31 @@ class Playground: NSObject {
     {
         if let mazeelementtype = mazeElementType
         {
-            if MazeElement.isMap(mazeelementtype)
+            if MazeType.isMap(mazeelementtype)
             {
                 mapsFound.append(mazeelementtype)
+                if mazeelementtype==MazeElementType.map_1 {
+                    scene?.updateViewController!(MazeEvent.map1_found)
+                }
+                else
+                if mazeelementtype==MazeElementType.map_2 {
+                    scene?.updateViewController!(MazeEvent.map2_found)
+                }
+                else
+                if mazeelementtype==MazeElementType.map_3 {
+                    scene?.updateViewController!(MazeEvent.map3_found)
+                }
+                else
+                if mazeelementtype==MazeElementType.map_4 {
+                    scene?.updateViewController!(MazeEvent.map4_found)
+                }
+                
+                
             }
             else
             if mazeelementtype == MazeElementType.mask
             {
-                anzahl_gesammelter_masken += 1
+                masken_gesammelt += 1
             }
             else
             if mazeElementType == MazeElementType.bad_mask
@@ -522,7 +583,7 @@ class Playground: NSObject {
             let mazeType = element(position:position)
             scene?.spritesToRemove.append(mazeType?.sprite)
             createEmptySpaceOnPlayground(position:position)
-            scene?.updateViewController!(mazeElementType!)
+            scene?.updateViewController!(MazeEvent.redraw)
         }
         return false
     }
@@ -651,7 +712,7 @@ class Playground: NSObject {
 
             break
         case MazeElementType.player_1, MazeElementType.player_2:
-            killCurrentPlayer()
+            killCurrentPlayer(elementType)
             createEmptySpaceOnPlayground(position: position)
             // Bewege Huhn um eins nach links
             changeElement(position: leftposition, element: leftElement!)
@@ -704,7 +765,7 @@ class Playground: NSObject {
             fishFall(position:bottomposition)
             testForChickenOrFishAction(position:position)
             if elementType==MazeElementType.player_1 || elementType==MazeElementType.player_2 {
-                killCurrentPlayer()
+                killCurrentPlayer(elementType)
             }
             break
         case MazeElementType.acid:
@@ -725,13 +786,23 @@ class Playground: NSObject {
         }
     }
     
-    func killCurrentPlayer() {
-        if playerKilled==false {
-            playerKilled=true
-            scene?.updateViewController!(MazeElementType.death)
+    func killCurrentPlayer(_ elementType:MazeElementType) {
+        if numberOfKilledPlayer==0 {
+            numberOfKilledPlayer=1
+            if elementType==MazeElementType.player_1
+            {
+                scene?.updateViewController!(MazeEvent.death_player1)
+            }
+            else
+            {
+                scene?.updateViewController!(MazeEvent.death_player2)
+            }
+            
         }
-        else {
-            scene?.updateViewController!(MazeElementType.death_both)
+        else
+        {
+            numberOfKilledPlayer=2
+            scene?.updateViewController!(MazeEvent.death_both)
         }
     }
     

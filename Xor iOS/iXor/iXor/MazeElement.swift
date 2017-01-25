@@ -35,16 +35,31 @@ enum MazeElementType: Int {
     death_both
 }
 
-class MazeElement {
-    var column: Int
-    var row: Int
-    let theMazeElementType: MazeElementType
-    var sprite: SKSpriteNode?
+enum MazeEvent : Int {
+    case step_done = 0,
+    map1_found,
+    map2_found,
+    map3_found,
+    map4_found,
+    exit_found,
+    transporter_found,
+    mask_found,
+    bad_mask_found,
+    death_player1,
+    death_player2,
+    death_both,
+    redraw
+}
+
+struct MazeType {
+    var mazeElementType : MazeElementType?
+    var sprite : SKSpriteNode?
     
-    init(column: Int, row: Int, mazeElementType: MazeElementType) {
-        self.column = column
-        self.row = row
-        self.theMazeElementType = mazeElementType
+    func removeSprite() {
+        let fadeOut = SKAction.fadeOut(withDuration: 0.25)
+        sprite?.run(fadeOut, completion: {
+            self.sprite?.removeFromParent()
+        })
     }
     
     static func isMap(_ item:MazeElementType) -> Bool {
@@ -69,7 +84,4 @@ class MazeElement {
             return true
         }
     }
-    
-    
-
 }

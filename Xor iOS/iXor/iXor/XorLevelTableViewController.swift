@@ -10,10 +10,19 @@ import UIKit
 
 class XorLevelTableViewController: UITableViewController {
 
-    var playgrounds : Array<Playground>?
+    private var playgrounds : [Int:Playground]?
+    var playgroundIndices = Array<Int>()
     var currentLevel : Int?
     var selectionFinishedClosure : ((Int) -> ())?
     var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
+    
+    func setPlaygrounds(playgrounds:[Int:Playground]?){
+        self.playgrounds = playgrounds
+        for i in (playgrounds?.keys)! {
+            playgroundIndices.append(i)
+        }
+        playgroundIndices.sort{$0<$1}
+    }
     
     @IBAction func backButtonPressed()
     {
@@ -62,11 +71,11 @@ class XorLevelTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        let playground = playgrounds?[indexPath.row]
+        let playground = playgrounds?[playgroundIndices[indexPath.row]]
         print("adding playground \(playground?.level_name) to Cell")
         if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
-            cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
+            cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
             cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
             if playground?.finished == true
             {
@@ -76,7 +85,7 @@ class XorLevelTableViewController: UITableViewController {
             }
         }
         else {
-            cell.textLabel?.text = "Level \(indexPath.row) - "+(playground?.level_name)!
+            cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
             cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
             if playground?.finished == true
             {
@@ -89,11 +98,11 @@ class XorLevelTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isEnabled = enabled(level: indexPath.row)
+        let isEnabled = enabled(level: self.playgroundIndices[indexPath.row])
         if isEnabled == true {
             self.selectedItem = indexPath as NSIndexPath
             if let s = selectionFinishedClosure {
-                s((self.selectedItem.row))
+                s((self.playgroundIndices[selectedItem.row]))
             }
             self.dismiss(animated: true, completion: {});
         }
@@ -145,12 +154,18 @@ class XorLevelTableViewController: UITableViewController {
     */
     
     func enabled(level:Int) -> Bool {
-        var previousLevelFinished=true
-        if level>1 && level<(playgrounds?.count)! {
-            let playground = playgrounds?[level-1]
-            if playground?.finished==false {
+        var previousLevelFinished=false
+        if level>1 && level<(playgrounds?.count)!
+        {
+            let playground = playgrounds?[self.playgroundIndices[level-1]]
+            if playground?.finished==false
+            {
                 previousLevelFinished = false
             }
+        }
+        else
+        if level == 1 {
+                return true
         }
         return previousLevelFinished
     }

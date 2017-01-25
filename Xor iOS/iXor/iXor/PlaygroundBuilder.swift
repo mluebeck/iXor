@@ -73,24 +73,35 @@ class PlaygroundBuilder: NSObject {
     }
     
     static func readLevelString(filepath: String) -> Playground {
-        return readLevelString(filepath: filepath, playground:nil)
+        return readFromFile(filepath: filepath, playground:nil)
     }
     
-    static func readLevelString(filepath: String, playground:Playground?) -> Playground
+    static func readFromFile(filepath: String, playground:Playground?) -> Playground
     {
+        var localPlayground = playground
+        if playground == nil {
+            localPlayground = Playground()
+        }
         let s = try! String(contentsOfFile: filepath)
+        localPlayground?.contentAsString = s
+        return readFromString(playground:localPlayground)
+    }
+    
+    static func readFromString(playground:Playground?) -> Playground
+    {
         var x = 0
         var y = 0
         var commentMode = false
         var levelTitleWithNumber : String = ""
         var mazeString : String = ""
-        var localPlayground = playground
-        if playground == nil {
-            localPlayground = Playground()
-        }
+        playground?.playgroundArray.removeAll()
+        playground?.masken_gesamtanzahl = 0
+        playground?.masken_gesammelt = 0
+        playground?.anzahl_spielzuege = 0
+        playground?.akt_spieler_ist_playerOne = true
+        playground?.numberOfKilledPlayer = 0
         
-        localPlayground?.playgroundArray.removeAll()
-        for char in s.characters {
+        for char in (playground?.contentAsString.characters)! {
             if commentMode == true {
                 if char == "#" {
                     commentMode = false
@@ -113,9 +124,9 @@ class PlaygroundBuilder: NSObject {
         
         let arr = levelTitleWithNumber.components(separatedBy:":")
         if arr.count==2 {
-            localPlayground?.level_name = arr[1]
+            playground?.level_name = arr[1]
             let numberStr = arr[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            localPlayground?.level_number = Int(numberStr)!
+            playground?.level_number = Int(numberStr)!
         }
         
         var i = 0
@@ -128,7 +139,7 @@ class PlaygroundBuilder: NSObject {
                 y = y + 1
                 if localArray.count>0
                 {
-                    localPlayground?.playgroundArray.append(localArray)
+                    playground?.playgroundArray.append(localArray)
                     i += 1;
                     localArray = Array<MazeType>()
                 }
@@ -137,18 +148,18 @@ class PlaygroundBuilder: NSObject {
                 if !(char == " ")
                 {
                     if char == "a" {
-                        localPlayground?.positionPlayerOne.x = x
-                        localPlayground?.positionPlayerOne.y = y
-                        localPlayground?.playerPosition.x = x
-                        localPlayground?.playerPosition.y = y
-                        localPlayground?.oldPlayerPosition = (localPlayground?.playerPosition)!
+                        playground?.positionPlayerOne.x = x
+                        playground?.positionPlayerOne.y = y
+                        playground?.playerPosition.x = x
+                        playground?.playerPosition.y = y
+                        playground?.oldPlayerPosition = (playground?.playerPosition)!
                     } else
                         if char == "b" {
-                            localPlayground?.positionPlayerTwo.x = x
-                            localPlayground?.positionPlayerTwo.y = y
+                            playground?.positionPlayerTwo.x = x
+                            playground?.positionPlayerTwo.y = y
                         }
                         else if char == "M" {
-                            localPlayground?.anzahl_masken += 1
+                            playground?.masken_gesamtanzahl += 1
                     }
                     if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
                         if let element = PlaygroundBuilder.mazeElementToString[char]! as MazeElementType? {
@@ -159,12 +170,12 @@ class PlaygroundBuilder: NSObject {
                                 let sprite = SKSpriteNode(imageNamed:PlaygroundBuilder.MazeElementToFilename[element]!)
                                 if char == "a" {
                                     sprite.zPosition = 1.0
-                                    localPlayground?.playerOneSprite = sprite
+                                    playground?.playerOneSprite = sprite
                                     
                                 } else
                                     if char == "b" {
                                         sprite.zPosition = 1.0
-                                        localPlayground?.playerTwoSprite = sprite
+                                        playground?.playerTwoSprite = sprite
                                     }
                                     else
                                     {
@@ -179,18 +190,18 @@ class PlaygroundBuilder: NSObject {
                         
                         let kl = Int(String(char))
                         if x % 4 == 0 {
-                            localPlayground?.beam_from[index][0] = kl!;
+                            playground?.beam_from[index][0] = kl!;
                         } else
                             if x % 4 == 1 {
-                                localPlayground?.beam_from[index][1] = kl!;
+                                playground?.beam_from[index][1] = kl!;
                             }
                             else
                                 if x % 4 == 2 {
-                                    localPlayground?.beam_to[index][0] = kl!;
+                                    playground?.beam_to[index][0] = kl!;
                                 }
                                 else
                                     if x % 4 == 3 {
-                                        localPlayground?.beam_to[index][1] = kl!;
+                                        playground?.beam_to[index][1] = kl!;
                                         index=index+1
                         }
                         x=x+1
@@ -199,7 +210,7 @@ class PlaygroundBuilder: NSObject {
             }
             
         }
-        return localPlayground!
+        return playground!
     }
     
     static func readLevel(number: Int) -> Playground {
@@ -215,7 +226,7 @@ class PlaygroundBuilder: NSObject {
         }
         
         if let s = Bundle.main.path(forResource: file, ofType: "xor") {
-            return self.readLevelString(filepath: s, playground:playground)
+            return self.readFromFile(filepath: s, playground:playground)
         }
         return nil
     }

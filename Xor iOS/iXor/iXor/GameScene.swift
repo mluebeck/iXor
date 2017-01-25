@@ -13,7 +13,7 @@ class GameScene: SKScene {
     var segmentX : CGFloat?
     var segmentY : CGFloat?
     var exitDone = false
-    var updateViewController : ((MazeElementType)->Void)?
+    var updateViewController : ((MazeEvent)->Void)?
     
     let factorX = CGFloat(PlaygroundBuilder.Constants.groesseX-PlaygroundBuilder.Constants.sichtbareGroesseX)*CGFloat(-1.0)
     let factorY = CGFloat(PlaygroundBuilder.Constants.groesseY-PlaygroundBuilder.Constants.sichtbareGroesseY)
@@ -38,14 +38,19 @@ class GameScene: SKScene {
         segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
         segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
-        drawWholePlayground() //position:PlaygroundPosition(positionX: 0,positionY: 0))
-    }
-    
-    func drawWholePlayground() {
         worldNode.removeAllChildren()
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
+                    /*if mazeType.mazeElementType==MazeElementType.player_1 {
+                        self.playground.playerOneSprite = mazeType.sprite
+                        self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
+                        self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
+                    } else
+                    if mazeType.mazeElementType==MazeElementType.player_2 {
+                        self.playground.playerOneSprite = mazeType.sprite
+                        self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
+                    }*/
                     if let sprite = mazeType.sprite {
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
@@ -58,6 +63,38 @@ class GameScene: SKScene {
         }
         switchToPlayerOne()
     }
+    
+    func resetGameScene(playground:Playground?) {
+        worldNode.removeAllChildren()
+        if let playgrnd = playground {
+            self.playground = playgrnd
+        }
+        self.playground.scene = self
+        segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
+        segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
+        for x in 0..<PlaygroundBuilder.Constants.groesseX {
+            for y in 0..<PlaygroundBuilder.Constants.groesseY {
+                if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
+//                    if mazeType.mazeElementType==MazeElementType.player_1 {
+//                        self.playground.playerOneSprite = mazeType.sprite
+//                        self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
+//                        self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
+//                    } else
+//                    if mazeType.mazeElementType==MazeElementType.player_2 {
+//                        self.playground.playerOneSprite = mazeType.sprite
+//                        self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
+//                    }
+                    if let sprite = mazeType.sprite {
+                        sprite.removeFromParent()
+                        worldNode.addChild(sprite)
+                        sprite.xScale = segmentX! / CGFloat(40.0)
+                        sprite.yScale = segmentY! / CGFloat(40.0)
+                        drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y))
+                    }
+                }
+            }
+        }
+        switchToPlayerOne()    }
     
     func drawSprite(sprite:SKSpriteNode,position:PlaygroundPosition) {
         if self.spritesToRemove.count == 0 {
@@ -73,7 +110,7 @@ class GameScene: SKScene {
             }
             self.spritesToRemove.removeAll()
             if self.playground.justFinished == true {
-                self.updateViewController!(MazeElementType.exit)
+                self.updateViewController!(MazeEvent.exit_found)
             }
         })
         
@@ -94,7 +131,7 @@ class GameScene: SKScene {
                 }
                 self.spritesToRemove.removeAll()
                 if self.playground.justFinished == true {
-                    self.updateViewController!(MazeElementType.exit)
+                    self.updateViewController!(MazeEvent.exit_found)
                 }
                 if let animationCompleted = self.animationCompleted {
                     animationCompleted(element,position)
@@ -114,6 +151,8 @@ class GameScene: SKScene {
                                           y:playground.positionPlayerOne.y-4)
         self.playground.playerPosition = self.playground.positionPlayerOne
         self.playground.oldPlayerPosition = self.playground.positionPlayerOne
+        print("player one:\(self.playground.positionPlayerOne)")
+        print("player two:\(self.playground.positionPlayerTwo)")
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
@@ -144,6 +183,7 @@ class GameScene: SKScene {
         let xCoord = (CGFloat(coord.x)*CGFloat(segmentX!))*CGFloat(-1)
         let yCoord = CGFloat(coord.y)*segmentY!
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
+        print("Camera position:\(coord)")
         self.playground.cameraPosition = coord
     }
     
