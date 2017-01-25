@@ -14,6 +14,8 @@ class XorLevelTableViewController: UITableViewController {
     var playgroundIndices = Array<Int>()
     var currentLevel : Int?
     var selectionFinishedClosure : ((Int) -> ())?
+    var resetPressedClosure : (() ->())?
+    
     var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
     
     func setPlaygrounds(playgrounds:[Int:Playground]?){
@@ -29,6 +31,16 @@ class XorLevelTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: {});
         //self.navigationController?.popViewControllerAnimated(true);
     }
+    
+    @IBAction func resetPressed()
+    {
+        if let s = resetPressedClosure {
+            s()
+        }
+        self.dismiss(animated: true, completion: {});
+        //self.navigationController?.popViewControllerAnimated(true);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

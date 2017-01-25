@@ -88,13 +88,13 @@ class XorGameViewController: UIViewController {
             if orientation == Orientation.MyViewOrientationPortrait {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height / CGFloat(2.25)
-                countMovesViewWidthConstraint.constant=50
+                //countMovesViewWidthConstraint.constant=50
                 movesString="/1000"
-                self.countMovesLabel.text = String("\(z)/1000")
+                self.countMovesLabel.text = String("\(z)")
             } else {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width - playgroundViewConstraint.constant - 15
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height
-                countMovesViewWidthConstraint.constant=10
+                //countMovesViewWidthConstraint.constant=10
                 movesString=""
                 self.countMovesLabel.text = String("\(z)")
             }
@@ -199,7 +199,7 @@ class XorGameViewController: UIViewController {
         currentPlayground = playgrounds[1]
         
         if let gesMask = self.currentPlayground?.masken_gesamtanzahl {
-            collectedMasksLabel!.text! = "0 of \(gesMask)"
+            collectedMasksLabel!.text! = "0/\(gesMask)"
         }
         playgroundView.isMultipleTouchEnabled = false
         
@@ -262,11 +262,11 @@ class XorGameViewController: UIViewController {
             // always : one step further 
             if let zuege = self.currentPlayground?.anzahl_spielzuege {
                 self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
-                self.countMovesLabel.text = String("\(zuege)\(self.movesString)")
+                self.countMovesLabel.text = String("\(zuege)")
             }
             if let maskenTotal = self.currentPlayground?.masken_gesamtanzahl {
                 if let masken = self.currentPlayground?.masken_gesammelt {
-                    self.collectedMasksLabel!.text! = String("\(masken) of \(maskenTotal)")
+                    self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
                     
                 }
             }
@@ -292,10 +292,15 @@ class XorGameViewController: UIViewController {
                     Playground.currentPlaygroundLevel=selectedPlaygroundLevel
                     //self.scene = GameScene()
                     //self.scene.drawWholePlayground()
-                    self.xorNavigationItem.title = String("Zero of 1000 Steps.")
+                    self.countMovesLabel.text = "0"
+                    self.xorNavigationItem.title = self.currentPlayground?.level_name
                     self.presentPlayground()
                 }
                 return
+            }
+            levelTableViewController.resetPressedClosure = {
+                self.countMovesLabel.text = "0"
+                self.resetToBegin()
             }
         }
     }
@@ -370,11 +375,13 @@ class XorGameViewController: UIViewController {
     @IBAction func resetToBegin()
     {
         map_visible = false
-        self.xorNavigationItem.title = String("Zero of 1000 Steps.")
+        self.xorNavigationItem.title = self.currentPlayground?.level_name
         showPlayerIconOnButton(playerOne: false)
         currentPlayground = PlaygroundBuilder.readFromString(playground: currentPlayground)
         scene.resetGameScene(playground: currentPlayground!)
+        
         presentPlayground()
+        self.xorNavigationItem.title = self.currentPlayground?.level_name
     }
     
     // Show Map Button
