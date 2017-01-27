@@ -10,6 +10,11 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PressStart2P.ttf">
+            <string>PressStart2P</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Xor Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -27,29 +32,29 @@
                                 <rect key="frame" x="10" y="10" width="355" height="355"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
-                                        <rect key="frame" x="35" y="138" width="286" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <string key="text">No Map available. 
 Collect four Map Items to
 unlock all parts of the Map!</string>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1">
                                         <rect key="frame" x="57" y="113" width="240" height="128"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="-23" y="1" width="286" height="69"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="78"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="22"/>
                                                 <color key="textColor" red="1" green="0.51780715649124698" blue="0.23331811231651367" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yah-3T-933">
-                                                <rect key="frame" x="53" y="90" width="135" height="30"/>
+                                                <rect key="frame" x="0.0" y="78" width="240" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="135" id="7X5-aM-OUp"/>
+                                                    <constraint firstAttribute="height" constant="50" id="Qgx-WA-jvL"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="11"/>
                                                 <state key="normal" title="OK - Weiter geht's !"/>
                                                 <connections>
                                                     <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="lTC-ER-53d"/>
@@ -58,20 +63,32 @@ unlock all parts of the Map!</string>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="yah-3T-933" firstAttribute="centerX" secondItem="Emc-Mx-aj1" secondAttribute="centerX" id="FBI-xG-qgd"/>
-                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="8" id="JET-Ks-Bct"/>
+                                            <constraint firstItem="yah-3T-933" firstAttribute="top" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="4E5-G5-KtO"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="IfL-W2-ysR"/>
+                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="JqV-n1-Q63"/>
+                                            <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="KzU-Vb-a6k"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="PQc-NE-8Mp"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="WH0-di-lni"/>
+                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" id="YbJ-IA-C46"/>
+                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="gX6-c2-fQa"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="s2v-um-1rs"/>
+                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" id="zhf-3S-5is"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98515519679999997" green="1" blue="0.33110773090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerY" secondItem="mOW-CJ-XDb" secondAttribute="centerY" id="3KY-0F-IrU"/>
+                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="CJf-vs-zTz"/>
                                     <constraint firstAttribute="width" constant="355" id="F3G-0e-RbR"/>
                                     <constraint firstAttribute="trailing" secondItem="Emc-Mx-aj1" secondAttribute="trailing" constant="58" id="JHe-wp-hGm"/>
+                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="Qsc-AG-phS"/>
+                                    <constraint firstAttribute="bottom" secondItem="gqB-Sb-UYk" secondAttribute="bottom" id="QyS-jJ-UCL"/>
                                     <constraint firstItem="Emc-Mx-aj1" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" constant="113" id="UbV-G1-kwt"/>
                                     <constraint firstAttribute="width" secondItem="mOW-CJ-XDb" secondAttribute="height" multiplier="1:1" id="ZIw-8p-sIA"/>
                                     <constraint firstItem="Emc-Mx-aj1" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" constant="57" id="baQ-bo-IC3"/>
                                     <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerX" secondItem="mOW-CJ-XDb" secondAttribute="centerX" id="dXs-Qp-EBy"/>
+                                    <constraint firstAttribute="trailing" secondItem="gqB-Sb-UYk" secondAttribute="trailing" id="fYn-rp-hnl"/>
                                     <constraint firstAttribute="bottom" secondItem="Emc-Mx-aj1" secondAttribute="bottom" constant="114" id="pCa-40-6cc"/>
                                 </constraints>
                             </view>
@@ -85,22 +102,23 @@ unlock all parts of the Map!</string>
                                         </constraints>
                                         <color key="barTintColor" red="1" green="0.37023983780000003" blue="0.1951047242" alpha="1" colorSpace="calibratedRGB"/>
                                         <items>
-                                            <navigationItem title="iXor!" id="T44-sV-ZBd">
+                                            <navigationItem id="T44-sV-ZBd">
+                                                <nil key="title"/>
                                                 <leftBarButtonItems>
                                                     <barButtonItem style="plain" id="uR0-PK-PfU">
                                                         <view key="customView" contentMode="scaleToFill" id="mAw-aa-uaa" userLabel="Counter ">
-                                                            <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                                            <rect key="frame" x="16" y="7" width="50" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maske" highlightedImage="maske" translatesAutoresizingMaskIntoConstraints="NO" id="31P-Ts-t7q">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="15"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="15"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBs-kG-5Es">
-                                                                    <rect key="frame" x="0.0" y="16" width="30" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="16" width="50" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="14" id="RNX-CV-2uE"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -113,29 +131,29 @@ unlock all parts of the Map!</string>
                                                                 <constraint firstAttribute="bottom" secondItem="31P-Ts-t7q" secondAttribute="bottom" constant="15" id="Cuh-mN-TvV"/>
                                                                 <constraint firstItem="31P-Ts-t7q" firstAttribute="leading" secondItem="mAw-aa-uaa" secondAttribute="leading" id="PpA-ws-mUd"/>
                                                                 <constraint firstAttribute="trailing" secondItem="31P-Ts-t7q" secondAttribute="trailing" id="jHX-Qp-sqb"/>
-                                                                <constraint firstAttribute="width" constant="30" id="u0l-uR-rwj"/>
+                                                                <constraint firstAttribute="width" constant="50" id="u0l-uR-rwj"/>
                                                                 <constraint firstAttribute="height" constant="30" id="urK-RF-5pD"/>
                                                             </constraints>
                                                         </view>
                                                     </barButtonItem>
                                                     <barButtonItem style="plain" id="x80-L7-Tra">
                                                         <view key="customView" contentMode="scaleToFill" id="2aZ-xl-LLb">
-                                                            <rect key="frame" x="54" y="7" width="40" height="30"/>
+                                                            <rect key="frame" x="74" y="7" width="50" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ynM-bS-FL5">
-                                                                    <rect key="frame" x="0.0" y="5" width="40" height="8"/>
+                                                                    <rect key="frame" x="0.0" y="5" width="50" height="8"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="8" id="MsU-bw-GCD"/>
                                                                     </constraints>
                                                                     <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </progressView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qS1-Vu-35B">
-                                                                    <rect key="frame" x="0.0" y="17" width="40" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="50" height="12"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="12" id="V37-BI-za5"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -152,10 +170,50 @@ unlock all parts of the Map!</string>
                                                         </view>
                                                     </barButtonItem>
                                                 </leftBarButtonItems>
-                                                <barButtonItem key="rightBarButtonItem" title="Level" id="xaI-R9-8Ag">
-                                                    <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                <view key="titleView" contentMode="scaleToFill" id="ZfQ-e3-TGV">
+                                                    <rect key="frame" x="130" y="6" width="157" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the Beginning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g86-dt-vrk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="157" height="33"/>
+                                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="8"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="g86-dt-vrk" secondAttribute="trailing" id="GUh-tk-j1q"/>
+                                                        <constraint firstItem="g86-dt-vrk" firstAttribute="top" secondItem="ZfQ-e3-TGV" secondAttribute="top" id="kNj-5g-U72"/>
+                                                        <constraint firstAttribute="bottom" secondItem="g86-dt-vrk" secondAttribute="bottom" id="vfV-nx-oHb"/>
+                                                        <constraint firstItem="g86-dt-vrk" firstAttribute="leading" secondItem="ZfQ-e3-TGV" secondAttribute="leading" id="wOg-6x-842"/>
+                                                    </constraints>
+                                                </view>
+                                                <barButtonItem key="rightBarButtonItem" style="plain" id="CfA-ly-kQO">
+                                                    <view key="customView" contentMode="scaleToFill" id="mwr-d9-RZF">
+                                                        <rect key="frame" x="299" y="5" width="60" height="33"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMF-kX-xHV">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="33"/>
+                                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
+                                                                <state key="normal" title="Level">
+                                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="FPW-FN-jbY"/>
+                                                                    <segue destination="uMF-bP-LeY" kind="show" id="Yhu-t0-agq"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="TMF-kX-xHV" firstAttribute="top" secondItem="mwr-d9-RZF" secondAttribute="top" id="Dip-ub-61f"/>
+                                                            <constraint firstAttribute="bottom" secondItem="TMF-kX-xHV" secondAttribute="bottom" id="IVG-Q4-THY"/>
+                                                            <constraint firstItem="TMF-kX-xHV" firstAttribute="leading" secondItem="mwr-d9-RZF" secondAttribute="leading" id="bVs-6t-q1d"/>
+                                                            <constraint firstAttribute="trailing" secondItem="TMF-kX-xHV" secondAttribute="trailing" id="wI7-ew-XJb"/>
+                                                        </constraints>
+                                                    </view>
                                                     <connections>
-                                                        <segue destination="uMF-bP-LeY" kind="show" id="6Wx-rF-b4X"/>
+                                                        <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" id="vP9-Ts-bHH"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -364,7 +422,7 @@ unlock all parts of the Map!</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="EAx-Rh-Ol4"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -461,6 +519,7 @@ unlock all parts of the Map!</string>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
                         <outlet property="mapRightUp" destination="FQx-Am-3X7" id="NmI-V9-pL2"/>
                         <outlet property="mapTextLabel" destination="gqB-Sb-UYk" id="NsX-En-Esa"/>
+                        <outlet property="navigationBarTitle" destination="g86-dt-vrk" id="Pwf-BT-x6f"/>
                         <outlet property="playerButtonsViewHeightConstraint" destination="gI4-2p-Vfi" id="LvP-4l-dfH"/>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="jzI-IL-TzW"/>
                         <outlet property="playerChangeButton" destination="fiK-qK-abw" id="uwn-zB-Ku5"/>
@@ -483,22 +542,55 @@ unlock all parts of the Map!</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="59n-7u-dfu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="DkK-nE-Nlt">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
-                                <navigationItem title="iXor!  Level" id="VYl-WP-Lyi">
-                                    <barButtonItem key="leftBarButtonItem" title="Zurück" id="BrS-E0-Uc8">
-                                        <connections>
-                                            <action selector="backButtonPressed" destination="uMF-bP-LeY" id="fBp-BQ-yvf"/>
-                                        </connections>
+                                <navigationItem id="VYl-WP-Lyi">
+                                    <nil key="title"/>
+                                    <barButtonItem key="leftBarButtonItem" style="plain" id="9Tv-Ba-Dlm">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4JA-sR-4dh">
+                                            <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
+                                            <state key="normal" title="Zurück"/>
+                                            <connections>
+                                                <action selector="backButtonPressed" destination="uMF-bP-LeY" eventType="touchUpInside" id="f6h-iy-ZpK"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" title="RESET" id="VYB-S3-Lo0">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <action selector="resetPressed" destination="uMF-bP-LeY" id="sSr-jc-P2W"/>
-                                        </connections>
+                                    <view key="titleView" contentMode="scaleToFill" id="SbD-Y1-an4">
+                                        <rect key="frame" x="121" y="6" width="134" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="145" height="33"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="8nK-Yz-5aJ" secondAttribute="bottom" id="HAe-Nj-ItM"/>
+                                            <constraint firstItem="8nK-Yz-5aJ" firstAttribute="leading" secondItem="SbD-Y1-an4" secondAttribute="leading" id="RNz-T4-9w2"/>
+                                            <constraint firstAttribute="trailing" secondItem="8nK-Yz-5aJ" secondAttribute="trailing" constant="-11" id="RQq-oW-sYi"/>
+                                            <constraint firstItem="8nK-Yz-5aJ" firstAttribute="top" secondItem="SbD-Y1-an4" secondAttribute="top" id="xhi-DX-TVH"/>
+                                        </constraints>
+                                    </view>
+                                    <barButtonItem key="rightBarButtonItem" style="plain" id="lQ8-gD-tys">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ikJ-SQ-Huf">
+                                            <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="15"/>
+                                            <state key="normal" title="RESET">
+                                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="resetPressed" destination="uMF-bP-LeY" eventType="touchUpInside" id="5Rs-CM-KTh"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                 </navigationItem>
                             </items>
@@ -512,21 +604,22 @@ unlock all parts of the Map!</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9y-Mb-GOs">
-                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
+                                            <rect key="frame" x="15" y="17" width="45" height="9"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="9"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqV-m3-9qz">
-                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
+                                            <rect key="frame" x="312" y="18" width="48" height="8"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="8"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" hint="Hint" identifier="reuseIdentifier" label="Label"/>
                             </tableViewCell>
                         </prototypes>

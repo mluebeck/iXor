@@ -100,7 +100,9 @@ class PlaygroundBuilder: NSObject {
         playground?.anzahl_spielzuege = 0
         playground?.akt_spieler_ist_playerOne = true
         playground?.numberOfKilledPlayer = 0
-        
+
+        let language = Bundle.main.preferredLocalizations.first
+
         for char in (playground?.contentAsString.characters)! {
             if commentMode == true {
                 if char == "#" {
@@ -123,11 +125,16 @@ class PlaygroundBuilder: NSObject {
         }
         
         let arr = levelTitleWithNumber.components(separatedBy:":")
-        if arr.count==2 {
-            playground?.level_name = arr[1]
-            let numberStr = arr[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            playground?.level_number = Int(numberStr)!
+        
+        for i in 1...arr.count
+        {
+            if arr[i]==language {
+                playground?.level_name = arr[i+1]
+                break
+            }
         }
+        let numberStr = arr[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        playground?.level_number = Int(numberStr)!
         
         var i = 0
         var localArray = Array<MazeType>()

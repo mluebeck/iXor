@@ -88,7 +88,7 @@ class XorLevelTableViewController: UITableViewController {
         if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
             cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
-            cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
+            //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
             if playground?.finished == true
             {
                 cell.detailTextLabel?.text = "Completed!"
@@ -98,7 +98,7 @@ class XorLevelTableViewController: UITableViewController {
         }
         else {
             cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
-            cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
+            //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
             if playground?.finished == true
             {
                 cell.detailTextLabel?.text = "Completed!"

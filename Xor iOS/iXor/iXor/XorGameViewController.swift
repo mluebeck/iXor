@@ -38,6 +38,7 @@ class XorGameViewController: UIViewController {
     @IBOutlet var countMovesView : UIView!
     @IBOutlet var countMovesLabel : UILabel!
     @IBOutlet var progressBar : UIProgressView!
+    @IBOutlet var navigationBarTitle : UILabel!
     
     var movesString = "/1000"
     var currentOrientation : Orientation!
@@ -141,6 +142,8 @@ class XorGameViewController: UIViewController {
         
         
         presentPlayground()
+        self.navigationBarTitle.text = self.currentPlayground?.level_name
+
         //drawCircleSegment(index:2)
     }
     
@@ -276,6 +279,13 @@ class XorGameViewController: UIViewController {
         playgroundView.presentScene(scene)
     }
     
+    func resetMaps() {
+        self.mapLeftUp.alpha = 0.5
+        self.mapRightUp.alpha = 0.5
+        self.mapLeftDown.alpha = 0.5
+        self.mapRightDown.alpha = 0.5
+        self.currentPlayground?.mapsFound.removeAll()
+    }
     
     // segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -293,14 +303,17 @@ class XorGameViewController: UIViewController {
                     //self.scene = GameScene()
                     //self.scene.drawWholePlayground()
                     self.countMovesLabel.text = "0"
-                    self.xorNavigationItem.title = self.currentPlayground?.level_name
+                    self.navigationBarTitle.text = self.currentPlayground?.level_name
                     self.presentPlayground()
+                    self.resetMaps()
+                    
                 }
                 return
             }
             levelTableViewController.resetPressedClosure = {
                 self.countMovesLabel.text = "0"
                 self.resetToBegin()
+                self.resetMaps()
             }
         }
     }
@@ -375,13 +388,12 @@ class XorGameViewController: UIViewController {
     @IBAction func resetToBegin()
     {
         map_visible = false
-        self.xorNavigationItem.title = self.currentPlayground?.level_name
         showPlayerIconOnButton(playerOne: false)
         currentPlayground = PlaygroundBuilder.readFromString(playground: currentPlayground)
         scene.resetGameScene(playground: currentPlayground!)
         
         presentPlayground()
-        self.xorNavigationItem.title = self.currentPlayground?.level_name
+        self.navigationBarTitle.text = self.currentPlayground?.level_name
     }
     
     // Show Map Button

@@ -36,6 +36,7 @@
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
 		8C57E1711E3657060098C0BC /* testlevel.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C57E1701E3657060098C0BC /* testlevel.xor */; };
+		8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C57E1701E3657060098C0BC /* testlevel.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testlevel.xor; sourceTree = "<group>"; };
+		8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		8CF054941E302BE100771C7B /* Playground.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Playground.java; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				8CF054941E302BE100771C7B /* Playground.java */,
+				8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */,
 				8C2416401DF9FF850009FCC6 /* Level */,
 				8C04831E1E285BFD00F29B4D /* sounds */,
 				8C4312B41DF4717800E80996 /* Main.storyboard */,
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0483261E285DC000F29B4D /* bomb.caf in Resources */,
+				8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */,
 				8C2416511DF9FFA30009FCC6 /* level02.xor in Resources */,
 				8C2416561DF9FFA30009FCC6 /* level07.xor in Resources */,
 				8C2416531DF9FFA30009FCC6 /* level04.xor in Resources */,
