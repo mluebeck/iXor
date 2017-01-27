@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10659B0B1E3BE748001D4235 /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10659B081E3BE748001D4235 /* UIImage+REFrostedViewController.m */; };
+		10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10659B0A1E3BE748001D4235 /* UIView+REFrostedViewController.m */; };
+		109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E14031E3B4BB1007DB9F8 /* FrostedView.swift */; };
 		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
 		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
@@ -50,6 +53,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10659B071E3BE748001D4235 /* UIImage+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+REFrostedViewController.h"; path = "../iXor/UIImage+REFrostedViewController.h"; sourceTree = "<group>"; };
+		10659B081E3BE748001D4235 /* UIImage+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+REFrostedViewController.m"; path = "../iXor/UIImage+REFrostedViewController.m"; sourceTree = "<group>"; };
+		10659B091E3BE748001D4235 /* UIView+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+REFrostedViewController.h"; path = "../iXor/UIView+REFrostedViewController.h"; sourceTree = "<group>"; };
+		10659B0A1E3BE748001D4235 /* UIView+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+REFrostedViewController.m"; path = "../iXor/UIView+REFrostedViewController.m"; sourceTree = "<group>"; };
+		10659B101E3BE86B001D4235 /* iXor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iXor-Bridging-Header.h"; path = "../iXor/iXor-Bridging-Header.h"; sourceTree = "<group>"; };
+		109E14031E3B4BB1007DB9F8 /* FrostedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedView.swift; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
@@ -105,6 +114,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10659AFC1E3BDBB0001D4235 /* FrostedView */ = {
+			isa = PBXGroup;
+			children = (
+				10659B101E3BE86B001D4235 /* iXor-Bridging-Header.h */,
+				10659B071E3BE748001D4235 /* UIImage+REFrostedViewController.h */,
+				10659B081E3BE748001D4235 /* UIImage+REFrostedViewController.m */,
+				10659B091E3BE748001D4235 /* UIView+REFrostedViewController.h */,
+				10659B0A1E3BE748001D4235 /* UIView+REFrostedViewController.m */,
+			);
+			name = FrostedView;
+			path = iXorTests;
+			sourceTree = SOURCE_ROOT;
+		};
 		8C04831E1E285BFD00F29B4D /* sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +180,7 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				10659AFC1E3BDBB0001D4235 /* FrostedView */,
 				8C564AA91E2BF38F00C89298 /* Resources */,
 				8C44EBED1E26FFC900229C93 /* Classes */,
 			);
@@ -183,6 +206,7 @@
 				8C4312B01DF4717800E80996 /* GameScene.swift */,
 				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
 				8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */,
+				109E14031E3B4BB1007DB9F8 /* FrostedView.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -253,11 +277,13 @@
 					8C4312A61DF4717800E80996 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = HH3JD7K438;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					8C4312C01DF4717900E80996 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = HH3JD7K438;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8C4312A61DF4717800E80996;
 					};
@@ -328,10 +354,13 @@
 			files = (
 				8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */,
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
+				10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
+				10659B0B1E3BE748001D4235 /* UIImage+REFrostedViewController.m in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,
 				8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */,
+				109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */,
 				8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,12 +502,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXorTests/iXor-Bridging-Header.h";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "iXor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -487,12 +520,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXorTests/iXor-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -502,11 +537,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXor/iXor/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iXor.app/iXor";
 			};
@@ -517,11 +555,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXor/iXor/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iXor.app/iXor";
 			};

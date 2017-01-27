@@ -30,9 +30,9 @@ class XorGameViewController: UIViewController {
     @IBOutlet var mapLeftDown : UIView!
     @IBOutlet var mapRightUp : UIView!
     @IBOutlet var mapRightDown : UIView!
-    @IBOutlet var mapTextLabel: UILabel! 
+    @IBOutlet var mapTextView: FrostedView!
     @IBOutlet var xorNavigationItem: UINavigationItem!
-    @IBOutlet var successView: UIView!
+    @IBOutlet var successView: FrostedView!
     @IBOutlet var messageLabel : UILabel!
     @IBOutlet var okButton : UIButton!
     @IBOutlet var countMovesView : UIView!
@@ -189,14 +189,14 @@ class XorGameViewController: UIViewController {
         super.viewWillAppear(animated)
         if map_visible == false
         {
-            mapTextLabel.isHidden = true
+            mapTextView.show(visible: map_visible)
         }
     }
     
     // present the playground
     func presentPlayground() {
         
-        successView.isHidden = true
+        successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
         currentPlayground = playgrounds[1]
@@ -230,14 +230,18 @@ class XorGameViewController: UIViewController {
                 break;
             case MazeEvent.exit_found:
                 // Hier Erfolg animieren und Level freischalten
-                self.successView.isHidden = false
+                self.successView.show(visible: true)
                 self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
+                self.okButton.layer.borderWidth=2.0
+                self.okButton.layer.borderColor=UIColor.gray.cgColor
+                //[[myButton layer] setBorderWidth:2.0f];
+                //[[myButton layer] setBorderColor:[UIColor greenColor].CGColor];
                 self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                 
                 self.scene.removeAllChildren()
                 Playground.currentPlaygroundLevel += 1
                 self.currentPlayground?.finished = true
-                self.currentPlayground?.justFinished = true
+                self.currentPlayground?.justFinished = false
                 break
             case MazeEvent.bad_mask_found:
                 self.currentPlayground?.badMaskOperation()
@@ -251,7 +255,7 @@ class XorGameViewController: UIViewController {
                 self.showForbiddenImage()
                 break
             case MazeEvent.death_both:
-                self.successView.isHidden = false
+                self.successView.show(visible: true)
                 self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
                 self.okButton.setTitle("OK, gleich nochmal versuchen!", for: UIControlState.normal)
                 self.scene.removeAllChildren()
@@ -407,7 +411,7 @@ class XorGameViewController: UIViewController {
         else
         {
             scene.hideMap()
-            mapTextLabel.isHidden=true
+            mapTextView.show(visible: false)
             map_visible = false
         }
     }
@@ -415,11 +419,11 @@ class XorGameViewController: UIViewController {
     func mapTextVisible(){
         if currentPlayground?.mapsFound.count == 0
         {
-            mapTextLabel.isHidden = false
+            mapTextView.show(visible: true)
         }
         else
         {
-            mapTextLabel.isHidden = true
+            mapTextView.show(visible: false)
         }
 
     }

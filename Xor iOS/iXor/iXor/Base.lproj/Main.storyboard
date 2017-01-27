@@ -31,65 +31,71 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-CJ-XDb" userLabel="Playground View" customClass="SKView">
                                 <rect key="frame" x="10" y="10" width="355" height="355"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTD-rJ-Cdm" customClass="FrostedView" customModule="iXor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
-                                        <string key="text">No Map available. 
-Collect four Map Items to
-unlock all parts of the Map!</string>
-                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="20"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1">
-                                        <rect key="frame" x="57" y="113" width="240" height="128"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
+                                                <rect key="frame" x="50" y="50" width="255" height="255"/>
+                                                <string key="text">Keine Karte verfügbar.
+
+Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="20"/>
+                                                <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="gqB-Sb-UYk" firstAttribute="top" secondItem="fTD-rJ-Cdm" secondAttribute="top" constant="50" id="2lq-Pv-yCe"/>
+                                            <constraint firstItem="gqB-Sb-UYk" firstAttribute="leading" secondItem="fTD-rJ-Cdm" secondAttribute="leading" constant="50" id="fun-w1-RY7"/>
+                                            <constraint firstAttribute="bottom" secondItem="gqB-Sb-UYk" secondAttribute="bottom" constant="50" id="knN-BG-HqI"/>
+                                            <constraint firstAttribute="trailing" secondItem="gqB-Sb-UYk" secondAttribute="trailing" constant="50" id="mlR-Wf-miw"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1" customClass="FrostedView" customModule="iXor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="78"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                                 <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="22"/>
-                                                <color key="textColor" red="1" green="0.51780715649124698" blue="0.23331811231651367" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yah-3T-933">
-                                                <rect key="frame" x="0.0" y="78" width="240" height="50"/>
+                                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yah-3T-933">
+                                                <rect key="frame" x="40" y="265" width="275" height="60"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="Qgx-WA-jvL"/>
+                                                    <constraint firstAttribute="height" constant="60" id="be0-qX-0rh"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="11"/>
-                                                <state key="normal" title="OK - Weiter geht's !"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
+                                                <state key="normal" title="Ok, weiter geht's !"/>
                                                 <connections>
                                                     <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="lTC-ER-53d"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="yah-3T-933" firstAttribute="top" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="4E5-G5-KtO"/>
-                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="IfL-W2-ysR"/>
-                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="JqV-n1-Q63"/>
-                                            <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="KzU-Vb-a6k"/>
-                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="PQc-NE-8Mp"/>
-                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="WH0-di-lni"/>
-                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" id="YbJ-IA-C46"/>
-                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="gX6-c2-fQa"/>
-                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="s2v-um-1rs"/>
-                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" id="zhf-3S-5is"/>
+                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="30" id="8YP-Z1-mLh"/>
+                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" constant="40" id="aNJ-uj-ZNU"/>
+                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="jOi-PM-590"/>
+                                            <constraint firstAttribute="bottom" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="lVS-S3-Q24"/>
+                                            <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="p4I-0j-2nr"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="tFC-YB-AQw"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="uWN-kh-FAv"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98515519679999997" green="1" blue="0.33110773090000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerY" secondItem="mOW-CJ-XDb" secondAttribute="centerY" id="3KY-0F-IrU"/>
-                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="CJf-vs-zTz"/>
                                     <constraint firstAttribute="width" constant="355" id="F3G-0e-RbR"/>
-                                    <constraint firstAttribute="trailing" secondItem="Emc-Mx-aj1" secondAttribute="trailing" constant="58" id="JHe-wp-hGm"/>
-                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="Qsc-AG-phS"/>
-                                    <constraint firstAttribute="bottom" secondItem="gqB-Sb-UYk" secondAttribute="bottom" id="QyS-jJ-UCL"/>
-                                    <constraint firstItem="Emc-Mx-aj1" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" constant="113" id="UbV-G1-kwt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Emc-Mx-aj1" secondAttribute="trailing" id="JHe-wp-hGm"/>
+                                    <constraint firstItem="fTD-rJ-Cdm" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="Tvw-uP-1bI"/>
+                                    <constraint firstItem="Emc-Mx-aj1" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="UbV-G1-kwt"/>
                                     <constraint firstAttribute="width" secondItem="mOW-CJ-XDb" secondAttribute="height" multiplier="1:1" id="ZIw-8p-sIA"/>
-                                    <constraint firstItem="Emc-Mx-aj1" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" constant="57" id="baQ-bo-IC3"/>
-                                    <constraint firstItem="gqB-Sb-UYk" firstAttribute="centerX" secondItem="mOW-CJ-XDb" secondAttribute="centerX" id="dXs-Qp-EBy"/>
-                                    <constraint firstAttribute="trailing" secondItem="gqB-Sb-UYk" secondAttribute="trailing" id="fYn-rp-hnl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Emc-Mx-aj1" secondAttribute="bottom" constant="114" id="pCa-40-6cc"/>
+                                    <constraint firstItem="Emc-Mx-aj1" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="baQ-bo-IC3"/>
+                                    <constraint firstItem="fTD-rJ-Cdm" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="efU-aw-yN6"/>
+                                    <constraint firstAttribute="bottom" secondItem="fTD-rJ-Cdm" secondAttribute="bottom" id="m77-aV-1Vp"/>
+                                    <constraint firstAttribute="bottom" secondItem="Emc-Mx-aj1" secondAttribute="bottom" id="pCa-40-6cc"/>
+                                    <constraint firstAttribute="trailing" secondItem="fTD-rJ-Cdm" secondAttribute="trailing" id="sMc-zy-GTZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vrw-AF-AtW" userLabel="Player Buttons View">
@@ -311,42 +317,39 @@ unlock all parts of the Map!</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yH3-ah-l2R" userLabel="Game Controller View">
                                         <rect key="frame" x="0.0" y="45" width="375" height="203"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Pr-ugY">
-                                                <rect key="frame" x="10" y="76" width="60" height="60"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Pr-ugY">
+                                                <rect key="frame" x="9" y="62" width="65" height="65"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="c4n-hQ-acf"/>
-                                                    <constraint firstAttribute="width" constant="60" id="nFY-3j-s0t"/>
+                                                    <constraint firstAttribute="height" constant="65" id="c4n-hQ-acf"/>
+                                                    <constraint firstAttribute="width" constant="65" id="nFY-3j-s0t"/>
                                                 </constraints>
-                                                <state key="normal" title="&lt;">
+                                                <state key="normal" backgroundImage="left">
                                                     <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="leftGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="Ws1-WP-5ry"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhH-4i-AGq">
-                                                <rect key="frame" x="70" y="136" width="60" height="60"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhH-4i-AGq">
+                                                <rect key="frame" x="70" y="131" width="65" height="65"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="GuN-mm-HOY"/>
-                                                    <constraint firstAttribute="height" constant="60" id="mR9-ZC-1Gm"/>
+                                                    <constraint firstAttribute="width" constant="65" id="GuN-mm-HOY"/>
+                                                    <constraint firstAttribute="height" constant="65" id="mR9-ZC-1Gm"/>
                                                 </constraints>
-                                                <state key="normal" title="\/">
+                                                <state key="normal" backgroundImage="down">
                                                     <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="downGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="o7h-Bg-lhi"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbD-9B-DyD">
-                                                <rect key="frame" x="70" y="16" width="60" height="60"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbD-9B-DyD">
+                                                <rect key="frame" x="70" y="0.0" width="65" height="65"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Wxe-WM-3y0"/>
-                                                    <constraint firstAttribute="width" constant="60" id="bFK-GY-Rpl"/>
+                                                    <constraint firstAttribute="height" constant="65" id="Wxe-WM-3y0"/>
+                                                    <constraint firstAttribute="width" constant="65" id="bFK-GY-Rpl"/>
                                                 </constraints>
-                                                <state key="normal" title="^">
+                                                <state key="normal" backgroundImage="up">
                                                     <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -354,11 +357,10 @@ unlock all parts of the Map!</string>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5NA-LN-4Bz" userLabel="Change Player">
-                                                <rect key="frame" x="70" y="76" width="60" height="60"/>
+                                                <rect key="frame" x="74" y="68" width="60" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiK-qK-abw" userLabel="Spielerwechsel">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="spieler2">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -366,11 +368,10 @@ unlock all parts of the Map!</string>
                                                             <action selector="switchMaskButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="PSa-at-OVf"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler2" translatesAutoresizingMaskIntoConstraints="NO" id="9xH-EE-ocQ">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler2" translatesAutoresizingMaskIntoConstraints="NO" id="9xH-EE-ocQ">
                                                         <rect key="frame" x="5" y="5" width="50" height="50"/>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="9xH-EE-ocQ" firstAttribute="top" secondItem="5NA-LN-4Bz" secondAttribute="top" constant="5" id="14L-sC-S85"/>
                                                     <constraint firstItem="fiK-qK-abw" firstAttribute="leading" secondItem="5NA-LN-4Bz" secondAttribute="leading" id="1GU-JE-ExF"/>
@@ -454,14 +455,13 @@ unlock all parts of the Map!</string>
                                                     <constraint firstItem="eAW-El-Cay" firstAttribute="leading" secondItem="KvS-mg-L7Y" secondAttribute="leading" id="yaP-Kd-tEC"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-P1-SqZ">
-                                                <rect key="frame" x="130" y="76" width="60" height="60"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-P1-SqZ">
+                                                <rect key="frame" x="134" y="62" width="65" height="65"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="AlQ-zj-xBz"/>
-                                                    <constraint firstAttribute="height" constant="60" id="gcd-y9-JDX"/>
+                                                    <constraint firstAttribute="width" constant="65" id="AlQ-zj-xBz"/>
+                                                    <constraint firstAttribute="height" constant="65" id="gcd-y9-JDX"/>
                                                 </constraints>
-                                                <state key="normal" title="&gt;">
+                                                <state key="normal" backgroundImage="right">
                                                     <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -472,14 +472,14 @@ unlock all parts of the Map!</string>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="mMX-P1-SqZ" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" constant="60" id="0Ke-k7-c7P"/>
-                                            <constraint firstItem="zhH-4i-AGq" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" id="3Z9-9L-Uf7"/>
-                                            <constraint firstItem="5NA-LN-4Bz" firstAttribute="top" secondItem="KbD-9B-DyD" secondAttribute="bottom" id="4gF-ch-JzU"/>
-                                            <constraint firstAttribute="bottom" secondItem="io0-Pr-ugY" secondAttribute="bottom" constant="67" id="6WH-c6-ahu"/>
-                                            <constraint firstAttribute="bottom" secondItem="mMX-P1-SqZ" secondAttribute="bottom" constant="67" id="6xf-6R-JPI"/>
-                                            <constraint firstItem="io0-Pr-ugY" firstAttribute="leading" secondItem="yH3-ah-l2R" secondAttribute="leading" constant="10" id="7C9-sw-2eM"/>
-                                            <constraint firstItem="zhH-4i-AGq" firstAttribute="top" secondItem="5NA-LN-4Bz" secondAttribute="bottom" id="P1g-Qk-00e"/>
+                                            <constraint firstItem="zhH-4i-AGq" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" constant="-4" id="3Z9-9L-Uf7"/>
+                                            <constraint firstItem="5NA-LN-4Bz" firstAttribute="top" secondItem="KbD-9B-DyD" secondAttribute="bottom" constant="3" id="4gF-ch-JzU"/>
+                                            <constraint firstAttribute="bottom" secondItem="io0-Pr-ugY" secondAttribute="bottom" constant="76" id="6WH-c6-ahu"/>
+                                            <constraint firstAttribute="bottom" secondItem="mMX-P1-SqZ" secondAttribute="bottom" constant="76" id="6xf-6R-JPI"/>
+                                            <constraint firstItem="io0-Pr-ugY" firstAttribute="leading" secondItem="yH3-ah-l2R" secondAttribute="leading" constant="9" id="7C9-sw-2eM"/>
+                                            <constraint firstItem="zhH-4i-AGq" firstAttribute="top" secondItem="5NA-LN-4Bz" secondAttribute="bottom" constant="3" id="P1g-Qk-00e"/>
                                             <constraint firstItem="5NA-LN-4Bz" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" id="Scq-IW-kw6"/>
-                                            <constraint firstItem="KbD-9B-DyD" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" id="SkZ-8h-drX"/>
+                                            <constraint firstItem="KbD-9B-DyD" firstAttribute="leading" secondItem="io0-Pr-ugY" secondAttribute="trailing" constant="-4" id="SkZ-8h-drX"/>
                                             <constraint firstAttribute="trailing" secondItem="KvS-mg-L7Y" secondAttribute="trailing" constant="20" id="cLm-lx-4Mp"/>
                                             <constraint firstAttribute="bottom" secondItem="zhH-4i-AGq" secondAttribute="bottom" constant="7" id="fS2-Nl-rPH"/>
                                             <constraint firstItem="KvS-mg-L7Y" firstAttribute="top" secondItem="yH3-ah-l2R" secondAttribute="top" constant="20" id="sDa-he-Pf6"/>
@@ -518,8 +518,10 @@ unlock all parts of the Map!</string>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
                         <outlet property="mapRightUp" destination="FQx-Am-3X7" id="NmI-V9-pL2"/>
-                        <outlet property="mapTextLabel" destination="gqB-Sb-UYk" id="NsX-En-Esa"/>
+                        <outlet property="mapTextView" destination="fTD-rJ-Cdm" id="M38-Xw-RiX"/>
+                        <outlet property="messageLabel" destination="JLV-6w-TxB" id="cGL-a3-sc8"/>
                         <outlet property="navigationBarTitle" destination="g86-dt-vrk" id="Pwf-BT-x6f"/>
+                        <outlet property="okButton" destination="yah-3T-933" id="jfc-Np-Luc"/>
                         <outlet property="playerButtonsViewHeightConstraint" destination="gI4-2p-Vfi" id="LvP-4l-dfH"/>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="jzI-IL-TzW"/>
                         <outlet property="playerChangeButton" destination="fiK-qK-abw" id="uwn-zB-Ku5"/>
@@ -527,7 +529,7 @@ unlock all parts of the Map!</string>
                         <outlet property="playgroundView" destination="mOW-CJ-XDb" id="FZ2-il-eMX"/>
                         <outlet property="playgroundViewConstraint" destination="F3G-0e-RbR" id="NTZ-i0-V0z"/>
                         <outlet property="progressBar" destination="ynM-bS-FL5" id="YHu-xF-BFy"/>
-                        <outlet property="successView" destination="Emc-Mx-aj1" id="5mZ-SR-4Fi"/>
+                        <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
                         <outlet property="xorNavigationItem" destination="T44-sV-ZBd" id="hhD-KL-ScT"/>
                     </connections>
                 </viewController>
@@ -635,11 +637,15 @@ unlock all parts of the Map!</string>
         </scene>
     </scenes>
     <resources>
+        <image name="down" width="52" height="52"/>
         <image name="karte_lo" width="20" height="21"/>
         <image name="karte_lu" width="20" height="20"/>
         <image name="karte_ro" width="20" height="20"/>
         <image name="karte_ru" width="20" height="20"/>
+        <image name="left" width="52" height="52"/>
         <image name="maske" width="40" height="40"/>
+        <image name="right" width="52" height="52"/>
         <image name="spieler2" width="40" height="40"/>
+        <image name="up" width="52" height="52"/>
     </resources>
 </document>
