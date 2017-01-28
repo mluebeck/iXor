@@ -403,13 +403,21 @@ class XorGameViewController: UIViewController {
     }
     
     func showForbiddenImage() {
-        let playerOneImage = UIImage(named:"verbot")
+        let playerOneImage = UIImage(named:"verbot_weiss")
         playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
         playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
         playerChangeImage.image = nil
         playerChangeButton.isEnabled = false
-        
     }
+    
+    func hideForbiddenImage() {
+        let playerOneImage = UIImage(named:"spieler2")
+        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+        playerChangeImage.image = playerOneImage
+        playerChangeButton.isEnabled = true
+    }
+    
     // MARK: Replay 
     
     @IBAction func replayButtonPressed(){}
@@ -435,6 +443,7 @@ class XorGameViewController: UIViewController {
             resetToBegin()
         }
         else {
+            self.hideForbiddenImage()
             presentPlayground()
         }
     }

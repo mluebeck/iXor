@@ -48,22 +48,13 @@ class Playground: NSObject {
         {
         case PlayerMoveDirection.UP:
             return up(position: position)
-            break
-            
         case PlayerMoveDirection.DOWN:
             return down(position: position)
-            break
-        
         case PlayerMoveDirection.LEFT:
             return left(position: position)
-            break
-        
         case PlayerMoveDirection.RIGHT:
             return right(position: position)
-            break
-        
         }
-        return up(position: position)
     }
 
     
@@ -352,13 +343,10 @@ class Playground: NSObject {
                             self.puppetMove(position: position, direction: direction)
                         }
                         else
-                        if direction == PlayerMoveDirection.UP {
-                            self.chickenRun(position: Playground.up(position:newPosition!))
+                        {
+                            self.chickenRun(position: Playground.newPosition(position: newPosition!, direction: direction))
                         }
-                        else
-                        if direction == PlayerMoveDirection.DOWN {
-                            self.chickenRun(position: Playground.down(position:newPosition!))
-                        }
+                    
                     }
                 }
             }
@@ -400,22 +388,11 @@ class Playground: NSObject {
                     element, position in
                     if canMoveFish == true {
                         canMoveFish = false
-                        if direction == PlayerMoveDirection.LEFT {
-                            if mazeElementType==MazeElementType.fish{
-                                self.fishFall(position: Playground.left(position:newPosition!))
-                            }else
-                            if mazeElementType==MazeElementType.puppet {
-                                self.puppetMove(position: Playground.left(position:newPosition!),direction: PlayerMoveDirection.LEFT)
-                            }
-                        }
-                        else
-                        if direction == PlayerMoveDirection.RIGHT {
-                            if mazeElementType==MazeElementType.fish{
-                                self.fishFall(position: Playground.right(position:newPosition!))
-                            } else
-                            if mazeElementType==MazeElementType.puppet {
-                                self.puppetMove(position: Playground.right(position:newPosition!),direction: PlayerMoveDirection.RIGHT)
-                            }
+                        if mazeElementType==MazeElementType.puppet {
+                            self.puppetMove(position:position,direction: direction)
+                        } else
+                        {
+                            self.fishFall(position: Playground.newPosition(position:newPosition!,direction: direction))
                         }
                     }
                 }
@@ -750,8 +727,9 @@ class Playground: NSObject {
             killCurrentPlayer(elementType)
             createEmptySpaceOnPlayground(position: position)
             // Bewege Huhn um eins nach links
-            changeElement(position: leftposition, element: leftElement!)
-            scene?.drawSprite(element:leftElement!,position:leftposition)
+            leftElement?.sprite?.removeFromParent()
+            changeElement(position: leftposition, element: chickenElement!)
+            scene?.drawSprite(element:chickenElement!,position:leftposition)
             
             // weitermachen !
             chickenRun(position:leftposition)
