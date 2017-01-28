@@ -43,9 +43,30 @@ class Playground: NSObject {
         return PlaygroundPosition(x: 0, y: 0)
     }
     
- 
+    static func newPosition(position:PlaygroundPosition,direction:PlayerMoveDirection)->PlaygroundPosition {
+        switch(direction)
+        {
+        case PlayerMoveDirection.UP:
+            return up(position: position)
+            break
+            
+        case PlayerMoveDirection.DOWN:
+            return down(position: position)
+            break
+        
+        case PlayerMoveDirection.LEFT:
+            return left(position: position)
+            break
+        
+        case PlayerMoveDirection.RIGHT:
+            return right(position: position)
+            break
+        
+        }
+        return up(position: position)
+    }
+
     
-    static var currentPlaygroundLevel = 1
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
@@ -327,6 +348,10 @@ class Playground: NSObject {
                     element, position in
                     if canMoveChicken == true {
                         canMoveChicken = false
+                        if mazeElementType == MazeElementType.puppet {
+                            self.puppetMove(position: position, direction: direction)
+                        }
+                        else
                         if direction == PlayerMoveDirection.UP {
                             self.chickenRun(position: Playground.up(position:newPosition!))
                         }
@@ -376,11 +401,21 @@ class Playground: NSObject {
                     if canMoveFish == true {
                         canMoveFish = false
                         if direction == PlayerMoveDirection.LEFT {
-                            self.fishFall(position: Playground.left(position:newPosition!))
+                            if mazeElementType==MazeElementType.fish{
+                                self.fishFall(position: Playground.left(position:newPosition!))
+                            }else
+                            if mazeElementType==MazeElementType.puppet {
+                                self.puppetMove(position: Playground.left(position:newPosition!),direction: PlayerMoveDirection.LEFT)
+                            }
                         }
                         else
-                            if direction == PlayerMoveDirection.RIGHT {
+                        if direction == PlayerMoveDirection.RIGHT {
+                            if mazeElementType==MazeElementType.fish{
                                 self.fishFall(position: Playground.right(position:newPosition!))
+                            } else
+                            if mazeElementType==MazeElementType.puppet {
+                                self.puppetMove(position: Playground.right(position:newPosition!),direction: PlayerMoveDirection.RIGHT)
+                            }
                         }
                     }
                 }
@@ -785,6 +820,43 @@ class Playground: NSObject {
             break
         }
     }
+    
+    func puppetMove(position:PlaygroundPosition,direction:PlayerMoveDirection) {
+        let newPosition  = Playground.newPosition(position: position, direction: direction)
+        let puppetElement     = self.element(position: position)
+        let newElement   = self.element(position:newPosition)                                  // space ?
+        var elementType     = MazeElementType.space
+        if let elementtype  = newElement?.mazeElementType {
+            elementType = elementtype
+        }
+        switch(elementType)
+        {
+        case MazeElementType.space:
+            // Lösche alte Position des Fishes
+            createEmptySpaceOnPlayground(position: position)
+            newElement?.removeSprite()
+            // Bewege Fish um eins nach unten
+            changeElement(position: newPosition, element: puppetElement!)
+            scene?.drawSprite(element:puppetElement!,position:newPosition)
+            
+            //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,bottomposition,nil,self.akt_spieler_ist_playerOne)
+            
+            // weitermachen !
+            puppetMove(position: newPosition, direction: direction)
+            break
+            
+        default:
+            createEmptySpaceOnPlayground(position: position)
+            changeElement(position: position, element: puppetElement!)
+            scene?.drawSprite(element:puppetElement!,position:position)
+            //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,position,nil,self.akt_spieler_ist_playerOne)
+            
+            break
+        }
+    }
+
+    
+    
     
     func killCurrentPlayer(_ elementType:MazeElementType) {
         if numberOfKilledPlayer==0 {

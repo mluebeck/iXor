@@ -237,4 +237,16 @@ class PlaygroundBuilder: NSObject {
         }
         return nil
     }
+    
+    static func playgrounds() -> [Int: Playground]
+    {
+        var playgrounds = [Int: Playground]()
+        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
+        for path in paths {
+            let playground = PlaygroundBuilder.readLevelString(filepath:path)
+            playgrounds[playground.level_number]=playground
+        }
+        return playgrounds
+    }
+    
 }

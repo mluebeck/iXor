@@ -40,6 +40,8 @@ class XorGameViewController: UIViewController {
     @IBOutlet var progressBar : UIProgressView!
     @IBOutlet var navigationBarTitle : UILabel!
     
+    static var currentPlaygroundLevel = 1
+
     var movesString = "/1000"
     var currentOrientation : Orientation!
     var scene: GameScene!
@@ -51,6 +53,7 @@ class XorGameViewController: UIViewController {
     
     var motionManager: CMMotionManager!
 
+    // MARK: Rotation and Status Bar
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -103,11 +106,12 @@ class XorGameViewController: UIViewController {
         }
     }
     
-    // Life Cycle
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showPlayerIconOnButton(playerOne: false)
 
+        /*
         motionManager = CMMotionManager()
         motionManager.startAccelerometerUpdates(to:OperationQueue(),withHandler:  {
             data, error in
@@ -128,20 +132,13 @@ class XorGameViewController: UIViewController {
             }
             return
         })
+        */
         
-        mapLeftUp.alpha = 0.5
-        mapLeftDown.alpha = 0.5
-        mapRightUp.alpha = 0.5
-        mapRightDown.alpha = 0.5
+        self.resetMaps()
+
+        self.playgrounds = PlaygroundBuilder.playgrounds()
         
-        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
-        for path in paths {
-            let playground = PlaygroundBuilder.readLevelString(filepath:path)
-            playgrounds[playground.level_number]=playground
-        }
-        
-        
-        presentPlayground()
+        self.presentPlayground()
         self.navigationBarTitle.text = self.currentPlayground?.level_name
 
         //drawCircleSegment(index:2)
@@ -193,13 +190,13 @@ class XorGameViewController: UIViewController {
         }
     }
     
-    // present the playground
+    // MARK:  present the playground
     func presentPlayground() {
         
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
-        currentPlayground = playgrounds[1]
+        currentPlayground = playgrounds[XorGameViewController.currentPlaygroundLevel]
         
         if let gesMask = self.currentPlayground?.masken_gesamtanzahl {
             collectedMasksLabel!.text! = "0/\(gesMask)"
@@ -239,9 +236,10 @@ class XorGameViewController: UIViewController {
                 self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                 
                 self.scene.removeAllChildren()
-                Playground.currentPlaygroundLevel += 1
+                XorGameViewController.currentPlaygroundLevel += 1
                 self.currentPlayground?.finished = true
                 self.currentPlayground?.justFinished = false
+
                 break
             case MazeEvent.bad_mask_found:
                 self.currentPlayground?.badMaskOperation()
@@ -283,6 +281,8 @@ class XorGameViewController: UIViewController {
         playgroundView.presentScene(scene)
     }
     
+    // MARK: MAPS 
+    
     func resetMaps() {
         self.mapLeftUp.alpha = 0.5
         self.mapRightUp.alpha = 0.5
@@ -291,7 +291,35 @@ class XorGameViewController: UIViewController {
         self.currentPlayground?.mapsFound.removeAll()
     }
     
-    // segue
+    // Show Map Button
+    @IBAction func mapButtonPressed(){
+        
+        mapTextVisible()
+        if map_visible==false {
+            scene.showMap()
+            map_visible = true
+        }
+        else
+        {
+            scene.hideMap()
+            mapTextView.show(visible: false)
+            map_visible = false
+        }
+    }
+    
+    func mapTextVisible(){
+        if currentPlayground?.mapsFound.count == 0
+        {
+            mapTextView.show(visible: true)
+        }
+        else
+        {
+            mapTextView.show(visible: false)
+        }
+        
+    }
+
+    // MARK: segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination
         if viewController is XorLevelTableViewController {
@@ -303,7 +331,7 @@ class XorGameViewController: UIViewController {
                 if selectedPlaygroundLevel >= 0 {
                     self.currentPlayground = self.playgrounds[selectedPlaygroundLevel]
                     self.currentPlayground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel,playground:self.currentPlayground)
-                    Playground.currentPlaygroundLevel=selectedPlaygroundLevel
+                    XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     //self.scene = GameScene()
                     //self.scene.drawWholePlayground()
                     self.countMovesLabel.text = "0"
@@ -326,7 +354,7 @@ class XorGameViewController: UIViewController {
     
     
     
-    // Direction controls
+    // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT)
     }
@@ -340,7 +368,7 @@ class XorGameViewController: UIViewController {
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN)
     }
     
-    // Switch Player
+    // MARK: Switch Player
     @IBAction func switchMaskButtonPressed(){
         if (currentPlayground?.numberOfKilledPlayer)!>0 {
             return
@@ -382,13 +410,14 @@ class XorGameViewController: UIViewController {
         playerChangeButton.isEnabled = false
         
     }
+    // MARK: Replay 
     
     @IBAction func replayButtonPressed(){}
     @IBAction func forwardButtonPressed(){}
     @IBAction func backButtonPressed(){}
     
     
-    // Reset Button
+    // MARK: Reset 
     @IBAction func resetToBegin()
     {
         map_visible = false
@@ -400,34 +429,7 @@ class XorGameViewController: UIViewController {
         self.navigationBarTitle.text = self.currentPlayground?.level_name
     }
     
-    // Show Map Button
-    @IBAction func mapButtonPressed(){
-        
-        mapTextVisible()
-        if map_visible==false {
-            scene.showMap()
-            map_visible = true
-        }
-        else
-        {
-            scene.hideMap()
-            mapTextView.show(visible: false)
-            map_visible = false
-        }
-    }
-    
-    func mapTextVisible(){
-        if currentPlayground?.mapsFound.count == 0
-        {
-            mapTextView.show(visible: true)
-        }
-        else
-        {
-            mapTextView.show(visible: false)
-        }
-
-    }
-    // Successful Level finished, show next level
+    // MARK: Successful Level finished, show next level
     @IBAction func nextLevelButtonPressed() {
         if mazeEvent == MazeEvent.death_both {
             resetToBegin()
