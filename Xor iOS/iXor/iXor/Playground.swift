@@ -574,6 +574,7 @@ class Playground: NSObject {
                 else {
                     invisible = true
                 }
+                scene?.updateViewController!(MazeEvent.bad_mask_found)
             }
             let mazeType = element(position:position)
             scene?.spritesToRemove.append(mazeType?.sprite)
