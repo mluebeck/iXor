@@ -177,7 +177,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     </barButtonItem>
                                                 </leftBarButtonItems>
                                                 <view key="titleView" contentMode="scaleToFill" id="ZfQ-e3-TGV">
-                                                    <rect key="frame" x="130" y="6" width="157" height="33"/>
+                                                    <rect key="frame" x="130" y="5.5" width="157" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the Beginning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g86-dt-vrk">
@@ -336,7 +336,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <constraint firstAttribute="width" constant="65" id="GuN-mm-HOY"/>
                                                     <constraint firstAttribute="height" constant="65" id="mR9-ZC-1Gm"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="down">
+                                                <state key="normal" backgroundImage="down_low">
                                                     <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -637,7 +637,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         </scene>
     </scenes>
     <resources>
-        <image name="down" width="52" height="52"/>
+        <image name="down_low" width="15" height="15"/>
         <image name="karte_lo" width="20" height="21"/>
         <image name="karte_lu" width="20" height="20"/>
         <image name="karte_ro" width="20" height="20"/>

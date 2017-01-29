@@ -279,6 +279,7 @@ class XorGameViewController: UIViewController {
         
         // Present the scene.
         playgroundView.presentScene(scene)
+        currentPlayground?.testChickenAcidFishBomb()
     }
     
     // MARK: MAPS 

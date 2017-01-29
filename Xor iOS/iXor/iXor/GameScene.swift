@@ -15,6 +15,9 @@ class GameScene: SKScene {
     var exitDone = false
     var updateViewController : ((MazeEvent)->Void)?
     
+    var acidFrames : [SKTexture]!
+    var bombFrames : [SKTexture]!
+
     let factorX = CGFloat(PlaygroundBuilder.Constants.groesseX-PlaygroundBuilder.Constants.sichtbareGroesseX)*CGFloat(-1.0)
     let factorY = CGFloat(PlaygroundBuilder.Constants.groesseY-PlaygroundBuilder.Constants.sichtbareGroesseY)
 
@@ -62,7 +65,58 @@ class GameScene: SKScene {
             }
         }
         switchToPlayerOne()
+        prepareAcidAnimation()
+        prepareBombAnimation()
+        
     }
+    
+    func prepareAcidAnimation()
+    {
+        let acidAnimatedAtlas = SKTextureAtlas(named: "acid")
+        var acidCorrosiveFrames = [SKTexture]()
+        
+        let numImages = acidAnimatedAtlas.textureNames.count
+        for i in 1...(numImages/2)
+        {
+            let acidTextureName = "saeure_\(i)"
+            acidCorrosiveFrames.append(acidAnimatedAtlas.textureNamed(acidTextureName))
+        }
+        
+        acidFrames = acidCorrosiveFrames
+    }
+    
+    func doAcidAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
+    {
+        sprite.run(SKAction.repeat(
+            SKAction.animate(with: acidFrames,timePerFrame: 0.1,resize: true,restore: true),
+            count:1), completion: block
+        )
+    }
+    
+    func prepareBombAnimation()
+    {
+        let bombAnimatedAtlas = SKTextureAtlas(named: "bomb")
+        var bombCorrosiveFrames = [SKTexture]()
+        
+        let numImages = bombAnimatedAtlas.textureNames.count
+        for i in 1...(numImages/2)
+        {
+            let bombTextureName = "bombe_\(i)"
+            bombCorrosiveFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
+        }
+        
+        bombFrames = bombCorrosiveFrames
+    }
+    
+    func doBombAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
+    {
+        sprite.run(SKAction.repeat(
+            SKAction.animate(with: bombFrames,timePerFrame: 0.1,resize: true,restore: true),
+            count:1), completion: block
+        )
+    }
+    
+    
     
     func resetGameScene(playground:Playground?) {
         worldNode.removeAllChildren()

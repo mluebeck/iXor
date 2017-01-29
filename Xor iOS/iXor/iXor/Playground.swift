@@ -95,16 +95,6 @@ class Playground: NSObject {
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     var replay = Array<PlaygroundPosition>()         // stores all moves to enable replay. (-1,-1) means: change Player !
-
-/*
-    Image sprites[]  = new Image[25];                  // all images
-    Image bomben[][] = new Image[8][3];                // bomb explosion animation
-    Image acid[][]   = new Image[8][3];                // acid corrosion animation
-    public Image play_buffer;                          // the playground image
-    public Graphics graph_offline,graph_online;        // these objects connects the playground with the window
-    Frame frame;                                       // the frame where the playground will be shown
-    MediaTracker mtracker;                             // Observer for all loaded images
-*/
     
    override func copy() -> Any {
         let playground = Playground()
@@ -158,40 +148,6 @@ class Playground: NSObject {
         }
     }
     
-//    func reset() {
-//        //self.playgroundArray = playground.playgroundArray
-//        
-//        //self.playerOneSprite = nil
-//        //self.playerTwoSprite = nil
-//        //self.scene = playground.scene
-//        
-//        self.akt_spieler_ist_playerOne = true
-//        self.ende_erreicht = false
-//        self.anzahl_spielzuege = 0
-//        self.masken_gesamtanzahl = 0
-//        self.masken_gesammelt = 0
-//        self.invisible = false
-//        self.karten_gesammelt = 0
-//        /*
-//        self.masken_gefunden = playground.masken_gefunden
-//        self.numberOfKilledPlayer = playground.numberOfKilledPlayer
-//        self.next_step = playground.next_step
-//        self.names = playground.names
-//        self.level_name = playground.level_name
-//        self.level_geschafft = playground.level_geschafft
-//        self.level_number = playground.level_number
-//        self.justFinished = playground.justFinished
-//        self.numberOfMoves = playground.numberOfMoves
-//        self.mapsFound = playground.mapsFound
-//        self.playerPosition = playground.playerPosition
-//        self.oldPlayerPosition = playground.oldPlayerPosition
-//        self.cameraPosition = playground.cameraPosition
-//        self.positionPlayerOne = playground.positionPlayerOne
-//        self.positionPlayerTwo = playground.positionPlayerTwo
-//        self.replay = playground.replay
-// }
-    
-    
     func changePlayer()
     {
         if numberOfKilledPlayer==0 {
@@ -225,6 +181,33 @@ class Playground: NSObject {
             }
         }
     }
+    
+    func testChickenAcidFishBomb(){
+        for x in 0..<PlaygroundBuilder.Constants.groesseX {
+            for y in 0..<PlaygroundBuilder.Constants.groesseY {
+                let currentPosition = PlaygroundPosition(x:x,y:y)
+                let mazetype = element(position:currentPosition)
+                if mazetype?.mazeElementType==MazeElementType.chicken || mazetype?.mazeElementType==MazeElementType.acid  {
+                    let leftPosition = Playground.left(position: currentPosition)
+                    let leftElement = element(position:leftPosition)
+                    if leftElement?.mazeElementType == MazeElementType.space
+                    {
+                        chickenRun(position: currentPosition)
+                    }
+                } else
+                if mazetype?.mazeElementType==MazeElementType.fish || mazetype?.mazeElementType==MazeElementType.bomb  {
+                    let downPosition = Playground.down(position: currentPosition)
+                    let downElement = element(position:downPosition)
+                    if downElement?.mazeElementType == MazeElementType.space
+                    {
+                        fishFall(position: currentPosition)
+                    }
+                }
+                
+            }
+        }
+    }
+    
     
         
     func allMasksCollected() -> Bool {
@@ -629,6 +612,15 @@ class Playground: NSObject {
         //        }
     }
     
+    func createEmptySpaceOnPlaygroundAndRemoveSprite(position:PlaygroundPosition)
+    {
+        
+        print("createEmptySpaceOnPlayground Element at position: \(position)")
+        print("createEmptySpaceOnPlayground maze Element type:\(element(position:position))")
+        changeElementAndRemoveSprite(position: position, element: MazeType(mazeElementType: MazeElementType.space, sprite:nil))
+    }
+    
+    
     func createEmptySpaceOnPlayground(position:PlaygroundPosition)
     {
         
@@ -687,6 +679,15 @@ class Playground: NSObject {
         return a
     }
     
+    func changeElementAndRemoveSprite(position:PlaygroundPosition,element:MazeType) {
+        let oldValue = self.element(position:position)
+        if oldValue?.mazeElementType == element.mazeElementType {
+            return
+        }
+        oldValue?.sprite?.removeFromParent()
+        playgroundArray[position.y][position.x]=element
+    }
+
     
     func changeElement(position:PlaygroundPosition,element:MazeType) {
         let oldValue = self.element(position:position)
@@ -737,10 +738,10 @@ class Playground: NSObject {
 
             break
         case MazeElementType.acid:
-            acidCorrosive()
+            acidCorrosive(element:leftElement!,position:position)
             break
         case MazeElementType.bomb:
-            bombExplode()
+            bombExplode(element:leftElement!,position:position)
             break
         case MazeElementType.wall,MazeElementType.h_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
@@ -782,10 +783,10 @@ class Playground: NSObject {
             }
             break
         case MazeElementType.acid:
-            acidCorrosive()
+            acidCorrosive(element:bottomElement!,position:position)
             break
         case MazeElementType.bomb:
-            bombExplode()
+            bombExplode(element:bottomElement!,position:position)
             break
         case MazeElementType.wall,MazeElementType.v_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
@@ -856,13 +857,43 @@ class Playground: NSObject {
         }
     }
     
-    func bombExplode() {
-        
-        
+    func bombExplode(element:MazeType,position:PlaygroundPosition) {
+        if let sprite = element.sprite
+        {
+            
+            scene?.doBombAnimation(sprite: sprite,block:{
+                element.sprite?.removeFromParent()
+                //                let elementAtPosition = self.element(position: position)
+                //                elementAtPosition?.sprite?.removeFromParent()
+                let elementDown = Playground.down(position: position)
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position) // fish
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.left(position: elementDown)) //  fish left
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.right(position: elementDown)) // fish right
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementDown) // acid
+                
+                
+            } )
+        }
     }
+
     
-    func acidCorrosive() {
-        
+    func acidCorrosive(element:MazeType,position:PlaygroundPosition) {
+        if let sprite = element.sprite
+        {
+            
+            scene?.doAcidAnimation(sprite: sprite,block:{
+                element.sprite?.removeFromParent()
+//                let elementAtPosition = self.element(position: position)
+//                elementAtPosition?.sprite?.removeFromParent()
+                let elementLeft = Playground.left(position: position)
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position) // chicken
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft)) //  acid up
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft)) // acid down
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft) // acid
+                
+                
+            } )
+        }
     }
     
 }
