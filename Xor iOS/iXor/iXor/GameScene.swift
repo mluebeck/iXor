@@ -95,13 +95,13 @@ class GameScene: SKScene {
     
     func prepareBombAnimation()
     {
-        let bombAnimatedAtlas = SKTextureAtlas(named: "bomb")
+        let bombAnimatedAtlas = SKTextureAtlas(named: "bombs")
         var bombCorrosiveFrames = [SKTexture]()
         
         let numImages = bombAnimatedAtlas.textureNames.count
         for i in 1...(numImages/2)
         {
-            let bombTextureName = "bombe_\(i)"
+            let bombTextureName = "bomb_\(i)"
             bombCorrosiveFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
         }
         

@@ -177,7 +177,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     </barButtonItem>
                                                 </leftBarButtonItems>
                                                 <view key="titleView" contentMode="scaleToFill" id="ZfQ-e3-TGV">
-                                                    <rect key="frame" x="130" y="5.5" width="157" height="33"/>
+                                                    <rect key="frame" x="130" y="6" width="157" height="33"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the Beginning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g86-dt-vrk">
@@ -241,21 +241,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <action selector="replayButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="gQi-8G-57y"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0d-1a-mjQ">
-                                                <rect key="frame" x="333" y="2" width="40" height="34"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="oSk-6g-rqr"/>
-                                                </constraints>
-                                                <state key="normal" title="&lt;">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="backButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="vsB-Yc-fgt"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5M-6t-tUw">
-                                                <rect key="frame" x="178" y="2" width="40" height="34"/>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5M-6t-tUw">
+                                                <rect key="frame" x="225" y="2" width="40" height="34"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="yBd-Zh-ggd"/>
@@ -264,11 +251,11 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="forwardButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="Nbj-HP-Cai"/>
+                                                    <action selector="fastforwarButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="UkY-Fp-bjU"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEw-gD-L93">
-                                                <rect key="frame" x="278" y="2" width="45" height="34"/>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEw-gD-L93">
+                                                <rect key="frame" x="325" y="2" width="45" height="34"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="45" id="zEs-0n-RaS"/>
@@ -277,11 +264,11 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="replayButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="xrj-6X-NPh"/>
+                                                    <action selector="stopButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="qlN-Hf-IB7"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRY-QW-Yhk">
-                                                <rect key="frame" x="228" y="2" width="40" height="34"/>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRY-QW-Yhk">
+                                                <rect key="frame" x="275" y="2" width="40" height="34"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="rbz-Ua-Ul4"/>
@@ -297,12 +284,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="N0d-1a-mjQ" firstAttribute="top" secondItem="5q4-F4-zqL" secondAttribute="top" constant="2" id="0UW-G8-Fmk"/>
-                                            <constraint firstItem="N0d-1a-mjQ" firstAttribute="leading" secondItem="GEw-gD-L93" secondAttribute="trailing" constant="10" id="1ae-pA-m8c"/>
-                                            <constraint firstAttribute="bottom" secondItem="N0d-1a-mjQ" secondAttribute="bottom" constant="2" id="63X-FK-HFW"/>
                                             <constraint firstItem="PRY-QW-Yhk" firstAttribute="top" secondItem="5q4-F4-zqL" secondAttribute="top" constant="2" id="64A-C7-EDS"/>
                                             <constraint firstItem="GEw-gD-L93" firstAttribute="top" secondItem="5q4-F4-zqL" secondAttribute="top" constant="2" id="6cT-aY-bdP"/>
-                                            <constraint firstAttribute="trailing" secondItem="N0d-1a-mjQ" secondAttribute="trailing" constant="2" id="H0F-0b-WTE"/>
                                             <constraint firstItem="HNQ-MT-zeI" firstAttribute="top" secondItem="5q4-F4-zqL" secondAttribute="top" constant="2" id="PLP-oD-lc9"/>
                                             <constraint firstAttribute="bottom" secondItem="PRY-QW-Yhk" secondAttribute="bottom" constant="2" id="TUd-Lg-pvF"/>
                                             <constraint firstItem="GEw-gD-L93" firstAttribute="leading" secondItem="PRY-QW-Yhk" secondAttribute="trailing" constant="10" id="TW7-Cs-Qdf"/>
@@ -310,6 +293,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstAttribute="bottom" secondItem="E5M-6t-tUw" secondAttribute="bottom" constant="2" id="WDe-FD-eJd"/>
                                             <constraint firstAttribute="bottom" secondItem="HNQ-MT-zeI" secondAttribute="bottom" constant="2" id="dew-2d-ctN"/>
                                             <constraint firstItem="E5M-6t-tUw" firstAttribute="top" secondItem="5q4-F4-zqL" secondAttribute="top" constant="2" id="eo3-GO-efG"/>
+                                            <constraint firstAttribute="trailing" secondItem="GEw-gD-L93" secondAttribute="trailing" constant="5" id="kb7-5u-4Qq"/>
                                             <constraint firstItem="PRY-QW-Yhk" firstAttribute="leading" secondItem="E5M-6t-tUw" secondAttribute="trailing" constant="10" id="vTo-cq-oMs"/>
                                             <constraint firstAttribute="bottom" secondItem="GEw-gD-L93" secondAttribute="bottom" constant="2" id="zx2-wR-wen"/>
                                         </constraints>
@@ -514,6 +498,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="collectedMasksLabel" destination="jBs-kG-5Es" id="wfd-Ok-dHI"/>
                         <outlet property="countMovesLabel" destination="qS1-Vu-35B" id="IOj-WS-8b3"/>
                         <outlet property="countMovesView" destination="2aZ-xl-LLb" id="iCd-0V-hxv"/>
+                        <outlet property="gameControllerView" destination="yH3-ah-l2R" id="g5p-oZ-6hE"/>
                         <outlet property="mapLeftDown" destination="uZZ-Jv-m8d" id="Ky1-t8-Ex0"/>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
@@ -529,6 +514,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="playgroundView" destination="mOW-CJ-XDb" id="FZ2-il-eMX"/>
                         <outlet property="playgroundViewConstraint" destination="F3G-0e-RbR" id="NTZ-i0-V0z"/>
                         <outlet property="progressBar" destination="ynM-bS-FL5" id="YHu-xF-BFy"/>
+                        <outlet property="replayButton" destination="HNQ-MT-zeI" id="pgl-2o-Vsf"/>
+                        <outlet property="replayButtonsView" destination="5q4-F4-zqL" id="weP-fa-4Xs"/>
                         <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
                         <outlet property="xorNavigationItem" destination="T44-sV-ZBd" id="hhD-KL-ScT"/>
                     </connections>

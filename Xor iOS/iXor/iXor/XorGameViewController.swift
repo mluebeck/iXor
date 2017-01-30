@@ -22,15 +22,21 @@ class XorGameViewController: UIViewController {
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
     @IBOutlet var countMovesViewWidthConstraint : NSLayoutConstraint!
+    
     @IBOutlet var playerChangeButton : UIButton!
     @IBOutlet var playerChangeImage: UIImageView!
+    
     @IBOutlet var playgroundView : SKView!
+    
     @IBOutlet var collectedMasksLabel : UILabel!
+    @IBOutlet var gameControllerView: UIView!
     @IBOutlet var mapLeftUp : UIView!
     @IBOutlet var mapLeftDown : UIView!
     @IBOutlet var mapRightUp : UIView!
     @IBOutlet var mapRightDown : UIView!
+    @IBOutlet var replayButtonsView :UIView!
     @IBOutlet var mapTextView: FrostedView!
+    
     @IBOutlet var xorNavigationItem: UINavigationItem!
     @IBOutlet var successView: FrostedView!
     @IBOutlet var messageLabel : UILabel!
@@ -39,6 +45,7 @@ class XorGameViewController: UIViewController {
     @IBOutlet var countMovesLabel : UILabel!
     @IBOutlet var progressBar : UIProgressView!
     @IBOutlet var navigationBarTitle : UILabel!
+    @IBOutlet var replayButton : UIButton!
     
     static var currentPlaygroundLevel = 1
 
@@ -50,9 +57,15 @@ class XorGameViewController: UIViewController {
     var mazeEvent = MazeEvent.redraw
     var currentPlayground : Playground?
     var oldAcceleration : CMAcceleration?
-    
+    var replays = [String : Array<ReplayPlayerMove>]()
+    var currentReplay = Array<ReplayPlayerMove>()
     var motionManager: CMMotionManager!
-
+    
+    var replayMode = false
+    var replayStopPressed = false
+    
+    var currentNumberOfReplayMove = 0
+    
     // MARK: Rotation and Status Bar
     override var prefersStatusBarHidden: Bool {
         return true
@@ -188,6 +201,7 @@ class XorGameViewController: UIViewController {
         {
             mapTextView.show(visible: map_visible)
         }
+        replayControllerView(active: false)
     }
     
     // MARK:  present the playground
@@ -333,6 +347,9 @@ class XorGameViewController: UIViewController {
                     self.currentPlayground = self.playgrounds[selectedPlaygroundLevel]
                     self.currentPlayground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel,playground:self.currentPlayground)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
+                    
+                    self.resetReplay()
+                    
                     //self.scene = GameScene()
                     //self.scene.drawWholePlayground()
                     self.countMovesLabel.text = "0"
@@ -345,6 +362,7 @@ class XorGameViewController: UIViewController {
             }
             levelTableViewController.resetPressedClosure = {
                 self.countMovesLabel.text = "0"
+                self.resetReplay()
                 self.resetToBegin()
                 self.resetMaps()
             }
@@ -357,15 +375,33 @@ class XorGameViewController: UIViewController {
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
+        
+        if self.replayMode == false {
+            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
+                                                       moveDirection: PlayerMoveDirection.LEFT))
+        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT)
     }
+    
     @IBAction func rightGameButtonPressed(){
+        if self.replayMode == false {
+            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
+                                                       moveDirection: PlayerMoveDirection.RIGHT))
+        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT)
     }
     @IBAction func upGameButtonPressed(){
+        if self.replayMode == false {
+            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
+                                                       moveDirection: PlayerMoveDirection.UP))
+        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP)
     }
     @IBAction func downGameButtonPressed(){
+        if self.replayMode == false {
+            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
+                                                       moveDirection: PlayerMoveDirection.DOWN))
+        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN)
     }
     
@@ -374,6 +410,11 @@ class XorGameViewController: UIViewController {
         if (currentPlayground?.numberOfKilledPlayer)!>0 {
             return
         }
+        if self.replayMode == false {
+            self.currentReplay.append(ReplayPlayerMove(playerChanged:true,
+                                                       moveDirection:PlayerMoveDirection.UP))
+        }
+        
         showPlayerIconOnButton(playerOne: (currentPlayground?.akt_spieler_ist_playerOne)!)
     }
     
@@ -421,21 +462,142 @@ class XorGameViewController: UIViewController {
     
     // MARK: Replay 
     
-    @IBAction func replayButtonPressed(){}
-    @IBAction func forwardButtonPressed(){}
+    @IBAction func replayButtonPressed()
+    {
+        if self.replayMode==true {
+            self.replayMode = false
+            self.gameControllerView(active: true)
+            self.replayControllerView(active: false)
+            self.replayButton.setTitle("Replay", for: UIControlState.normal)
+            self.replayButton.setTitle("Replay", for: UIControlState.highlighted)
+        }
+        else
+        {
+            self.gameControllerView(active: false)
+            self.replayControllerView(active: true)
+            self.replayButton.setTitle("EXIT", for: UIControlState.normal)
+            self.replayButton.setTitle("EXIT", for: UIControlState.highlighted)
+            self.replayMode = true
+        
+            self.currentNumberOfReplayMove = 0
+            self.resetToBegin()
+        }
+    }
+
+    func fastForward(queue:Array<ReplayPlayerMove>)
+    {
+        if queue.count==0 || self.replayStopPressed == true
+        {
+            return
+        }
+        var newQueue = queue
+        if let first = queue.first {
+            newQueue.remove(at: 0)
+        
+            if first.playerChanged==true {
+                switchMaskButtonPressed()
+            }
+            else
+            {
+                switch(first.moveDirection)
+                {
+                case PlayerMoveDirection.UP:
+                    upGameButtonPressed()
+                    break
+            
+                case PlayerMoveDirection.DOWN:
+                    downGameButtonPressed()
+                    break
+            
+                case PlayerMoveDirection.LEFT:
+                    leftGameButtonPressed()
+                    break
+            
+                case PlayerMoveDirection.RIGHT:
+                    rightGameButtonPressed()
+                    break
+                }
+            }
+            
+            self.currentNumberOfReplayMove += 1
+            AppDelegate.delay(bySeconds: 0.1, dispatchLevel: .main) {
+                self.fastForward(queue: newQueue)
+            }
+        }
+       
+    }
+    
+    @IBAction func fastforwarButtonPressed() {
+        let queue = self.currentReplay
+        if self.currentNumberOfReplayMove>0 {
+            self.replayStopPressed = false
+            self.resetToBegin()
+            AppDelegate.delay(bySeconds: 0.1, dispatchLevel: .main) {
+                self.fastForward(queue:queue)
+            }
+        }
+        else
+        {
+            self.fastForward(queue:queue)
+        }
+    }
+    
+    @IBAction func forwardButtonPressed(){
+        
+        if self.currentReplay.count<=self.currentNumberOfReplayMove {
+            return
+        }
+        
+        let replayPlayerMove = self.currentReplay[self.currentNumberOfReplayMove]
+        if replayPlayerMove.playerChanged==true {
+            switchMaskButtonPressed()
+        }
+        else
+        {
+            switch(replayPlayerMove.moveDirection)
+            {
+            case PlayerMoveDirection.UP:
+                upGameButtonPressed()
+                break
+            
+            case PlayerMoveDirection.DOWN:
+                downGameButtonPressed()
+                break
+            
+            case PlayerMoveDirection.LEFT:
+                leftGameButtonPressed()
+                break
+            
+            case PlayerMoveDirection.RIGHT:
+                rightGameButtonPressed()
+                break
+            }
+        }
+        self.currentNumberOfReplayMove += 1
+    }
+    
     @IBAction func backButtonPressed(){}
     
+    @IBAction func stopButtonPressed()
+    {
+        self.replayStopPressed = true
+    }
     
-    // MARK: Reset 
+    // MARK: Reset
     @IBAction func resetToBegin()
     {
         map_visible = false
         showPlayerIconOnButton(playerOne: false)
         currentPlayground = PlaygroundBuilder.readFromString(playground: currentPlayground)
         scene.resetGameScene(playground: currentPlayground!)
-        
         presentPlayground()
         self.navigationBarTitle.text = self.currentPlayground?.level_name
+    }
+    
+    func resetReplay()
+    {
+        self.currentReplay.removeAll()
+        self.replays[(currentPlayground?.level_name)!] = self.currentReplay
     }
     
     // MARK: Successful Level finished, show next level
@@ -449,5 +611,35 @@ class XorGameViewController: UIViewController {
         }
     }
     
+    func gameControllerView(active:Bool)
+    {
+        for view in self.gameControllerView.subviews
+        {
+            view.isUserInteractionEnabled = active
+            if active == true
+            {
+                view.alpha = 1.0
+            }
+            else
+            {
+                view.alpha = 0.5
+            }
+        }
+        
+    }
     
+    func replayControllerView(active:Bool){
+        for view in self.replayButtonsView.subviews {
+            if view.tag==1 {
+                view.isUserInteractionEnabled = active
+                if active == false {
+                    view.alpha = 0.5
+                }
+                else
+                {
+                    view.alpha = 1.0
+                }
+            }
+        }
+    }
 }

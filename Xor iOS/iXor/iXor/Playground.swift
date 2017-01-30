@@ -10,16 +10,23 @@ import UIKit
 import SpriteKit
 
 enum PlayerMoveDirection  : Int {
-    case UP = 0,
+    case
+    UP = 0,
     DOWN,
     LEFT,
     RIGHT
 }
 
+
 struct PlaygroundPosition {
     var x : Int
     var y : Int
-    
+}
+
+struct ReplayPlayerMove
+{
+    var playerChanged : Bool
+    var moveDirection : PlayerMoveDirection
 }
 
 class Playground: NSObject {
@@ -75,7 +82,6 @@ class Playground: NSObject {
     var karten_gesammelt = 0                    // how many map parts have you collected ?
     var numberOfKilledPlayer = 0
     var next_step = 0                 // number of moves ( max. 1000)
-    var names  = Array<String>()      //new String[25];                    // Die file names of the bitmaps
     var level_name: String?           // the 'official' level name (e.g. "The Decoder")
     var level_geschafft = 0           // how many level have you completed ??
     var level_number : Int = 0
@@ -94,7 +100,7 @@ class Playground: NSObject {
     var cameraPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper 
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
-    var replay = Array<PlaygroundPosition>()         // stores all moves to enable replay. (-1,-1) means: change Player !
+    var replay = Array<ReplayPlayerMove>()         // stores all moves to enable replay. (-1,-1) means: change Player !
     
    override func copy() -> Any {
         let playground = Playground()
@@ -112,7 +118,6 @@ class Playground: NSObject {
         playground.invisible = self.invisible
         playground.numberOfKilledPlayer = self.numberOfKilledPlayer
         playground.next_step = self.next_step
-        playground.names = self.names
         playground.level_name = self.level_name
         playground.level_geschafft = self.level_geschafft
         playground.level_number = self.level_number

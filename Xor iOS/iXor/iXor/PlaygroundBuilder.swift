@@ -217,6 +217,7 @@ class PlaygroundBuilder: NSObject {
             }
             
         }
+        playground?.replay = Array<ReplayPlayerMove>()
         return playground!
     }
     
