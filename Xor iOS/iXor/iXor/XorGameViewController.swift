@@ -23,6 +23,10 @@ class XorGameViewController: UIViewController {
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
     @IBOutlet var countMovesViewWidthConstraint : NSLayoutConstraint!
     
+    @IBOutlet var gameControllerViewHeightConstraint :  NSLayoutConstraint!
+    @IBOutlet var gameControllerViewWidthConstraint :  NSLayoutConstraint!
+    @IBOutlet var controllerView  :  UIView!
+    
     @IBOutlet var playerChangeButton : UIButton!
     @IBOutlet var playerChangeImage: UIImageView!
     
@@ -60,8 +64,9 @@ class XorGameViewController: UIViewController {
     var replays = [String : Array<ReplayPlayerMove>]()
     var currentReplay = Array<ReplayPlayerMove>()
     var motionManager: CMMotionManager!
-    
+    var replayTime = 0.1
     var replayMode = false
+    var undoMode = false
     var replayStopPressed = false
     
     var currentNumberOfReplayMove = 0
@@ -93,8 +98,14 @@ class XorGameViewController: UIViewController {
         var  orientation : Orientation!
         if size.width > size.height {
             orientation = Orientation.MyViewOrientationLandscape
+//            gameControllerViewWidthConstraint.constant=controllerView.frame.size.width
+
+            playgroundViewConstraint.constant = self.view.frame.height-20
+
         } else {
             orientation = Orientation.MyViewOrientationPortrait
+//            gameControllerViewWidthConstraint.constant=controllerView.frame.size.height
+            playgroundViewConstraint.constant = self.view.frame.width-20
         }
         if self.currentOrientation != orientation && orientation != Orientation.MyViewOrientationUnspecified {
             var z = 0
@@ -147,16 +158,19 @@ class XorGameViewController: UIViewController {
         })
         */
         
-        self.resetMaps()
-
-        self.playgrounds = PlaygroundBuilder.playgrounds()
-        
-        self.presentPlayground()
         self.navigationBarTitle.text = self.currentPlayground?.level_name
 
         //drawCircleSegment(index:2)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.resetMaps()
+        
+        self.playgrounds = PlaygroundBuilder.playgrounds()
+        
+        self.presentPlayground()
+        
+    }
     /*
     func drawCircleSegment(index:Int) {
         let circlePath = UIBezierPath(ovalIn: CGRect(x: 5, y: 5, width: self.countMovesView.frame.height-10, height: self.countMovesView.frame.height-10))
@@ -376,7 +390,7 @@ class XorGameViewController: UIViewController {
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
         
-        if self.replayMode == false {
+        if self.replayMode == false && self.undoMode == false {
             self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
                                                        moveDirection: PlayerMoveDirection.LEFT))
         }
@@ -384,21 +398,21 @@ class XorGameViewController: UIViewController {
     }
     
     @IBAction func rightGameButtonPressed(){
-        if self.replayMode == false {
+        if self.replayMode == false && self.undoMode == false {
             self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
                                                        moveDirection: PlayerMoveDirection.RIGHT))
         }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT)
     }
     @IBAction func upGameButtonPressed(){
-        if self.replayMode == false {
+        if self.replayMode == false && self.undoMode == false {
             self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
                                                        moveDirection: PlayerMoveDirection.UP))
         }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP)
     }
     @IBAction func downGameButtonPressed(){
-        if self.replayMode == false {
+        if self.replayMode == false && self.undoMode == false {
             self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
                                                        moveDirection: PlayerMoveDirection.DOWN))
         }
@@ -410,7 +424,7 @@ class XorGameViewController: UIViewController {
         if (currentPlayground?.numberOfKilledPlayer)!>0 {
             return
         }
-        if self.replayMode == false {
+        if self.replayMode == false && self.undoMode == false {
             self.currentReplay.append(ReplayPlayerMove(playerChanged:true,
                                                        moveDirection:PlayerMoveDirection.UP))
         }
@@ -445,22 +459,43 @@ class XorGameViewController: UIViewController {
     }
     
     func showForbiddenImage() {
-        let playerOneImage = UIImage(named:"verbot_weiss")
-        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
-        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-        playerChangeImage.image = nil
+//        let playerOneImage = UIImage(named:"")
+//        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+//        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+//        playerChangeImage.image = nil
         playerChangeButton.isEnabled = false
     }
     
     func hideForbiddenImage() {
-        let playerOneImage = UIImage(named:"spieler2")
-        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
-        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-        playerChangeImage.image = playerOneImage
+//        let playerOneImage = UIImage(named:"spieler2")
+//        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+//        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+//        playerChangeImage.image = playerOneImage
         playerChangeButton.isEnabled = true
     }
     
+    
+    
+    // MARK: UNDO 
+    
+    @IBAction func undoButtonPressed()
+    {
+        if self.currentReplay.count==0 {
+            return
+        }
+        self.currentReplay.remove(at: self.currentReplay.count-1)
+        self.undoMode = true
+        self.replayTime=0.0
+        self.resetToBegin()
+        self.fastforwarButtonPressed()
+    }
+
+    
+    
     // MARK: Replay 
+    
+    
+    
     
     @IBAction func replayButtonPressed()
     {
@@ -478,22 +513,22 @@ class XorGameViewController: UIViewController {
             self.replayButton.setTitle("EXIT", for: UIControlState.normal)
             self.replayButton.setTitle("EXIT", for: UIControlState.highlighted)
             self.replayMode = true
-        
+            self.replayTime = 0.1
             self.currentNumberOfReplayMove = 0
             self.resetToBegin()
         }
     }
 
-    func fastForward(queue:Array<ReplayPlayerMove>)
+    func fastForward(position:Int)
     {
-        if queue.count==0 || self.replayStopPressed == true
+        if self.currentReplay.count<=position || self.replayStopPressed == true
         {
+            self.undoMode = false
             return
         }
-        var newQueue = queue
-        if let first = queue.first {
-            newQueue.remove(at: 0)
         
+            let first = self.currentReplay[position]
+            
             if first.playerChanged==true {
                 switchMaskButtonPressed()
             }
@@ -520,25 +555,24 @@ class XorGameViewController: UIViewController {
             }
             
             self.currentNumberOfReplayMove += 1
-            AppDelegate.delay(bySeconds: 0.1, dispatchLevel: .main) {
-                self.fastForward(queue: newQueue)
+            AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main) {
+                self.fastForward(position:position+1)
             }
-        }
+        
        
     }
     
     @IBAction func fastforwarButtonPressed() {
-        let queue = self.currentReplay
         if self.currentNumberOfReplayMove>0 {
             self.replayStopPressed = false
             self.resetToBegin()
-            AppDelegate.delay(bySeconds: 0.1, dispatchLevel: .main) {
-                self.fastForward(queue:queue)
+            AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main) {
+                self.fastForward(position:0)
             }
         }
         else
         {
-            self.fastForward(queue:queue)
+            self.fastForward(position:0)
         }
     }
     
@@ -613,7 +647,7 @@ class XorGameViewController: UIViewController {
     
     func gameControllerView(active:Bool)
     {
-        for view in self.gameControllerView.subviews
+        for view in self.controllerView.subviews
         {
             view.isUserInteractionEnabled = active
             if active == true

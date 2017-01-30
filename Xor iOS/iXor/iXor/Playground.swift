@@ -216,7 +216,7 @@ class Playground: NSObject {
     
         
     func allMasksCollected() -> Bool {
-        return true ;//anzahl_masken == anzahl_gesammelter_masken
+        return self.masken_gesamtanzahl == self.masken_gesammelt
     }
     // fish, bombe fällt runter von selbst
     // chicken, acid fliegen nach links von selbst
