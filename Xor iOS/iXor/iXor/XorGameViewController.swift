@@ -50,6 +50,7 @@ class XorGameViewController: UIViewController {
     @IBOutlet var progressBar : UIProgressView!
     @IBOutlet var navigationBarTitle : UILabel!
     @IBOutlet var replayButton : UIButton!
+    @IBOutlet var verbotImage : UIImageView!
     
     static var currentPlaygroundLevel = 1
 
@@ -134,6 +135,7 @@ class XorGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showPlayerIconOnButton(playerOne: false)
+        hideForbiddenImage()
 
         /*
         motionManager = CMMotionManager()
@@ -463,10 +465,12 @@ class XorGameViewController: UIViewController {
 //        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
 //        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
 //        playerChangeImage.image = nil
+        verbotImage.isHidden=false
         playerChangeButton.isEnabled = false
     }
     
     func hideForbiddenImage() {
+        verbotImage.isHidden = true
 //        let playerOneImage = UIImage(named:"spieler2")
 //        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
 //        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
@@ -621,6 +625,8 @@ class XorGameViewController: UIViewController {
     @IBAction func resetToBegin()
     {
         map_visible = false
+        hideForbiddenImage()
+        self.countMovesLabel.text = "0"
         showPlayerIconOnButton(playerOne: false)
         currentPlayground = PlaygroundBuilder.readFromString(playground: currentPlayground)
         scene.resetGameScene(playground: currentPlayground!)
