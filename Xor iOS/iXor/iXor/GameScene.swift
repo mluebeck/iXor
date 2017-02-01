@@ -88,7 +88,7 @@ class GameScene: SKScene {
     func doAcidAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
     {
         sprite.run(SKAction.repeat(
-            SKAction.animate(with: acidFrames,timePerFrame: 0.1,resize: true,restore: true),
+            SKAction.animate(with: acidFrames,timePerFrame: 0.2,resize: true,restore: true),
             count:1), completion: block
         )
     }

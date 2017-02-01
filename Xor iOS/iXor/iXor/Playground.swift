@@ -625,12 +625,12 @@ class Playground: NSObject {
         //        }
     }
     
-    func createEmptySpaceOnPlaygroundAndRemoveSprite(position:PlaygroundPosition)
+    func createEmptySpaceOnPlaygroundAndRemoveSprite(position:PlaygroundPosition,duration:TimeInterval)
     {
         
         print("createEmptySpaceOnPlayground Element at position: \(position)")
         print("createEmptySpaceOnPlayground maze Element type:\(element(position:position))")
-        changeElementAndRemoveSprite(position: position, element: MazeType(mazeElementType: MazeElementType.space, sprite:nil))
+        changeElementAndRemoveSprite(position: position, element: MazeType(mazeElementType: MazeElementType.space, sprite:nil),duration:duration)
     }
     
     
@@ -692,12 +692,15 @@ class Playground: NSObject {
         return a
     }
     
-    func changeElementAndRemoveSprite(position:PlaygroundPosition,element:MazeType) {
+    func changeElementAndRemoveSprite(position:PlaygroundPosition,element:MazeType,duration:TimeInterval) {
         let oldValue = self.element(position:position)
         if oldValue?.mazeElementType == element.mazeElementType {
             return
         }
-        oldValue?.sprite?.removeFromParent()
+        let action = SKAction.fadeOut(withDuration: duration)
+        oldValue?.sprite?.run(action, completion: {
+            oldValue?.sprite?.removeFromParent()
+        })
         playgroundArray[position.y][position.x]=element
     }
 
@@ -872,16 +875,17 @@ class Playground: NSObject {
     func bombExplode(element:MazeType,position:PlaygroundPosition) {
         if let sprite = element.sprite
         {
+            scene?.run(SKAction.playSoundFileNamed("bomb.caf" ,waitForCompletion:false))
             
             scene?.doBombAnimation(sprite: sprite,block:{
                 element.sprite?.removeFromParent()
                 //                let elementAtPosition = self.element(position: position)
                 //                elementAtPosition?.sprite?.removeFromParent()
                 let elementDown = Playground.down(position: position)
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position) // fish
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.left(position: elementDown)) //  fish left
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.right(position: elementDown)) // fish right
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementDown) // acid
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.0) // fish
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.left(position: elementDown),duration:0.0) //  fish left
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.right(position: elementDown),duration:0.0) // fish right
+                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementDown,duration:0.0) // acid
                 
                 
             } )
@@ -892,16 +896,19 @@ class Playground: NSObject {
     func acidCorrosive(element:MazeType,position:PlaygroundPosition) {
         if let sprite = element.sprite
         {
-            
+            let elementLeft = Playground.left(position: position)
+
+            scene?.run(SKAction.playSoundFileNamed("acid.caf" ,waitForCompletion:false))
+
+            self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0) // chicken
+            self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft),duration:0.7) //  acid up
+            self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft),duration:0.7) // acid down
+            //self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft) // acid
+
             scene?.doAcidAnimation(sprite: sprite,block:{
                 element.sprite?.removeFromParent()
 //                let elementAtPosition = self.element(position: position)
 //                elementAtPosition?.sprite?.removeFromParent()
-                let elementLeft = Playground.left(position: position)
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position) // chicken
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft)) //  acid up
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft)) // acid down
-                self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft) // acid
                 
                 
             } )
