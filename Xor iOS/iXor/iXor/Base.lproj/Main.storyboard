@@ -30,6 +30,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-CJ-XDb" userLabel="Playground View" customClass="SKView">
                                 <rect key="frame" x="10" y="10" width="355" height="355"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPLAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u8-dk-IhO">
+                                        <rect key="frame" x="20" y="20" width="315" height="40"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="2hu-a0-IS8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="15"/>
+                                        <color key="textColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTD-rJ-Cdm" customClass="FrostedView" customModule="iXor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
@@ -38,7 +48,7 @@
                                                 <string key="text">Keine Karte verfügbar.
 
 Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
-                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="14"/>
                                                 <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                                 <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
@@ -54,8 +64,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
-                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="22"/>
+                                                <rect key="frame" x="40" y="0.0" width="275" height="265"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="18"/>
                                                 <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -63,9 +73,9 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <rect key="frame" x="40" y="265" width="275" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="be0-qX-0rh"/>
+                                                    <constraint firstAttribute="height" constant="60" id="5BC-FC-Ec2"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="11"/>
                                                 <state key="normal" title="Ok, weiter geht's !"/>
                                                 <connections>
                                                     <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="lTC-ER-53d"/>
@@ -73,13 +83,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="30" id="8YP-Z1-mLh"/>
-                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" constant="40" id="aNJ-uj-ZNU"/>
-                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="jOi-PM-590"/>
-                                            <constraint firstAttribute="bottom" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="lVS-S3-Q24"/>
-                                            <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="p4I-0j-2nr"/>
-                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" id="tFC-YB-AQw"/>
+                                            <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="5ly-yJ-b44"/>
+                                            <constraint firstItem="yah-3T-933" firstAttribute="top" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="ENj-a3-r9f"/>
+                                            <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="30" id="Ntw-JQ-7vD"/>
+                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" constant="40" id="YuU-x8-cfu"/>
+                                            <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="tFC-YB-AQw"/>
                                             <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="uWN-kh-FAv"/>
+                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" constant="40" id="zRP-Mi-ujt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -89,11 +99,14 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <constraint firstAttribute="trailing" secondItem="Emc-Mx-aj1" secondAttribute="trailing" id="JHe-wp-hGm"/>
                                     <constraint firstItem="fTD-rJ-Cdm" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="Tvw-uP-1bI"/>
                                     <constraint firstItem="Emc-Mx-aj1" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" id="UbV-G1-kwt"/>
+                                    <constraint firstAttribute="trailing" secondItem="0u8-dk-IhO" secondAttribute="trailing" constant="20" id="Xs3-8o-h43"/>
                                     <constraint firstAttribute="width" secondItem="mOW-CJ-XDb" secondAttribute="height" multiplier="1:1" id="ZIw-8p-sIA"/>
                                     <constraint firstItem="Emc-Mx-aj1" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="baQ-bo-IC3"/>
                                     <constraint firstItem="fTD-rJ-Cdm" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" id="efU-aw-yN6"/>
+                                    <constraint firstItem="0u8-dk-IhO" firstAttribute="top" secondItem="mOW-CJ-XDb" secondAttribute="top" constant="20" id="hkm-oE-iUj"/>
                                     <constraint firstAttribute="bottom" secondItem="fTD-rJ-Cdm" secondAttribute="bottom" id="m77-aV-1Vp"/>
                                     <constraint firstAttribute="bottom" secondItem="Emc-Mx-aj1" secondAttribute="bottom" id="pCa-40-6cc"/>
+                                    <constraint firstItem="0u8-dk-IhO" firstAttribute="leading" secondItem="mOW-CJ-XDb" secondAttribute="leading" constant="20" id="pvA-2e-E2a"/>
                                     <constraint firstAttribute="trailing" secondItem="fTD-rJ-Cdm" secondAttribute="trailing" id="sMc-zy-GTZ"/>
                                 </constraints>
                             </view>
@@ -539,6 +552,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="controllerView" destination="Xk7-eV-XZv" id="fBi-p1-WGy"/>
                         <outlet property="countMovesLabel" destination="guq-I0-gJG" id="CZX-KS-ZYf"/>
                         <outlet property="countMovesView" destination="FkF-Hj-52b" id="53X-Di-bkR"/>
+                        <outlet property="fastForwardButton" destination="E5M-6t-tUw" id="kHW-pq-ItD"/>
                         <outlet property="mapLeftDown" destination="uZZ-Jv-m8d" id="Ky1-t8-Ex0"/>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
@@ -556,6 +570,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="progressBar" destination="rVe-Np-qVK" id="a7c-sX-bEy"/>
                         <outlet property="replayButton" destination="HNQ-MT-zeI" id="pgl-2o-Vsf"/>
                         <outlet property="replayButtonsView" destination="5q4-F4-zqL" id="weP-fa-4Xs"/>
+                        <outlet property="replayLabel" destination="0u8-dk-IhO" id="Xm3-aZ-Dxh"/>
                         <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
                         <outlet property="verbotImage" destination="x8a-hn-qaM" id="jOE-jd-jJs"/>
                     </connections>
@@ -583,7 +598,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4JA-sR-4dh">
                                             <rect key="frame" x="16" y="7" width="83" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                             <state key="normal" title="Zurück"/>
                                             <connections>
                                                 <action selector="backButtonPressed" destination="uMF-bP-LeY" eventType="touchUpInside" id="f6h-iy-ZpK"/>
@@ -596,7 +611,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="33"/>
-                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="9"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -612,7 +627,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ikJ-SQ-Huf">
                                             <rect key="frame" x="276" y="7" width="83" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="15"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                             <state key="normal" title="RESET">
                                                 <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>

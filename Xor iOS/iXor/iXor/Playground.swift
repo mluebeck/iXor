@@ -64,7 +64,10 @@ class Playground: NSObject {
         }
     }
 
-    
+    static let chickenDuration = 0.1
+    static let fishDuration = 0.1
+    static let puppetMove = 0.1
+
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
@@ -89,7 +92,7 @@ class Playground: NSObject {
     var finished = false
     var numberOfMoves = 0
     var mapsFound = Array<MazeElementType>()
-   
+    var animationQueue = 0
     
     // screen co-ordinates of the current player
     var playerPosition : PlaygroundPosition
@@ -286,7 +289,8 @@ class Playground: NSObject {
         return false
     }
     
-    func movePlayer(direction:PlayerMoveDirection) {
+    func movePlayer(direction:PlayerMoveDirection)
+    {
         var mazeElementType : MazeElementType?
         var newPosition : PlaygroundPosition?
         var canMoveFish = false
@@ -386,7 +390,7 @@ class Playground: NSObject {
                 }
             }
         }
-        updateScene(direction:direction)
+        movePlayerToNewPositionAndUpdateScene(direction:direction)
     }
 
     func canMoveFishBombPuppetLeftOrRight(direction:PlayerMoveDirection) -> Bool {
@@ -401,7 +405,7 @@ class Playground: NSObject {
                     changeElement(position:leftleftPosition , element: leftElement!)
                     leftleftElement?.removeSprite()
                     createEmptySpaceOnPlayground(position:leftPosition)
-                    scene?.drawSprite(element:leftElement!, position: leftleftPosition)
+                    scene?.drawSprite(element:leftElement!, position: leftleftPosition,duration:0.25,completed:nil)
                 }
                 else
                 {
@@ -424,7 +428,7 @@ class Playground: NSObject {
                     changeElement(position:rightrightPosition , element: rightElement!)
                     rightrightElement?.removeSprite()
                     createEmptySpaceOnPlayground(position:rightPosition)
-                    scene?.drawSprite(element:rightElement!, position: rightrightPosition)
+                    scene?.drawSprite(element:rightElement!, position: rightrightPosition,duration:0.25,completed:nil)
                 }
                 else
                 {
@@ -451,7 +455,7 @@ class Playground: NSObject {
                     changeElement(position:upupPosition , element: upElement!)
                     upupElement?.removeSprite()
                     createEmptySpaceOnPlayground(position:upPosition)
-                    scene?.drawSprite(element:upElement!, position: upupPosition)
+                    scene?.drawSprite(element:upElement!, position: upupPosition,duration:0.25,completed:nil)
                 }
                 else
                 {
@@ -474,7 +478,7 @@ class Playground: NSObject {
                     changeElement(position:downdownPosition , element: downElement!)
                     downdownElement?.removeSprite()
                     createEmptySpaceOnPlayground(position:downPosition)
-                    scene?.drawSprite(element:downElement!, position: downdownPosition)
+                    scene?.drawSprite(element:downElement!, position: downdownPosition,duration:0.25,completed:nil)
                 }
                 else
                 {
@@ -491,7 +495,7 @@ class Playground: NSObject {
     
     
     
-    func updateScene(direction:PlayerMoveDirection){
+    func movePlayerToNewPositionAndUpdateScene(direction:PlayerMoveDirection){
         print("\n\n update scene\n\n")
         self.oldPlayerPosition = self.playerPosition
         // WE CAN MOVE - do the GameScene Drawing
@@ -517,7 +521,12 @@ class Playground: NSObject {
         }
         // move player 1 to new position in the playground array
         changeElement(position: playerPosition, element: mazeType!)
-        scene?.drawPlayer(position: playerPosition, player: self.akt_spieler_ist_playerOne)
+        scene?.drawPlayer(position: playerPosition, player: self.akt_spieler_ist_playerOne,completition:
+            {
+                self.doTheFishChickenMoving(position: self.oldPlayerPosition)
+
+            }
+        )
         scene?.updateViewController!(MazeEvent.step_done)
         
         // CAMERA
@@ -535,10 +544,8 @@ class Playground: NSObject {
         }
         scene?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
         cameraPosition = newCameraPosition
-        //testForChickenOrFishAction(position:position, player:player)
         print("\n\n update scene ende \n\n")
-        doTheFishChickenMoving(position: oldPlayerPosition)
-    } 
+    }
     
     func removeItemFromPlayground(mazeElementType:MazeElementType?,position:PlaygroundPosition) -> Bool
     {
@@ -706,6 +713,7 @@ class Playground: NSObject {
     // MARK: chicken run and fish fall methods 
     
     func chickenRun(position:PlaygroundPosition) {  // position = chicken
+        
         // lasse das chicken so lange rennen, bis ein Hindernis da ist
         let leftposition = Playground.left(position: position)
         let chickenElement = self.element(position: position)
@@ -721,13 +729,16 @@ class Playground: NSObject {
             createEmptySpaceOnPlayground(position: position)
             // Bewege Huhn um eins nach links
             changeElement(position: leftposition, element: chickenElement!)
-            scene?.drawSprite(element:chickenElement!,position:leftposition)
+            scene?.drawSprite(element:chickenElement!,position:leftposition,duration:Playground.chickenDuration,completed:{
+                self.chickenRun(position:leftposition)
+                self.testForChickenOrFishAction(position:position)
+            })
 
             //self.sceneShallChange!(SceneNotification.DRAW_SPRITE,leftposition,chickenElement,self.akt_spieler_ist_playerOne)
 
             // weitermachen !
-            chickenRun(position:leftposition)
-            testForChickenOrFishAction(position:position)
+            //chickenRun(position:leftposition)
+            //testForChickenOrFishAction(position:position)
 
             break
         case MazeElementType.player_1, MazeElementType.player_2:
@@ -736,12 +747,11 @@ class Playground: NSObject {
             // Bewege Huhn um eins nach links
             leftElement?.sprite?.removeFromParent()
             changeElement(position: leftposition, element: chickenElement!)
-            scene?.drawSprite(element:chickenElement!,position:leftposition)
-            
-            // weitermachen !
-            chickenRun(position:leftposition)
-            testForChickenOrFishAction(position:position)
-
+            scene?.drawSprite(element:chickenElement!,position:leftposition,duration:Playground.chickenDuration,completed:{
+                // weitermachen !
+                self.chickenRun(position:leftposition)
+                self.testForChickenOrFishAction(position:position)
+            })
             break
         case MazeElementType.acid:
             acidCorrosive(element:leftElement!,position:position)
@@ -752,7 +762,7 @@ class Playground: NSObject {
         case MazeElementType.wall,MazeElementType.h_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
             changeElement(position: position, element: chickenElement!)
-            scene?.drawSprite(element:chickenElement!,position:position)
+            scene?.drawSprite(element:chickenElement!,position:position,duration:Playground.chickenDuration,completed:nil)
             
             break
         default:
@@ -777,16 +787,14 @@ class Playground: NSObject {
             bottomElement?.removeSprite()
             // Bewege Fish um eins nach unten
             changeElement(position: bottomposition, element: fishElement!)
-            scene?.drawSprite(element:fishElement!,position:bottomposition)
-
-            //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,bottomposition,nil,self.akt_spieler_ist_playerOne)
-
-            // weitermachen !
-            fishFall(position:bottomposition)
-            testForChickenOrFishAction(position:position)
-            if elementType==MazeElementType.player_1 || elementType==MazeElementType.player_2 {
-                killCurrentPlayer(elementType)
-            }
+            scene?.drawSprite(element:fishElement!,position:bottomposition,duration:Playground.fishDuration,completed:{
+                // weitermachen !
+                self.fishFall(position:bottomposition)
+                self.testForChickenOrFishAction(position:position)
+                if elementType==MazeElementType.player_1 || elementType==MazeElementType.player_2 {
+                    self.killCurrentPlayer(elementType)
+                }
+            })
             break
         case MazeElementType.acid:
             acidCorrosive(element:bottomElement!,position:position)
@@ -797,9 +805,7 @@ class Playground: NSObject {
         case MazeElementType.wall,MazeElementType.v_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
             changeElement(position: position, element: fishElement!)
-            scene?.drawSprite(element:fishElement!,position:position)
-            //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,position,nil,self.akt_spieler_ist_playerOne)
-
+            scene?.drawSprite(element:fishElement!,position:position,duration:Playground.fishDuration,completed:nil)
             break
         default:
             break
@@ -822,7 +828,7 @@ class Playground: NSObject {
             newElement?.removeSprite()
             // Bewege Fish um eins nach unten
             changeElement(position: newPosition, element: puppetElement!)
-            scene?.drawSprite(element:puppetElement!,position:newPosition)
+            scene?.drawSprite(element:puppetElement!,position:newPosition,duration:Playground.puppetMove,completed:nil)
             
             //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,bottomposition,nil,self.akt_spieler_ist_playerOne)
             
@@ -833,7 +839,7 @@ class Playground: NSObject {
         default:
             createEmptySpaceOnPlayground(position: position)
             changeElement(position: position, element: puppetElement!)
-            scene?.drawSprite(element:puppetElement!,position:position)
+            scene?.drawSprite(element:puppetElement!,position:position,duration:Playground.puppetMove,completed:nil)
             //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,position,nil,self.akt_spieler_ist_playerOne)
             
             break

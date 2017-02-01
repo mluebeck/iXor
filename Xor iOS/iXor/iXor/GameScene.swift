@@ -59,7 +59,7 @@ class GameScene: SKScene {
                         worldNode.addChild(sprite)
                         sprite.xScale = segmentX! / CGFloat(40.0)
                         sprite.yScale = segmentY! / CGFloat(40.0)
-                        drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y))
+                        drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y),duration:0.25,completed:nil)
                     }
                 }
             }
@@ -143,14 +143,14 @@ class GameScene: SKScene {
                         worldNode.addChild(sprite)
                         sprite.xScale = segmentX! / CGFloat(40.0)
                         sprite.yScale = segmentY! / CGFloat(40.0)
-                        drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y))
+                        drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y),duration:0.25,completed:nil)
                     }
                 }
             }
         }
         switchToPlayerOne()    }
     
-    func drawSprite(sprite:SKSpriteNode,position:PlaygroundPosition) {
+    func drawSprite(sprite:SKSpriteNode,position:PlaygroundPosition,completition:(()->Void)?) {
         if self.spritesToRemove.count == 0 {
             print("sprite to remove ist leer!")
         }
@@ -166,17 +166,20 @@ class GameScene: SKScene {
             if self.playground.justFinished == true {
                 self.updateViewController!(MazeEvent.exit_found)
             }
+            if let compe = completition {
+                compe()
+            }
         })
         
     }
     
-    func drawSprite(element:MazeType,position:PlaygroundPosition) {
+    func drawSprite(element:MazeType,position:PlaygroundPosition,duration:TimeInterval, completed:(()->())?) {
         if let sprite = element.sprite {
             if self.spritesToRemove.count == 0 {
                 print("sprite to remove ist leer!")
             }
             let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
-            let moveAction = SKAction.move(to: point, duration: 0.25)
+            let moveAction = SKAction.move(to: point, duration: duration)
             sprite.run(moveAction, completion: {
                 
                 for sprite in self.spritesToRemove
@@ -189,6 +192,9 @@ class GameScene: SKScene {
                 }
                 if let animationCompleted = self.animationCompleted {
                     animationCompleted(element,position)
+                }
+                if let compl = completed {
+                    compl()
                 }
             })
         }
@@ -241,16 +247,16 @@ class GameScene: SKScene {
         self.playground.cameraPosition = coord
     }
     
-    func drawPlayer(position:PlaygroundPosition,player:Bool) {
+    func drawPlayer(position:PlaygroundPosition,player:Bool,completition:(()->Void)?) {
         print("zeichne player an position \(position)")
         if player==true {
             playground.positionPlayerOne = position
-            drawSprite(sprite:(playground.playerOneSprite)!,position:position)
+            drawSprite(sprite:(playground.playerOneSprite)!,position:position,completition:completition)
         }
         else
         {
             playground.positionPlayerTwo = position
-            drawSprite(sprite:(playground.playerTwoSprite)!,position:position)
+            drawSprite(sprite:(playground.playerTwoSprite)!,position:position,completition:completition)
         }
     }
     
