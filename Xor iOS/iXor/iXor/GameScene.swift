@@ -150,34 +150,10 @@ class GameScene: SKScene {
         }
         switchToPlayerOne()    }
     
-    func drawSprite(sprite:SKSpriteNode,position:PlaygroundPosition,completition:(()->Void)?) {
-        if self.spritesToRemove.count == 0 {
-            print("sprite to remove ist leer!")
-        }
-        let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
-        let moveAction = SKAction.move(to: point, duration: 0.25)
-        sprite.run(moveAction, completion: {
-                
-            for sprite in self.spritesToRemove
-            {
-                sprite?.removeFromParent()
-            }
-            self.spritesToRemove.removeAll()
-            if self.playground.justFinished == true {
-                self.updateViewController!(MazeEvent.exit_found)
-            }
-            if let compe = completition {
-                compe()
-            }
-        })
-        
-    }
+    
     
     func drawSprite(element:MazeType,position:PlaygroundPosition,duration:TimeInterval, completed:(()->())?) {
         if let sprite = element.sprite {
-            if self.spritesToRemove.count == 0 {
-                print("sprite to remove ist leer!")
-            }
             let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
             let moveAction = SKAction.move(to: point, duration: duration)
             sprite.run(moveAction, completion: {
@@ -247,17 +223,35 @@ class GameScene: SKScene {
         self.playground.cameraPosition = coord
     }
     
-    func drawPlayer(position:PlaygroundPosition,player:Bool,completition:(()->Void)?) {
+    func drawPlayer(position:PlaygroundPosition,player:Bool,completition:(()->Void)?)
+    {
         print("zeichne player an position \(position)")
-        if player==true {
+        var sprite = (playground.playerOneSprite)!
+        if player==true
+        {
             playground.positionPlayerOne = position
-            drawSprite(sprite:(playground.playerOneSprite)!,position:position,completition:completition)
         }
         else
         {
             playground.positionPlayerTwo = position
-            drawSprite(sprite:(playground.playerTwoSprite)!,position:position,completition:completition)
+            sprite = (playground.playerTwoSprite)!
         }
+        
+        let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
+        let moveAction = SKAction.move(to: point, duration: 0.25)
+        sprite.run(moveAction, completion: {
+            for sprite in self.spritesToRemove
+            {
+                sprite?.removeFromParent()
+            }
+            self.spritesToRemove.removeAll()
+            if self.playground.justFinished == true {
+                self.updateViewController!(MazeEvent.exit_found)
+            }
+            if let compe = completition {
+                compe()
+            }
+        })
     }
     
     func showMap() {

@@ -36,7 +36,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2hu-a0-IS8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
                                         <color key="textColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>

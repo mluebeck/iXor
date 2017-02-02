@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10622C851E42874F00E01D81 /* acid.wav in Resources */ = {isa = PBXBuildFile; fileRef = 10622C841E42874F00E01D81 /* acid.wav */; };
 		10659B0B1E3BE748001D4235 /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10659B081E3BE748001D4235 /* UIImage+REFrostedViewController.m */; };
 		10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10659B0A1E3BE748001D4235 /* UIView+REFrostedViewController.m */; };
 		107048111E3E6CE10044E525 /* bombe.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 107048101E3E6CE10044E525 /* bombe.atlas */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10622C841E42874F00E01D81 /* acid.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = acid.wav; sourceTree = "<group>"; };
 		10659B071E3BE748001D4235 /* UIImage+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+REFrostedViewController.h"; path = "../iXor/UIImage+REFrostedViewController.h"; sourceTree = "<group>"; };
 		10659B081E3BE748001D4235 /* UIImage+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+REFrostedViewController.m"; path = "../iXor/UIImage+REFrostedViewController.m"; sourceTree = "<group>"; };
 		10659B091E3BE748001D4235 /* UIView+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+REFrostedViewController.h"; path = "../iXor/UIView+REFrostedViewController.h"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		8C04831E1E285BFD00F29B4D /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				10622C841E42874F00E01D81 /* acid.wav */,
 				8C0483231E285DC000F29B4D /* acid.caf */,
 				8C0483241E285DC000F29B4D /* bomb.caf */,
 			);
@@ -337,6 +340,7 @@
 				107048111E3E6CE10044E525 /* bombe.atlas in Resources */,
 				8C2416581DF9FFA30009FCC6 /* level09.xor in Resources */,
 				8C2416521DF9FFA30009FCC6 /* level03.xor in Resources */,
+				10622C851E42874F00E01D81 /* acid.wav in Resources */,
 				8C24165E1DF9FFA30009FCC6 /* level15.xor in Resources */,
 				8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */,
 				8C57E1711E3657060098C0BC /* level01.xor in Resources */,
