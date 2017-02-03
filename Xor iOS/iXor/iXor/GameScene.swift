@@ -37,23 +37,31 @@ class GameScene: SKScene {
     init(size: CGSize, playground:Playground) {
         self.playground = playground
         super.init(size:size)
-        self.playground.scene = self
         segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
         segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
+        self.updateWithNewPlayground(self.playground)
+        switchToPlayerOne()
+        prepareAcidAnimation()
+        prepareBombAnimation()
+    }
+    
+    func updateWithNewPlayground(_ playground:Playground) {
+        self.playground = playground
+        self.playground.scene = self
         worldNode.removeAllChildren()
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
                     /*if mazeType.mazeElementType==MazeElementType.player_1 {
-                        self.playground.playerOneSprite = mazeType.sprite
-                        self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
-                        self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
-                    } else
-                    if mazeType.mazeElementType==MazeElementType.player_2 {
-                        self.playground.playerOneSprite = mazeType.sprite
-                        self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
-                    }*/
+                     self.playground.playerOneSprite = mazeType.sprite
+                     self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
+                     self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
+                     } else
+                     if mazeType.mazeElementType==MazeElementType.player_2 {
+                     self.playground.playerOneSprite = mazeType.sprite
+                     self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
+                     }*/
                     if let sprite = mazeType.sprite {
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
@@ -61,13 +69,12 @@ class GameScene: SKScene {
                         sprite.yScale = segmentY! / CGFloat(40.0)
                         drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y),duration:0.25,completed:nil)
                     }
+                    else {
+                        
+                    }
                 }
             }
         }
-        switchToPlayerOne()
-        prepareAcidAnimation()
-        prepareBombAnimation()
-        
     }
     
     func prepareAcidAnimation()
@@ -129,16 +136,8 @@ class GameScene: SKScene {
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
-//                    if mazeType.mazeElementType==MazeElementType.player_1 {
-//                        self.playground.playerOneSprite = mazeType.sprite
-//                        self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
-//                        self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
-//                    } else
-//                    if mazeType.mazeElementType==MazeElementType.player_2 {
-//                        self.playground.playerOneSprite = mazeType.sprite
-//                        self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
-//                    }
                     if let sprite = mazeType.sprite {
+                        sprite.alpha=1.0
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
                         sprite.xScale = segmentX! / CGFloat(40.0)
@@ -148,7 +147,7 @@ class GameScene: SKScene {
                 }
             }
         }
-        switchToPlayerOne()    }
+    }
     
     
     

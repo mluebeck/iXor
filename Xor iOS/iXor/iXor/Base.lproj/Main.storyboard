@@ -594,7 +594,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             <items>
                                 <navigationItem id="VYl-WP-Lyi">
                                     <nil key="title"/>
-                                    <barButtonItem key="leftBarButtonItem" style="plain" id="9Tv-Ba-Dlm">
+                                    <barButtonItem key="leftBarButtonItem" id="9Tv-Ba-Dlm">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4JA-sR-4dh">
                                             <rect key="frame" x="16" y="7" width="83" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -623,7 +623,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstItem="8nK-Yz-5aJ" firstAttribute="top" secondItem="SbD-Y1-an4" secondAttribute="top" id="xhi-DX-TVH"/>
                                         </constraints>
                                     </view>
-                                    <barButtonItem key="rightBarButtonItem" style="plain" id="lQ8-gD-tys">
+                                    <barButtonItem key="rightBarButtonItem" id="lQ8-gD-tys">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ikJ-SQ-Huf">
                                             <rect key="frame" x="276" y="7" width="83" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

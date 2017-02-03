@@ -67,7 +67,8 @@ class Playground: NSObject {
     static let chickenDuration = 0.1
     static let fishDuration = 0.1
     static let puppetMove = 0.1
-
+    
+    static var replay = Array<Playground>()
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
     var beam_from = Array<Array<Int>>() // transporter start co-ordinates
@@ -93,21 +94,24 @@ class Playground: NSObject {
     var numberOfMoves = 0
     var mapsFound = Array<MazeElementType>()
     var animationQueue = 0
-    
+    var eventCounter = 0
     // screen co-ordinates of the current player
     var playerPosition : PlaygroundPosition
     
     // old screen co-ordinates
     var oldPlayerPosition : PlaygroundPosition
-    
-    var cameraPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper 
+    var cameraPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
-    var replay = Array<ReplayPlayerMove>()         // stores all moves to enable replay. (-1,-1) means: change Player !
     
-   override func copy() -> Any {
+    override func copy() -> Any {
         let playground = Playground()
         playground.playgroundArray = self.playgroundArray.map{$0}
+        for i in playgroundArray {
+            for var j in i {
+                j.sprite=nil
+            }
+        }
         playground.beam_to = self.beam_to
         playground.beam_from = self.beam_from
         playground.playerOneSprite = nil
@@ -132,7 +136,6 @@ class Playground: NSObject {
         playground.cameraPosition = self.cameraPosition
         playground.positionPlayerOne = self.positionPlayerOne
         playground.positionPlayerTwo = self.positionPlayerTwo
-        playground.replay = self.replay
         playground.playerOneSprite = self.playerOneSprite
         playground.playerTwoSprite = self.playerTwoSprite
     
@@ -304,6 +307,10 @@ class Playground: NSObject {
     
     func movePlayer(direction:PlayerMoveDirection)
     {
+        let previousPlayground = self.copy() as! Playground
+        Playground.replay.append(previousPlayground)
+        print("playground history:\(Playground.replay)")
+        
         var mazeElementType : MazeElementType?
         var newPosition : PlaygroundPosition?
         var canMoveFish = false
@@ -530,6 +537,8 @@ class Playground: NSObject {
     
     func movePlayerToNewPositionAndUpdateScene(direction:PlayerMoveDirection){
         print("\n\n update scene\n\n")
+        
+        
         self.oldPlayerPosition = self.playerPosition
         // WE CAN MOVE - do the GameScene Drawing
         // old position : draw a space
@@ -563,7 +572,10 @@ class Playground: NSObject {
             }
         )
         scene?.updateViewController!(MazeEvent.step_done)
-        
+        self.updateCameraPosition(direction)
+    }
+    
+    func updateCameraPosition(_ direction:PlayerMoveDirection) {
         // CAMERA
         // we moved the player, now check if we have to move the camera
         var newCameraPosition = cameraPosition
@@ -573,13 +585,14 @@ class Playground: NSObject {
             newCameraPosition.x = oldPlayerPosition.x - 3
         }
         else
-        if (cameraPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
-            (cameraPosition.y == (playerPosition.y - 7) && direction==PlayerMoveDirection.DOWN) {
-            newCameraPosition.y = playerPosition.y - 3
+            if (cameraPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
+                (cameraPosition.y == (playerPosition.y - 7) && direction==PlayerMoveDirection.DOWN) {
+                newCameraPosition.y = playerPosition.y - 3
         }
         scene?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
         cameraPosition = newCameraPosition
         print("\n\n update scene ende \n\n")
+        
     }
     
     func removeItemFromPlayground(mazeElementType:MazeElementType?,position:PlaygroundPosition) -> Bool
@@ -768,6 +781,8 @@ class Playground: NSObject {
     
     func chickenRun(position:PlaygroundPosition,juststarted:Bool) {  // position = chicken
         
+        increaseEventCounter(comment: "chickenRun",element:MazeElementType.chicken)
+        
         // lasse das chicken so lange rennen, bis ein Hindernis da ist
         let leftposition = Playground.left(position: position)
         let chickenElement = self.element(position: position)
@@ -789,7 +804,8 @@ class Playground: NSObject {
                                        completition: {
                     self.chickenRun(position:leftposition,juststarted: false)
                     self.testForChickenOrFishAction(position:position)
-                })
+                    self.decreaseEventCounter(comment: "chicken run exit", element: MazeElementType.chicken)
+            })
             
             
             
@@ -798,8 +814,7 @@ class Playground: NSObject {
             // weitermachen !
             //chickenRun(position:leftposition)
             //testForChickenOrFishAction(position:position)
-
-            break
+            return
         case MazeElementType.player_1, MazeElementType.player_2:
             if juststarted==false {
                 killCurrentPlayer(elementType)
@@ -816,7 +831,9 @@ class Playground: NSObject {
             else
             {
                 createEmptySpaceOnPlayground(position: position)
-                changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: nil)
+                changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: {
+                    self.decreaseEventCounter(comment:"chicken run player killed",element: MazeElementType.chicken)
+                })
                 
             }
             break
@@ -824,22 +841,47 @@ class Playground: NSObject {
             acidCorrosive(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
             break
         case MazeElementType.bomb:
-            bombExplode(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
+            if juststarted==false {
+                bombExplode(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
+            }
             break
         case MazeElementType.wall,MazeElementType.h_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
-            changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: nil)
+            changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: {
+                self.decreaseEventCounter(comment: "chicken run another element",element: MazeElementType.chicken)
+            })
             //changeElement(position: position, element: chickenElement!)
             //scene?.drawSprite(element:chickenElement!,position:position,duration:Playground.chickenDuration,completed:nil)
             
-            break
+            return
         default:
-            break
+            self.decreaseEventCounter(comment:"chicken run exit",element: MazeElementType.chicken)
+            return
         }
         
     }
     
+    func increaseEventCounter(comment:String,element:MazeElementType)
+    {
+        self.eventCounter = self.eventCounter + 1
+        print(" events up at \(comment): \(self.eventCounter)")
+        
+    }
+    
+    func decreaseEventCounter(comment:String,element:MazeElementType)
+    {
+        self.eventCounter = self.eventCounter - 1
+        if self.eventCounter==0 {
+            print("All  Events done!")
+            return
+        }
+        assert(self.eventCounter>=0,"event counter must be nonnegative ")
+        print(" events down at \(comment): \(self.eventCounter)")
+    }
+    
+    
     func fishFall(position:PlaygroundPosition,juststarted:Bool) {
+        increaseEventCounter(comment: "fishFall",element: MazeElementType.fish)
         let bottomposition = Playground.down(position: position)
         let fishOrBombElement = self.element(position: position)
         
@@ -887,6 +929,7 @@ class Playground: NSObject {
                                                 if elementType==MazeElementType.player_1 || elementType==MazeElementType.player_2 {
                                                     self.killCurrentPlayer(elementType)
                                                 }
+                                                self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
                 })
                 // changeElement(position: bottomposition, element: fishElement!)
                 /*scene?.drawSprite(element:fishElement!,position:bottomposition,duration:Playground.fishDuration,completed:{
@@ -898,14 +941,16 @@ class Playground: NSObject {
                  }
                  })*/
             }
+            return
             
-            break
         case MazeElementType.acid:
             acidCorrosive(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
-            break
+            return
+        
         case MazeElementType.bomb:
             bombExplode(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
-            break
+            return
+            
         case MazeElementType.wall,
              MazeElementType.v_wave,
              MazeElementType.fish,
@@ -914,17 +959,21 @@ class Playground: NSObject {
              MazeElementType.bad_mask,
              MazeElementType.mask:
             createEmptySpaceOnPlayground(position: position)
-            changeElementAndDrawSprite(position: position, element: fishOrBombElement!, duration: Playground.fishDuration, completition: nil)
+            changeElementAndDrawSprite(position: position, element: fishOrBombElement!, duration: Playground.fishDuration, completition: {
+                self.decreaseEventCounter(comment: "fish fall continue falling",element: MazeElementType.fish)
+            })
             //changeElement(position: position, element: fishElement!)
             //scene?.drawSprite(element:fishElement!,position:position,duration:Playground.fishDuration,completed:nil)
-            break
+            return
         default:
-            break
+            decreaseEventCounter(comment: "fish fall done",element: MazeElementType.fish)
+            return
         }
     }
     
     func puppetMove(position:PlaygroundPosition,direction:PlayerMoveDirection)
     {
+        self.increaseEventCounter(comment: "puppet moving", element:MazeElementType.puppet)
         let newPosition  = Playground.newPosition(position: position, direction: direction)
         let puppetElement     = self.element(position: position)
         let newElement   = self.element(position:newPosition)                                  // space ?
@@ -952,18 +1001,19 @@ class Playground: NSObject {
             
             // weitermachen !
             puppetMove(position: newPosition, direction: direction)
-            break
+            return
             
         default:
             createEmptySpaceOnPlayground(position: position)
             
-            changeElementAndDrawSprite(position: position, element: puppetElement!, duration: Playground.puppetMove, completition: nil)
+            changeElementAndDrawSprite(position: position, element: puppetElement!, duration: Playground.puppetMove, completition: {
+            self.decreaseEventCounter(comment: "puppet done", element: MazeElementType.puppet)})
             
             //changeElement(position: position, element: puppetElement!)
             //scene?.drawSprite(element:puppetElement!,position:position,duration:Playground.puppetMove,completed:nil)
             //self.sceneShallChange!(SceneNotification.DRAW_PLAYER,position,nil,self.akt_spieler_ist_playerOne)
             
-            break
+            return
         }
     }
 
@@ -1006,6 +1056,7 @@ class Playground: NSObject {
                 scene?.doBombAnimation(sprite: sprite,block:{
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionDown,duration:0.0) // bomb
+                    self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
                 } )
             }
             else
@@ -1018,6 +1069,7 @@ class Playground: NSObject {
                 scene?.doBombAnimation(sprite: sprite,block:{
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionLeft,duration:0.0) // bomb
+                    self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
                 } )
                 
             }
@@ -1038,6 +1090,7 @@ class Playground: NSObject {
                 scene?.doAcidAnimation(sprite: sprite,block:{
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft,duration:0.0) // acid
+                    self.decreaseEventCounter(comment:"acid corrosive",element: causedBy)
                 })
             }
             else
@@ -1050,10 +1103,22 @@ class Playground: NSObject {
                 scene?.doAcidAnimation(sprite: sprite,block:{
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: position),duration:0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementFishAboveAcid,duration:0.0) // acid
+                    self.decreaseEventCounter(comment:"acid corrosive",element:causedBy)
                 })
                 
             }
         }
     }
     
+//    func playerChanged(playground: Playground) -> Bool
+//    {
+//        if self.akt_spieler_ist_playerOne==playground.akt_spieler_ist_playerOne
+//        {
+//            return false
+//        }
+//        else
+//        {
+//            return true
+//        }
+//    }
 }

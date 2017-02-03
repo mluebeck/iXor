@@ -10,14 +10,16 @@ import UIKit
 import SpriteKit
 import CoreMotion
 
-enum Orientation {
+enum Orientation
+{
     case MyViewOrientationUnspecified
     case MyViewOrientationPortrait
     case MyViewOrientationLandscape
 }
 
 
-class XorGameViewController: UIViewController,SKSceneDelegate {
+class XorGameViewController: UIViewController
+{
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
@@ -56,42 +58,46 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     @IBOutlet var replayButton : UIButton!
     @IBOutlet var replayLabel : UILabel!
     
-    static var currentPlaygroundLevel = 1
-
-    var movesString = "/1000"
     var currentOrientation : Orientation!
+    
     var scene: GameScene!
+    
+    // for game logic
+    var movesString = "/1000"
+    static var currentPlaygroundLevel = 1
     var map_visible = false
     var playgrounds = [Int: Playground]()
     var mazeEvent = MazeEvent.redraw
     var currentPlayground : Playground?
+    
+    // motion
     var oldAcceleration : CMAcceleration?
-    var replays = [String : Array<ReplayPlayerMove>]()
-    var currentReplay = Array<ReplayPlayerMove>()
     var motionManager: CMMotionManager!
+    
+    // Replay
+    var replays = [String : Array<Playground>]()
     var replayTime = 2.0
     var replayMode = false
-    var undoMode = false
     var replayStopPressed = false
-    
     var currentNumberOfReplayMove = 0
     
     // MARK: Rotation and Status Bar
-    override var prefersStatusBarHidden: Bool {
+    override var prefersStatusBarHidden: Bool
+    {
         return true
     }
     
-    // Rotation
-    
-    override var shouldAutorotate: Bool {
+    override var shouldAutorotate: Bool
+    {
         return true
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask
+    {
         return [.portrait, .portraitUpsideDown, .landscape]
     }
     
-    // view constraints
+    // MARK: view constraints
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
@@ -101,33 +107,34 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     func updateCurrentConstraintsToSize(size:CGSize)
     {
         var  orientation : Orientation!
-        if size.width > size.height {
+        if size.width > size.height
+        {
             orientation = Orientation.MyViewOrientationLandscape
-//            gameControllerViewWidthConstraint.constant=controllerView.frame.size.width
-
             playgroundViewConstraint.constant = self.view.frame.height-20
-
-        } else {
+        }
+        else
+        {
             orientation = Orientation.MyViewOrientationPortrait
-//            gameControllerViewWidthConstraint.constant=controllerView.frame.size.height
             playgroundViewConstraint.constant = self.view.frame.width-20
         }
-        if self.currentOrientation != orientation && orientation != Orientation.MyViewOrientationUnspecified {
+        if self.currentOrientation != orientation && orientation != Orientation.MyViewOrientationUnspecified
+        {
             var z = 0
             if let zuege = self.currentPlayground?.anzahl_spielzuege
             {
                 z=zuege
             }
-            if orientation == Orientation.MyViewOrientationPortrait {
+            if orientation == Orientation.MyViewOrientationPortrait
+            {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height / CGFloat(2.25)
-                //countMovesViewWidthConstraint.constant=50
                 movesString="/1000"
                 self.countMovesLabel.text = String("\(z)")
-            } else {
+            }
+            else
+            {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width - playgroundViewConstraint.constant - 15
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height
-                //countMovesViewWidthConstraint.constant=10
                 movesString=""
                 self.countMovesLabel.text = String("\(z)")
             }
@@ -136,10 +143,11 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     }
     
     // MARK: Life Cycle
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        showPlayerIconOnButton(playerOne: false)
-        hideForbiddenImage()
+        switchAndShowPlayerIconOnButton(playerOne: false)
+        hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
 
         /*
         motionManager = CMMotionManager()
@@ -167,19 +175,6 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         self.navigationBarTitle.text = self.currentPlayground?.level_name
 
         //drawCircleSegment(index:2)
-    }
-    
-    func replayBlink() {
-        if self.replayLabel.isHidden==false {
-            if self.replayLabel.text == "REPLAY MODE" {
-                self.replayLabel.text = ""
-            } else {
-                self.replayLabel.text = "REPLAY MODE"
-            }
-            AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
-                self.replayBlink()
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -229,13 +224,66 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     }*/
     
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
         if map_visible == false
         {
             mapTextView.show(visible: map_visible)
         }
         replayControllerView(active: false)
+    }
+    
+    func replayBlink()
+    {
+        if self.replayLabel.isHidden==false
+        {
+            if self.replayLabel.text == "REPLAY MODE"
+            {
+                self.replayLabel.text = ""
+            }
+            else
+            {
+                self.replayLabel.text = "REPLAY MODE"
+            }
+            AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main)
+            {
+                self.replayBlink()
+            }
+        }
+    }
+    
+    func resetLabels()
+    {
+        successView.show(visible: false)
+        collectedMasksLabel.text = String("0")
+        if let gesMask = self.currentPlayground?.masken_gesamtanzahl
+        {
+            collectedMasksLabel!.text! = "0/\(gesMask)"
+        }
+        
+        if self.currentPlayground?.numberOfKilledPlayer == 0
+        {
+            self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+        }
+        else
+        {
+            self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+        }
+        
+        if let zuege = self.currentPlayground?.anzahl_spielzuege
+        {
+            self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
+            self.countMovesLabel.text = String("\(zuege)")
+        }
+        if let maskenTotal = self.currentPlayground?.masken_gesamtanzahl
+        {
+            if let masken = self.currentPlayground?.masken_gesammelt
+            {
+                self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
+                
+            }
+        }
     }
     
     // MARK:  present the playground
@@ -294,10 +342,10 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
                 self.currentPlayground?.badMaskOperation()
                 break
             case MazeEvent.death_player1:
-                self.showPlayerIconOnButton(playerOne:true)
+                self.switchAndShowPlayerIconOnButton(playerOne: true)
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 1 getötet!"
-                self.showForbiddenImage()
+                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
                 }
@@ -305,8 +353,8 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
                 case MazeEvent.death_player2:
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 2 getötet!"
-                self.showPlayerIconOnButton(playerOne:false)
-                self.showForbiddenImage()
+                self.switchAndShowPlayerIconOnButton(playerOne:false)
+                self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
                 }
@@ -315,7 +363,7 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
             case MazeEvent.death_both:
                 self.successView.show(visible: true)
                 self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
-                self.okButton.setTitle("OK, gleich nochmal versuchen!", for: UIControlState.normal)
+                self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                 self.scene.removeAllChildren()
                 self.currentPlayground?.justFinished = false
                 self.currentPlayground?.finished = false
@@ -339,8 +387,7 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
 
         
         // Present the scene.
-        //let transition = SKTransition.fade(with: UIColor.red, duration: 0.5)
-        scene.delegate = self
+
         self.playgroundView.presentScene(self.scene) //, transition: transition)
 
         AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
@@ -350,18 +397,6 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         }
     }
     
-    
-    func didFinishUpdate(for scene: SKScene)
-    {
-        //self.playgroundView.isHidden = false
-
-    }
-    
-    func didEvaluateActions(for scene: SKScene)
-    {
-        //self.playgroundView.isHidden = false
-        
-    }
     // MARK: MAPS
     
     func resetMaps() {
@@ -373,9 +408,9 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     }
     
     // Show Map Button
-    @IBAction func mapButtonPressed(){
-        
-        mapTextVisible()
+    @IBAction func mapButtonPressed()
+    {
+        mapTextView.show(visible: (currentPlayground?.mapsFound.count == 0))
         if map_visible==false {
             scene.showMap()
             map_visible = true
@@ -388,19 +423,8 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         }
     }
     
-    func mapTextVisible(){
-        if currentPlayground?.mapsFound.count == 0
-        {
-            mapTextView.show(visible: true)
-        }
-        else
-        {
-            mapTextView.show(visible: false)
-        }
-        
-    }
-
     // MARK: segue
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination
         if viewController is XorLevelTableViewController {
@@ -441,57 +465,53 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
-        
-        if self.replayMode == false && self.undoMode == false {
-            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
-                                                       moveDirection: PlayerMoveDirection.LEFT))
-        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT)
     }
     
     @IBAction func rightGameButtonPressed(){
-        if self.replayMode == false && self.undoMode == false {
-            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
-                                                       moveDirection: PlayerMoveDirection.RIGHT))
-        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT)
     }
     @IBAction func upGameButtonPressed(){
-        if self.replayMode == false && self.undoMode == false {
-            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
-                                                       moveDirection: PlayerMoveDirection.UP))
-        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP)
     }
     @IBAction func downGameButtonPressed(){
-        if self.replayMode == false && self.undoMode == false {
-            self.currentReplay.append(ReplayPlayerMove(playerChanged:false,
-                                                       moveDirection: PlayerMoveDirection.DOWN))
-        }
         currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN)
     }
     
     // MARK: Switch Player
-    @IBAction func switchMaskButtonPressed(){
-        if (currentPlayground?.numberOfKilledPlayer)!>0 {
-            return
+    @IBAction func switchMaskButtonPressed()
+    {
+        if (currentPlayground?.numberOfKilledPlayer)!==0
+        {
+            switchAndShowPlayerIconOnButton(playerOne: (currentPlayground?.akt_spieler_ist_playerOne)!)
         }
-        if self.replayMode == false && self.undoMode == false {
-            self.currentReplay.append(ReplayPlayerMove(playerChanged:true,
-                                                       moveDirection:PlayerMoveDirection.UP))
-        }
-        
-        showPlayerIconOnButton(playerOne: (currentPlayground?.akt_spieler_ist_playerOne)!)
     }
     
-    func showPlayerIconOnButton(playerOne:Bool) {
+    func switchAndShowPlayerIconOnButton(playerOne:Bool)
+    {
         playerChangeButton.isEnabled = true
         if playerOne == true
         {
-            if !(scene==nil) {
+            if !(scene==nil)
+            {
                 scene.switchToPlayerTwo()
             }
             currentPlayground?.akt_spieler_ist_playerOne = false
+        }
+        else
+        {
+            if !(scene==nil)
+            {
+                scene.switchToPlayerOne()
+            }
+            currentPlayground?.akt_spieler_ist_playerOne = true
+        }
+        self.changePlayerIconOnButton(playerOne: playerOne)
+    }
+    
+    func changePlayerIconOnButton(playerOne:Bool) {
+        if playerOne == true
+        {
             let playerOneImage = UIImage(named:"spieler1")
             playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
             playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
@@ -499,10 +519,6 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         }
         else
         {
-            if !(scene==nil) {
-                scene.switchToPlayerOne()
-            }
-            currentPlayground?.akt_spieler_ist_playerOne = true
             let playerOneImage = UIImage(named:"spieler2")
             playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
             playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
@@ -510,73 +526,67 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         }
     }
     
-    func showForbiddenImage() {
-//        let playerOneImage = UIImage(named:"")
-//        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
-//        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-//        playerChangeImage.image = nil
+    func showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+    {
         verbotImage.isHidden=false
         playerChangeButton.isEnabled = false
     }
     
-    func hideForbiddenImage() {
+    func hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+    {
         verbotImage.isHidden = true
-//        let playerOneImage = UIImage(named:"spieler2")
-//        playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
-//        playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-//        playerChangeImage.image = playerOneImage
         playerChangeButton.isEnabled = true
     }
     
-    
-    
-    // MARK: UNDO 
+    // MARK: UNDO AND REPLAY
     
     @IBAction func undoButtonPressed()
     {
-        if self.currentReplay.count==0 {
+        let counter = Playground.replay.count
+        if counter<1
+        {
             return
         }
         self.replayStopPressed = false
-        self.currentReplay.remove(at: self.currentReplay.count-1)
-        self.undoMode = true
-        self.replayTime=0.0
-        //self.resetToBegin()
-        //AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
-        self.playgroundView.isHidden=false
-        self.resetToBegin()
-        AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
-            self.currentPlayground?.testChickenAcidFishBomb()
-            AppDelegate.delay(bySeconds: 0.2, dispatchLevel: .main) {
-                self.fastForward(position:0)
-            }
+        self.changePlayerIconOnButton(playerOne: !(Playground.replay.last?.akt_spieler_ist_playerOne)!)
+        self.currentPlayground = Playground.replay.last
+        self.scene.resetGameScene(playground: self.currentPlayground)
+        self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+        self.resetLabels()
+        if Playground.replay.count>0
+        {
+            Playground.replay.removeLast()
         }
     }
 
-    
-    
-    // MARK: Replay 
-    
-    
-    
-    
     @IBAction func replayButtonPressed()
     {
-        if self.replayMode==true {
+        if Playground.replay.count==0
+        {
+            return
+        }
+        if self.replayMode==true
+        {
             self.replayLabel.isHidden = true
             self.replayMode = false
             self.gameControllerView(active: true)
             self.replayControllerView(active: false)
             self.replayButton.setTitle("Replay", for: UIControlState.normal)
             self.replayButton.setTitle("Replay", for: UIControlState.highlighted)
-            if self.currentNumberOfReplayMove>0 {
-                removeReplayMoves(fromPosition: self.currentNumberOfReplayMove)
+            var diff = Playground.replay.count-self.currentNumberOfReplayMove
+            while !(diff == 0)
+            {
+                self.currentPlayground = Playground.replay.last
+                Playground.replay.removeLast()
+                diff -= 1
             }
         }
         else
         {
             self.replayLabel.isHidden = false
             self.replayBlink()
+            Playground.replay.append(self.currentPlayground!)
+            self.currentPlayground = Playground.replay.first
             self.gameControllerView(active: false)
             self.replayControllerView(active: true)
             self.replayButton.setTitle("EXIT", for: UIControlState.normal)
@@ -589,57 +599,40 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     }
 
     func removeReplayMoves(fromPosition:Int) {
-        for i in 0...self.currentReplay.count
-        {
-            if i>fromPosition {
-                self.currentReplay.remove(at: self.currentReplay.count-1)
-            }
-        }
+//        for i in 0...self.currentReplay.count
+//        {
+//            if i>fromPosition {
+//                self.currentReplay.remove(at: self.currentReplay.count-1)
+//            }
+//        }
         
     }
-    func fastForward(position:Int)
+    func fastForward(position:Int,recursive:Bool)
     {
-        if self.currentReplay.count<=position || self.replayStopPressed == true
+        if Playground.replay.count<=position || self.replayStopPressed == true
         {
             fastForwardButton.setTitle("FF", for: UIControlState.normal)
             fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
             self.replayStopPressed = true
-            
-            self.undoMode = false
             return
         }
         
-            let first = self.currentReplay[position]
-            
-            if first.playerChanged==true {
-                switchMaskButtonPressed()
-            }
-            else
+        self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
+        self.currentPlayground = Playground.replay[position]
+        self.scene.resetGameScene(playground: self.currentPlayground)
+        self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+        self.resetLabels()
+        
+        self.currentNumberOfReplayMove += 1
+        print("currentNumberOfReplayMove:\(self.currentNumberOfReplayMove)")
+        print("position:\(position)")
+        AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
+        {
+            if recursive==true
             {
-                switch(first.moveDirection)
-                {
-                case PlayerMoveDirection.UP:
-                    upGameButtonPressed()
-                    break
-            
-                case PlayerMoveDirection.DOWN:
-                    downGameButtonPressed()
-                    break
-            
-                case PlayerMoveDirection.LEFT:
-                    leftGameButtonPressed()
-                    break
-            
-                case PlayerMoveDirection.RIGHT:
-                    rightGameButtonPressed()
-                    break
-                }
+                self.fastForward(position:position+1,recursive: recursive)
             }
-            
-            self.currentNumberOfReplayMove += 1
-            AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main) {
-                self.fastForward(position:position+1)
-            }
+        }
         
        
     }
@@ -660,68 +653,57 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         }
     }
     
-    @IBAction func fastforwarButtonPressed() {
-        if fastForwardButton.titleLabel?.text == "STOP" {
+    @IBAction func fastforwarButtonPressed()
+    {
+        if fastForwardButton.titleLabel?.text == "STOP"
+        {
             fastForwardButton.setTitle("FF", for: UIControlState.normal)
             fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
             self.replayStopPressed = true
             return
         }
         self.fastForwardButtonState()
-        if self.currentNumberOfReplayMove>0 {
-            self.replayStopPressed = false
-            self.resetToBegin()
-            AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main) {
-                self.currentPlayground?.testChickenAcidFishBomb()
-                AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
-                    self.fastForward(position:0)
-                }
-            }
-        }
-        else
+        self.replayStopPressed = false
+        self.currentNumberOfReplayMove=0
+        self.resetToBegin()
+        AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
         {
-            self.resetToBegin()
-            AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
-                self.currentPlayground?.testChickenAcidFishBomb()
-                AppDelegate.delay(bySeconds: 1.0, dispatchLevel: .main) {
-                    //self.fastForward(position:0)
-                }
-            }
+            self.fastForward(position:1,recursive: true)
         }
     }
     
     @IBAction func forwardButtonPressed(){
         
-        if self.currentReplay.count<=self.currentNumberOfReplayMove {
+        if Playground.replay.count<=self.currentNumberOfReplayMove {
             return
         }
-        
-        let replayPlayerMove = self.currentReplay[self.currentNumberOfReplayMove]
-        if replayPlayerMove.playerChanged==true {
-            switchMaskButtonPressed()
-        }
-        else
-        {
-            switch(replayPlayerMove.moveDirection)
-            {
-            case PlayerMoveDirection.UP:
-                upGameButtonPressed()
-                break
-            
-            case PlayerMoveDirection.DOWN:
-                downGameButtonPressed()
-                break
-            
-            case PlayerMoveDirection.LEFT:
-                leftGameButtonPressed()
-                break
-            
-            case PlayerMoveDirection.RIGHT:
-                rightGameButtonPressed()
-                break
-            }
-        }
-        self.currentNumberOfReplayMove += 1
+        fastForward(position: self.currentNumberOfReplayMove+1,recursive: false)
+//        let replayPlayerMove = self.currentReplay[self.currentNumberOfReplayMove]
+//        if replayPlayerMove.playerChanged==true {
+//            switchMaskButtonPressed()
+//        }
+//        else
+//        {
+//            switch(replayPlayerMove.moveDirection)
+//            {
+//            case PlayerMoveDirection.UP:
+//                upGameButtonPressed()
+//                break
+//            
+//            case PlayerMoveDirection.DOWN:
+//                downGameButtonPressed()
+//                break
+//            
+//            case PlayerMoveDirection.LEFT:
+//                leftGameButtonPressed()
+//                break
+//            
+//            case PlayerMoveDirection.RIGHT:
+//                rightGameButtonPressed()
+//                break
+//            }
+//        }
+//        self.currentNumberOfReplayMove += 1
     }
     
     @IBAction func backButtonPressed(){}
@@ -734,32 +716,37 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
     // MARK: Reset
     @IBAction func resetToBegin()
     {
-        //self.playgroundView.isHidden=true
+        self.replayStopPressed = false
+        self.currentPlayground = Playground.replay.first
+        self.scene.resetGameScene(playground: self.currentPlayground)
+        self.scene.switchToPlayerOne()
+        self.resetLabels()
+        
         map_visible = false
-        hideForbiddenImage()
-        self.countMovesLabel.text = "0"
-        showPlayerIconOnButton(playerOne: false)
-        currentPlayground = PlaygroundBuilder.readFromString(playground: currentPlayground)
-        scene.resetGameScene(playground: currentPlayground!)
+        hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+        switchAndShowPlayerIconOnButton(playerOne: false)
         self.navigationBarTitle.text = self.currentPlayground?.level_name
     }
     
     func resetReplay()
     {
-        self.currentReplay.removeAll()
-        self.replays[(currentPlayground?.level_name)!] = self.currentReplay
+      //  self.currentReplay.removeAll()
+      //  self.replays[(currentPlayground?.level_name)!] = self.currentReplay
     }
     
     // MARK: Successful Level finished, show next level
-    @IBAction func nextLevelButtonPressed() {
-        if mazeEvent == MazeEvent.death_both {
+    @IBAction func nextLevelButtonPressed()
+    {
+        if mazeEvent == MazeEvent.death_both
+        {
             successView.show(visible: false)
             resetToBegin()
             presentPlayground()
 
         }
-        else {
-            self.hideForbiddenImage()
+        else
+        {
+            self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
             presentPlayground()
         }
     }
@@ -781,11 +768,15 @@ class XorGameViewController: UIViewController,SKSceneDelegate {
         
     }
     
-    func replayControllerView(active:Bool){
-        for view in self.replayButtonsView.subviews {
-            if view.tag==1 {
+    func replayControllerView(active:Bool)
+    {
+        for view in self.replayButtonsView.subviews
+        {
+            if view.tag==1
+            {
                 view.isUserInteractionEnabled = active
-                if active == false {
+                if active == false
+                {
                     view.alpha = 0.5
                 }
                 else
