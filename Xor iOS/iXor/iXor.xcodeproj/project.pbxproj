@@ -12,6 +12,10 @@
 		10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10659B0A1E3BE748001D4235 /* UIView+REFrostedViewController.m */; };
 		107048111E3E6CE10044E525 /* bombe.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 107048101E3E6CE10044E525 /* bombe.atlas */; };
 		107048131E3E6CF20044E525 /* bombs.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 107048121E3E6CF20044E525 /* bombs.atlas */; };
+		107738FF1E44CAD200BBE90D /* skull.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 107738FE1E44CAD200BBE90D /* skull.atlas */; };
+		107739011E450D3B00BBE90D /* SpeechBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107739001E450D3B00BBE90D /* SpeechBubbleView.swift */; };
+		107739151E45570700BBE90D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107739141E45570700BBE90D /* InfoViewController.swift */; };
+		107739171E455BE000BBE90D /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107739161E455BE000BBE90D /* DismissSegue.swift */; };
 		109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E14031E3B4BB1007DB9F8 /* FrostedView.swift */; };
 		10DF66F81E3D5ACF00F1D8B2 /* acid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 10DF66F71E3D5ACF00F1D8B2 /* acid.atlas */; };
 		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
@@ -26,7 +30,7 @@
 		8C2416541DF9FFA30009FCC6 /* level05.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416451DF9FFA30009FCC6 /* level05.xor */; };
 		8C2416551DF9FFA30009FCC6 /* level06.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416461DF9FFA30009FCC6 /* level06.xor */; };
 		8C2416561DF9FFA30009FCC6 /* level07.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416471DF9FFA30009FCC6 /* level07.xor */; };
-		8C2416571DF9FFA30009FCC6 /* level08.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416481DF9FFA30009FCC6 /* level08.xor */; };
+		8C2416571DF9FFA30009FCC6 /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416481DF9FFA30009FCC6 /* level01.xor */; };
 		8C2416581DF9FFA30009FCC6 /* level09.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416491DF9FFA30009FCC6 /* level09.xor */; };
 		8C2416591DF9FFA30009FCC6 /* level10.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164A1DF9FFA30009FCC6 /* level10.xor */; };
 		8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164B1DF9FFA30009FCC6 /* level11.xor */; };
@@ -42,7 +46,7 @@
 		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
-		8C57E1711E3657060098C0BC /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C57E1701E3657060098C0BC /* level01.xor */; };
+		8C57E1711E3657060098C0BC /* level01.xortest in Resources */ = {isa = PBXBuildFile; fileRef = 8C57E1701E3657060098C0BC /* level01.xortest */; };
 		8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +69,10 @@
 		10659B101E3BE86B001D4235 /* iXor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "iXor-Bridging-Header.h"; path = "../iXor/iXor-Bridging-Header.h"; sourceTree = "<group>"; };
 		107048101E3E6CE10044E525 /* bombe.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombe.atlas; sourceTree = "<group>"; };
 		107048121E3E6CF20044E525 /* bombs.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombs.atlas; sourceTree = "<group>"; };
+		107738FE1E44CAD200BBE90D /* skull.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = skull.atlas; sourceTree = "<group>"; };
+		107739001E450D3B00BBE90D /* SpeechBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBubbleView.swift; sourceTree = "<group>"; };
+		107739141E45570700BBE90D /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		107739161E455BE000BBE90D /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		109E14031E3B4BB1007DB9F8 /* FrostedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedView.swift; sourceTree = "<group>"; };
 		10DF66F71E3D5ACF00F1D8B2 /* acid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = acid.atlas; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
@@ -79,7 +87,7 @@
 		8C2416451DF9FFA30009FCC6 /* level05.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level05.xor; sourceTree = "<group>"; };
 		8C2416461DF9FFA30009FCC6 /* level06.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level06.xor; sourceTree = "<group>"; };
 		8C2416471DF9FFA30009FCC6 /* level07.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level07.xor; sourceTree = "<group>"; };
-		8C2416481DF9FFA30009FCC6 /* level08.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level08.xor; sourceTree = "<group>"; };
+		8C2416481DF9FFA30009FCC6 /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
 		8C2416491DF9FFA30009FCC6 /* level09.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level09.xor; sourceTree = "<group>"; };
 		8C24164A1DF9FFA30009FCC6 /* level10.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level10.xor; sourceTree = "<group>"; };
 		8C24164B1DF9FFA30009FCC6 /* level11.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level11.xor; sourceTree = "<group>"; };
@@ -99,7 +107,7 @@
 		8C4312C71DF4717900E80996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8C57E1701E3657060098C0BC /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
+		8C57E1701E3657060098C0BC /* level01.xortest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xortest; sourceTree = "<group>"; };
 		8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		8CF054941E302BE100771C7B /* Playground.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Playground.java; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,7 +156,7 @@
 		8C2416401DF9FF850009FCC6 /* Level */ = {
 			isa = PBXGroup;
 			children = (
-				8C57E1701E3657060098C0BC /* level01.xor */,
+				8C57E1701E3657060098C0BC /* level01.xortest */,
 				8C2416411DF9FFA30009FCC6 /* level01.xorback */,
 				8C2416421DF9FFA30009FCC6 /* level02.xor */,
 				8C2416431DF9FFA30009FCC6 /* level03.xor */,
@@ -156,7 +164,7 @@
 				8C2416451DF9FFA30009FCC6 /* level05.xor */,
 				8C2416461DF9FFA30009FCC6 /* level06.xor */,
 				8C2416471DF9FFA30009FCC6 /* level07.xor */,
-				8C2416481DF9FFA30009FCC6 /* level08.xor */,
+				8C2416481DF9FFA30009FCC6 /* level01.xor */,
 				8C2416491DF9FFA30009FCC6 /* level09.xor */,
 				8C24164A1DF9FFA30009FCC6 /* level10.xor */,
 				8C24164B1DF9FFA30009FCC6 /* level11.xor */,
@@ -171,6 +179,7 @@
 		8C43129E1DF4717800E80996 = {
 			isa = PBXGroup;
 			children = (
+				107739001E450D3B00BBE90D /* SpeechBubbleView.swift */,
 				8C4312A91DF4717800E80996 /* iXor */,
 				8C4312C41DF4717900E80996 /* iXorTests */,
 				8C4312A81DF4717800E80996 /* Products */,
@@ -189,6 +198,7 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				107738FE1E44CAD200BBE90D /* skull.atlas */,
 				107048121E3E6CF20044E525 /* bombs.atlas */,
 				107048101E3E6CE10044E525 /* bombe.atlas */,
 				10DF66F71E3D5ACF00F1D8B2 /* acid.atlas */,
@@ -219,6 +229,8 @@
 				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
 				8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */,
 				109E14031E3B4BB1007DB9F8 /* FrostedView.swift */,
+				107739141E45570700BBE90D /* InfoViewController.swift */,
+				107739161E455BE000BBE90D /* DismissSegue.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -332,18 +344,19 @@
 				8C2416561DF9FFA30009FCC6 /* level07.xor in Resources */,
 				8C2416531DF9FFA30009FCC6 /* level04.xor in Resources */,
 				107048131E3E6CF20044E525 /* bombs.atlas in Resources */,
-				8C2416571DF9FFA30009FCC6 /* level08.xor in Resources */,
+				8C2416571DF9FFA30009FCC6 /* level01.xor in Resources */,
 				8C4312B61DF4717800E80996 /* Main.storyboard in Resources */,
 				8C2416501DF9FFA30009FCC6 /* level01.xorback in Resources */,
 				8C2416591DF9FFA30009FCC6 /* level10.xor in Resources */,
 				8C24165D1DF9FFA30009FCC6 /* level14.xor in Resources */,
+				107738FF1E44CAD200BBE90D /* skull.atlas in Resources */,
 				107048111E3E6CE10044E525 /* bombe.atlas in Resources */,
 				8C2416581DF9FFA30009FCC6 /* level09.xor in Resources */,
 				8C2416521DF9FFA30009FCC6 /* level03.xor in Resources */,
 				10622C851E42874F00E01D81 /* acid.wav in Resources */,
 				8C24165E1DF9FFA30009FCC6 /* level15.xor in Resources */,
 				8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */,
-				8C57E1711E3657060098C0BC /* level01.xor in Resources */,
+				8C57E1711E3657060098C0BC /* level01.xortest in Resources */,
 				8C24165B1DF9FFA30009FCC6 /* level12.xor in Resources */,
 				8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */,
 				8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */,
@@ -374,9 +387,12 @@
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
 				10659B0B1E3BE748001D4235 /* UIImage+REFrostedViewController.m in Sources */,
+				107739011E450D3B00BBE90D /* SpeechBubbleView.swift in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,
 				8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */,
 				109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */,
+				107739151E45570700BBE90D /* InfoViewController.swift in Sources */,
+				107739171E455BE000BBE90D /* DismissSegue.swift in Sources */,
 				8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,7 +32,8 @@ enum MazeElementType: Int {
     wall,
     step,
     death,
-    death_both
+    death_both,
+    skull
 }
 
 enum MazeEvent : Int {

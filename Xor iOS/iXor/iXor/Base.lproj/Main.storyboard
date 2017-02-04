@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -507,6 +508,21 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <constraint firstItem="KvS-mg-L7Y" firstAttribute="top" secondItem="Kb3-h9-TVG" secondAttribute="top" constant="5" id="r2B-al-c4i"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWg-pN-pHt">
+                                                <rect key="frame" x="285" y="179" width="80" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="JFr-MG-Aur"/>
+                                                    <constraint firstAttribute="width" constant="80" id="wIQ-rz-CsM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="17"/>
+                                                <state key="normal" title="INFO">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="tPD-Yu-quZ" kind="presentation" id="y5E-u1-TQg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -516,6 +532,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Xk7-eV-XZv" secondAttribute="bottom" id="b4u-AH-ZQC"/>
                                             <constraint firstAttribute="trailing" secondItem="Kb3-h9-TVG" secondAttribute="trailing" id="bCf-ai-uyS"/>
                                             <constraint firstItem="Xk7-eV-XZv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yH3-ah-l2R" secondAttribute="top" id="fHw-Dk-jvJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="XWg-pN-pHt" secondAttribute="bottom" constant="8" id="ih1-2P-3Tb"/>
+                                            <constraint firstAttribute="trailing" secondItem="XWg-pN-pHt" secondAttribute="trailing" constant="10" id="kMW-pm-rJC"/>
                                             <constraint firstItem="Xk7-eV-XZv" firstAttribute="leading" secondItem="yH3-ah-l2R" secondAttribute="leading" constant="10" id="lEn-YC-tIo"/>
                                             <constraint firstItem="Xk7-eV-XZv" firstAttribute="top" secondItem="Kb3-h9-TVG" secondAttribute="top" id="xCU-oT-5LY"/>
                                         </constraints>
@@ -578,6 +596,61 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="141.59999999999999" y="103.89805097451276"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="jRx-Vq-24A">
+            <objects>
+                <viewController id="tPD-Yu-quZ" customClass="InfoViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7gm-f2-FDW"/>
+                        <viewControllerLayoutGuide type="bottom" id="wyQ-Oc-Aa4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Cg-do-f3L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iXor" translatesAutoresizingMaskIntoConstraints="NO" id="Pip-mr-HNh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iXor" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-0e-9Ae">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ex0-V2-izJ">
+                                <rect key="frame" x="16" y="20" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1aq-kA-DM2"/>
+                                    <constraint firstAttribute="width" constant="120" id="tCV-OQ-7Ol"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="17"/>
+                                <state key="normal" title="Zurück">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="custom" customClass="DismissSegue" customModule="iXor" customModuleProvider="target" id="qc1-bs-DpI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pip-mr-HNh" firstAttribute="top" secondItem="2Cg-do-f3L" secondAttribute="top" id="4YW-YI-keV"/>
+                            <constraint firstItem="wyQ-Oc-Aa4" firstAttribute="top" secondItem="Pip-mr-HNh" secondAttribute="bottom" id="6QR-nm-Gw4"/>
+                            <constraint firstItem="Ex0-V2-izJ" firstAttribute="top" secondItem="7gm-f2-FDW" secondAttribute="bottom" id="DFY-4u-Wl9"/>
+                            <constraint firstAttribute="trailing" secondItem="fQN-0e-9Ae" secondAttribute="trailing" id="Sbw-Tq-aY2"/>
+                            <constraint firstItem="wyQ-Oc-Aa4" firstAttribute="top" secondItem="fQN-0e-9Ae" secondAttribute="bottom" id="YyY-dT-TJJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Pip-mr-HNh" secondAttribute="trailing" id="lbT-i7-uk7"/>
+                            <constraint firstItem="fQN-0e-9Ae" firstAttribute="top" secondItem="2Cg-do-f3L" secondAttribute="top" id="t85-Np-9Nb"/>
+                            <constraint firstItem="fQN-0e-9Ae" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leading" id="tuw-ya-FlC"/>
+                            <constraint firstItem="Ex0-V2-izJ" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leadingMargin" id="vCW-Ro-n65"/>
+                            <constraint firstItem="Pip-mr-HNh" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leading" id="xCM-Er-8UR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="fQN-0e-9Ae" id="l7I-11-0Qk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSB-k4-SUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1112.8" y="444.82758620689657"/>
         </scene>
         <!--Xor Level Table View Controller-->
         <scene sceneID="K07-aM-b1g">
@@ -675,11 +748,12 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sc0-p1-LhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1114" y="104"/>
+            <point key="canvasLocation" x="1113" y="-224"/>
         </scene>
     </scenes>
     <resources>
         <image name="down_low" width="60" height="60"/>
+        <image name="iXor" width="320" height="568"/>
         <image name="karte_lo" width="20" height="21"/>
         <image name="karte_lu" width="20" height="20"/>
         <image name="karte_ro" width="20" height="20"/>

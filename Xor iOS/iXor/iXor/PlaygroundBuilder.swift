@@ -51,7 +51,9 @@ class PlaygroundBuilder: NSObject {
         MazeElementType.player_1:   "spieler1",
         MazeElementType.player_2:   "spieler2",
         MazeElementType.exit:       "ausgang",
-        MazeElementType.wall:       "wand"
+        MazeElementType.wall:       "wand",
+        MazeElementType.skull:       "skull",
+        
     ]
     
     struct Constants {

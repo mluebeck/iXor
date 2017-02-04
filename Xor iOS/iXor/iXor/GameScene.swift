@@ -17,6 +17,7 @@ class GameScene: SKScene {
     
     var acidFrames : [SKTexture]!
     var bombFrames : [SKTexture]!
+    var skullFrames : [SKTexture]!
 
     let factorX = CGFloat(PlaygroundBuilder.Constants.groesseX-PlaygroundBuilder.Constants.sichtbareGroesseX)*CGFloat(-1.0)
     let factorY = CGFloat(PlaygroundBuilder.Constants.groesseY-PlaygroundBuilder.Constants.sichtbareGroesseY)
@@ -44,6 +45,7 @@ class GameScene: SKScene {
         switchToPlayerOne()
         prepareAcidAnimation()
         prepareBombAnimation()
+        prepareSkullAnimation()
     }
     
     func updateWithNewPlayground(_ playground:Playground) {
@@ -83,7 +85,7 @@ class GameScene: SKScene {
         var acidCorrosiveFrames = [SKTexture]()
         
         let numImages = acidAnimatedAtlas.textureNames.count
-        for i in 1...(numImages/2)
+        for i in 1...(numImages)
         {
             let acidTextureName = "saeure_\(i)"
             acidCorrosiveFrames.append(acidAnimatedAtlas.textureNamed(acidTextureName))
@@ -106,13 +108,28 @@ class GameScene: SKScene {
         var bombCorrosiveFrames = [SKTexture]()
         
         let numImages = bombAnimatedAtlas.textureNames.count
-        for i in 1...(numImages/2)
+        for i in 1...(numImages)
         {
             let bombTextureName = "bomb_\(i)"
             bombCorrosiveFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
         }
         
         bombFrames = bombCorrosiveFrames
+    }
+    
+    func prepareSkullAnimation()
+    {
+        let bombAnimatedAtlas = SKTextureAtlas(named: "skull")
+        var bombCorrosiveFrames = [SKTexture]()
+        
+        let numImages = bombAnimatedAtlas.textureNames.count
+        for i in 1...(numImages)
+        {
+            let bombTextureName = "skull_\(i)"
+            bombCorrosiveFrames.append(bombAnimatedAtlas.textureNamed(bombTextureName))
+        }
+        
+        skullFrames = bombCorrosiveFrames
     }
     
     func doBombAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
@@ -123,6 +140,10 @@ class GameScene: SKScene {
         )
     }
     
+    func doSkullAnimation()
+    {
+        
+    }
     
     
     func resetGameScene(playground:Playground?) {

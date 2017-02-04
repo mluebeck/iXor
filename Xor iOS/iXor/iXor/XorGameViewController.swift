@@ -60,11 +60,15 @@ class XorGameViewController: UIViewController
     
     var currentOrientation : Orientation!
     
+    
+    var levelButtonPressed = false
+    
+    // Game Scene
     var scene: GameScene!
     
     // for game logic
     var movesString = "/1000"
-    static var currentPlaygroundLevel = 1
+    static var currentPlaygroundLevel = 8
     var map_visible = false
     var playgrounds = [Int: Playground]()
     var mazeEvent = MazeEvent.redraw
@@ -177,14 +181,30 @@ class XorGameViewController: UIViewController
         //drawCircleSegment(index:2)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.resetMaps()
-        
-        self.playgrounds = PlaygroundBuilder.playgrounds()
-        self.replayLabel.isHidden = true
-
-        self.presentPlayground()
-        
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        if map_visible == false
+        {
+            mapTextView.show(visible: map_visible)
+        }
+        replayControllerView(active: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        if self.levelButtonPressed==true
+        {
+            self.levelButtonPressed=false
+        }
+        else
+        {
+            self.resetMaps()
+            self.playgrounds = PlaygroundBuilder.playgrounds()
+            self.replayLabel.isHidden = true
+            self.presentPlayground()
+        }
     }
     /*
     func drawCircleSegment(index:Int) {
@@ -224,34 +244,6 @@ class XorGameViewController: UIViewController
     }*/
     
     
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        if map_visible == false
-        {
-            mapTextView.show(visible: map_visible)
-        }
-        replayControllerView(active: false)
-    }
-    
-    func replayBlink()
-    {
-        if self.replayLabel.isHidden==false
-        {
-            if self.replayLabel.text == "REPLAY MODE"
-            {
-                self.replayLabel.text = ""
-            }
-            else
-            {
-                self.replayLabel.text = "REPLAY MODE"
-            }
-            AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main)
-            {
-                self.replayBlink()
-            }
-        }
-    }
     
     func resetLabels()
     {
@@ -342,31 +334,50 @@ class XorGameViewController: UIViewController
                 self.currentPlayground?.badMaskOperation()
                 break
             case MazeEvent.death_player1:
-                self.switchAndShowPlayerIconOnButton(playerOne: true)
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 1 getötet!"
+                self.switchAndShowPlayerIconOnButton(playerOne:true)
                 self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
-                AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
+                
+                let sprite = SKSpriteNode.init(imageNamed: "skull")
+                let mazeElement = MazeType(mazeElementType: MazeElementType.skull, sprite:sprite)
+                self.scene.drawSprite(element: mazeElement, position: (self.currentPlayground?.playerPosition)!, duration: 1.0, completed: nil)
+                
+                /*
+                let zoomInAction = SKAction.scale(to: 2, duration: 5)
+                
+                sprite.run(
+                    
+                    SKAction.repeat(
+                        zoomInAction,//SKAction.animate(with: self.scene.skullFrames,timePerFrame: 0.1,resize: true,restore: true),
+                        count:1
+                    ),completion:
+                    {
+                     })
+                */
+                AppDelegate.delay(bySeconds: 2.0, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
+                    self.switchAndShowPlayerIconOnButton(playerOne: true)
                 }
                 break
                 case MazeEvent.death_player2:
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 2 getötet!"
                 self.switchAndShowPlayerIconOnButton(playerOne:false)
-                self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
+                    self.switchAndShowPlayerIconOnButton(playerOne: false)
                 }
-                
                 break
             case MazeEvent.death_both:
-                self.successView.show(visible: true)
-                self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
-                self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
-                self.scene.removeAllChildren()
-                self.currentPlayground?.justFinished = false
-                self.currentPlayground?.finished = false
+                AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
+                    self.successView.show(visible: true)
+                    self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
+                    self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
+                    self.currentPlayground?.justFinished = false
+                    self.currentPlayground?.finished = false
+                }
                 break
             default:
                 break;
@@ -428,6 +439,7 @@ class XorGameViewController: UIViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewController = segue.destination
         if viewController is XorLevelTableViewController {
+            self.levelButtonPressed = true
             let levelTableViewController = viewController as! XorLevelTableViewController
             levelTableViewController.setPlaygrounds(playgrounds:self.playgrounds)
             levelTableViewController.currentLevel = self.currentPlayground?.level_number
@@ -540,6 +552,23 @@ class XorGameViewController: UIViewController
     
     // MARK: UNDO AND REPLAY
     
+    func gotoFirst()
+    {
+        if Playground.replay.count>0
+        {
+            self.changePlayerIconOnButton(playerOne: !(Playground.replay.first?.akt_spieler_ist_playerOne)!)
+            self.currentPlayground = Playground.replay.first
+            self.scene.resetGameScene(playground: self.currentPlayground)
+            self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+            self.resetLabels()
+            Playground.replay.removeAll()
+            if (self.currentPlayground?.numberOfKilledPlayer)!>0
+            {
+                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+            }
+        }
+    }
+    
     @IBAction func undoButtonPressed()
     {
         let counter = Playground.replay.count
@@ -549,6 +578,12 @@ class XorGameViewController: UIViewController
         }
         self.replayStopPressed = false
         self.changePlayerIconOnButton(playerOne: !(Playground.replay.last?.akt_spieler_ist_playerOne)!)
+        
+        var badMaskOperation = false
+        if !(Playground.replay.last?.invisible == self.currentPlayground?.invisible)
+        {
+            badMaskOperation = true
+        }
         self.currentPlayground = Playground.replay.last
         self.scene.resetGameScene(playground: self.currentPlayground)
         self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
@@ -556,6 +591,10 @@ class XorGameViewController: UIViewController
         if Playground.replay.count>0
         {
             Playground.replay.removeLast()
+        }
+        if self.currentPlayground?.invisible==true
+        {
+            self.currentPlayground?.badMaskOperation()
         }
     }
 
@@ -598,15 +637,25 @@ class XorGameViewController: UIViewController
         }
     }
 
-    func removeReplayMoves(fromPosition:Int) {
-//        for i in 0...self.currentReplay.count
-//        {
-//            if i>fromPosition {
-//                self.currentReplay.remove(at: self.currentReplay.count-1)
-//            }
-//        }
-        
+    func replayBlink()
+    {
+        if self.replayLabel.isHidden==false
+        {
+            if self.replayLabel.text == "REPLAY MODE"
+            {
+                self.replayLabel.text = ""
+            }
+            else
+            {
+                self.replayLabel.text = "REPLAY MODE"
+            }
+            AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main)
+            {
+                self.replayBlink()
+            }
+        }
     }
+    
     func fastForward(position:Int,recursive:Bool)
     {
         if Playground.replay.count<=position || self.replayStopPressed == true
@@ -672,41 +721,13 @@ class XorGameViewController: UIViewController
         }
     }
     
-    @IBAction func forwardButtonPressed(){
-        
-        if Playground.replay.count<=self.currentNumberOfReplayMove {
-            return
+    @IBAction func forwardButtonPressed()
+    {
+        if Playground.replay.count>self.currentNumberOfReplayMove
+        {
+            fastForward(position: self.currentNumberOfReplayMove+1,recursive: false)
         }
-        fastForward(position: self.currentNumberOfReplayMove+1,recursive: false)
-//        let replayPlayerMove = self.currentReplay[self.currentNumberOfReplayMove]
-//        if replayPlayerMove.playerChanged==true {
-//            switchMaskButtonPressed()
-//        }
-//        else
-//        {
-//            switch(replayPlayerMove.moveDirection)
-//            {
-//            case PlayerMoveDirection.UP:
-//                upGameButtonPressed()
-//                break
-//            
-//            case PlayerMoveDirection.DOWN:
-//                downGameButtonPressed()
-//                break
-//            
-//            case PlayerMoveDirection.LEFT:
-//                leftGameButtonPressed()
-//                break
-//            
-//            case PlayerMoveDirection.RIGHT:
-//                rightGameButtonPressed()
-//                break
-//            }
-//        }
-//        self.currentNumberOfReplayMove += 1
     }
-    
-    @IBAction func backButtonPressed(){}
     
     @IBAction func stopButtonPressed()
     {
@@ -718,6 +739,7 @@ class XorGameViewController: UIViewController
     {
         self.replayStopPressed = false
         self.currentPlayground = Playground.replay.first
+        self.scene.updateWithNewPlayground(self.currentPlayground!)
         self.scene.resetGameScene(playground: self.currentPlayground)
         self.scene.switchToPlayerOne()
         self.resetLabels()
@@ -740,9 +762,11 @@ class XorGameViewController: UIViewController
         if mazeEvent == MazeEvent.death_both
         {
             successView.show(visible: false)
-            resetToBegin()
-            presentPlayground()
-
+            //AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main, closure: {
+                //self.resetToBegin()
+                self.gotoFirst()
+            //})
+            
         }
         else
         {
