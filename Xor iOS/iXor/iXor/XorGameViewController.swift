@@ -68,7 +68,7 @@ class XorGameViewController: UIViewController
     
     // for game logic
     var movesString = "/1000"
-    static var currentPlaygroundLevel = 8
+    static var currentPlaygroundLevel = 1
     var map_visible = false
     var playgrounds = [Int: Playground]()
     var mazeEvent = MazeEvent.redraw
@@ -579,11 +579,6 @@ class XorGameViewController: UIViewController
         self.replayStopPressed = false
         self.changePlayerIconOnButton(playerOne: !(Playground.replay.last?.akt_spieler_ist_playerOne)!)
         
-        var badMaskOperation = false
-        if !(Playground.replay.last?.invisible == self.currentPlayground?.invisible)
-        {
-            badMaskOperation = true
-        }
         self.currentPlayground = Playground.replay.last
         self.scene.resetGameScene(playground: self.currentPlayground)
         self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
