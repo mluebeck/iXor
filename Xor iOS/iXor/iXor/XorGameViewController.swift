@@ -151,7 +151,7 @@ class XorGameViewController: UIViewController
     {
         super.viewDidLoad()
         switchAndShowPlayerIconOnButton(playerOne: false)
-        hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+        self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
 
         /*
         motionManager = CMMotionManager()
@@ -254,14 +254,7 @@ class XorGameViewController: UIViewController
             collectedMasksLabel!.text! = "0/\(gesMask)"
         }
         
-        if self.currentPlayground?.numberOfKilledPlayer == 0
-        {
-            self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
-        }
-        else
-        {
-            self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
-        }
+        self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:!(self.currentPlayground?.numberOfKilledPlayer == 0))
         
         if let zuege = self.currentPlayground?.anzahl_spielzuege
         {
@@ -337,7 +330,7 @@ class XorGameViewController: UIViewController
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 1 getötet!"
                 self.switchAndShowPlayerIconOnButton(playerOne:true)
-                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+                self.playerChangeNotAllowedImageOverPlayerChangeButton(visible: true)
                 
                 let sprite = SKSpriteNode.init(imageNamed: "skull")
                 let mazeElement = MazeType(mazeElementType: MazeElementType.skull, sprite:sprite)
@@ -364,7 +357,7 @@ class XorGameViewController: UIViewController
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 2 getötet!"
                 self.switchAndShowPlayerIconOnButton(playerOne:false)
-                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+                self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:true)
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
                     self.switchAndShowPlayerIconOnButton(playerOne: false)
@@ -449,11 +442,6 @@ class XorGameViewController: UIViewController
                     self.currentPlayground = self.playgrounds[selectedPlaygroundLevel]
                     self.currentPlayground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel,playground:self.currentPlayground)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
-                    
-                    self.resetReplay()
-                    
-                    //self.scene = GameScene()
-                    //self.scene.drawWholePlayground()
                     self.countMovesLabel.text = "0"
                     self.navigationBarTitle.text = self.currentPlayground?.level_name
                     self.presentPlayground()
@@ -464,7 +452,6 @@ class XorGameViewController: UIViewController
             }
             levelTableViewController.resetPressedClosure = {
                 self.countMovesLabel.text = "0"
-                self.resetReplay()
                 self.resetToBegin()
                 self.resetMaps()
             }
@@ -538,17 +525,12 @@ class XorGameViewController: UIViewController
         }
     }
     
-    func showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+    func playerChangeNotAllowedImageOverPlayerChangeButton(visible:Bool)
     {
-        verbotImage.isHidden=false
-        playerChangeButton.isEnabled = false
+        verbotImage.isHidden = !visible
+        playerChangeButton.isEnabled = !visible
     }
     
-    func hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
-    {
-        verbotImage.isHidden = true
-        playerChangeButton.isEnabled = true
-    }
     
     // MARK: UNDO AND REPLAY
     
@@ -564,7 +546,7 @@ class XorGameViewController: UIViewController
             Playground.replay.removeAll()
             if (self.currentPlayground?.numberOfKilledPlayer)!>0
             {
-                self.showPlayerChangeNotAllowedImageOverPlayerChangeButton()
+                self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:true)
             }
         }
     }
@@ -740,15 +722,9 @@ class XorGameViewController: UIViewController
         self.resetLabels()
         
         map_visible = false
-        hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+        playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
         switchAndShowPlayerIconOnButton(playerOne: false)
         self.navigationBarTitle.text = self.currentPlayground?.level_name
-    }
-    
-    func resetReplay()
-    {
-      //  self.currentReplay.removeAll()
-      //  self.replays[(currentPlayground?.level_name)!] = self.currentReplay
     }
     
     // MARK: Successful Level finished, show next level
@@ -765,7 +741,7 @@ class XorGameViewController: UIViewController
         }
         else
         {
-            self.hidePlayerChangeNotAllowedImageOverPlayerChangeButton()
+            self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
             presentPlayground()
         }
     }
