@@ -37,20 +37,23 @@ class InfoViewController: UIViewController {
         super.viewDidAppear(animated)
         let secs = 2.0
         AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-            self.imageView.image = UIImage.init(named: "iXor2.png")
+            self.imageView.image = UIImage.init(named: "xanadoo_1.png")
             AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                self.imageView.image = UIImage.init(named: "iXor3.png")
+                self.imageView.image = UIImage.init(named: "xanadoo_2.png")
                 AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                    self.imageView.image = UIImage.init(named: "iXor4.png")
+                    self.imageView.image = UIImage.init(named: "xanadoo_3.png")
                     AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                        self.imageView.image = UIImage.init(named: "iXor5.png")
+                        self.imageView.image = UIImage.init(named: "xanadoo_4.png")
                         AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                            self.imageView.image = UIImage.init(named: "iXor6.png")
+                            self.imageView.image = UIImage.init(named: "xanadoo_5.png")
                             AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                                self.imageView.image = UIImage.init(named: "iXor7.png")
+                                self.imageView.image = UIImage.init(named: "xanadoo_6.png")
                                 AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                                    self.imageView.image = UIImage.init(named: "iXor8.png")
-                                    
+                                    self.imageView.image = UIImage.init(named: "xanadoo_7.png")
+                                    AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
+                                        self.imageView.image = UIImage.init(named: "xanadoo_8.png")
+                                        
+                                    }
                                 }
                             }
                         }

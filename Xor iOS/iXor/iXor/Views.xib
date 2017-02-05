@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="PressStart2P.ttf">
+            <string>PressStart2P</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="ViewOne" id="XPe-5K-rn1">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo" translatesAutoresizingMaskIntoConstraints="NO" id="Cc0-PR-HKA">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Cc0-PR-HKA" secondAttribute="height" multiplier="125:89" id="sof-Im-sSf"/>
+                    </constraints>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JI4-JY-LU1">
+                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">The Xanadoo Experience            
+
+.... in the beautiful land Xor with its beautiful mazes !
+
+Who am I ? The powerful Xana !
+
+To enhance my power, I have scattered masks around Xanadoo's mazes !
+
+The only way to defeat me is to collect all masks and find the way out ouf each of the 15 mazes !
+
+Sounds easy ? Ha ! To make your job extremly difficult, the maze has some beautiful inhabitants !
+
+</string>
+                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JI4-JY-LU1" secondAttribute="bottom" id="1mW-Pk-sEA"/>
+                <constraint firstItem="JI4-JY-LU1" firstAttribute="leading" secondItem="XPe-5K-rn1" secondAttribute="leading" id="945-U7-VBh"/>
+                <constraint firstItem="Cc0-PR-HKA" firstAttribute="leading" secondItem="XPe-5K-rn1" secondAttribute="leading" id="BGL-g0-3M3"/>
+                <constraint firstAttribute="trailing" secondItem="Cc0-PR-HKA" secondAttribute="trailing" id="Kmo-rn-v8h"/>
+                <constraint firstItem="Cc0-PR-HKA" firstAttribute="top" secondItem="XPe-5K-rn1" secondAttribute="top" id="Tke-Fj-Zad"/>
+                <constraint firstAttribute="trailing" secondItem="JI4-JY-LU1" secondAttribute="trailing" id="h4f-Rv-gov"/>
+                <constraint firstItem="JI4-JY-LU1" firstAttribute="top" secondItem="Cc0-PR-HKA" secondAttribute="bottom" id="igB-lU-h3b"/>
+            </constraints>
+            <point key="canvasLocation" x="-111.5" y="17.5"/>
+        </view>
+        <view contentMode="scaleToFill" restorationIdentifier="ViewTwo" id="Hv8-dt-G7c">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OgC-Jg-vmb">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="OgC-Jg-vmb" secondAttribute="height" multiplier="375:308" id="F20-Cj-zzx"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment>
+                            <string key="content">Your challenge: The maze and its inhabitants
+
+You really want to defeat Xor and enter the mazes of Xanadoo ? Congratulations !
+
+What will be expected to you ? Each maze is a 32 x 32 field, but you can only see an 8 x 8 part of it !
+
+15 levels will wait for you, level 1 is very simple - to make you hungry for more !
+
+Each level you will master will increase your fame and your competence in solving future challenges - and there are lots of it !  
+
+But now, take a look at the inhabitants of Xor: 
+</string>
+                            <attributes>
+                                <font key="NSFont" size="12" name="PressStart2P"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhd-Gu-xih">
+                    <rect key="frame" x="0.0" y="308" width="375" height="359"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler1" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-vI-Gh7">
+                            <rect key="frame" x="8" y="8" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="49" id="HPF-xs-gNH"/>
+                                <constraint firstAttribute="height" constant="55" id="Xce-Vb-xoy"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbf-Jb-LNx">
+                            <rect key="frame" x="65" y="0.0" width="310" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="8u3-iL-j5x"/>
+                            </constraints>
+                            <string key="text">This is your avatar, 
+called "Magus"!</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler2" translatesAutoresizingMaskIntoConstraints="NO" id="qfj-oY-dKK">
+                            <rect key="frame" x="8" y="71" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="aiN-8j-Bq6"/>
+                                <constraint firstAttribute="width" constant="49" id="yUr-qw-Pgi"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfX-Qw-enE">
+                            <rect key="frame" x="65" y="68" width="310" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="1Ye-9h-PRY"/>
+                            </constraints>
+                            <string key="text">This is your second 
+avatar, called "Questor"!</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wand" translatesAutoresizingMaskIntoConstraints="NO" id="GHP-yw-Hsb">
+                            <rect key="frame" x="8" y="137" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="49" id="GA4-bA-Dqb"/>
+                                <constraint firstAttribute="height" constant="55" id="hWm-cW-8SI"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSq-AP-UwA">
+                            <rect key="frame" x="73" y="134" width="292" height="67"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="67" id="7ap-Yn-1o3"/>
+                            </constraints>
+                            <string key="text">This is a wall. It's a 
+natural barriere you 
+cannot walk through! 
+But you can destroy it - 
+how? you will see...</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maske" translatesAutoresizingMaskIntoConstraints="NO" id="1oa-UJ-DuZ">
+                            <rect key="frame" x="8" y="208" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="Ewt-0X-t69"/>
+                                <constraint firstAttribute="width" constant="49" id="z6f-Ch-jfK"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-RG-qfN">
+                            <rect key="frame" x="73" y="205" width="302" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="ub9-va-x7H"/>
+                            </constraints>
+                            <string key="text">This is a mask. Collect
+all of them!</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ausgang" translatesAutoresizingMaskIntoConstraints="NO" id="oZI-Cv-hrQ">
+                            <rect key="frame" x="8" y="296" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="LKl-kn-aid"/>
+                                <constraint firstAttribute="width" constant="49" id="uQi-BF-Lj4"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilw-f8-dho">
+                            <rect key="frame" x="65" y="293" width="310" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="Sc5-DQ-dmX"/>
+                            </constraints>
+                            <string key="text">And then, escape through 
+this exit!</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="1oa-UJ-DuZ" firstAttribute="top" secondItem="GHP-yw-Hsb" secondAttribute="bottom" constant="16" id="0aV-1P-Xui"/>
+                        <constraint firstItem="qfj-oY-dKK" firstAttribute="top" secondItem="qzp-vI-Gh7" secondAttribute="bottom" constant="8" id="3t6-mV-xc9"/>
+                        <constraint firstItem="qzp-vI-Gh7" firstAttribute="top" secondItem="hhd-Gu-xih" secondAttribute="top" constant="8" id="9ge-1N-hib"/>
+                        <constraint firstAttribute="trailing" secondItem="Mpm-RG-qfN" secondAttribute="trailing" id="AMp-Hd-aD1"/>
+                        <constraint firstItem="oZI-Cv-hrQ" firstAttribute="leading" secondItem="hhd-Gu-xih" secondAttribute="leading" constant="8" id="CKm-JL-oGU"/>
+                        <constraint firstItem="vbf-Jb-LNx" firstAttribute="top" secondItem="hhd-Gu-xih" secondAttribute="top" id="Dtp-5H-6qi"/>
+                        <constraint firstItem="hfX-Qw-enE" firstAttribute="leading" secondItem="qfj-oY-dKK" secondAttribute="trailing" constant="8" id="E7G-eg-OhE"/>
+                        <constraint firstItem="ilw-f8-dho" firstAttribute="leading" secondItem="oZI-Cv-hrQ" secondAttribute="trailing" constant="8" id="HNn-V4-Dcb"/>
+                        <constraint firstItem="VSq-AP-UwA" firstAttribute="leading" secondItem="GHP-yw-Hsb" secondAttribute="trailing" constant="16" id="IHw-Gc-DOQ"/>
+                        <constraint firstItem="Mpm-RG-qfN" firstAttribute="leading" secondItem="1oa-UJ-DuZ" secondAttribute="trailing" constant="16" id="Kia-hM-xwE"/>
+                        <constraint firstItem="qzp-vI-Gh7" firstAttribute="leading" secondItem="hhd-Gu-xih" secondAttribute="leading" constant="8" id="LYT-2J-NaU"/>
+                        <constraint firstItem="GHP-yw-Hsb" firstAttribute="leading" secondItem="hhd-Gu-xih" secondAttribute="leading" constant="8" id="Myj-LG-QMn"/>
+                        <constraint firstItem="VSq-AP-UwA" firstAttribute="top" secondItem="hfX-Qw-enE" secondAttribute="bottom" constant="6" id="QaE-Kj-XCJ"/>
+                        <constraint firstAttribute="trailing" secondItem="VSq-AP-UwA" secondAttribute="trailing" constant="10" id="bKc-Vm-hVk"/>
+                        <constraint firstAttribute="bottom" secondItem="oZI-Cv-hrQ" secondAttribute="bottom" constant="8" id="cbp-wI-8Lg"/>
+                        <constraint firstItem="vbf-Jb-LNx" firstAttribute="leading" secondItem="qzp-vI-Gh7" secondAttribute="trailing" constant="8" id="gEK-8A-hDy"/>
+                        <constraint firstAttribute="trailing" secondItem="hfX-Qw-enE" secondAttribute="trailing" id="gkh-ey-7hA"/>
+                        <constraint firstAttribute="trailing" secondItem="vbf-Jb-LNx" secondAttribute="trailing" id="kfJ-FN-DTK"/>
+                        <constraint firstItem="1oa-UJ-DuZ" firstAttribute="leading" secondItem="hhd-Gu-xih" secondAttribute="leading" constant="8" id="mEe-9G-ITh"/>
+                        <constraint firstItem="Mpm-RG-qfN" firstAttribute="top" secondItem="VSq-AP-UwA" secondAttribute="bottom" constant="4" id="nGm-CS-YIo"/>
+                        <constraint firstItem="qfj-oY-dKK" firstAttribute="leading" secondItem="hhd-Gu-xih" secondAttribute="leading" constant="8" id="nje-CY-hyt"/>
+                        <constraint firstAttribute="trailing" secondItem="ilw-f8-dho" secondAttribute="trailing" id="rCa-ou-xFO"/>
+                        <constraint firstItem="GHP-yw-Hsb" firstAttribute="top" secondItem="qfj-oY-dKK" secondAttribute="bottom" constant="11" id="rdg-Md-9sH"/>
+                        <constraint firstAttribute="bottom" secondItem="ilw-f8-dho" secondAttribute="bottom" constant="6" id="u2O-tX-Ku6"/>
+                        <constraint firstItem="hfX-Qw-enE" firstAttribute="top" secondItem="vbf-Jb-LNx" secondAttribute="bottom" constant="8" id="xjn-Ai-efQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="OgC-Jg-vmb" firstAttribute="top" secondItem="Hv8-dt-G7c" secondAttribute="top" id="66k-yo-RXn"/>
+                <constraint firstItem="hhd-Gu-xih" firstAttribute="top" secondItem="OgC-Jg-vmb" secondAttribute="bottom" id="DAr-fh-Tui"/>
+                <constraint firstAttribute="trailing" secondItem="hhd-Gu-xih" secondAttribute="trailing" id="MKe-j9-l84"/>
+                <constraint firstItem="hhd-Gu-xih" firstAttribute="leading" secondItem="Hv8-dt-G7c" secondAttribute="leading" id="RaL-oT-YGP"/>
+                <constraint firstItem="OgC-Jg-vmb" firstAttribute="leading" secondItem="Hv8-dt-G7c" secondAttribute="leading" id="h1P-f7-s70"/>
+                <constraint firstAttribute="bottom" secondItem="hhd-Gu-xih" secondAttribute="bottom" id="qmM-T0-ODc"/>
+                <constraint firstAttribute="trailing" secondItem="OgC-Jg-vmb" secondAttribute="trailing" id="zEe-rJ-7Kp"/>
+            </constraints>
+            <point key="canvasLocation" x="325.5" y="16.5"/>
+        </view>
+        <view contentMode="scaleToFill" restorationIdentifier="ViewThree" id="FP9-Ii-0ac">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDV-vf-YiZ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="karte" translatesAutoresizingMaskIntoConstraints="NO" id="M38-pf-oQO">
+                            <rect key="frame" x="8" y="8" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="6dM-lT-eXS"/>
+                                <constraint firstAttribute="width" constant="49" id="CgA-bu-zE7"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MY4-0W-6zp">
+                            <rect key="frame" x="73" y="0.0" width="302" height="126"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="126" id="vI7-ft-F7k"/>
+                            </constraints>
+                            <string key="text">This is a map. Torn into
+four pieces, you must collect
+the four parts to have a complete map.
+collect ore piece, and you can see a fourth part of the maze . Collect all four and you can see all!</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fisch" translatesAutoresizingMaskIntoConstraints="NO" id="H74-ou-ReR">
+                            <rect key="frame" x="4" y="567" width="49" height="55"/>
+                            <color key="backgroundColor" red="0.22526625413716328" green="0.29625960419351605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="49" id="Fjs-Tq-Dob"/>
+                                <constraint firstAttribute="height" constant="55" id="pQt-Hz-PqA"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gph-4h-32w">
+                            <rect key="frame" x="61" y="564" width="310" height="95"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="95" id="j99-sx-wFH"/>
+                            </constraints>
+                            <string key="text">This is a fish. You can push it to the left or the right, and it falls down, if there's no wall or other items that prevents it !</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOx-6w-RJe">
+                            <rect key="frame" x="0.0" y="127" width="375" height="432"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wellen" translatesAutoresizingMaskIntoConstraints="NO" id="S3q-LL-BIH">
+                                    <rect key="frame" x="8" y="189" width="49" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="49" id="1iK-EY-9wb"/>
+                                        <constraint firstAttribute="height" constant="55" id="MIP-VH-scy"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wellen_vertikal" translatesAutoresizingMaskIntoConstraints="NO" id="UIr-im-AUy">
+                                    <rect key="frame" x="8" y="369" width="49" height="55"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="55" id="6NT-bN-UNJ"/>
+                                        <constraint firstAttribute="width" constant="49" id="Esh-Tt-ACR"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je8-fQ-8qh">
+                                    <rect key="frame" x="73" y="363" width="302" height="67"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="67" id="1z5-fl-27J"/>
+                                    </constraints>
+                                    <string key="text">These are dots. You can
+only walk through it 
+horizontally.</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huhn" translatesAutoresizingMaskIntoConstraints="NO" id="iCV-UR-8cN">
+                                    <rect key="frame" x="8" y="16" width="49" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="49" id="HRL-Yz-0vU"/>
+                                        <constraint firstAttribute="height" constant="55" id="w9F-Cl-2sO"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-WQ-tDL">
+                                    <rect key="frame" x="65" y="16" width="302" height="110"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="110" id="bPD-EQ-yOC"/>
+                                    </constraints>
+                                    <string key="text"> This is a chicken. You can push it up or down, if there's enough space ! 
+    And it always wants to chase from right to the left, if there's no wall or other item that 
+    could prevent it from chasing !</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCT-sE-Dli">
+                                    <rect key="frame" x="73" y="186" width="302" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="4tC-oM-MXW"/>
+                                    </constraints>
+                                    <string key="text">This are waves. You can 
+only walk through it 
+vertically</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="S3q-LL-BIH" firstAttribute="leading" secondItem="VOx-6w-RJe" secondAttribute="leading" constant="8" id="78d-w3-re2"/>
+                                <constraint firstItem="iCV-UR-8cN" firstAttribute="leading" secondItem="VOx-6w-RJe" secondAttribute="leading" constant="8" id="G48-hp-cPb"/>
+                                <constraint firstAttribute="bottom" secondItem="UIr-im-AUy" secondAttribute="bottom" constant="8" id="J8F-Hn-B9t"/>
+                                <constraint firstAttribute="bottom" secondItem="je8-fQ-8qh" secondAttribute="bottom" constant="2" id="Jig-XZ-mtw"/>
+                                <constraint firstItem="9Hx-WQ-tDL" firstAttribute="top" secondItem="VOx-6w-RJe" secondAttribute="top" constant="16" id="MTt-fU-4pg"/>
+                                <constraint firstItem="S3q-LL-BIH" firstAttribute="centerY" secondItem="VOx-6w-RJe" secondAttribute="centerY" id="MrI-Sr-ZdM"/>
+                                <constraint firstAttribute="trailing" secondItem="je8-fQ-8qh" secondAttribute="trailing" id="N1O-cS-2a1"/>
+                                <constraint firstItem="9Hx-WQ-tDL" firstAttribute="leading" secondItem="iCV-UR-8cN" secondAttribute="trailing" constant="8" id="Qaq-Zb-tud"/>
+                                <constraint firstItem="je8-fQ-8qh" firstAttribute="leading" secondItem="UIr-im-AUy" secondAttribute="trailing" constant="16" id="Qhl-dh-MVG"/>
+                                <constraint firstItem="UIr-im-AUy" firstAttribute="leading" secondItem="VOx-6w-RJe" secondAttribute="leading" constant="8" id="gI5-Ol-I1r"/>
+                                <constraint firstAttribute="trailing" secondItem="9Hx-WQ-tDL" secondAttribute="trailing" constant="8" id="gt2-H8-Lvf"/>
+                                <constraint firstItem="iCV-UR-8cN" firstAttribute="top" secondItem="VOx-6w-RJe" secondAttribute="top" constant="16" id="mcF-02-7LD"/>
+                                <constraint firstAttribute="trailing" secondItem="aCT-sE-Dli" secondAttribute="trailing" id="n8i-P5-S1i"/>
+                                <constraint firstItem="aCT-sE-Dli" firstAttribute="centerY" secondItem="VOx-6w-RJe" secondAttribute="centerY" id="vPh-HH-Uya"/>
+                                <constraint firstItem="aCT-sE-Dli" firstAttribute="leading" secondItem="S3q-LL-BIH" secondAttribute="trailing" constant="16" id="xGm-uV-I9l"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="VOx-6w-RJe" firstAttribute="leading" secondItem="aDV-vf-YiZ" secondAttribute="leading" id="4NB-qr-VvP"/>
+                        <constraint firstItem="gph-4h-32w" firstAttribute="top" secondItem="VOx-6w-RJe" secondAttribute="bottom" constant="5" id="7ep-uB-Vvx"/>
+                        <constraint firstItem="M38-pf-oQO" firstAttribute="top" secondItem="aDV-vf-YiZ" secondAttribute="top" constant="8" id="E3c-4Y-sTs"/>
+                        <constraint firstItem="M38-pf-oQO" firstAttribute="leading" secondItem="aDV-vf-YiZ" secondAttribute="leading" constant="8" id="EBy-Ut-omb"/>
+                        <constraint firstItem="H74-ou-ReR" firstAttribute="leading" secondItem="aDV-vf-YiZ" secondAttribute="leading" constant="4" id="IOH-MM-hft"/>
+                        <constraint firstAttribute="trailing" secondItem="VOx-6w-RJe" secondAttribute="trailing" id="JEi-7x-cxW"/>
+                        <constraint firstItem="VOx-6w-RJe" firstAttribute="top" secondItem="MY4-0W-6zp" secondAttribute="bottom" constant="1" id="TC6-wY-FFn"/>
+                        <constraint firstAttribute="bottom" secondItem="gph-4h-32w" secondAttribute="bottom" constant="8" id="Yeg-HO-DTS"/>
+                        <constraint firstAttribute="trailing" secondItem="MY4-0W-6zp" secondAttribute="trailing" id="YhR-ES-BqF"/>
+                        <constraint firstItem="gph-4h-32w" firstAttribute="leading" secondItem="H74-ou-ReR" secondAttribute="trailing" constant="8" id="dIY-VQ-Z6N"/>
+                        <constraint firstItem="MY4-0W-6zp" firstAttribute="top" secondItem="aDV-vf-YiZ" secondAttribute="top" id="dIc-cG-pgz"/>
+                        <constraint firstAttribute="trailing" secondItem="gph-4h-32w" secondAttribute="trailing" constant="4" id="oWO-wM-o8G"/>
+                        <constraint firstItem="MY4-0W-6zp" firstAttribute="leading" secondItem="M38-pf-oQO" secondAttribute="trailing" constant="16" id="tXC-WL-wDQ"/>
+                        <constraint firstAttribute="bottom" secondItem="H74-ou-ReR" secondAttribute="bottom" constant="45" id="vxR-jo-w0c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="aDV-vf-YiZ" firstAttribute="leading" secondItem="FP9-Ii-0ac" secondAttribute="leading" id="L94-Ci-nyF"/>
+                <constraint firstItem="aDV-vf-YiZ" firstAttribute="top" secondItem="FP9-Ii-0ac" secondAttribute="top" id="PPg-1Z-AK8"/>
+                <constraint firstAttribute="trailing" secondItem="aDV-vf-YiZ" secondAttribute="trailing" id="pmM-77-KWQ"/>
+                <constraint firstAttribute="bottom" secondItem="aDV-vf-YiZ" secondAttribute="bottom" id="sXb-b3-Rr5"/>
+            </constraints>
+            <point key="canvasLocation" x="770.5" y="16.5"/>
+        </view>
+        <view contentMode="scaleToFill" restorationIdentifier="ViewFour" id="0B1-ZP-DBB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rw3-S9-Ea3">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="puppe" translatesAutoresizingMaskIntoConstraints="NO" id="xup-lS-xfR">
+                            <rect key="frame" x="8" y="8" width="49" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="49" id="5Zx-LZ-Rkv"/>
+                                <constraint firstAttribute="height" constant="55" id="sBE-NU-ank"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhm-fS-JsA">
+                            <rect key="frame" x="73" y="8" width="288" height="63"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="63" id="C8h-8p-4IM"/>
+                            </constraints>
+                            <string key="text">This is a doll. You can push it, and it will move towards the direction you want !
+</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kompass" translatesAutoresizingMaskIntoConstraints="NO" id="hQJ-oq-Mbq">
+                            <rect key="frame" x="4" y="567" width="49" height="55"/>
+                            <color key="backgroundColor" red="0.22526625410000001" green="0.29625960420000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="paZ-ZT-ahS"/>
+                                <constraint firstAttribute="width" constant="49" id="xnD-rb-YVx"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyF-gv-2Ot">
+                            <rect key="frame" x="73" y="564" width="298" height="95"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="95" id="QU6-rY-rPT"/>
+                            </constraints>
+                            <string key="text">This is a teleporter. It will transport you to a different part of the maze.
+</string>
+                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eG1-76-4Cw">
+                            <rect key="frame" x="0.0" y="71" width="375" height="488"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="saeure" translatesAutoresizingMaskIntoConstraints="NO" id="l0J-YF-Ocu">
+                                    <rect key="frame" x="8" y="216.5" width="49" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="55" id="ETL-5c-eW4"/>
+                                        <constraint firstAttribute="width" constant="49" id="e8J-wD-8wh"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ek8-kK-LMH">
+                                    <rect key="frame" x="73" y="192" width="302" height="188"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="188" id="Nz7-E1-Yfa"/>
+                                    </constraints>
+                                    <string key="text">This is acid. If a chicken or a fish (or a falling bomb or acid) hits the acid bottle, it crashes and the items 
+    at the top and the bottom will be destroyed - because acid is corrosive ! Very useful for removing walls 
+    and other barriers ! Like a chicken, you can move it up or down and it chases to the left (if it can!).</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkF-ae-eXW">
+                                    <rect key="frame" x="69" y="380" width="302" height="108"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="108" id="b9E-pB-c6j"/>
+                                    </constraints>
+                                    <string key="text"> This is a sad mask. It makes all walls invisible, if you collect it ! Collect another sad mask, 
+    and the walls becomes visible again !</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bombe" translatesAutoresizingMaskIntoConstraints="NO" id="die-yC-o7R">
+                                    <rect key="frame" x="8" y="16" width="49" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="49" id="8vR-cY-5De"/>
+                                        <constraint firstAttribute="height" constant="55" id="kJR-7M-UAt"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4h-up-zcU">
+                                    <rect key="frame" x="73" y="0.0" width="294" height="184"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="184" id="In3-3a-p2Y"/>
+                                    </constraints>
+                                    <string key="text">This is a bomb. If a chicken or a fish (or a falling bomb or acid) hits the bomb, it explodes and the items 
+    at the left and the right will be destroyed ! Very useful for removing a wall and other barriers ! 
+    Like a fish, you can move it to the left or to the right and it falls down (if it can!).</string>
+                                    <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maske_trauer" translatesAutoresizingMaskIntoConstraints="NO" id="JXF-QC-BTb">
+                                    <rect key="frame" x="8" y="417" width="49" height="55"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="55" id="Adf-No-FaS"/>
+                                        <constraint firstAttribute="width" constant="49" id="H86-BU-FCK"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Ek8-kK-LMH" secondAttribute="trailing" id="6B0-i8-gJ8"/>
+                                <constraint firstItem="JXF-QC-BTb" firstAttribute="leading" secondItem="eG1-76-4Cw" secondAttribute="leading" constant="8" id="AiS-bj-dJG"/>
+                                <constraint firstItem="QkF-ae-eXW" firstAttribute="leading" secondItem="JXF-QC-BTb" secondAttribute="trailing" constant="12" id="Ayj-LN-Ij6"/>
+                                <constraint firstItem="Ek8-kK-LMH" firstAttribute="centerY" secondItem="eG1-76-4Cw" secondAttribute="centerY" constant="42" id="Kal-B9-ux0"/>
+                                <constraint firstItem="g4h-up-zcU" firstAttribute="top" secondItem="eG1-76-4Cw" secondAttribute="top" id="MKw-k6-mKL"/>
+                                <constraint firstAttribute="trailing" secondItem="g4h-up-zcU" secondAttribute="trailing" constant="8" id="PcV-aG-R1J"/>
+                                <constraint firstItem="die-yC-o7R" firstAttribute="leading" secondItem="eG1-76-4Cw" secondAttribute="leading" constant="8" id="Sa6-kZ-3FA"/>
+                                <constraint firstItem="l0J-YF-Ocu" firstAttribute="leading" secondItem="eG1-76-4Cw" secondAttribute="leading" constant="8" id="VXD-21-zB3"/>
+                                <constraint firstAttribute="bottom" secondItem="JXF-QC-BTb" secondAttribute="bottom" constant="16" id="XPh-nD-iC0"/>
+                                <constraint firstItem="die-yC-o7R" firstAttribute="top" secondItem="eG1-76-4Cw" secondAttribute="top" constant="16" id="XjZ-lU-yxY"/>
+                                <constraint firstItem="g4h-up-zcU" firstAttribute="leading" secondItem="die-yC-o7R" secondAttribute="trailing" constant="16" id="Xoh-16-eHx"/>
+                                <constraint firstItem="Ek8-kK-LMH" firstAttribute="leading" secondItem="l0J-YF-Ocu" secondAttribute="trailing" constant="16" id="aR7-ue-bDr"/>
+                                <constraint firstItem="l0J-YF-Ocu" firstAttribute="centerY" secondItem="eG1-76-4Cw" secondAttribute="centerY" id="bDf-wh-Cwu"/>
+                                <constraint firstAttribute="trailing" secondItem="QkF-ae-eXW" secondAttribute="trailing" constant="4" id="jgU-u6-c0P"/>
+                                <constraint firstAttribute="bottom" secondItem="QkF-ae-eXW" secondAttribute="bottom" id="miB-dr-GGH"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="eG1-76-4Cw" firstAttribute="leading" secondItem="Rw3-S9-Ea3" secondAttribute="leading" id="3WN-wS-8F9"/>
+                        <constraint firstItem="xup-lS-xfR" firstAttribute="top" secondItem="Rw3-S9-Ea3" secondAttribute="top" constant="8" id="8Nn-zP-enk"/>
+                        <constraint firstItem="kyF-gv-2Ot" firstAttribute="leading" secondItem="hQJ-oq-Mbq" secondAttribute="trailing" constant="20" id="Aet-Sr-xoF"/>
+                        <constraint firstItem="Qhm-fS-JsA" firstAttribute="top" secondItem="Rw3-S9-Ea3" secondAttribute="top" constant="8" id="CSv-LQ-xlw"/>
+                        <constraint firstItem="Qhm-fS-JsA" firstAttribute="leading" secondItem="xup-lS-xfR" secondAttribute="trailing" constant="16" id="IdM-8b-qYo"/>
+                        <constraint firstAttribute="bottom" secondItem="kyF-gv-2Ot" secondAttribute="bottom" constant="8" id="Il0-va-cp2"/>
+                        <constraint firstAttribute="trailing" secondItem="kyF-gv-2Ot" secondAttribute="trailing" constant="4" id="LE3-MJ-ppx"/>
+                        <constraint firstItem="xup-lS-xfR" firstAttribute="leading" secondItem="Rw3-S9-Ea3" secondAttribute="leading" constant="8" id="bMM-5x-IkO"/>
+                        <constraint firstAttribute="trailing" secondItem="Qhm-fS-JsA" secondAttribute="trailing" constant="14" id="hSA-o0-OZg"/>
+                        <constraint firstItem="kyF-gv-2Ot" firstAttribute="top" secondItem="eG1-76-4Cw" secondAttribute="bottom" constant="5" id="kqK-ft-fkY"/>
+                        <constraint firstAttribute="trailing" secondItem="eG1-76-4Cw" secondAttribute="trailing" id="lpL-kc-BR9"/>
+                        <constraint firstItem="eG1-76-4Cw" firstAttribute="top" secondItem="Qhm-fS-JsA" secondAttribute="bottom" id="r1V-SM-VIg"/>
+                        <constraint firstAttribute="bottom" secondItem="hQJ-oq-Mbq" secondAttribute="bottom" constant="45" id="wQa-bQ-Bx2"/>
+                        <constraint firstItem="hQJ-oq-Mbq" firstAttribute="leading" secondItem="Rw3-S9-Ea3" secondAttribute="leading" constant="4" id="yhY-FO-Ow0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Rw3-S9-Ea3" firstAttribute="top" secondItem="0B1-ZP-DBB" secondAttribute="top" id="9fg-8f-Qap"/>
+                <constraint firstItem="Rw3-S9-Ea3" firstAttribute="leading" secondItem="0B1-ZP-DBB" secondAttribute="leading" id="GSP-jw-ore"/>
+                <constraint firstAttribute="bottom" secondItem="Rw3-S9-Ea3" secondAttribute="bottom" id="StR-pU-BsQ"/>
+                <constraint firstAttribute="trailing" secondItem="Rw3-S9-Ea3" secondAttribute="trailing" id="b0M-oC-n16"/>
+            </constraints>
+            <point key="canvasLocation" x="1229.5" y="17.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ausgang" width="40" height="40"/>
+        <image name="bombe" width="40" height="40"/>
+        <image name="fisch" width="30" height="36"/>
+        <image name="huhn" width="35" height="36"/>
+        <image name="karte" width="40" height="40"/>
+        <image name="kompass" width="40" height="40"/>
+        <image name="maske" width="33" height="36"/>
+        <image name="maske_trauer" width="33" height="36"/>
+        <image name="puppe" width="40" height="40"/>
+        <image name="saeure" width="40" height="40"/>
+        <image name="spieler1" width="36" height="39"/>
+        <image name="spieler2" width="40" height="40"/>
+        <image name="wand" width="40" height="40"/>
+        <image name="wellen" width="36" height="36"/>
+        <image name="wellen_vertikal" width="36" height="36"/>
+        <image name="xanadoo" width="455" height="320"/>
+    </resources>
+</document>

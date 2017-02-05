@@ -48,10 +48,21 @@ class GameScene: SKScene {
         prepareSkullAnimation()
     }
     
+    func remove_all_children(){
+        self.worldNode.removeAllChildren()
+        
+        let sprite = SKSpriteNode.init(color: UIColor.black, size: CGSize(width:self.size.width*8.0,height:self.size.height*8.0))
+        
+        //let sprite2 = SKSpriteNode.init(imageNamed: "xanadoo.png")
+        //sprite2.scale(to: CGSize(width:self.size.width*8.0,height:self.size.height*8.0))
+        
+        self.worldNode.addChild(sprite)
+        
+    }
     func updateWithNewPlayground(_ playground:Playground) {
         self.playground = playground
         self.playground.scene = self
-        worldNode.removeAllChildren()
+        remove_all_children()
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
@@ -147,7 +158,7 @@ class GameScene: SKScene {
     
     
     func resetGameScene(playground:Playground?) {
-        worldNode.removeAllChildren()
+        remove_all_children()
         if let playgrnd = playground {
             self.playground = playgrnd
         }
