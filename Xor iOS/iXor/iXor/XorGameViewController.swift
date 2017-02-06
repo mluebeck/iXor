@@ -149,11 +149,6 @@ class XorGameViewController: UIViewController
     // MARK: Life Cycle
     override func viewDidLoad()
     {
-        
-        let views = Bundle.main.loadNibNamed("Views", owner: self, options: nil)
-        print(views)
-        
-            
         super.viewDidLoad()
         switchAndShowPlayerIconOnButton(playerOne: false)
         self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
@@ -462,6 +457,11 @@ class XorGameViewController: UIViewController
                 self.resetMaps()
             }
         }
+        else
+        if viewController is UINavigationController
+        {
+            self.levelButtonPressed = true
+        }
     }
     
     
@@ -722,6 +722,7 @@ class XorGameViewController: UIViewController
     {
         self.replayStopPressed = false
         self.currentPlayground = Playground.replay.first
+        Playground.replay.removeAll()
         self.scene.updateWithNewPlayground(self.currentPlayground!)
         self.scene.resetGameScene(playground: self.currentPlayground)
         self.scene.switchToPlayerOne()

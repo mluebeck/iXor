@@ -11,8 +11,8 @@ import UIKit
 class InfoWebViewController: UIViewController {
 
     @IBOutlet var view1:  UIView!
-    @IBOutlet var view2:  UIView!
-    
+    //@IBOutlet var view2:  UIView!
+    @IBOutlet var contentHeight : NSLayoutConstraint!
     @IBOutlet var webView : UIWebView!
     
     override var prefersStatusBarHidden: Bool
@@ -25,25 +25,18 @@ class InfoWebViewController: UIViewController {
         return true
     }
    
+    @IBAction func doneButtonPressed() {
+        self.navigationController?.dismiss(animated:true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         let views = Bundle.main.loadNibNamed("Views", owner: self, options: nil)
-        print(views)
-        
-        
-        //webView.loadRequest(URLRequest(url: URL(fileURLWithPath: Bundle.main.path(forResource: "html/intro", ofType: "htm")!)))
-
         let v = views?[0] as! UIView
-        v.frame = self.view.frame
-        
-        let v2 = views?[1] as! UIView
-        v2.frame = self.view.frame
-        
-        // Do any additional setup after loading the view.
+        v.frame.size.width = self.view.frame.size.width
         self.view1.addSubview(v)
-        self.view2.addSubview(v2)
+        contentHeight.constant = v.frame.size.height
     }
 
     override func didReceiveMemoryWarning() {

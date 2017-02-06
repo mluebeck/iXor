@@ -56,6 +56,7 @@ class PlaygroundBuilder: NSObject {
         
     ]
     
+    
     struct Constants {
         static let groesseX = 32;         // playground dimensions (=32x32)
         static let groesseY = 32;         // playground dimensions (=32x32)
@@ -93,6 +94,8 @@ class PlaygroundBuilder: NSObject {
     {
         var x = 0
         var y = 0
+        var beamerCoordinates = Beamer(from:PlaygroundPosition(x:0,y:0),to:PlaygroundPosition(x:0,y:0))
+        
         var commentMode = false
         var levelTitleWithNumber : String = ""
         var mazeString : String = ""
@@ -141,7 +144,6 @@ class PlaygroundBuilder: NSObject {
         var i = 0
         var localArray = Array<MazeType>()
         
-        var index = 0
         for char in mazeString.characters {
             if char == "\n" {
                 x = 0
@@ -199,23 +201,23 @@ class PlaygroundBuilder: NSObject {
                         
                         let kl = Int(String(char))
                         if x % 4 == 0 {
-                            playground?.beam_from[index][0] = kl!;
+                            beamerCoordinates.from.x = kl!
                         } else
-                            if x % 4 == 1 {
-                                playground?.beam_from[index][1] = kl!;
-                            }
-                            else
-                                if x % 4 == 2 {
-                                    playground?.beam_to[index][0] = kl!;
-                                }
-                                else
-                                    if x % 4 == 3 {
-                                        playground?.beam_to[index][1] = kl!;
-                                        index=index+1
+                        if x % 4 == 1 {
+                            beamerCoordinates.from.y = kl!//playground?.beam_from[index][1] = kl!;
                         }
-                        x=x+1
+                        else
+                        if x % 4 == 2 {
+                            beamerCoordinates.to.x = kl!
+                        }
+                        else
+                        if x % 4 == 3 {
+                            beamerCoordinates.to.y = kl!//playground?.beam_from[index][1] = kl!;
+                            playground?.beamerArray.append(beamerCoordinates)
+                            beamerCoordinates = Beamer(from:PlaygroundPosition(x:0,y:0),to:PlaygroundPosition(x:0,y:0))
+                        }
                     }
-                    x = x + 1
+                    x+=1
             }
             
         }

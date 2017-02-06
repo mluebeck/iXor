@@ -27,7 +27,7 @@
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
 		8C24163D1DF9FB4F0009FCC6 /* MazeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */; };
 		8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C24163E1DF9FF490009FCC6 /* Playground.swift */; };
-		8C2416501DF9FFA30009FCC6 /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416411DF9FFA30009FCC6 /* level01.xor */; };
+		8C2416501DF9FFA30009FCC6 /* level01.xorbackup in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416411DF9FFA30009FCC6 /* level01.xorbackup */; };
 		8C2416511DF9FFA30009FCC6 /* level02.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416421DF9FFA30009FCC6 /* level02.xor */; };
 		8C2416521DF9FFA30009FCC6 /* level03.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416431DF9FFA30009FCC6 /* level03.xor */; };
 		8C2416531DF9FFA30009FCC6 /* level04.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416441DF9FFA30009FCC6 /* level04.xor */; };
@@ -36,7 +36,7 @@
 		8C2416561DF9FFA30009FCC6 /* level07.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416471DF9FFA30009FCC6 /* level07.xor */; };
 		8C2416571DF9FFA30009FCC6 /* level08.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416481DF9FFA30009FCC6 /* level08.xor */; };
 		8C2416581DF9FFA30009FCC6 /* level09.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C2416491DF9FFA30009FCC6 /* level09.xor */; };
-		8C2416591DF9FFA30009FCC6 /* level10.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164A1DF9FFA30009FCC6 /* level10.xor */; };
+		8C2416591DF9FFA30009FCC6 /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164A1DF9FFA30009FCC6 /* level01.xor */; };
 		8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164B1DF9FFA30009FCC6 /* level11.xor */; };
 		8C24165B1DF9FFA30009FCC6 /* level12.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164C1DF9FFA30009FCC6 /* level12.xor */; };
 		8C24165C1DF9FFA30009FCC6 /* level13.xor in Resources */ = {isa = PBXBuildFile; fileRef = 8C24164D1DF9FFA30009FCC6 /* level13.xor */; };
@@ -50,7 +50,7 @@
 		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
-		8C57E1711E3657060098C0BC /* level01.xor_back in Resources */ = {isa = PBXBuildFile; fileRef = 8C57E1701E3657060098C0BC /* level01.xor_back */; };
+		8C57E1711E3657060098C0BC /* level01.xor2 in Resources */ = {isa = PBXBuildFile; fileRef = 8C57E1701E3657060098C0BC /* level01.xor2 */; };
 		8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +88,7 @@
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
 		8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeElement.swift; sourceTree = "<group>"; };
 		8C24163E1DF9FF490009FCC6 /* Playground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
-		8C2416411DF9FFA30009FCC6 /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
+		8C2416411DF9FFA30009FCC6 /* level01.xorbackup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xorbackup; sourceTree = "<group>"; };
 		8C2416421DF9FFA30009FCC6 /* level02.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level02.xor; sourceTree = "<group>"; };
 		8C2416431DF9FFA30009FCC6 /* level03.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level03.xor; sourceTree = "<group>"; };
 		8C2416441DF9FFA30009FCC6 /* level04.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level04.xor; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		8C2416471DF9FFA30009FCC6 /* level07.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level07.xor; sourceTree = "<group>"; };
 		8C2416481DF9FFA30009FCC6 /* level08.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level08.xor; sourceTree = "<group>"; };
 		8C2416491DF9FFA30009FCC6 /* level09.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level09.xor; sourceTree = "<group>"; };
-		8C24164A1DF9FFA30009FCC6 /* level10.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level10.xor; sourceTree = "<group>"; };
+		8C24164A1DF9FFA30009FCC6 /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
 		8C24164B1DF9FFA30009FCC6 /* level11.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level11.xor; sourceTree = "<group>"; };
 		8C24164C1DF9FFA30009FCC6 /* level12.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level12.xor; sourceTree = "<group>"; };
 		8C24164D1DF9FFA30009FCC6 /* level13.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level13.xor; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		8C4312C71DF4717900E80996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8C57E1701E3657060098C0BC /* level01.xor_back */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor_back; sourceTree = "<group>"; };
+		8C57E1701E3657060098C0BC /* level01.xor2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor2; sourceTree = "<group>"; };
 		8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		8CF054941E302BE100771C7B /* Playground.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Playground.java; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,8 +175,8 @@
 		8C2416401DF9FF850009FCC6 /* Level */ = {
 			isa = PBXGroup;
 			children = (
-				8C57E1701E3657060098C0BC /* level01.xor_back */,
-				8C2416411DF9FFA30009FCC6 /* level01.xor */,
+				8C57E1701E3657060098C0BC /* level01.xor2 */,
+				8C2416411DF9FFA30009FCC6 /* level01.xorbackup */,
 				8C2416421DF9FFA30009FCC6 /* level02.xor */,
 				8C2416431DF9FFA30009FCC6 /* level03.xor */,
 				8C2416441DF9FFA30009FCC6 /* level04.xor */,
@@ -185,7 +185,7 @@
 				8C2416471DF9FFA30009FCC6 /* level07.xor */,
 				8C2416481DF9FFA30009FCC6 /* level08.xor */,
 				8C2416491DF9FFA30009FCC6 /* level09.xor */,
-				8C24164A1DF9FFA30009FCC6 /* level10.xor */,
+				8C24164A1DF9FFA30009FCC6 /* level01.xor */,
 				8C24164B1DF9FFA30009FCC6 /* level11.xor */,
 				8C24164C1DF9FFA30009FCC6 /* level12.xor */,
 				8C24164D1DF9FFA30009FCC6 /* level13.xor */,
@@ -368,8 +368,8 @@
 				108955F41E4775330086A887 /* Views.xib in Resources */,
 				8C2416571DF9FFA30009FCC6 /* level08.xor in Resources */,
 				8C4312B61DF4717800E80996 /* Main.storyboard in Resources */,
-				8C2416501DF9FFA30009FCC6 /* level01.xor in Resources */,
-				8C2416591DF9FFA30009FCC6 /* level10.xor in Resources */,
+				8C2416501DF9FFA30009FCC6 /* level01.xorbackup in Resources */,
+				8C2416591DF9FFA30009FCC6 /* level01.xor in Resources */,
 				8C24165D1DF9FFA30009FCC6 /* level14.xor in Resources */,
 				107738FF1E44CAD200BBE90D /* skull.atlas in Resources */,
 				107048111E3E6CE10044E525 /* bombe.atlas in Resources */,
@@ -379,7 +379,7 @@
 				8C24165E1DF9FFA30009FCC6 /* level15.xor in Resources */,
 				8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */,
 				106DAA0C1E46AD6800E637B0 /* html in Resources */,
-				8C57E1711E3657060098C0BC /* level01.xor_back in Resources */,
+				8C57E1711E3657060098C0BC /* level01.xor2 in Resources */,
 				8C24165B1DF9FFA30009FCC6 /* level12.xor in Resources */,
 				8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */,
 				8C24165A1DF9FFA30009FCC6 /* level11.xor in Resources */,

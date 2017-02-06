@@ -251,12 +251,12 @@ class GameScene: SKScene {
         let yCoord = CGFloat(coord.y)*segmentY!
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
         print("Camera position:\(coord)")
-        self.playground.cameraPosition = coord
+        self.playground.cameraLeftTopPosition = coord
     }
     
-    func drawPlayer(position:PlaygroundPosition,player:Bool,completition:(()->Void)?)
+    func drawPlayer(position:PlaygroundPosition,player:Bool,beamed:Bool,completition:(()->Void)?)
     {
-        print("zeichne player an position \(position)")
+        print("zeichne player an position \(position)  ")
         var sprite = (playground.playerOneSprite)!
         if player==true
         {
@@ -267,22 +267,49 @@ class GameScene: SKScene {
             playground.positionPlayerTwo = position
             sprite = (playground.playerTwoSprite)!
         }
-        
         let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
-        let moveAction = SKAction.move(to: point, duration: 0.25)
-        sprite.run(moveAction, completion: {
-            for sprite in self.spritesToRemove
-            {
-                sprite?.removeFromParent()
-            }
-            self.spritesToRemove.removeAll()
-            if self.playground.justFinished == true {
-                self.updateViewController!(MazeEvent.exit_found)
-            }
-            if let compe = completition {
-                compe()
-            }
-        })
+        if beamed==true
+        {
+            let scaleActionZero = SKAction.resize(toHeight: 0.0,duration:0.5)
+            let scaleActionFull = SKAction.resize(toHeight: 40.0 ,duration:0.5)
+            sprite.run(scaleActionZero, completion: {
+                let moveAction = SKAction.move(to: point, duration: 0.25)
+                sprite.run(moveAction, completion: {
+                    for sprite in self.spritesToRemove
+                    {
+                        sprite?.removeFromParent()
+                    }
+                    self.spritesToRemove.removeAll()
+                    if self.playground.justFinished == true {
+                        self.updateViewController!(MazeEvent.exit_found)
+                    }
+                    sprite.run(scaleActionFull,completion:{
+                        if let compe = completition {
+                            compe()
+                        }
+                        print(" sprite size: \(sprite.size)")
+                    })
+                })
+            })
+        }
+        else
+        {
+            let moveAction = SKAction.move(to: point, duration: 0.25)
+            sprite.run(moveAction, completion: {
+                for sprite in self.spritesToRemove
+                {
+                    sprite?.removeFromParent()
+                }
+                self.spritesToRemove.removeAll()
+                if self.playground.justFinished == true {
+                    self.updateViewController!(MazeEvent.exit_found)
+                }
+                
+                if let compe = completition {
+                    compe()
+                }
+            })
+        }
     }
     
     func showMap() {

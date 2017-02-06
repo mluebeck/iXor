@@ -23,6 +23,11 @@ struct PlaygroundPosition {
     var y : Int
 }
 
+struct Beamer {
+    var from : PlaygroundPosition
+    var to : PlaygroundPosition
+}
+
 struct ReplayPlayerMove
 {
     var playerChanged : Bool
@@ -77,8 +82,7 @@ class Playground: NSObject {
     static var replay = Array<Playground>()
 
     var playgroundArray : Array<Array<MazeType>> = Array()  // Das spielfeld
-    var beam_from = Array<Array<Int>>() // transporter start co-ordinates
-    var beam_to =   Array<Array<Int>>() // transporter target co-ordinates
+    var beamerArray = Array<Beamer>() // transporter start co-ordinates
     var playerOneSprite : SKSpriteNode?
     var playerTwoSprite : SKSpriteNode?
     var scene : GameScene?
@@ -106,7 +110,7 @@ class Playground: NSObject {
     
     // old screen co-ordinates
     var oldPlayerPosition : PlaygroundPosition
-    var cameraPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper
+    var cameraLeftTopPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     
@@ -121,8 +125,7 @@ class Playground: NSObject {
                 j.sprite=nil
             }
         }
-        playground.beam_to = self.beam_to
-        playground.beam_from = self.beam_from
+        playground.beamerArray = self.beamerArray
         playground.playerOneSprite = nil
         playground.playerTwoSprite = nil
         playground.scene = self.scene
@@ -142,7 +145,7 @@ class Playground: NSObject {
         playground.mapsFound = self.mapsFound
         playground.playerPosition = self.playerPosition
         playground.oldPlayerPosition = self.oldPlayerPosition
-        playground.cameraPosition = self.cameraPosition
+        playground.cameraLeftTopPosition = self.cameraLeftTopPosition
         playground.positionPlayerOne = self.positionPlayerOne
         playground.positionPlayerTwo = self.positionPlayerTwo
         playground.playerOneSprite = self.playerOneSprite
@@ -157,38 +160,31 @@ class Playground: NSObject {
     {
         self.positionPlayerOne = PlaygroundPosition(x: 0, y: 0)
         self.positionPlayerTwo = PlaygroundPosition(x: 0, y: 0)
-        self.cameraPosition    = PlaygroundPosition(x: 0, y: 0)
+        self.cameraLeftTopPosition    = PlaygroundPosition(x: 0, y: 0)
         self.playerPosition    = PlaygroundPosition(x: -1, y: -1)
         self.oldPlayerPosition = PlaygroundPosition(x: -1, y: -1)
-
         super.init()
-
-        for _ in 0..<20
-        {
-            beam_from.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
-            beam_to.append([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,])
-        }
     }
     
-    func changePlayer()
-    {
-        if numberOfKilledPlayer==0
-        {
-            if akt_spieler_ist_playerOne
-            {
-                positionPlayerTwo = playerPosition
-                playerPosition = positionPlayerOne
-                akt_spieler_ist_playerOne = false
-            }
-            else
-            {
-                positionPlayerOne = playerPosition
-                playerPosition = positionPlayerTwo
-                akt_spieler_ist_playerOne = true
-            }
-            oldPlayerPosition = playerPosition
-        }
-    }
+//    func changePlayer()
+//    {
+//        if numberOfKilledPlayer==0
+//        {
+//            if akt_spieler_ist_playerOne
+//            {
+//                positionPlayerTwo = playerPosition
+//                playerPosition = positionPlayerOne
+//                akt_spieler_ist_playerOne = false
+//            }
+//            else
+//            {
+//                positionPlayerOne = playerPosition
+//                playerPosition = positionPlayerTwo
+//                akt_spieler_ist_playerOne = true
+//            }
+//            oldPlayerPosition = playerPosition
+//        }
+//    }
     
     func badMaskOperation()
     {
@@ -338,14 +334,17 @@ class Playground: NSObject {
     
     func movePlayer(direction:PlayerMoveDirection)
     {
+        //beamMeUp()
+
         let previousPlayground = self.copy() as! Playground
         Playground.replay.append(previousPlayground)
         print("playground history:\(Playground.replay)")
-        
+        var canMove = true
         var mazeElementType : MazeElementType?
         var newPosition : PlaygroundPosition?
         var canMoveFish = false
         var canMoveChicken = false
+        var beamed = false
         scene?.animationCompleted = nil
         if direction == PlayerMoveDirection.UP  || direction == PlayerMoveDirection.DOWN
         {
@@ -364,33 +363,45 @@ class Playground: NSObject {
             print("Can move: \(mazeElementType)")
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
-                canMoveChicken = canMoveChickenAcidPuppetUpDown(direction:direction)
-                if MazeType.canMoveUpDown(item: mazeElementType) == true || canMoveChicken
+                if mazeElementType == MazeElementType.transporter
                 {
+                    newPosition = beamMeUp(position:playerPosition)
+                    beamed = true
                     anzahl_spielzuege += 1
-                    // Alte position löschen und den View Controller updaten.
-                    if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
-                    {
-                        scene?.updateViewController!(MazeEvent.step_done)
-                    }
                 }
                 else
                 {
-                    return
-                }
-                scene?.animationCompleted =
-                {
-                    element, position in
-                    if canMoveChicken == true {
-                        canMoveChicken = false
-                        if mazeElementType == MazeElementType.puppet {
-                            self.puppetMove(position: position, direction: direction)
-                        }
-                        else
+                    canMoveChicken = canMoveChickenAcidPuppetUpDown(direction:direction)
+                    if MazeType.canMoveUpDown(item: mazeElementType) == true || canMoveChicken
+                    {
+                        anzahl_spielzuege += 1
+                        // Alte position löschen und den View Controller updaten.
+                        if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
                         {
-                            self.chickenRun(position: Playground.newPosition(position: newPosition!, direction: direction),juststarted: true)
+                            scene?.updateViewController!(MazeEvent.step_done)
                         }
-                    
+                    }
+                    else
+                    {
+                        canMove = false
+                    }
+                    if canMove == true
+                    {
+                        scene?.animationCompleted =
+                            {
+                                element, position in
+                                if canMoveChicken == true {
+                                    canMoveChicken = false
+                                    if mazeElementType == MazeElementType.puppet
+                                    {
+                                        self.puppetMove(position: position, direction: direction)
+                                    }
+                                    else
+                                    {
+                                        self.chickenRun(position: Playground.newPosition(position: newPosition!, direction: direction),juststarted: true)
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -415,38 +426,58 @@ class Playground: NSObject {
 
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
-                canMoveFish = canMoveFishBombPuppetLeftOrRight(direction:direction)
-                if  MazeType.canMoveLeftRight(item: mazeElementType) == true || canMoveFish == true
+                if mazeElementType == MazeElementType.transporter
                 {
+                    beamed=true
+                    newPosition = beamMeUp(position:playerPosition)
                     anzahl_spielzuege += 1
-                    if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
-                    {
-                        scene?.updateViewController!(MazeEvent.step_done)
-                    }
                 }
                 else
                 {
-                    return
-                }
-                scene?.animationCompleted =
-                {
-                    element, position in
-                    if canMoveFish == true
+                    canMoveFish = canMoveFishBombPuppetLeftOrRight(direction:direction)
+                    if  MazeType.canMoveLeftRight(item: mazeElementType) == true || canMoveFish == true
                     {
-                        canMoveFish = false
-                        if mazeElementType==MazeElementType.puppet
+                        anzahl_spielzuege += 1
+                        if removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
                         {
-                            self.puppetMove(position:position,direction: direction)
-                        }
-                        else
-                        {
-                            self.fishFall(position: Playground.newPosition(position:newPosition!,direction: direction),juststarted:true)
+                            scene?.updateViewController!(MazeEvent.step_done)
                         }
                     }
+                    else
+                    {
+                        canMove = false
+                    }
+                }
+                if canMove == true
+                {
+                    scene?.animationCompleted =
+                        {
+                            element, position in
+                            if canMoveFish == true
+                            {
+                                canMoveFish = false
+                                if mazeElementType==MazeElementType.puppet
+                                {
+                                    self.puppetMove(position:position,direction: direction)
+                                }
+                                else
+                                {
+                                    self.fishFall(position: Playground.newPosition(position:newPosition!,direction: direction),juststarted:true)
+                                }
+                            }
+                        }
                 }
             }
         }
-        movePlayerToNewPositionAndUpdateScene(direction:direction)
+        if canMove == true
+        {
+            movePlayerToNewPositionAndUpdateScene(direction:direction,newPosition:newPosition,beamed:beamed)
+        }
+        else
+        {
+            Playground.replay.removeLast(1)
+
+        }
     }
 
     func canMoveFishBombPuppetLeftOrRight(direction:PlayerMoveDirection) -> Bool
@@ -578,67 +609,84 @@ class Playground: NSObject {
     
     
     
-    func movePlayerToNewPositionAndUpdateScene(direction:PlayerMoveDirection)
+    func movePlayerToNewPositionAndUpdateScene(direction:PlayerMoveDirection,newPosition:PlaygroundPosition?,beamed:Bool)
     {
         print("\n\n update scene\n\n")
         
         
         self.oldPlayerPosition = self.playerPosition
-        // WE CAN MOVE - do the GameScene Drawing
+        
+        // beamer ?
+        
+         // WE CAN MOVE - do the GameScene Drawing
         // old position : draw a space
         let mazeType = element(position: playerPosition)
         
         createEmptySpaceOnPlayground(position:playerPosition)
-        //self.sceneShallChange!(SceneNotification.SPRITE_TO_REMOVE,position,nil,player)
         
-        switch (direction)
+        if let position = newPosition
         {
-        case PlayerMoveDirection.DOWN:
-            playerPosition.y = oldPlayerPosition.y + 1
-            break
-        case PlayerMoveDirection.UP:
-            playerPosition.y = oldPlayerPosition.y - 1
-            break
-        case PlayerMoveDirection.LEFT:
-            playerPosition.x = oldPlayerPosition.x - 1
-            break
-        case PlayerMoveDirection.RIGHT:
-            playerPosition.x = oldPlayerPosition.x + 1
-            break
+            playerPosition = position
         }
-        // move player 1 to new position in the playground array
-        
+        else
+        {
+            switch (direction)
+            {
+            case PlayerMoveDirection.DOWN:
+                playerPosition.y = oldPlayerPosition.y + 1
+                break
+            case PlayerMoveDirection.UP:
+                playerPosition.y = oldPlayerPosition.y - 1
+                break
+            case PlayerMoveDirection.LEFT:
+                playerPosition.x = oldPlayerPosition.x - 1
+                break
+            case PlayerMoveDirection.RIGHT:
+                playerPosition.x = oldPlayerPosition.x + 1
+                break
+            }
+            // move player 1 to new position in the playground array
+        }
         
         changeElement(position: playerPosition, element: mazeType!)
-        scene?.drawPlayer(position: playerPosition, player: self.akt_spieler_ist_playerOne,completition:
+        
+        scene?.drawPlayer(position: playerPosition, player: self.akt_spieler_ist_playerOne, beamed:beamed, completition:
             {
                 self.doTheFishChickenMoving(position: self.oldPlayerPosition)
 
             }
         )
+        
         scene?.updateViewController!(MazeEvent.step_done)
-        self.updateCameraPosition(direction)
+        if beamed==true
+        {
+            scene?.moveCameraToPlaygroundCoordinates(position:PlaygroundPosition(x:playerPosition.x-3,y:playerPosition.y-3))
+        }
+        else
+        {
+            self.updateCameraPosition(direction)
+        }
     }
     
     func updateCameraPosition(_ direction:PlayerMoveDirection)
     {
         // CAMERA
         // we moved the player, now check if we have to move the camera
-        var newCameraPosition = cameraPosition
+        var newCameraPosition = cameraLeftTopPosition
         
-        if (cameraPosition.x == (playerPosition.x) && direction==PlayerMoveDirection.LEFT) ||
-            (cameraPosition.x == (oldPlayerPosition.x - 7) && direction==PlayerMoveDirection.RIGHT)
+        if (cameraLeftTopPosition.x == playerPosition.x && direction==PlayerMoveDirection.LEFT) ||
+            (cameraLeftTopPosition.x == (oldPlayerPosition.x - 7) && direction==PlayerMoveDirection.RIGHT)
         {
             newCameraPosition.x = oldPlayerPosition.x - 3
         }
         else
-        if (cameraPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
-            (cameraPosition.y == (playerPosition.y - 7) && direction==PlayerMoveDirection.DOWN)
+        if (cameraLeftTopPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
+            (cameraLeftTopPosition.y == (playerPosition.y - 7) && direction==PlayerMoveDirection.DOWN)
         {
                 newCameraPosition.y = playerPosition.y - 3
         }
         scene?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
-        cameraPosition = newCameraPosition
+        cameraLeftTopPosition = newCameraPosition
         print("\n\n update scene ende \n\n")
         
     }
@@ -1086,6 +1134,23 @@ class Playground: NSObject {
             numberOfKilledPlayer=2
             scene?.updateViewController!(MazeEvent.death_both)
         }
+    }
+    
+    func beamMeUp(position:PlaygroundPosition?) -> PlaygroundPosition?
+    {
+        //let i=0,q=0
+        if let thePosition = position
+        {
+            for x in 0..<beamerArray.count
+            {
+                let beampos = beamerArray[x]
+                if beampos.from.x == thePosition.x && beampos.from.y == thePosition.y
+                {
+                    return beampos.to
+                }
+            }
+        }
+        return nil
     }
     
     func bombExplode(element:MazeType,position:PlaygroundPosition,causedBy:MazeElementType)
