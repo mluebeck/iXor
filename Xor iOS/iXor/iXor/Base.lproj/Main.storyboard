@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -685,19 +686,18 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUm-xm-gQ5" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="640" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="750" height="667"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo" translatesAutoresizingMaskIntoConstraints="NO" id="Tum-m6-abj" userLabel="xanadoo 1">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo" translatesAutoresizingMaskIntoConstraints="NO" id="Tum-m6-abj" userLabel="xanadoo 1">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="xanadoo" translatesAutoresizingMaskIntoConstraints="NO" id="T8b-Ff-MwV" userLabel="xanadoo 2">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="xanadoo" translatesAutoresizingMaskIntoConstraints="NO" id="T8b-Ff-MwV" userLabel="xanadoo 2">
                                                 <rect key="frame" x="375" y="0.0" width="375" height="667"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Tum-m6-abj" firstAttribute="leading" secondItem="EUm-xm-gQ5" secondAttribute="leading" id="BAj-HL-vbv"/>
-                                            <constraint firstAttribute="width" constant="640" id="NqQ-Uq-Wlf"/>
                                             <constraint firstItem="T8b-Ff-MwV" firstAttribute="top" secondItem="EUm-xm-gQ5" secondAttribute="top" id="PWl-22-6r6"/>
                                             <constraint firstAttribute="bottom" secondItem="T8b-Ff-MwV" secondAttribute="bottom" id="WtJ-5v-vn9"/>
                                             <constraint firstItem="Tum-m6-abj" firstAttribute="top" secondItem="EUm-xm-gQ5" secondAttribute="top" id="csr-6y-wtt"/>
@@ -710,6 +710,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <constraint firstItem="EUm-xm-gQ5" firstAttribute="leading" secondItem="Dg3-gv-jBv" secondAttribute="leading" id="8AS-cW-X6l"/>
                                     <constraint firstAttribute="bottom" secondItem="EUm-xm-gQ5" secondAttribute="bottom" id="DNV-dn-8kK"/>
                                     <constraint firstAttribute="trailing" secondItem="EUm-xm-gQ5" secondAttribute="trailing" id="DmE-Rc-gMY"/>
+                                    <constraint firstItem="EUm-xm-gQ5" firstAttribute="width" secondItem="Dg3-gv-jBv" secondAttribute="width" multiplier="2" id="EoS-fZ-Tuy"/>
                                     <constraint firstItem="EUm-xm-gQ5" firstAttribute="top" secondItem="Dg3-gv-jBv" secondAttribute="top" id="MWJ-BA-fFm"/>
                                     <constraint firstItem="EUm-xm-gQ5" firstAttribute="height" secondItem="Dg3-gv-jBv" secondAttribute="height" id="Y6K-NZ-TEr"/>
                                     <constraint firstItem="Tum-m6-abj" firstAttribute="width" secondItem="Dg3-gv-jBv" secondAttribute="width" id="iEp-Ff-dWa"/>
