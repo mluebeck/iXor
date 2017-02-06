@@ -294,6 +294,9 @@ class GameScene: SKScene {
         }
         else
         {
+//            let scaleActionZero = SKAction.resize(toWidth: 0.0,duration:0.5)
+//            let scaleActionFull = SKAction.resize(toWidth: 40.0 ,duration:0.5)
+//            sprite.run(scaleActionZero)
             let moveAction = SKAction.move(to: point, duration: 0.25)
             sprite.run(moveAction, completion: {
                 for sprite in self.spritesToRemove
@@ -304,11 +307,15 @@ class GameScene: SKScene {
                 if self.playground.justFinished == true {
                     self.updateViewController!(MazeEvent.exit_found)
                 }
-                
-                if let compe = completition {
-                    compe()
-                }
+            
+                    if let compe = completition {
+                        compe()
+                    }
+                    print(" sprite size: \(sprite.size)")
             })
+
+            //sprite.run(scaleActionFull)
+            
         }
     }
     

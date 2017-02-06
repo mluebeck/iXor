@@ -685,7 +685,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
