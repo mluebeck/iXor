@@ -15,19 +15,35 @@ class InfoWebViewController: UIViewController {
     
     @IBOutlet var webView : UIWebView!
     
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
+    }
+    
+    override var shouldAutorotate: Bool
+    {
+        return true
+    }
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         let views = Bundle.main.loadNibNamed("Views", owner: self, options: nil)
         print(views)
         
         
         //webView.loadRequest(URLRequest(url: URL(fileURLWithPath: Bundle.main.path(forResource: "html/intro", ofType: "htm")!)))
 
-
+        let v = views?[0] as! UIView
+        v.frame = self.view.frame
+        
+        let v2 = views?[1] as! UIView
+        v2.frame = self.view.frame
+        
         // Do any additional setup after loading the view.
-        //self.view1.addSubview(views?[0] as! UIView)
-        //self.view2.addSubview(views?[1] as! UIView)
+        self.view1.addSubview(v)
+        self.view2.addSubview(v2)
     }
 
     override func didReceiveMemoryWarning() {
