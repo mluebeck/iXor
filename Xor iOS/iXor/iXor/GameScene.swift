@@ -78,7 +78,7 @@ class GameScene: SKScene {
     }
     func updateWithNewPlayground(_ playground:Playground) {
         self.playground = playground
-        self.playground.scene = self
+        self.playground.sceneDelegate = SceneDelegateImplementation(scene:self)
         remove_all_children()
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
@@ -170,7 +170,7 @@ class GameScene: SKScene {
         if let playgrnd = playground {
             self.playground = playgrnd
         }
-        self.playground.scene = self
+        self.playground.sceneDelegate = SceneDelegateImplementation(scene: self)
         segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
         segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         for x in 0..<PlaygroundBuilder.Constants.groesseX {

@@ -23,6 +23,7 @@
 		109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E14031E3B4BB1007DB9F8 /* FrostedView.swift */; };
 		10BD350E1E4941A2006298D0 /* Views.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10BD35101E4941A2006298D0 /* Views.xib */; };
 		10DF66F81E3D5ACF00F1D8B2 /* acid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 10DF66F71E3D5ACF00F1D8B2 /* acid.atlas */; };
+		10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */; };
 		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
 		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
@@ -93,6 +94,7 @@
 		10BD35121E4941A7006298D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Views.strings; sourceTree = "<group>"; };
 		10BD35141E4941C3006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Views.strings; sourceTree = "<group>"; };
 		10DF66F71E3D5ACF00F1D8B2 /* acid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = acid.atlas; sourceTree = "<group>"; };
+		10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegateImplementation.swift; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				107739141E45570700BBE90D /* InfoViewController.swift */,
 				106DAA071E46A47800E637B0 /* InfoWebViewController.swift */,
 				107739161E455BE000BBE90D /* DismissSegue.swift */,
+				10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			files = (
 				8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */,
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
+				10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */,
 				10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,

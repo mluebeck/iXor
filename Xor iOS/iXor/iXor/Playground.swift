@@ -81,7 +81,7 @@ class Playground: NSObject {
     var beamerArray = Array<Beamer>() // transporter start co-ordinates
     var playerOneMazeElement : MazeElement?
     var playerTwoMazeElement : MazeElement?
-    var scene : GameScene?
+    var sceneDelegate : SceneDelegate?
     var contentAsString = ""
     var akt_spieler_ist_playerOne = true;          // =0:player 1,  1:player 2
     var ende_erreicht = false;        // =0: start
@@ -125,7 +125,7 @@ class Playground: NSObject {
         playground.beamerArray = self.beamerArray
         playground.playerOneMazeElement = nil
         playground.playerTwoMazeElement = nil
-        playground.scene = self.scene
+        playground.sceneDelegate = self.sceneDelegate
         playground.akt_spieler_ist_playerOne = self.akt_spieler_ist_playerOne
         playground.ende_erreicht = self.ende_erreicht
         playground.anzahl_spielzuege = self.anzahl_spielzuege
@@ -322,7 +322,7 @@ class Playground: NSObject {
         var canMoveFish = false
         var canMoveChicken = false
         var beamed = false
-        animationCompleted(function: nil)
+        sceneDelegate?.animationCompleted(function: nil)
         if direction == PlayerMoveDirection.UP  || direction == PlayerMoveDirection.DOWN
         {
             
@@ -361,7 +361,7 @@ class Playground: NSObject {
                     }
                     if canMove == true
                     {
-                        animationCompleted(function:
+                        sceneDelegate?.animationCompleted(function:
                             {
                                 element, position in
                                 if canMoveChicken == true {
@@ -421,7 +421,7 @@ class Playground: NSObject {
                 }
                 if canMove == true
                 {
-                    animationCompleted(function:
+                    sceneDelegate?.animationCompleted(function:
                         {
                             element, position in
                             if canMoveFish == true
@@ -613,17 +613,17 @@ class Playground: NSObject {
         
         changeElement(position: playerPosition, element: mazeType!)
         
-        drawPlayer(position: playerPosition, previousPosition: oldPlayerPosition, player: self.akt_spieler_ist_playerOne, beamed:beamed, completition:
+       sceneDelegate?.drawPlayer(position: playerPosition, previousPosition: oldPlayerPosition, player: self.akt_spieler_ist_playerOne, beamed:beamed, completition:
             {
                 self.doTheFishChickenMoving(position: self.oldPlayerPosition)
 
             }
         )
         
-        updateViewController(event:MazeEvent.step_done)
+         sceneDelegate?.updateViewController(event:MazeEvent.step_done)
         if beamed==true
         {
-            moveCameraToPlaygroundCoordinates(position:PlaygroundPosition(x:playerPosition.x-3,y:playerPosition.y-3))
+             sceneDelegate?.moveCameraToPlaygroundCoordinates(position:PlaygroundPosition(x:playerPosition.x-3,y:playerPosition.y-3))
         }
         else
         {
@@ -648,7 +648,7 @@ class Playground: NSObject {
         {
                 newCameraPosition.y = playerPosition.y - 3
         }
-        moveCameraToPlaygroundCoordinates(position: newCameraPosition)
+         sceneDelegate?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
         cameraLeftTopPosition = newCameraPosition
         print("\n\n update scene ende \n\n")
         
@@ -663,22 +663,22 @@ class Playground: NSObject {
                 mapsFound.append(mazeelementtype)
                 if mazeelementtype==MazeElementType.map_1
                 {
-                    updateViewController(event:MazeEvent.map1_found)
+                     sceneDelegate?.updateViewController(event:MazeEvent.map1_found)
                 }
                 else
                 if mazeelementtype==MazeElementType.map_2
                 {
-                    updateViewController(event:MazeEvent.map2_found)
+                     sceneDelegate?.updateViewController(event:MazeEvent.map2_found)
                 }
                 else
                 if mazeelementtype==MazeElementType.map_3
                 {
-                    updateViewController(event:MazeEvent.map3_found)
+                     sceneDelegate?.updateViewController(event:MazeEvent.map3_found)
                 }
                 else
                 if mazeelementtype==MazeElementType.map_4
                 {
-                    updateViewController(event:MazeEvent.map4_found)
+                     sceneDelegate?.updateViewController(event:MazeEvent.map4_found)
                 }
                 
                 
@@ -699,12 +699,12 @@ class Playground: NSObject {
                 {
                     invisible = true
                 }
-                updateViewController(event:MazeEvent.bad_mask_found)
+                 sceneDelegate?.updateViewController(event:MazeEvent.bad_mask_found)
             }
             let mazeType = element(position:position)
-            spritesToRemove(mazeType!)
+             sceneDelegate?.spritesToRemove(mazeType!)
             createEmptySpaceOnPlayground(position:position)
-            updateViewController(event:MazeEvent.redraw)
+             sceneDelegate?.updateViewController(event:MazeEvent.redraw)
         }
     }
     
@@ -841,7 +841,7 @@ class Playground: NSObject {
         }
         changeElement(position: position, element: element)
         
-        drawSprite(element:element,
+         sceneDelegate?.drawSprite(element:element,
                           position:position,
                           duration:Playground.chickenDuration,
                           completed:completition)
@@ -897,7 +897,7 @@ class Playground: NSObject {
                 // Bewege Huhn um eins nach links
                 leftElement?.sprite?.removeFromParent()
                 changeElement(position: leftposition, element: chickenElement!)
-                drawSprite(element:chickenElement!,position:leftposition,duration:Playground.chickenDuration,completed:{
+                 sceneDelegate?.drawSprite(element:chickenElement!,position:leftposition,duration:Playground.chickenDuration,completed:{
                     // weitermachen !
                     self.chickenRun(position:leftposition,juststarted: false)
                     self.testForChickenOrFishAction(position:position)
@@ -1077,18 +1077,18 @@ class Playground: NSObject {
             numberOfKilledPlayer=1
             if elementType==MazeElementType.player_1
             {
-                updateViewController(event:MazeEvent.death_player1)
+                 sceneDelegate?.updateViewController(event:MazeEvent.death_player1)
             }
             else
             {
-                updateViewController(event:MazeEvent.death_player2)
+                 sceneDelegate?.updateViewController(event:MazeEvent.death_player2)
             }
             
         }
         else
         {
             numberOfKilledPlayer=2
-            updateViewController(event:MazeEvent.death_both)
+             sceneDelegate?.updateViewController(event:MazeEvent.death_both)
         }
     }
     
@@ -1123,8 +1123,8 @@ class Playground: NSObject {
                 self.testForChickenOrFishAction(position: Playground.right(position: positionDown))
                 self.createEmptySpaceOnPlayground(position: positionDown)
                 
-                playSoundBomb()
-                doBombAnimation(element: element,block:{
+                 sceneDelegate?.playSoundBomb()
+                 sceneDelegate?.doBombAnimation(element: element,block:{
                     element.removeSprite(duration: 0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionDown,duration:0.0) // bomb
                     self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
@@ -1141,8 +1141,8 @@ class Playground: NSObject {
                 self.testForChickenOrFishAction(position: Playground.left(position: positionLeft))
                 self.testForChickenOrFishAction(position: Playground.right(position: positionLeft))
                 self.createEmptySpaceOnPlayground(position: positionLeft)
-                playSoundBomb()
-                doBombAnimation(element:element,block:{
+                 sceneDelegate?.playSoundBomb()
+                 sceneDelegate?.doBombAnimation(element:element,block:{
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionLeft,duration:0.0) // bomb
                     self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
@@ -1161,11 +1161,11 @@ class Playground: NSObject {
             if causedBy==MazeElementType.chicken || causedBy == MazeElementType.acid
             {
                 let elementLeft = Playground.left(position: position)
-                playSoundAcid()
+                 sceneDelegate?.playSoundAcid()
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.9) // chicken/acid
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft),duration:0.9) //  acid up
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft),duration:0.9) // acid down
-                doAcidAnimation(element: element,block:{
+                 sceneDelegate?.doAcidAnimation(element: element,block:{
                     element.removeSprite(duration: 0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft,duration:0.0) // acid
                     self.decreaseEventCounter(comment:"acid corrosive",element: causedBy)
@@ -1179,13 +1179,13 @@ class Playground: NSObject {
             {
                 let elementFishAboveAcid = Playground.up(position: position)
                 let elementDownFromAcid = Playground.down(position: Playground.down(position: position))
-                playSoundAcid()
+                 sceneDelegate?.playSoundAcid()
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.9) // fish/bomb
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementDownFromAcid,duration:0.9) //  acid down
                 self.testForChickenOrFishAction(position: position)
                 self.testForChickenOrFishAction(position: elementDownFromAcid)
 
-                doAcidAnimation(element: element,block:{
+                 sceneDelegate?.doAcidAnimation(element: element,block:{
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: position),duration:0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementFishAboveAcid,duration:0.0) // acid
                     self.decreaseEventCounter(comment:"acid corrosive",element:causedBy)
@@ -1198,7 +1198,7 @@ class Playground: NSObject {
     }
     
     // MARK: Scenes
-    
+    /*
     func updateViewController(event:MazeEvent)
     {
         scene?.updateViewController!(event)
@@ -1231,7 +1231,7 @@ class Playground: NSObject {
     
     func drawPlayer(position: PlaygroundPosition, previousPosition:PlaygroundPosition, player: Bool, beamed:Bool,completition:@escaping ()->())
     {
-        scene?.drawPlayer(position: playerPosition, previousPosition:previousPosition, beamed:beamed, completition:completition)
+        scene?.drawPlayer(position: position, previousPosition:previousPosition, beamed:beamed, completition:completition)
     }
     
     func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
@@ -1259,5 +1259,5 @@ class Playground: NSObject {
     {
         scene?.animationCompleted=function
     }
-
+     */
 }
