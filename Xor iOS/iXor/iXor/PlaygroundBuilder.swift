@@ -94,7 +94,7 @@ class PlaygroundBuilder: NSObject {
     {
         var x = 0
         var y = 0
-        var beamerCoordinates = Beamer(from:PlaygroundPosition(x:0,y:0),to:PlaygroundPosition(x:0,y:0))
+        var beamerCoordinates = Beamer(from:Playground.Null(),to:Playground.Null())
         
         var commentMode = false
         var levelTitleWithNumber : String = ""
@@ -142,7 +142,7 @@ class PlaygroundBuilder: NSObject {
         playground?.level_number = Int(numberStr)!
         
         var i = 0
-        var localArray = Array<MazeType>()
+        var localArray = Array<MazeElement>()
         
         for char in mazeString.characters {
             if char == "\n" {
@@ -152,7 +152,7 @@ class PlaygroundBuilder: NSObject {
                 {
                     playground?.playgroundArray.append(localArray)
                     i += 1;
-                    localArray = Array<MazeType>()
+                    localArray = Array<MazeElement>()
                 }
             }
             else
@@ -175,24 +175,24 @@ class PlaygroundBuilder: NSObject {
                     if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
                         if let element = PlaygroundBuilder.mazeElementToString[char]! as MazeElementType? {
                             if element == MazeElementType.space {
-                                let mazeElement = MazeType(mazeElementType: MazeElementType.space, sprite:nil)
+                                let mazeElement = MazeElement(mazeElementType: MazeElementType.space, sprite:nil)
                                 localArray.append(mazeElement)
                             } else {
                                 let sprite = SKSpriteNode(imageNamed:PlaygroundBuilder.MazeElementToFilename[element]!)
+                                let mazeElement = MazeElement(mazeElementType: element, sprite:sprite)
                                 if char == "a" {
                                     sprite.zPosition = 1.0
-                                    playground?.playerOneSprite = sprite
+                                    playground?.playerOneMazeElement = mazeElement
                                     
                                 } else
                                     if char == "b" {
                                         sprite.zPosition = 1.0
-                                        playground?.playerTwoSprite = sprite
+                                        playground?.playerTwoMazeElement = mazeElement
                                     }
                                     else
                                     {
                                         sprite.zPosition = 0.0
                                 }
-                                let mazeElement = MazeType(mazeElementType: element, sprite:sprite)
                                 localArray.append(mazeElement)
                             }
                         }
@@ -214,7 +214,7 @@ class PlaygroundBuilder: NSObject {
                         if x % 4 == 3 {
                             beamerCoordinates.to.y = kl!//playground?.beam_from[index][1] = kl!;
                             playground?.beamerArray.append(beamerCoordinates)
-                            beamerCoordinates = Beamer(from:PlaygroundPosition(x:0,y:0),to:PlaygroundPosition(x:0,y:0))
+                            beamerCoordinates = Beamer(from:Playground.Null(),to:Playground.Null())
                         }
                     }
                     x+=1

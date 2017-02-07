@@ -334,7 +334,7 @@ class XorGameViewController: UIViewController
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible: true)
                 
                 let sprite = SKSpriteNode.init(imageNamed: "skull")
-                let mazeElement = MazeType(mazeElementType: MazeElementType.skull, sprite:sprite)
+                let mazeElement = MazeElement(mazeElementType: MazeElementType.skull, sprite:sprite)
                 self.scene.drawSprite(element: mazeElement, position: (self.currentPlayground?.playerPosition)!, duration: 1.0, completed: nil)
                 
                 /*
@@ -484,7 +484,7 @@ class XorGameViewController: UIViewController
     }
     
     // MARK: Switch Player
-    @IBAction func switchMaskButtonPressed()
+    @IBAction func switchPlayerPressed()
     {
         if (currentPlayground?.numberOfKilledPlayer)!==0
         {
@@ -727,12 +727,12 @@ class XorGameViewController: UIViewController
         Playground.replay.removeAll()
         self.scene.updateWithNewPlayground(self.currentPlayground!)
         self.scene.resetGameScene(playground: self.currentPlayground)
-        self.scene.switchToPlayerOne()
+        self.scene.initWithPlayerOne()
         self.resetLabels()
         
         map_visible = false
         playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
-        switchAndShowPlayerIconOnButton(playerOne: false)
+        self.changePlayerIconOnButton(playerOne: true)
         self.navigationBarTitle.text = self.currentPlayground?.level_name
     }
     

@@ -52,15 +52,19 @@ enum MazeEvent : Int {
     redraw
 }
 
-struct MazeType {
+struct MazeElement {
     var mazeElementType : MazeElementType?
     var sprite : SKSpriteNode?
     
-    func removeSprite() {
+    func removeSprite(duration:TimeInterval) {
         let fadeOut = SKAction.fadeOut(withDuration: 0.25)
         sprite?.run(fadeOut, completion: {
             self.sprite?.removeFromParent()
         })
+    }
+    
+    func removeSprite() {
+        removeSprite(duration: 0.25)
     }
     
     static func isMap(_ item:MazeElementType) -> Bool {

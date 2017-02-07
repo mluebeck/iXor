@@ -8,6 +8,23 @@
 
 import SpriteKit
 
+enum SceneEvent : Int {
+    case step_done = 0,
+    map1_found,
+    map2_found,
+    map3_found,
+    map4_found,
+    exit_found,
+    transporter_found,
+    mask_found,
+    bad_mask_found,
+    death_player1,
+    death_player2,
+    death_both,
+    redraw
+}
+
+
 class GameScene: SKScene {
     
     var segmentX : CGFloat?
@@ -29,7 +46,7 @@ class GameScene: SKScene {
     let worldNode : SKNode = SKNode()
     let mapMode : SKNode = SKNode()
     
-    var animationCompleted : ((MazeType,PlaygroundPosition)->Void)?
+    var animationCompleted : ((MazeElement,PlaygroundPosition)->Void)?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -42,7 +59,7 @@ class GameScene: SKScene {
         segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
         self.updateWithNewPlayground(self.playground)
-        switchToPlayerOne()
+        initWithPlayerOne()
         prepareAcidAnimation()
         prepareBombAnimation()
         prepareSkullAnimation()
@@ -66,15 +83,6 @@ class GameScene: SKScene {
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
-                    /*if mazeType.mazeElementType==MazeElementType.player_1 {
-                     self.playground.playerOneSprite = mazeType.sprite
-                     self.playground.positionPlayerOne = PlaygroundPosition(x:x,y:y)
-                     self.playground.playerPosition = PlaygroundPosition(x:x,y:y)
-                     } else
-                     if mazeType.mazeElementType==MazeElementType.player_2 {
-                     self.playground.playerOneSprite = mazeType.sprite
-                     self.playground.positionPlayerTwo = PlaygroundPosition(x:x,y:y)
-                     }*/
                     if let sprite = mazeType.sprite {
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
@@ -183,7 +191,7 @@ class GameScene: SKScene {
     
     
     
-    func drawSprite(element:MazeType,position:PlaygroundPosition,duration:TimeInterval, completed:(()->())?) {
+    func drawSprite(element:MazeElement,position:PlaygroundPosition,duration:TimeInterval, completed:(()->())?) {
         if let sprite = element.sprite {
             let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
             let moveAction = SKAction.move(to: point, duration: duration)
@@ -207,13 +215,15 @@ class GameScene: SKScene {
         }
     }
     
-    func spriteNode(position:PlaygroundPosition) -> MazeType?
+    func spriteNode(position:PlaygroundPosition) -> MazeElement?
     {
         let mazeElement = playground.playgroundArray[position.x][position.y]
         return mazeElement
     }
     
-    func switchToPlayerOne() {
+    func initWithPlayerOne() {
+
+        self.playground.akt_spieler_ist_playerOne = true
         let position = PlaygroundPosition(x:playground.positionPlayerOne.x-4,
                                           y:playground.positionPlayerOne.y-4)
         self.playground.playerPosition = self.playground.positionPlayerOne
@@ -223,11 +233,19 @@ class GameScene: SKScene {
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
+    func switchToPlayerOne() {
+        self.playground.positionPlayerTwo = self.playground.playerPosition
+        initWithPlayerOne()
+    }
+    
     func switchToPlayerTwo() {
         let position = PlaygroundPosition(x:playground.positionPlayerTwo.x-4,
                                           y:playground.positionPlayerTwo.y-4)
+        self.playground.positionPlayerOne = self.playground.playerPosition
         self.playground.playerPosition = self.playground.positionPlayerTwo
         self.playground.oldPlayerPosition = self.playground.positionPlayerTwo
+        print("player one:\(self.playground.positionPlayerOne)")
+        print("player two:\(self.playground.positionPlayerTwo)")
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
@@ -254,19 +272,19 @@ class GameScene: SKScene {
         self.playground.cameraLeftTopPosition = coord
     }
     
-    func drawPlayer(position:PlaygroundPosition,player:Bool,beamed:Bool,completition:(()->Void)?)
+    func drawPlayer(position:PlaygroundPosition,previousPosition:PlaygroundPosition,beamed:Bool,completition:(()->Void)?)
     {
         print("zeichne player an position \(position)  ")
-        var sprite = (playground.playerOneSprite)!
-        if player==true
-        {
-            playground.positionPlayerOne = position
-        }
-        else
-        {
-            playground.positionPlayerTwo = position
-            sprite = (playground.playerTwoSprite)!
-        }
+        let sprite = (playground.element(position: position)?.sprite)!// (playground.playerOneMazeElement?.sprite)!
+//        if player==true
+//        {
+//            playground.positionPlayerOne = position
+//        }
+//        else
+//        {
+//            playground.positionPlayerTwo = position
+//            sprite = (playground.playerTwoMazeElement?.sprite)!
+//        }
         let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
         if beamed==true
         {
