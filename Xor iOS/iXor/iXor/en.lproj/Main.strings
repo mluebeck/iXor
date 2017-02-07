@@ -1,0 +1,72 @@
+
+/* Class = "UILabel"; text = "REPLAY"; ObjectID = "0u8-dk-IhO"; */
+"0u8-dk-IhO.text" = "REPLAY";
+
+/* Class = "UILabel"; text = "99/99"; ObjectID = "2T9-Pg-lbt"; */
+"2T9-Pg-lbt.text" = "99/99";
+
+/* Class = "UIButton"; normalTitle = "Zurück"; ObjectID = "4JA-sR-4dh"; */
+"4JA-sR-4dh.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "Choose Level"; ObjectID = "8nK-Yz-5aJ"; */
+"8nK-Yz-5aJ.text" = "Choose Level";
+
+/* Class = "UINavigationItem"; title = "Xanadoo! explained"; ObjectID = "9UD-2l-Mri"; */
+"9UD-2l-Mri.title" = "Xanadoo! explained";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "D9y-Mb-GOs"; */
+"D9y-Mb-GOs.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "FF"; ObjectID = "E5M-6t-tUw"; */
+"E5M-6t-tUw.normalTitle" = "FF";
+
+/* Class = "UIButton"; normalTitle = "Undo"; ObjectID = "GEw-gD-L93"; */
+"GEw-gD-L93.normalTitle" = "Undo";
+
+/* Class = "UIButton"; normalTitle = "Replay"; ObjectID = "HNQ-MT-zeI"; */
+"HNQ-MT-zeI.normalTitle" = "Replay";
+
+/* Class = "UILabel"; text = "Du hast es geschafft!"; ObjectID = "JLV-6w-TxB"; */
+"JLV-6w-TxB.text" = "You got it!";
+
+/* Class = "UIButton"; normalTitle = "+1"; ObjectID = "PRY-QW-Yhk"; */
+"PRY-QW-Yhk.normalTitle" = "+1";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "RqV-m3-9qz"; */
+"RqV-m3-9qz.text" = "Detail";
+
+/* Class = "UITableViewCell"; accessibilityHint = "Hint"; ObjectID = "Uai-03-lx7"; */
+"Uai-03-lx7.accessibilityHint" = "Hint";
+
+/* Class = "UITableViewCell"; accessibilityLabel = "Label"; ObjectID = "Uai-03-lx7"; */
+"Uai-03-lx7.accessibilityLabel" = "Label";
+
+/* Class = "UIViewController"; title = "How to play!"; ObjectID = "VPD-f1-3XW"; */
+"VPD-f1-3XW.title" = "How to play!";
+
+/* Class = "UIButton"; normalTitle = "Level"; ObjectID = "bEa-IU-Pdq"; */
+"bEa-IU-Pdq.normalTitle" = "Level";
+
+/* Class = "UILabel"; text = "Show Map"; ObjectID = "dvu-ei-zaP"; */
+"dvu-ei-zaP.text" = "Show Map";
+
+/* Class = "UILabel"; text = "In the Beginning"; ObjectID = "g86-dt-vrk"; */
+"g86-dt-vrk.text" = "In the Beginning";
+
+/* Class = "UILabel"; text = "Keine Karte verfügbar.\n\nFinde alle vier Teile, um sie vollständig anzuzeigen!"; ObjectID = "gqB-Sb-UYk"; */
+"gqB-Sb-UYk.text" = "No map available.\n\nCollect all four parts to get a complete map!";
+
+/* Class = "UILabel"; text = "1000"; ObjectID = "guq-I0-gJG"; */
+"guq-I0-gJG.text" = "1000";
+
+/* Class = "UIButton"; normalTitle = "RESET"; ObjectID = "ikJ-SQ-Huf"; */
+"ikJ-SQ-Huf.normalTitle" = "RESET";
+
+/* Class = "UILabel"; text = "How to play"; ObjectID = "r3M-AA-JEO"; */
+"r3M-AA-JEO.text" = "How to play";
+
+/* Class = "UIButton"; normalTitle = "Controls"; ObjectID = "vEV-1P-42a"; */
+"vEV-1P-42a.normalTitle" = "Controls";
+
+/* Class = "UIButton"; normalTitle = "Ok, weiter geht's !"; ObjectID = "yah-3T-933"; */
+"yah-3T-933.normalTitle" = "Ok, go on!";

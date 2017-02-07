@@ -78,9 +78,9 @@ class XorLevelTableViewController: UITableViewController
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
             if playground?.finished == true
             {
-                cell.detailTextLabel?.text = "Completed!"
+                cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
             } else {
-                cell.detailTextLabel?.text = "Pending"
+                cell.detailTextLabel?.text = NSLocalizedString("Pending", comment: "")
             }
         }
         else
@@ -89,11 +89,11 @@ class XorLevelTableViewController: UITableViewController
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
             if playground?.finished == true
             {
-                cell.detailTextLabel?.text = "Completed!"
+                cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
             }
             else
             {
-                cell.detailTextLabel?.text = "Locked!"
+                cell.detailTextLabel?.text = NSLocalizedString("Locked!", comment: "")
             }
         }
         return cell

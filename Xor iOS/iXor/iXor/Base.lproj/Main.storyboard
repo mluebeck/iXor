@@ -618,7 +618,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="102.99850074962519"/>
+            <point key="canvasLocation" x="140" y="270"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="jRx-Vq-24A">
@@ -656,6 +656,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YD6-98-UaS" firstAttribute="top" secondItem="7gm-f2-FDW" secondAttribute="bottom" id="4IN-Px-0oG"/>
                             <constraint firstItem="YD6-98-UaS" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leading" id="6Lj-jX-Lus"/>
@@ -677,7 +678,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSB-k4-SUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741.5999999999999" y="839.73013493253382"/>
+            <point key="canvasLocation" x="1668" y="994"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YLx-kD-Dxb">
@@ -685,7 +686,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -777,7 +778,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1AP-gZ-m1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704" y="994"/>
+            <point key="canvasLocation" x="937" y="994"/>
         </scene>
         <!--Xor Level Table View Controller-->
         <scene sceneID="K07-aM-b1g">
@@ -875,7 +876,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sc0-p1-LhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="-823"/>
+            <point key="canvasLocation" x="937" y="269"/>
         </scene>
     </scenes>
     <resources>
@@ -893,4 +894,5 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         <image name="up_low" width="60" height="60"/>
         <image name="verbot" width="720" height="720"/>
     </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

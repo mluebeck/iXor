@@ -721,7 +721,9 @@ class XorGameViewController: UIViewController
     @IBAction func resetToBegin()
     {
         self.replayStopPressed = false
-        self.currentPlayground = Playground.replay.first
+        if Playground.replay.count > 0 {
+            self.currentPlayground = Playground.replay.first
+        }
         Playground.replay.removeAll()
         self.scene.updateWithNewPlayground(self.currentPlayground!)
         self.scene.resetGameScene(playground: self.currentPlayground)

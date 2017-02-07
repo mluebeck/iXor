@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "This is a map. Torn into\nfour pieces, you must collect\nthe four parts to have a complete map.\ncollect ore piece, and you can see a fourth part of the maze . Collect all four and you can see all!"; ObjectID = "2P3-Wt-n2R"; */
+"2P3-Wt-n2R.text" = "This is a map. Torn into\nfour pieces, you must collect\nthe four parts to have a complete map.\ncollect ore piece, and you can see a fourth part of the maze . Collect all four and you can see all!";
+
+/* Class = "UILabel"; text = "This is acid. If a chicken or a fish hits the acid bottle, it crashes and the items at the top and the bottom will be destroyed - because acid is corrosive ! Very useful for removing walls and other barriers ! Like a chicken, you can move it up or down and it chases to the left (if it can!)."; ObjectID = "4Hb-Jv-UNH"; */
+"4Hb-Jv-UNH.text" = "This is acid. If a chicken or a fish hits the acid bottle, it crashes and the items at the top and the bottom will be destroyed - because acid is corrosive ! Very useful for removing walls and other barriers ! Like a chicken, you can move it up or down and it chases to the left (if it can!).";
+
+/* Class = "UILabel"; text = "This is a bomb. If a chicken or a fish hits the bomb, it explodes and the items at the left and the right will be destroyed ! Very useful for removing barriers! You can move it to the left or to the right and it falls down."; ObjectID = "7KG-Wc-F9F"; */
+"7KG-Wc-F9F.text" = "This is a bomb. If a chicken or a fish hits the bomb, it explodes and the items at the left and the right will be destroyed ! Very useful for removing barriers! You can move it to the left or to the right and it falls down.";
+
+/* Class = "UILabel"; text = "And then, escape through this exit, after you collected all masks and did it without exceeding the allowed number of 1000 steps!"; ObjectID = "Gan-jV-Zvq"; */
+"Gan-jV-Zvq.text" = "And then, escape through this exit, after you collected all masks and did it without exceeding the allowed number of 1000 steps!";
+
+/* Class = "UILabel"; text = "This is a mask. Collect all of them!"; ObjectID = "Mpm-RG-qfN"; */
+"Mpm-RG-qfN.text" = "This is a mask. Collect all of them!";
+
+/* Class = "UILabel"; text = "This are waves. You can only walk through it vertically"; ObjectID = "OLN-7g-65L"; */
+"OLN-7g-65L.text" = "This are waves. You can only walk through it vertically";
+
+/* Class = "UILabel"; text = "This is a wall. It's a natural barriere you cannot walk through! But you can destroy it.\nHow? you will see..."; ObjectID = "VSq-AP-UwA"; */
+"VSq-AP-UwA.text" = "This is a wall. It's a natural barriere you cannot walk through! But you can destroy it.\nHow? you will see...";
+
+/* Class = "UILabel"; text = "This is a doll. You can push it, and it will move towards the direction you want !\n"; ObjectID = "YK5-Ew-KcD"; */
+"YK5-Ew-KcD.text" = "This is a doll. You can push it, and it will move towards the direction you want !\n";
+
+/* Class = "UILabel"; text = "This is your second avatar, \ncalled \"Questor\"!"; ObjectID = "hfX-Qw-enE"; */
+"hfX-Qw-enE.text" = "This is your second avatar, \ncalled \"Questor\"!";
+
+/* Class = "UILabel"; text = " This is a sad mask. It makes all walls invisible, if you collect it ! Collect another sad mask, and the walls becomes visible again !"; ObjectID = "mCD-D3-pF2"; */
+"mCD-D3-pF2.text" = " This is a sad mask. It makes all walls invisible, if you collect it ! Collect another sad mask, and the walls becomes visible again !";
+
+/* Class = "UILabel"; text = "This is a chicken. You can push it up or down, if there's enough space! And it always wants to chase from right to the left, if there's no wall or other item that could prevent it from chasing!"; ObjectID = "mr3-Tr-wm2"; */
+"mr3-Tr-wm2.text" = "This is a chicken. You can push it up or down, if there's enough space! And it always wants to chase from right to the left, if there's no wall or other item that could prevent it from chasing!";
+
+/* Class = "UILabel"; text = "This is a fish. You can push it to the left or the right, and it falls down, if there's no wall or other items that prevents it !"; ObjectID = "nTO-5y-CdC"; */
+"nTO-5y-CdC.text" = "This is a fish. You can push it to the left or the right, and it falls down, if there's no wall or other items that prevents it !";
+
+/* Class = "UILabel"; text = "These are dots. You can only walk through it horizontally."; ObjectID = "ph6-AX-8dN"; */
+"ph6-AX-8dN.text" = "These are dots. You can only walk through it horizontally.";
+
+/* Class = "UILabel"; text = "This is a teleporter. It will transport you to a different part of the maze.\n"; ObjectID = "sYe-sf-Ghm"; */
+"sYe-sf-Ghm.text" = "This is a teleporter. It will transport you to a different part of the maze.\n";
+
+/* Class = "UILabel"; text = "This is your avatar, called \"Magus\"!"; ObjectID = "vbf-Jb-LNx"; */
+"vbf-Jb-LNx.text" = "This is your avatar, called \"Magus\"!";
