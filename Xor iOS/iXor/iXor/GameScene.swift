@@ -27,6 +27,9 @@ enum SceneEvent : Int {
 
 class GameScene: SKScene {
     
+    var path : UIBezierPath?
+
+    
     var segmentX : CGFloat?
     var segmentY : CGFloat?
     var exitDone = false
@@ -46,6 +49,11 @@ class GameScene: SKScene {
     let worldNode : SKNode = SKNode()
     let mapMode : SKNode = SKNode()
     
+    var panGestureRecognizer  : UIPanGestureRecognizer?
+    var longPressGestureRecognizer  : UILongPressGestureRecognizer?
+    var oldcoordinates : CGPoint?
+    var lines = Array<SKShapeNode>()
+    
     var animationCompleted : ((MazeElement,PlaygroundPosition)->Void)?
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,10 +67,106 @@ class GameScene: SKScene {
         segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
         self.updateWithNewPlayground(self.playground)
+        self.isUserInteractionEnabled = true
         initWithPlayerOne()
         prepareAcidAnimation()
         prepareBombAnimation()
         prepareSkullAnimation()
+        
+        longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(GameScene.handleLongPressFrom(recognizer:)))
+        longPressGestureRecognizer?.minimumPressDuration=0.01
+        panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:#selector(GameScene.handlePanFrom(recognizer:)))
+        panGestureRecognizer?.minimumNumberOfTouches = 1
+    }
+    
+    func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
+    {
+        if recognizer.state==UIGestureRecognizerState.ended {
+            oldcoordinates=nil
+            for line in lines {
+                line.removeFromParent()
+            }
+            lines.removeAll()
+            return
+        }
+        
+        
+        let height = self.size.height
+        let coordinates = recognizer.location(in: self.view)
+        let x = round40(Double(coordinates.x))+40.0/2.0
+        let y = round40(Double(height-coordinates.y))+40.0/2.0
+        print("handleLongPressFrom Tapped! \(x), \(y) ")
+        
+        if lines.count==0 {
+            // begin drawing
+            print("Begin drawing!")
+            let e = playground.element(position: PlaygroundPosition(x:Int(x/40),y:Int(round(40.0*(coordinates.y))/40.0)/40 + 1 ))
+            print("element : \(e!)")
+            if e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2
+            {
+                
+            }
+            else
+            {
+                return
+            }
+            
+        }
+        else
+        {
+            print("continue drawing!")
+            let e = playground.element(position: PlaygroundPosition(x:Int(x/40),y:Int(round(40.0*(coordinates.y))/40.0)/40 + 1 ))
+            print("element : \(e!)")
+            if e?.mazeElementType == MazeElementType.wall
+            {
+                return
+
+            }
+            else
+            {
+                
+            }
+        }
+        
+        let pathToDraw:CGMutablePath = CGMutablePath()
+        let myLine:SKShapeNode = SKShapeNode(path:pathToDraw)
+        
+        if let ocoord = oldcoordinates
+        {
+            let old_x = round40(Double(ocoord.x))+40.0/2.0
+            let old_y = round40(Double(height-ocoord.y))+40.0/2.0
+            
+            pathToDraw.move(to:CGPoint(x: old_x,y:old_y))
+            pathToDraw.addLine(to: CGPoint(x: x,y:y))
+            
+            myLine.path = pathToDraw
+            myLine.strokeColor = SKColor.red
+            myLine.lineWidth = 10.0
+            myLine.glowWidth = 2.0
+            self.addChild(myLine)
+            myLine.zPosition = 1.0
+            lines.append(myLine)
+        }
+        oldcoordinates = coordinates
+    }
+    
+    func round40(_ x:Double)->Double {
+        return round(x/40.0)*40.0
+    }
+    
+    func handlePanFrom(recognizer:UIPanGestureRecognizer)
+    {
+        let coordinates = recognizer.translation(in: self.view)
+        print("handlePanFrom Tapped! \(coordinates) ")
+        
+       
+    }
+    
+    override func didMove(to view: SKView) {
+         super.didMove(to: view)
+        view.addGestureRecognizer(longPressGestureRecognizer!)
+        view.addGestureRecognizer(panGestureRecognizer!)
+        
     }
     
     func remove_all_children(){
@@ -221,8 +325,8 @@ class GameScene: SKScene {
         return mazeElement
     }
     
-    func initWithPlayerOne() {
-
+    func initWithPlayerOne()
+    {
         self.playground.akt_spieler_ist_playerOne = true
         let position = PlaygroundPosition(x:playground.positionPlayerOne.x-4,
                                           y:playground.positionPlayerOne.y-4)
@@ -233,12 +337,14 @@ class GameScene: SKScene {
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
-    func switchToPlayerOne() {
+    func switchToPlayerOne()
+    {
         self.playground.positionPlayerTwo = self.playground.playerPosition
         initWithPlayerOne()
     }
     
-    func switchToPlayerTwo() {
+    func switchToPlayerTwo()
+    {
         let position = PlaygroundPosition(x:playground.positionPlayerTwo.x-4,
                                           y:playground.positionPlayerTwo.y-4)
         self.playground.positionPlayerOne = self.playground.playerPosition
@@ -249,12 +355,15 @@ class GameScene: SKScene {
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
-    func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition){
+    func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
+    {
         var coord = position
-        if coord.x<0 {
+        if coord.x<0
+        {
             coord.x = 0
         }
-        if coord.y<0 {
+        if coord.y<0
+        {
             coord.y = 0
         }
         if coord.x>(PlaygroundBuilder.Constants.groesseX-PlaygroundBuilder.Constants.sichtbareGroesseX)
@@ -276,65 +385,50 @@ class GameScene: SKScene {
     {
         print("zeichne player an position \(position)  ")
         let sprite = (playground.element(position: position)?.sprite)!// (playground.playerOneMazeElement?.sprite)!
-//        if player==true
-//        {
-//            playground.positionPlayerOne = position
-//        }
-//        else
-//        {
-//            playground.positionPlayerTwo = position
-//            sprite = (playground.playerTwoMazeElement?.sprite)!
-//        }
         let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
         if beamed==true
         {
+            // change size to zero to make sprite disappear -> beam effect!
             let scaleActionZero = SKAction.resize(toHeight: 0.0,duration:0.5)
-            let scaleActionFull = SKAction.resize(toHeight: 40.0 ,duration:0.5)
             sprite.run(scaleActionZero, completion: {
-                let moveAction = SKAction.move(to: point, duration: 0.25)
-                sprite.run(moveAction, completion: {
-                    for sprite in self.spritesToRemove
-                    {
-                        sprite?.removeFromParent()
-                    }
-                    self.spritesToRemove.removeAll()
-                    if self.playground.justFinished == true {
-                        self.updateViewController!(MazeEvent.exit_found)
-                    }
-                    sprite.run(scaleActionFull,completion:{
-                        if let compe = completition {
-                            compe()
-                        }
-                        print(" sprite size: \(sprite.size)")
-                    })
-                })
+                self.moveAction(point: point, sprite: sprite, completition: completition, beamed: true)
             })
         }
         else
         {
-//            let scaleActionZero = SKAction.resize(toWidth: 0.0,duration:0.5)
-//            let scaleActionFull = SKAction.resize(toWidth: 40.0 ,duration:0.5)
-//            sprite.run(scaleActionZero)
-            let moveAction = SKAction.move(to: point, duration: 0.25)
-            sprite.run(moveAction, completion: {
-                for sprite in self.spritesToRemove
-                {
-                    sprite?.removeFromParent()
-                }
-                self.spritesToRemove.removeAll()
-                if self.playground.justFinished == true {
-                    self.updateViewController!(MazeEvent.exit_found)
-                }
-            
+            self.moveAction(point: point, sprite: sprite, completition: completition, beamed: false)
+        }
+    }
+    
+    
+    func moveAction(point:CGPoint,sprite:SKSpriteNode,completition:(()->Void)?,beamed:Bool)
+    {
+        let moveAction = SKAction.move(to: point, duration: 0.25)
+        sprite.run(moveAction, completion: {
+            for sprite in self.spritesToRemove
+            {
+                sprite?.removeFromParent()
+            }
+            self.spritesToRemove.removeAll()
+            if self.playground.justFinished == true {
+                self.updateViewController!(MazeEvent.exit_found)
+            }
+            if beamed == true {
+                let scaleActionFull = SKAction.resize(toHeight: 40.0 ,duration:0.5)
+                sprite.run(scaleActionFull,completion:{
                     if let compe = completition {
                         compe()
                     }
-                    print(" sprite size: \(sprite.size)")
-            })
-
-            //sprite.run(scaleActionFull)
+                })
+            }
+            else {
+                if let compe = completition {
+                    compe()
+                }
+            }
             
-        }
+            print(" sprite size: \(sprite.size)")
+        })
     }
     
     func showMap() {
@@ -370,62 +464,20 @@ class GameScene: SKScene {
                 }
                 
                 let mazeElement = playground.playgroundArray[y][x]
-                var sprite : SKSpriteNode?
-                if let type = mazeElement.mazeElementType {
-                    switch(type) {
-                    
-                    case MazeElementType.player_1:
-                        sprite = SKSpriteNode(color: UIColor.darkGray, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.player_2:
-                        sprite = SKSpriteNode(color: UIColor.darkGray, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.wall:
-                        sprite = SKSpriteNode(color: UIColor.red, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.mask:
-                        sprite = SKSpriteNode(color: UIColor.blue, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.bad_mask:
-                        sprite = SKSpriteNode(color: UIColor.blue, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.v_wave:
-                        sprite = SKSpriteNode(color: UIColor.yellow, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.h_wave:
-                        sprite = SKSpriteNode(color: UIColor.white, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.exit:
-                        sprite = SKSpriteNode(color: UIColor.green, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.bomb:
-                        sprite = SKSpriteNode(color: UIColor.black, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.chicken:
-                        sprite = SKSpriteNode(color: UIColor.purple, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.fish:
-                        sprite = SKSpriteNode(color: UIColor.brown, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.puppet:
-                        sprite = SKSpriteNode(color: UIColor.orange, size:CGSize(width:10.0,height:10.0))
-                        break
-                    case MazeElementType.transporter:
-                        sprite = SKSpriteNode(color: UIColor.magenta, size:CGSize(width:10.0,height:10.0))
-                        break
-                    default:
-                        break
-                    }
-                }
-                if !(sprite == nil) {
-                    mapMode.addChild(sprite!)
-                    sprite?.xScale = tinySegmentX / CGFloat(10.0)
-                    sprite?.yScale = tinySegmentY / CGFloat(10.0)
+                if let sprite2 = mazeElement.sprite
+                {
+                    let sprite = sprite2.copy() as! SKSpriteNode
+                    mapMode.addChild(sprite)
+                    sprite.xScale = tinySegmentX / CGFloat(10.0)
+                    sprite.yScale = tinySegmentY / CGFloat(10.0)
                     let point = CGPoint(x: CGFloat(x)*tinySegmentX+tinySegmentX/2.0,y: self.size.height - CGFloat(y)*tinySegmentY-tinySegmentY/2.0)
-                    let moveAction = SKAction.move(to: point, duration: 0.0)
-                    sprite?.run(moveAction)
+                    
+                    let scaleAction = SKAction.scale(by: 0.25, duration: 0.0)
+                    sprite.run(scaleAction, completion: {
+                        let moveAction = SKAction.move(to: point, duration: 0.0)
+                        sprite.run(moveAction)
+                    })
                 }
-                
             }
         }
         removeAllChildren()

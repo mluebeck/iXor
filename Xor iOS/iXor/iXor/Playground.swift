@@ -311,8 +311,6 @@ class Playground: NSObject {
     
     func movePlayer(direction:PlayerMoveDirection)
     {
-        //beamMeUp()
-
         let previousPlayground = self.copy() as! Playground
         Playground.replay.append(previousPlayground)
         print("playground history:\(Playground.replay)")
@@ -342,9 +340,19 @@ class Playground: NSObject {
             {
                 if mazeElementType == MazeElementType.transporter
                 {
-                    newPosition = beamMeUp(position:playerPosition)
-                    beamed = true
-                    anzahl_spielzuege += 1
+                    if let newpos = beamMeUp(position:playerPosition)
+                    {
+                        if element(position: newpos)?.mazeElementType == MazeElementType.space
+                        {
+                            beamed = true
+                            anzahl_spielzuege += 1
+                            newPosition = newpos
+                        }
+                        else
+                        {
+                            canMove = false
+                        }
+                    }
                 }
                 else
                 {
@@ -402,9 +410,19 @@ class Playground: NSObject {
             {
                 if mazeElementType == MazeElementType.transporter
                 {
-                    beamed=true
-                    newPosition = beamMeUp(position:playerPosition)
-                    anzahl_spielzuege += 1
+                    if let newpos = beamMeUp(position:playerPosition)
+                    {
+                        if element(position: newpos)?.mazeElementType == MazeElementType.space
+                        {
+                            beamed = true
+                            anzahl_spielzuege += 1
+                            newPosition = newpos
+                        }
+                        else
+                        {
+                            canMove = false
+                        }
+                    }
                 }
                 else
                 {
@@ -620,7 +638,7 @@ class Playground: NSObject {
             }
         )
         
-         sceneDelegate?.updateViewController(event:MazeEvent.step_done)
+        sceneDelegate?.updateViewController(event:MazeEvent.step_done)
         if beamed==true
         {
              sceneDelegate?.moveCameraToPlaygroundCoordinates(position:PlaygroundPosition(x:playerPosition.x-3,y:playerPosition.y-3))
@@ -661,27 +679,7 @@ class Playground: NSObject {
             if MazeElement.isMap(mazeelementtype)
             {
                 mapsFound.append(mazeelementtype)
-                if mazeelementtype==MazeElementType.map_1
-                {
-                     sceneDelegate?.updateViewController(event:MazeEvent.map1_found)
-                }
-                else
-                if mazeelementtype==MazeElementType.map_2
-                {
-                     sceneDelegate?.updateViewController(event:MazeEvent.map2_found)
-                }
-                else
-                if mazeelementtype==MazeElementType.map_3
-                {
-                     sceneDelegate?.updateViewController(event:MazeEvent.map3_found)
-                }
-                else
-                if mazeelementtype==MazeElementType.map_4
-                {
-                     sceneDelegate?.updateViewController(event:MazeEvent.map4_found)
-                }
-                
-                
+                sceneDelegate?.updateViewController(type: mazeelementtype)
             }
             else
             if mazeelementtype == MazeElementType.mask
@@ -702,9 +700,9 @@ class Playground: NSObject {
                  sceneDelegate?.updateViewController(event:MazeEvent.bad_mask_found)
             }
             let mazeType = element(position:position)
-             sceneDelegate?.spritesToRemove(mazeType!)
+            sceneDelegate?.spritesToRemove(mazeType!)
             createEmptySpaceOnPlayground(position:position)
-             sceneDelegate?.updateViewController(event:MazeEvent.redraw)
+            sceneDelegate?.updateViewController(event:MazeEvent.redraw)
         }
     }
     
@@ -1196,68 +1194,4 @@ class Playground: NSObject {
             }
         }
     }
-    
-    // MARK: Scenes
-    /*
-    func updateViewController(event:MazeEvent)
-    {
-        scene?.updateViewController!(event)
-    }
-    
-    func playSoundAcid() {
-        scene?.run(SKAction.playSoundFileNamed("acid.wav" ,waitForCompletion:false))
-
-    }
-    
-    func playSoundBomb() {
-        scene?.run(SKAction.playSoundFileNamed("bomb.caf" ,waitForCompletion:false))
-
-    }
-    
-    func doAcidAnimation(element:MazeElement,block:@escaping ()->())
-    {
-        if let sprite = element.sprite
-        {
-            scene?.doAcidAnimation(sprite: sprite,block:block)
-        }
-    }
-    func doBombAnimation(element:MazeElement,block:@escaping ()->())
-    {
-        if let sprite = element.sprite
-        {
-            scene?.doBombAnimation(sprite: sprite,block:block)
-        }
-    }
-    
-    func drawPlayer(position: PlaygroundPosition, previousPosition:PlaygroundPosition, player: Bool, beamed:Bool,completition:@escaping ()->())
-    {
-        scene?.drawPlayer(position: position, previousPosition:previousPosition, beamed:beamed, completition:completition)
-    }
-    
-    func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
-    {
-        scene?.moveCameraToPlaygroundCoordinates(position:position)
-    }
-    
-    func drawSprite(element:MazeElement,
-                         position:PlaygroundPosition,
-                         duration:TimeInterval,
-                         completed:(()->Void)?)
-    {
-        scene?.drawSprite(element:element,
-                     position:position,
-                     duration:duration,
-                     completed:completed)
-    }
-    
-    func spritesToRemove(_ element:MazeElement)
-    {
-        scene?.spritesToRemove.append(element.sprite)
-    }
-    
-    func animationCompleted(function: ((MazeElement,PlaygroundPosition)->Void)?)
-    {
-        scene?.animationCompleted=function
-    }
-     */
 }

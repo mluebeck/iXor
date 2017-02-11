@@ -32,7 +32,7 @@ class XorGameViewController: UIViewController
     @IBOutlet var playerChangeButton : UIButton!
     @IBOutlet var playerChangeImage: UIImageView!
     
-    @IBOutlet var playgroundView : SKView!
+    @IBOutlet var playgroundView : TouchSKView!
     
     @IBOutlet var collectedMasksLabel : UILabel!
     @IBOutlet var gameControllerView: UIView!

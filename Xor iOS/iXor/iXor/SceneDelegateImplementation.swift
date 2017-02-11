@@ -9,8 +9,10 @@
 import UIKit
 import SpriteKit
 
-protocol SceneDelegate {
+protocol SceneDelegate
+{
     func updateViewController(event:MazeEvent)
+    func updateViewController(type:MazeElementType)
     func playSoundAcid()
     func playSoundBomb()
     func doBombAnimation(element:MazeElement,block:@escaping ()->())
@@ -26,10 +28,12 @@ protocol SceneDelegate {
     func animationCompleted(function: ((MazeElement,PlaygroundPosition)->Void)?)
 }
 
-class SceneDelegateImplementation: NSObject,SceneDelegate {
+class SceneDelegateImplementation: NSObject,SceneDelegate
+{
     var scene : GameScene
     
-    init(scene:GameScene){
+    init(scene:GameScene)
+    {
         self.scene = scene
         super.init()
     }
@@ -39,12 +43,34 @@ class SceneDelegateImplementation: NSObject,SceneDelegate {
         scene.updateViewController!(event)
     }
     
-    func playSoundAcid() {
+    func updateViewController(type:MazeElementType)
+    {
+        switch (type) {
+        case MazeElementType.map_1:
+            updateViewController(event: MazeEvent.map1_found)
+            break
+        case MazeElementType.map_2:
+            updateViewController(event: MazeEvent.map2_found)
+            break
+        case MazeElementType.map_3:
+            updateViewController(event: MazeEvent.map3_found)
+            break
+        case MazeElementType.map_4:
+            updateViewController(event: MazeEvent.map4_found)
+            break
+        default:
+            break
+        }
+    }
+    
+    func playSoundAcid()
+    {
         scene.run(SKAction.playSoundFileNamed("acid.wav" ,waitForCompletion:false))
         
     }
     
-    func playSoundBomb() {
+    func playSoundBomb()
+    {
         scene.run(SKAction.playSoundFileNamed("bomb.caf" ,waitForCompletion:false))
         
     }
