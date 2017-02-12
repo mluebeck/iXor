@@ -18,7 +18,16 @@ enum PlayerMoveDirection  : Int {
 }
 
 
-struct PlaygroundPosition {
+struct PlaygroundPosition : Hashable,Equatable {
+    
+    var hashValue: Int {
+        return x.hashValue ^ y.hashValue
+    }
+    
+    static func == (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+    
     var x : Int
     var y : Int
 }

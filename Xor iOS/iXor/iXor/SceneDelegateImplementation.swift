@@ -25,7 +25,7 @@ protocol SceneDelegate
                     duration:TimeInterval,
                     completed:(()->Void)?)
     func spritesToRemove(_ element:MazeElement)
-    func animationCompleted(function: ((MazeElement,PlaygroundPosition)->Void)?)
+    func animationCompleted(function: ((MazeElement?,PlaygroundPosition)->Void)?)
 }
 
 class SceneDelegateImplementation: NSObject,SceneDelegate
@@ -116,7 +116,7 @@ class SceneDelegateImplementation: NSObject,SceneDelegate
         scene.spritesToRemove.append(element.sprite)
     }
     
-    func animationCompleted(function: ((MazeElement,PlaygroundPosition)->Void)?)
+    func animationCompleted(function: ((MazeElement?,PlaygroundPosition)->Void)?)
     {
         scene.animationCompleted=function
     }

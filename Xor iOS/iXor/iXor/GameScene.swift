@@ -29,12 +29,12 @@ class GameScene: SKScene {
     
     var path : UIBezierPath?
 
-    
+    var intermediateAlreadySpriteDrawnQueue = [PlaygroundPosition : MazeElement]()
     var segmentX : CGFloat?
     var segmentY : CGFloat?
     var exitDone = false
     var updateViewController : ((MazeEvent)->Void)?
-    
+    var oldPosition : PlaygroundPosition?
     var acidFrames : [SKTexture]!
     var bombFrames : [SKTexture]!
     var skullFrames : [SKTexture]!
@@ -54,7 +54,7 @@ class GameScene: SKScene {
     var oldcoordinates : CGPoint?
     var lines = Array<SKShapeNode>()
     
-    var animationCompleted : ((MazeElement,PlaygroundPosition)->Void)?
+    var animationCompleted : ((MazeElement?,PlaygroundPosition)->Void)?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -87,20 +87,34 @@ class GameScene: SKScene {
                 line.removeFromParent()
             }
             lines.removeAll()
+            for mazeElement in intermediateAlreadySpriteDrawnQueue.values {
+                mazeElement.sprite?.removeFromParent()
+            }
+            intermediateAlreadySpriteDrawnQueue.removeAll()
+            oldPosition = nil
             return
         }
         
         
         let height = self.size.height
         let coordinates = recognizer.location(in: self.view)
-        let x = round40(Double(coordinates.x))+40.0/2.0
-        let y = round40(Double(height-coordinates.y))+40.0/2.0
-        print("handleLongPressFrom Tapped! \(x), \(y) ")
+        let x = Double(coordinates.x)//+Double(self.playground.cameraLeftTopPosition.x)
+        let y = Double(height-coordinates.y)//+Double(self.playground.cameraLeftTopPosition.y)
+    
+        print("handleLongPressFrom Tapped! \(x), \(coordinates.y) ")
+        let coordX = Int(x/Double(segmentX!))
+        let coordY = Int(((round(Double(segmentY!)*Double(coordinates.y))/Double(segmentY!))/Double(segmentY!)))
+        print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
+        
+        let position = PlaygroundPosition(x:coordX+self.playground.cameraLeftTopPosition.x,y:coordY+self.playground.cameraLeftTopPosition.y)
+        //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
+
+        print("position: \(position)")
         
         if lines.count==0 {
             // begin drawing
             print("Begin drawing!")
-            let e = playground.element(position: PlaygroundPosition(x:Int(x/40),y:Int(round(40.0*(coordinates.y))/40.0)/40 + 1 ))
+            let e = playground.element(position: position)
             print("element : \(e!)")
             if e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2
             {
@@ -108,41 +122,99 @@ class GameScene: SKScene {
             }
             else
             {
-                return
-            }
+              }
             
         }
         else
         {
-            print("continue drawing!")
-            let e = playground.element(position: PlaygroundPosition(x:Int(x/40),y:Int(round(40.0*(coordinates.y))/40.0)/40 + 1 ))
+           // print("continue drawing!")
+            let e = playground.element(position: position)
             print("element : \(e!)")
-            if e?.mazeElementType == MazeElementType.wall
+            
+            var deltax = true
+            var deltay = true
+            var deltaBoth = false
+            if let oldPos = oldPosition {
+                if ((oldPos.y > position.y + 1) || (oldPos.y < position.y - 1)) {
+                    deltay=false
+                }
+                if ((oldPos.x > position.x + 1) || (oldPos.x < position.x - 1)) {
+                    deltax=false
+                }
+                if oldPos.x==position.x+1 || oldPos.x==position.x-1 {
+                    if oldPos.y==position.y+1 || oldPos.y==position.y-1
+                    {
+                        deltaBoth = true
+                    }
+                }
+            }
+            
+            if (deltax==false || deltay == false || deltaBoth==true)
             {
                 return
-
+            }
+            
+            if (e?.mazeElementType == MazeElementType.wall || e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2)
+            {
+                if intermediateAlreadySpriteDrawnQueue.count == 1
+                {
+                    if let oldPos = oldPosition
+                    {
+                        let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPos]
+                        mazeElement?.sprite?.removeFromParent()
+                        intermediateAlreadySpriteDrawnQueue[oldPos]=nil
+                    }
+                }
+                return
+            }
+            else
+            if intermediateAlreadySpriteDrawnQueue[position] == nil
+            {
+                let edgeSprite = EdgeSprite.init()
+                edgeSprite.update(number:intermediateAlreadySpriteDrawnQueue.count+1)
+                edgeSprite.zPosition=1
+                self.addChild(edgeSprite)
+                let mazeElement = MazeElement(mazeElementType: MazeElementType.redCorner, sprite: edgeSprite)
+                intermediateAlreadySpriteDrawnQueue[position] = mazeElement
+                print("-> \(intermediateAlreadySpriteDrawnQueue.count)")
+                self.draw(sprite: edgeSprite, element: nil, position: position, duration: 0.0, completed: nil,relativeToCamera: true)
             }
             else
             {
-                
+                if oldPosition != position && oldPosition != nil
+                {
+                    print("Schon drin, also nichts tun \(intermediateAlreadySpriteDrawnQueue.count)")
+                    let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPosition!]
+                    mazeElement?.sprite?.removeFromParent()
+                    intermediateAlreadySpriteDrawnQueue[oldPosition!]=nil
+                }
             }
+            if intermediateAlreadySpriteDrawnQueue.count==0
+            {
+                oldPosition = nil
+            }
+            else
+            {
+                oldPosition = position
+            }
+            return
         }
-        
+    
         let pathToDraw:CGMutablePath = CGMutablePath()
         let myLine:SKShapeNode = SKShapeNode(path:pathToDraw)
         
         if let ocoord = oldcoordinates
         {
-            let old_x = round40(Double(ocoord.x))+40.0/2.0
-            let old_y = round40(Double(height-ocoord.y))+40.0/2.0
+            let old_x = Double(ocoord.x)
+            let old_y = Double(height-ocoord.y)
             
             pathToDraw.move(to:CGPoint(x: old_x,y:old_y))
             pathToDraw.addLine(to: CGPoint(x: x,y:y))
             
             myLine.path = pathToDraw
             myLine.strokeColor = SKColor.red
-            myLine.lineWidth = 10.0
-            myLine.glowWidth = 2.0
+            myLine.lineWidth = 0.0
+            myLine.glowWidth = 0.0
             self.addChild(myLine)
             myLine.zPosition = 1.0
             lines.append(myLine)
@@ -297,26 +369,51 @@ class GameScene: SKScene {
     
     func drawSprite(element:MazeElement,position:PlaygroundPosition,duration:TimeInterval, completed:(()->())?) {
         if let sprite = element.sprite {
-            let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
-            let moveAction = SKAction.move(to: point, duration: duration)
-            sprite.run(moveAction, completion: {
-                
-                for sprite in self.spritesToRemove
-                {
-                    sprite?.removeFromParent()
-                }
-                self.spritesToRemove.removeAll()
-                if self.playground.justFinished == true {
-                    self.updateViewController!(MazeEvent.exit_found)
-                }
-                if let animationCompleted = self.animationCompleted {
-                    animationCompleted(element,position)
-                }
-                if let compl = completed {
-                    compl()
-                }
-            })
+            self.draw(sprite:sprite,
+                      element:element,
+                      position:position,
+                      duration:duration,
+                      completed:completed,
+                      relativeToCamera:false)
         }
+    }
+    
+    func draw(sprite:SKSpriteNode,
+              element:MazeElement?,
+              position:PlaygroundPosition,
+              duration:TimeInterval,
+              completed:(()->())?,
+              relativeToCamera:Bool)
+    {
+        var point : CGPoint
+        if relativeToCamera == false
+        {
+            point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
+        }
+        else
+        {
+            point = CGPoint(x: CGFloat(position.x-self.playground.cameraLeftTopPosition.x)*segmentX!+segmentX!/2.0,
+                            y: self.size.height - CGFloat(position.y-self.playground.cameraLeftTopPosition.y)*segmentY!-segmentY!/2.0)
+        }
+        
+        let moveAction = SKAction.move(to: point, duration: duration)
+        sprite.run(moveAction, completion: {
+                
+            for sprite in self.spritesToRemove
+            {
+                sprite?.removeFromParent()
+            }
+            self.spritesToRemove.removeAll()
+            if self.playground.justFinished == true {
+                self.updateViewController!(MazeEvent.exit_found)
+            }
+            if let animationCompleted = self.animationCompleted {
+                animationCompleted(element,position)
+            }
+            if let compl = completed {
+                compl()
+            }
+        })
     }
     
     func spriteNode(position:PlaygroundPosition) -> MazeElement?
