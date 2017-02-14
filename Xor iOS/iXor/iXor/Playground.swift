@@ -639,10 +639,11 @@ class Playground: NSObject {
         }
         
         changeElement(position: playerPosition, element: mazeType!)
-        
+        self.increaseEventCounter(comment: "player moving", element: (mazeType?.mazeElementType)!)
        sceneDelegate?.drawPlayer(position: playerPosition, previousPosition: oldPlayerPosition, player: self.akt_spieler_ist_playerOne, beamed:beamed, completition:
             {
                 self.doTheFishChickenMoving(position: self.oldPlayerPosition)
+                self.decreaseEventCounter(comment: "player moving", element: (mazeType?.mazeElementType)!)
 
             }
         )
