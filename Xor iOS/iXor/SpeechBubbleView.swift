@@ -28,7 +28,6 @@ class SpeechBubbleView: UIView {
       func draw3(_ rect: CGRect) {
         // Size of rounded rectangle
         let rectCornerRadius = CGFloat(30.0)
-        let rectBgColor = UIColor.white
         let rectWidth:CGFloat = self.bounds.width-20
         let rectHeight:CGFloat = self.bounds.height-20
         

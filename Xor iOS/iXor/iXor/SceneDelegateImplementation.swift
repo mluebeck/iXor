@@ -16,7 +16,7 @@ protocol SceneDelegate
     func playSoundAcid()
     func playSoundBomb()
     func doBombAnimation(element:MazeElement,block:@escaping ()->())
-
+    func addChild(_ sprite: SKNode)
     func doAcidAnimation(element:MazeElement,block:@escaping ()->())
     func drawPlayer(position: PlaygroundPosition, previousPosition:PlaygroundPosition, player: Bool, beamed:Bool,completition:@escaping ()->())
     func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
@@ -26,6 +26,14 @@ protocol SceneDelegate
                     completed:(()->Void)?)
     func spritesToRemove(_ element:MazeElement)
     func animationCompleted(function: ((MazeElement?,PlaygroundPosition)->Void)?)
+    func fetchGestureTapCoordinates(gesture:UIGestureRecognizer) -> CGPoint
+    func getSceneDataSource() -> Playground
+    func segmentSize() -> (x:CGFloat,y:CGFloat)
+    func drawRelativeToCamera(sprite:SKSpriteNode,
+                              element:MazeElement,
+                              position:PlaygroundPosition,
+                              duration:TimeInterval,
+                              completed:(()->Void)?)
 }
 
 class SceneDelegateImplementation: NSObject,SceneDelegate
@@ -36,6 +44,26 @@ class SceneDelegateImplementation: NSObject,SceneDelegate
     {
         self.scene = scene
         super.init()
+    }
+    
+    func getSceneDataSource() -> Playground {
+        return scene.playground
+    }
+    
+    func segmentSize() -> (x:CGFloat,y:CGFloat)
+    {
+        return scene.segmentSize()
+    }
+    
+    
+    
+    func fetchGestureTapCoordinates(gesture:UIGestureRecognizer) -> CGPoint
+    {
+        return gesture.location(in: self.scene.view)
+    }
+    
+    func addChild(_ sprite: SKNode) {
+        scene.addChild(sprite)
     }
     
     func updateViewController(event:MazeEvent)
@@ -110,6 +138,21 @@ class SceneDelegateImplementation: NSObject,SceneDelegate
                           duration:duration,
                           completed:completed)
     }
+    
+    func drawRelativeToCamera(sprite:SKSpriteNode,
+                              element:MazeElement,
+                              position:PlaygroundPosition,
+                              duration:TimeInterval,
+                              completed:(()->Void)?)
+    {
+        scene.draw(  sprite:sprite,
+                    element:element,
+                   position:position,
+                   duration:duration,
+                   completed:completed,
+            relativeToCamera:true)
+    }
+    
     
     func spritesToRemove(_ element:MazeElement)
     {

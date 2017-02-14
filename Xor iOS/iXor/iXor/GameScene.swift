@@ -27,14 +27,10 @@ enum SceneEvent : Int {
 
 class GameScene: SKScene {
     
-    var path : UIBezierPath?
-
-    var intermediateAlreadySpriteDrawnQueue = [PlaygroundPosition : MazeElement]()
     var segmentX : CGFloat?
     var segmentY : CGFloat?
     var exitDone = false
     var updateViewController : ((MazeEvent)->Void)?
-    var oldPosition : PlaygroundPosition?
     var acidFrames : [SKTexture]!
     var bombFrames : [SKTexture]!
     var skullFrames : [SKTexture]!
@@ -49,10 +45,7 @@ class GameScene: SKScene {
     let worldNode : SKNode = SKNode()
     let mapMode : SKNode = SKNode()
     
-    var panGestureRecognizer  : UIPanGestureRecognizer?
-    var longPressGestureRecognizer  : UILongPressGestureRecognizer?
-    var oldcoordinates : CGPoint?
-    var lines = Array<SKShapeNode>()
+    var pathSelector : PathSelector?
     
     var animationCompleted : ((MazeElement?,PlaygroundPosition)->Void)?
     
@@ -60,11 +53,18 @@ class GameScene: SKScene {
         fatalError("init(coder) is not used in this app")
     }
     
+    func segmentSize() -> (x:CGFloat,y:CGFloat)
+    {
+        return (self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX),
+                self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY))
+    }
+    
     init(size: CGSize, playground:Playground) {
         self.playground = playground
         super.init(size:size)
-        segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
-        segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
+
+        segmentX = segmentSize().0 // self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
+        segmentY = segmentSize().1 //self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
         self.updateWithNewPlayground(self.playground)
         self.isUserInteractionEnabled = true
@@ -72,173 +72,13 @@ class GameScene: SKScene {
         prepareAcidAnimation()
         prepareBombAnimation()
         prepareSkullAnimation()
-        
-        longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(GameScene.handleLongPressFrom(recognizer:)))
-        longPressGestureRecognizer?.minimumPressDuration=0.01
-        panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:#selector(GameScene.handlePanFrom(recognizer:)))
-        panGestureRecognizer?.minimumNumberOfTouches = 1
-    }
-    
-    func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
-    {
-        if recognizer.state==UIGestureRecognizerState.ended {
-            oldcoordinates=nil
-            for line in lines {
-                line.removeFromParent()
-            }
-            lines.removeAll()
-            for mazeElement in intermediateAlreadySpriteDrawnQueue.values {
-                mazeElement.sprite?.removeFromParent()
-            }
-            intermediateAlreadySpriteDrawnQueue.removeAll()
-            oldPosition = nil
-            return
-        }
-        
-        
-        let height = self.size.height
-        let coordinates = recognizer.location(in: self.view)
-        let x = Double(coordinates.x)//+Double(self.playground.cameraLeftTopPosition.x)
-        let y = Double(height-coordinates.y)//+Double(self.playground.cameraLeftTopPosition.y)
-    
-        print("handleLongPressFrom Tapped! \(x), \(coordinates.y) ")
-        let coordX = Int(x/Double(segmentX!))
-        let coordY = Int(((round(Double(segmentY!)*Double(coordinates.y))/Double(segmentY!))/Double(segmentY!)))
-        print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
-        
-        let position = PlaygroundPosition(x:coordX+self.playground.cameraLeftTopPosition.x,y:coordY+self.playground.cameraLeftTopPosition.y)
-        //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
 
-        print("position: \(position)")
-        
-        if lines.count==0 {
-            // begin drawing
-            print("Begin drawing!")
-            let e = playground.element(position: position)
-            print("element : \(e!)")
-            if e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2
-            {
-                
-            }
-            else
-            {
-              }
-            
-        }
-        else
-        {
-           // print("continue drawing!")
-            let e = playground.element(position: position)
-            print("element : \(e!)")
-            
-            var deltax = true
-            var deltay = true
-            var deltaBoth = false
-            if let oldPos = oldPosition {
-                if ((oldPos.y > position.y + 1) || (oldPos.y < position.y - 1)) {
-                    deltay=false
-                }
-                if ((oldPos.x > position.x + 1) || (oldPos.x < position.x - 1)) {
-                    deltax=false
-                }
-                if oldPos.x==position.x+1 || oldPos.x==position.x-1 {
-                    if oldPos.y==position.y+1 || oldPos.y==position.y-1
-                    {
-                        deltaBoth = true
-                    }
-                }
-            }
-            
-            if (deltax==false || deltay == false || deltaBoth==true)
-            {
-                return
-            }
-            
-            if (e?.mazeElementType == MazeElementType.wall || e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2)
-            {
-                if intermediateAlreadySpriteDrawnQueue.count == 1
-                {
-                    if let oldPos = oldPosition
-                    {
-                        let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPos]
-                        mazeElement?.sprite?.removeFromParent()
-                        intermediateAlreadySpriteDrawnQueue[oldPos]=nil
-                    }
-                }
-                return
-            }
-            else
-            if intermediateAlreadySpriteDrawnQueue[position] == nil
-            {
-                let edgeSprite = EdgeSprite.init()
-                edgeSprite.update(number:intermediateAlreadySpriteDrawnQueue.count+1)
-                edgeSprite.zPosition=1
-                self.addChild(edgeSprite)
-                let mazeElement = MazeElement(mazeElementType: MazeElementType.redCorner, sprite: edgeSprite)
-                intermediateAlreadySpriteDrawnQueue[position] = mazeElement
-                print("-> \(intermediateAlreadySpriteDrawnQueue.count)")
-                self.draw(sprite: edgeSprite, element: nil, position: position, duration: 0.0, completed: nil,relativeToCamera: true)
-            }
-            else
-            {
-                if oldPosition != position && oldPosition != nil
-                {
-                    print("Schon drin, also nichts tun \(intermediateAlreadySpriteDrawnQueue.count)")
-                    let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPosition!]
-                    mazeElement?.sprite?.removeFromParent()
-                    intermediateAlreadySpriteDrawnQueue[oldPosition!]=nil
-                }
-            }
-            if intermediateAlreadySpriteDrawnQueue.count==0
-            {
-                oldPosition = nil
-            }
-            else
-            {
-                oldPosition = position
-            }
-            return
-        }
-    
-        let pathToDraw:CGMutablePath = CGMutablePath()
-        let myLine:SKShapeNode = SKShapeNode(path:pathToDraw)
-        
-        if let ocoord = oldcoordinates
-        {
-            let old_x = Double(ocoord.x)
-            let old_y = Double(height-ocoord.y)
-            
-            pathToDraw.move(to:CGPoint(x: old_x,y:old_y))
-            pathToDraw.addLine(to: CGPoint(x: x,y:y))
-            
-            myLine.path = pathToDraw
-            myLine.strokeColor = SKColor.red
-            myLine.lineWidth = 0.0
-            myLine.glowWidth = 0.0
-            self.addChild(myLine)
-            myLine.zPosition = 1.0
-            lines.append(myLine)
-        }
-        oldcoordinates = coordinates
     }
     
-    func round40(_ x:Double)->Double {
-        return round(x/40.0)*40.0
-    }
-    
-    func handlePanFrom(recognizer:UIPanGestureRecognizer)
-    {
-        let coordinates = recognizer.translation(in: self.view)
-        print("handlePanFrom Tapped! \(coordinates) ")
         
-       
-    }
-    
     override func didMove(to view: SKView) {
-         super.didMove(to: view)
-        view.addGestureRecognizer(longPressGestureRecognizer!)
-        view.addGestureRecognizer(panGestureRecognizer!)
-        
+        super.didMove(to: view)
+        pathSelector?.addGestureSelector(view:view)
     }
     
     func remove_all_children(){
@@ -255,6 +95,7 @@ class GameScene: SKScene {
     func updateWithNewPlayground(_ playground:Playground) {
         self.playground = playground
         self.playground.sceneDelegate = SceneDelegateImplementation(scene:self)
+        pathSelector = PathSelector(scene:self.playground.sceneDelegate!)
         remove_all_children()
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
