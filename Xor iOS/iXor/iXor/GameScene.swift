@@ -27,8 +27,6 @@ enum SceneEvent : Int {
 
 class GameScene: SKScene {
     
-    var segmentX : CGFloat?
-    var segmentY : CGFloat?
     var exitDone = false
     var updateViewController : ((MazeEvent)->Void)?
     var acidFrames : [SKTexture]!
@@ -59,12 +57,10 @@ class GameScene: SKScene {
                 self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY))
     }
     
-    init(size: CGSize, playground:Playground) {
+    init(size: CGSize, playground:Playground)
+    {
         self.playground = playground
         super.init(size:size)
-
-        segmentX = segmentSize().0 // self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
-        segmentY = segmentSize().1 //self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         addChild(worldNode)
         self.updateWithNewPlayground(self.playground)
         self.isUserInteractionEnabled = true
@@ -72,39 +68,40 @@ class GameScene: SKScene {
         prepareAcidAnimation()
         prepareBombAnimation()
         prepareSkullAnimation()
-
     }
     
-        
-    override func didMove(to view: SKView) {
+    override func didMove(to view: SKView)
+    {
         super.didMove(to: view)
         pathSelector?.addGestureSelector(view:view)
     }
     
-    func remove_all_children(){
+    func remove_all_children()
+    {
         self.worldNode.removeAllChildren()
-        
         let sprite = SKSpriteNode.init(color: UIColor.black, size: CGSize(width:self.size.width*8.0,height:self.size.height*8.0))
-        
-        //let sprite2 = SKSpriteNode.init(imageNamed: "xanadoo.png")
-        //sprite2.scale(to: CGSize(width:self.size.width*8.0,height:self.size.height*8.0))
-        
         self.worldNode.addChild(sprite)
         
     }
-    func updateWithNewPlayground(_ playground:Playground) {
+    
+    func updateWithNewPlayground(_ playground:Playground)
+    {
         self.playground = playground
         self.playground.sceneDelegate = SceneDelegateImplementation(scene:self)
         pathSelector = PathSelector(scene:self.playground.sceneDelegate!)
         remove_all_children()
-        for x in 0..<PlaygroundBuilder.Constants.groesseX {
-            for y in 0..<PlaygroundBuilder.Constants.groesseY {
-                if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
-                    if let sprite = mazeType.sprite {
+        for x in 0..<PlaygroundBuilder.Constants.groesseX
+        {
+            for y in 0..<PlaygroundBuilder.Constants.groesseY
+            {
+                if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x))
+                {
+                    if let sprite = mazeType.sprite
+                    {
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
-                        sprite.xScale = segmentX! / CGFloat(40.0)
-                        sprite.yScale = segmentY! / CGFloat(40.0)
+                        sprite.xScale = segmentSize().x / CGFloat(40.0)
+                        sprite.yScale = segmentSize().y / CGFloat(40.0)
                         drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y),duration:0.25,completed:nil)
                     }
                     else {
@@ -188,8 +185,8 @@ class GameScene: SKScene {
             self.playground = playgrnd
         }
         self.playground.sceneDelegate = SceneDelegateImplementation(scene: self)
-        segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
-        segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
+        //segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
+        //segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
@@ -197,8 +194,8 @@ class GameScene: SKScene {
                         sprite.alpha=1.0
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
-                        sprite.xScale = segmentX! / CGFloat(40.0)
-                        sprite.yScale = segmentY! / CGFloat(40.0)
+                        sprite.xScale = segmentSize().x / CGFloat(40.0)
+                        sprite.yScale = segmentSize().y / CGFloat(40.0)
                         drawSprite(element:mazeType,position:PlaygroundPosition(x:x,y:y),duration:0.25,completed:nil)
                     }
                 }
@@ -229,12 +226,12 @@ class GameScene: SKScene {
         var point : CGPoint
         if relativeToCamera == false
         {
-            point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
+            point = CGPoint(x: CGFloat(position.x)*segmentSize().x+segmentSize().x/2.0, y: self.size.height - CGFloat(position.y)*segmentSize().y-segmentSize().y/2.0)
         }
         else
         {
-            point = CGPoint(x: CGFloat(position.x-self.playground.cameraLeftTopPosition.x)*segmentX!+segmentX!/2.0,
-                            y: self.size.height - CGFloat(position.y-self.playground.cameraLeftTopPosition.y)*segmentY!-segmentY!/2.0)
+            point = CGPoint(x: CGFloat(position.x-self.playground.cameraLeftTopPosition.x)*segmentSize().x+segmentSize().x/2.0,
+                            y: self.size.height - CGFloat(position.y-self.playground.cameraLeftTopPosition.y)*segmentSize().y-segmentSize().y/2.0)
         }
         
         let moveAction = SKAction.move(to: point, duration: duration)
@@ -312,8 +309,8 @@ class GameScene: SKScene {
         {
             coord.y = PlaygroundBuilder.Constants.groesseY - PlaygroundBuilder.Constants.sichtbareGroesseY
         }
-        let xCoord = (CGFloat(coord.x)*CGFloat(segmentX!))*CGFloat(-1)
-        let yCoord = CGFloat(coord.y)*segmentY!
+        let xCoord = (CGFloat(coord.x)*CGFloat(segmentSize().x))*CGFloat(-1)
+        let yCoord = CGFloat(coord.y)*segmentSize().y
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
         print("Camera position:\(coord)")
         self.playground.cameraLeftTopPosition = coord
@@ -323,7 +320,7 @@ class GameScene: SKScene {
     {
         print("zeichne player an position \(position)  ")
         let sprite = (playground.element(position: position)?.sprite)!// (playground.playerOneMazeElement?.sprite)!
-        let point = CGPoint(x: CGFloat(position.x)*segmentX!+segmentX!/2.0, y: self.size.height - CGFloat(position.y)*segmentY!-segmentY!/2.0)
+        let point = CGPoint(x: CGFloat(position.x)*segmentSize().x+segmentSize().x/2.0, y: self.size.height - CGFloat(position.y)*segmentSize().y-segmentSize().y/2.0)
         if beamed==true
         {
             // change size to zero to make sprite disappear -> beam effect!
@@ -422,7 +419,8 @@ class GameScene: SKScene {
         addChild(mapMode)
     }
     
-    func hideMap() {
+    func hideMap()
+    {
         removeAllChildren()
         addChild(worldNode)
     }
