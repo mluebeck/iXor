@@ -46,6 +46,7 @@ class GameScene: SKScene {
     var pathSelector : PathSelector?
     
     var animationCompleted : ((MazeElement?,PlaygroundPosition)->Void)?
+    var animationBegan : (()->Void)?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder) is not used in this app")
@@ -185,6 +186,8 @@ class GameScene: SKScene {
             self.playground = playgrnd
         }
         self.playground.sceneDelegate = SceneDelegateImplementation(scene: self)
+        self.pathSelector?.playground=self.playground
+            
         //segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
         //segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
@@ -235,6 +238,9 @@ class GameScene: SKScene {
         }
         
         let moveAction = SKAction.move(to: point, duration: duration)
+        if let animationBegan = self.animationBegan {
+            animationBegan()
+        }
         sprite.run(moveAction, completion: {
                 
             for sprite in self.spritesToRemove
@@ -312,13 +318,13 @@ class GameScene: SKScene {
         let xCoord = (CGFloat(coord.x)*CGFloat(segmentSize().x))*CGFloat(-1)
         let yCoord = CGFloat(coord.y)*segmentSize().y
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
-        print("Camera position:\(coord)")
+        //print("Camera position:\(coord)")
         self.playground.cameraLeftTopPosition = coord
     }
     
     func drawPlayer(position:PlaygroundPosition,previousPosition:PlaygroundPosition,beamed:Bool,completition:(()->Void)?)
     {
-        print("zeichne player an position \(position)  ")
+        //print("zeichne player an position \(position)  ")
         let sprite = (playground.element(position: position)?.sprite)!// (playground.playerOneMazeElement?.sprite)!
         let point = CGPoint(x: CGFloat(position.x)*segmentSize().x+segmentSize().x/2.0, y: self.size.height - CGFloat(position.y)*segmentSize().y-segmentSize().y/2.0)
         if beamed==true

@@ -15,15 +15,15 @@ class PathSelector: NSObject {
     var longPressGestureRecognizer  : UILongPressGestureRecognizer?
     
     var intermediateAlreadySpriteDrawnQueue = [PlaygroundPosition : MazeElement]()
+    var movingQueue = Array<PlayerMoveDirection>()
     var startDrawing = false
     var oldPosition : PlaygroundPosition?
     var oldcoordinates : CGPoint?
-    var sceneDelegate : SceneDelegate
     var playground : Playground
     
     init(scene:SceneDelegate) {
-        sceneDelegate=scene
         playground = scene.getSceneDataSource()
+        playground.sceneDelegate = scene
         super.init()
         longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(PathSelector.handleLongPressFrom(recognizer:)))
         longPressGestureRecognizer?.minimumPressDuration=0.01
@@ -38,6 +38,8 @@ class PathSelector: NSObject {
         //view.addGestureRecognizer(panGestureRecognizer!)
     }
     
+    
+    
     func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
     {
         if recognizer.state==UIGestureRecognizerState.ended {
@@ -48,21 +50,24 @@ class PathSelector: NSObject {
             }
             intermediateAlreadySpriteDrawnQueue.removeAll()
             oldPosition = nil
+            playground.movePlayer(queue: movingQueue)
+            movingQueue.removeAll()
+            
             return
         }
         
         
-        let segment = sceneDelegate.segmentSize()
-        let segmentX = segment.x
-        let segmentY = segment.y
-        let coordinates = sceneDelegate.fetchGestureTapCoordinates(gesture: longPressGestureRecognizer!)
+        let segment = playground.sceneDelegate?.segmentSize()
+        let segmentX = segment?.x
+        let segmentY = segment?.y
+        let coordinates = playground.sceneDelegate?.fetchGestureTapCoordinates(gesture: longPressGestureRecognizer!)
         // recognizer.location(in: parentScene.view)
-        let x = Double(coordinates.x)//+Double(self.playground.cameraLeftTopPosition.x)
+        let x = Double((coordinates?.x)!)//+Double(self.playground.cameraLeftTopPosition.x)
         //let y = Double(height-coordinates.y)//+Double(self.playground.cameraLeftTopPosition.y)
         
-        print("handleLongPressFrom Tapped! \(x), \(coordinates.y) ")
-        let coordX = Int(x/Double(segmentX))
-        let coordY = Int(((round(Double(segmentY)*Double(coordinates.y))/Double(segmentY))/Double(segmentY)))
+        print("handleLongPressFrom Tapped! \(x), \(coordinates?.y) ")
+        let coordX = Int(x/Double(segmentX!))
+        let coordY = Int(((round(Double(segmentY!)*Double((coordinates?.y)!))/Double(segmentY!))/Double(segmentY!)))
         print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
         
         let position = PlaygroundPosition(x:coordX+(playground.cameraLeftTopPosition.x),
@@ -80,7 +85,7 @@ class PathSelector: NSObject {
             {
                 return
             }
-            
+            //self.moving(position: position)
         }
         else
         {
@@ -130,11 +135,14 @@ class PathSelector: NSObject {
                 let edgeSprite = EdgeSprite.init()
                 edgeSprite.update(number:intermediateAlreadySpriteDrawnQueue.count+1)
                 edgeSprite.zPosition=1
-                sceneDelegate.addChild(edgeSprite)
+                playground.sceneDelegate?.addChild(edgeSprite)
                 let mazeElement = MazeElement(mazeElementType: MazeElementType.redCorner, sprite: edgeSprite)
                 intermediateAlreadySpriteDrawnQueue[position] = mazeElement
+                
+                self.moving(position: position)
+                
                 print("-> \(intermediateAlreadySpriteDrawnQueue.count)")
-                sceneDelegate.drawRelativeToCamera(sprite: edgeSprite, element:mazeElement, position: position, duration: 0.0, completed: nil)
+                playground.sceneDelegate?.drawRelativeToCamera(sprite: edgeSprite, element:mazeElement, position: position, duration: 0.0, completed: nil)
             }
             else
             {
@@ -144,6 +152,7 @@ class PathSelector: NSObject {
                     let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPosition!]
                     mazeElement?.sprite?.removeFromParent()
                     intermediateAlreadySpriteDrawnQueue[oldPosition!]=nil
+                    movingQueue.removeLast()
                 }
             }
             if intermediateAlreadySpriteDrawnQueue.count==0
@@ -169,6 +178,41 @@ class PathSelector: NSObject {
         return round(x/40.0)*40.0
     }
     
+    func moving(position:PlaygroundPosition)
+    {
+        var move = PlayerMoveDirection.UP
+        var thePosition = playground.playerPosition
+        
+        if let oldPs = oldPosition
+        {
+            thePosition = oldPs
+        }
+        
+        if thePosition.x==position.x
+        {
+            if thePosition.y<position.y
+            {
+                move = PlayerMoveDirection.DOWN
+            }
+            else
+            {
+                move = PlayerMoveDirection.UP
+            }
+        }
+        
+        if thePosition.y==position.y
+        {
+            if thePosition.x<position.x
+            {
+                move = PlayerMoveDirection.RIGHT
+            }
+            else
+            {
+                move = PlayerMoveDirection.LEFT
+            }
+        }
+        movingQueue.append(move)
+    }
 //    func handlePanFrom(recognizer:UIPanGestureRecognizer)
 //    {
 //        let coordinates = recognizer.translation(in: parent Scene.view)

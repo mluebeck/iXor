@@ -470,17 +470,17 @@ class XorGameViewController: UIViewController
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
     }
     
     @IBAction func rightGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
     }
     @IBAction func upGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
     }
     @IBAction func downGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN)
+        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
     }
     
     // MARK: Switch Player
