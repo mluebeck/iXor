@@ -489,7 +489,6 @@ class Playground: NSObject {
                                     self.fishFall(position: Playground.newPosition(position:newPosition!,direction: direction),juststarted:true)
                                 }
                             }
-                            
                         })
                 }
             }
@@ -764,6 +763,7 @@ class Playground: NSObject {
                 return
             }
         }
+        self.endOfAnimation()
     }
     
     func createEmptySpaceOnPlaygroundAndRemoveSprite(position:PlaygroundPosition,duration:TimeInterval)
