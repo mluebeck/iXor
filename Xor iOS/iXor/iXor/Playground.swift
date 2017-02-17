@@ -110,7 +110,7 @@ class Playground: NSObject {
     var eventCounter = 0
     var sceneExecution : ((Playground,PlaygroundPosition,MazeElement,SceneEvent,MazeEvent)->Void)?
     var endOfAnimation = {}
-    
+    var playerJustKilled = false
     // screen co-ordinates of the current player
     var playerPosition : PlaygroundPosition
     
@@ -181,8 +181,15 @@ class Playground: NSObject {
             self.endOfAnimation = {
                 if q.count>0
                 {
-                    q.removeFirst()
-                    self.movePlayer(queue:q)
+                    if self.playerJustKilled==false
+                    {
+                        q.removeFirst()
+                        self.movePlayer(queue:q)
+                    }
+                    else
+                    {
+                        self.playerJustKilled = false
+                    }
                 }
             }
             self.movePlayer(direction: firstElement!,automatic:true)
@@ -231,6 +238,7 @@ class Playground: NSObject {
                     if leftElement?.mazeElementType == MazeElementType.space
                     {
                         x += 1
+                        self.increaseEventCounter(comment: "chicken run!", element: MazeElementType.fish)
                         chickenRun(position: currentPosition,juststarted: true)
                     }
                 }
@@ -242,6 +250,7 @@ class Playground: NSObject {
                     if downElement?.mazeElementType == MazeElementType.space
                     {
                         y += 1
+                        self.increaseEventCounter(comment: "fish fall!", element: MazeElementType.fish)
                         fishFall(position: currentPosition,juststarted:true)
                     }
                 }
@@ -400,7 +409,8 @@ class Playground: NSObject {
                             {
                                 element, position in
 
-                                if canMoveChicken == true {
+                                if canMoveChicken == true
+                                {
                                     canMoveChicken = false
                                     if mazeElementType == MazeElementType.puppet
                                     {
@@ -689,13 +699,13 @@ class Playground: NSObject {
         var newCameraPosition = cameraLeftTopPosition
         
         if (cameraLeftTopPosition.x == playerPosition.x && direction==PlayerMoveDirection.LEFT) ||
-            (cameraLeftTopPosition.x == (oldPlayerPosition.x - 7) && direction==PlayerMoveDirection.RIGHT)
+            (cameraLeftTopPosition.x == (oldPlayerPosition.x - 6) && direction==PlayerMoveDirection.RIGHT)
         {
             newCameraPosition.x = oldPlayerPosition.x - 3
         }
         else
         if (cameraLeftTopPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
-            (cameraLeftTopPosition.y == (playerPosition.y - 7) && direction==PlayerMoveDirection.DOWN)
+            (cameraLeftTopPosition.y == (playerPosition.y - 6) && direction==PlayerMoveDirection.DOWN)
         {
                 newCameraPosition.y = playerPosition.y - 3
         }
@@ -755,7 +765,8 @@ class Playground: NSObject {
         
         let rightFromPosition = Playground.right(position: position)
         let rightElement = element(position: rightFromPosition)
-        if let element = rightElement?.mazeElementType {
+        if let element = rightElement?.mazeElementType
+        {
             if element == MazeElementType.chicken || element == MazeElementType.acid
             {
                 self.increaseEventCounter(comment: "chicken run!", element: MazeElementType.chicken)
@@ -789,6 +800,10 @@ class Playground: NSObject {
             // fish, bombe fällt runter von selbst
             if mazeType==MazeElementType.fish || mazeType == MazeElementType.bomb
             {
+                if justStarted==true
+                {
+                    self.increaseEventCounter(comment: "fish fall", element: MazeElementType.fish)
+                }
                 fishFall(position:Playground.up(position: position),juststarted: false)
                 return
             }
@@ -895,13 +910,13 @@ class Playground: NSObject {
         let leftposition = Playground.left(position: position)
         let chickenElement = self.element(position: position)
         let leftElement = self.element(position:leftposition)                                  // space ?
-        var elementType = MazeElementType.space
+        var leftElementType = MazeElementType.space
         if let elementtype = leftElement?.mazeElementType
         {
-            elementType = elementtype
+            leftElementType = elementtype
         }
         
-        switch(elementType)
+        switch(leftElementType)
         {
         case MazeElementType.v_wave,MazeElementType.space:
             // Lösche alte Position des Huhns
@@ -918,7 +933,7 @@ class Playground: NSObject {
         case MazeElementType.player_1, MazeElementType.player_2:
             if juststarted==false
             {
-                killCurrentPlayer(elementType)
+                killCurrentPlayer(leftElementType)
                 createEmptySpaceOnPlayground(position: position)
                 // Bewege Huhn um eins nach links
                 leftElement?.sprite?.removeFromParent()
@@ -943,23 +958,27 @@ class Playground: NSObject {
                 return
                 
             }
-            
+            break
         case MazeElementType.acid:
-            if juststarted==false {
+            if juststarted==false && (chickenElement?.mazeElementType!) != MazeElementType.space {
                 acidCorrosive(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
                 self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
             
             }
             break
         case MazeElementType.bomb:
-            if juststarted==false {
+            if juststarted==false && (chickenElement?.mazeElementType!) != MazeElementType.space {
                 bombExplode(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
                 self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
             }
             break
             
             // END OF CHICKEN RUN REACHED !
-        case MazeElementType.wall,MazeElementType.h_wave,MazeElementType.fish,MazeElementType.chicken,MazeElementType.puppet:
+        case MazeElementType.wall,
+             MazeElementType.h_wave,
+             MazeElementType.fish,
+             MazeElementType.chicken,
+             MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
             changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: {
                 self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
@@ -971,9 +990,7 @@ class Playground: NSObject {
         return
         
     }
-    
-   
-    
+
     func fishFall(position:PlaygroundPosition,juststarted:Bool)
     {
         let bottomposition = Playground.down(position: position)
@@ -985,39 +1002,57 @@ class Playground: NSObject {
         }
         switch(elementType)
         {
-        case MazeElementType.h_wave,MazeElementType.space, MazeElementType.player_1, MazeElementType.player_2:
-            if juststarted==true && (elementType==MazeElementType.player_1 || elementType == MazeElementType.player_2) {
+        case MazeElementType.h_wave,MazeElementType.space:
+            createEmptySpaceOnPlayground(position: position)
+            changeElementAndDrawSprite(position: bottomposition,
+                                       element: fishOrBombElement!,
+                                       duration: Playground.fishDuration,
+                                       completition: {
+                self.fishFall(position:bottomposition,juststarted: false)
+                self.testForChickenOrFishAction(position:position,justStarted:juststarted)
+            })
+            return
+        case MazeElementType.player_1, MazeElementType.player_2:
+            if juststarted==false
+            {
+                killCurrentPlayer(elementType)
                 createEmptySpaceOnPlayground(position: position)
-                changeElementAndDrawSprite(position: position, element: fishOrBombElement!, duration: Playground.fishDuration, completition: nil)
+                // Bewege Huhn um eins nach links
+                bottomElement?.sprite?.removeFromParent()
+                changeElement(position: bottomposition, element: fishOrBombElement!)
+                sceneDelegate?.drawSprite(element:fishOrBombElement!,
+                                          position:bottomposition,
+                                          duration:Playground.fishDuration,
+                                          completed:{
+                                            self.fishFall(position:bottomposition,juststarted: false)
+                                            self.testForChickenOrFishAction(position:position,justStarted:false)
+                })
+                return
             }
             else
             {
-                // Lösche alte Position des Fishes
                 createEmptySpaceOnPlayground(position: position)
-                bottomElement?.removeSprite()
-                // Bewege Fish um eins nach unten
-                changeElementAndDrawSprite(position: bottomposition,
+                changeElementAndDrawSprite(position: position,
                                            element: fishOrBombElement!,
                                            duration: Playground.fishDuration,
                                            completition: {
-                                                // weitermachen !
-                                                self.fishFall(position:bottomposition,juststarted: false)
-                                                self.testForChickenOrFishAction(position:position,justStarted:false)
-                                                if elementType==MazeElementType.player_1 || elementType==MazeElementType.player_2 {
-                                                    self.killCurrentPlayer(elementType)
-                                                }
                 })
             }
             return
-            
         case MazeElementType.acid:
-            acidCorrosive(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
-            self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+            if juststarted==false && (fishOrBombElement?.mazeElementType!) != MazeElementType.space
+            {
+                acidCorrosive(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
+                self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+            }
             return
         
         case MazeElementType.bomb:
-            bombExplode(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
-            self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+            if juststarted==false && (fishOrBombElement?.mazeElementType!) != MazeElementType.space
+            {
+                bombExplode(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
+                self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+            }
             return
             
         case MazeElementType.wall,
@@ -1028,7 +1063,6 @@ class Playground: NSObject {
              MazeElementType.bad_mask,
              MazeElementType.mask:
             createEmptySpaceOnPlayground(position: position)
-            self.increaseEventCounter(comment: "fish Fall!", element: MazeElementType.fish)
             changeElementAndDrawSprite(position: position, element: fishOrBombElement!, duration: Playground.fishDuration, completition: {
                 self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
             })
@@ -1077,6 +1111,7 @@ class Playground: NSObject {
     
     func killCurrentPlayer(_ elementType:MazeElementType)
     {
+        playerJustKilled=true
         if numberOfKilledPlayer==0
         {
             numberOfKilledPlayer=1

@@ -330,12 +330,16 @@ class XorGameViewController: UIViewController
             case MazeEvent.death_player1:
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 1 getötet!"
-                self.switchAndShowPlayerIconOnButton(playerOne:true)
+                //self.switchAndShowPlayerIconOnButton(playerOne:true)
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible: true)
+                AppDelegate.delay(bySeconds: 2.0, dispatchLevel: .main) {
+                    self.replayLabel.isHidden = true
+                    self.switchAndShowPlayerIconOnButton(playerOne: true)
+                }
                 
-                let sprite = SKSpriteNode.init(imageNamed: "skull")
-                let mazeElement = MazeElement(mazeElementType: MazeElementType.skull, sprite:sprite)
-                self.scene.drawSprite(element: mazeElement, position: (self.currentPlayground?.playerPosition)!, duration: 1.0, completed: nil)
+                //let sprite = SKSpriteNode.init(imageNamed: "skull")
+                //let mazeElement = MazeElement(mazeElementType: MazeElementType.skull, sprite:sprite)
+                //self.scene.drawSprite(element: mazeElement, position: (self.currentPlayground?.playerPosition)!, duration: 1.0, completed: nil)
                 
                 /*
                 let zoomInAction = SKAction.scale(to: 2, duration: 5)
@@ -349,15 +353,11 @@ class XorGameViewController: UIViewController
                     {
                      })
                 */
-                AppDelegate.delay(bySeconds: 2.0, dispatchLevel: .main) {
-                    self.replayLabel.isHidden = true
-                    self.switchAndShowPlayerIconOnButton(playerOne: true)
-                }
                 break
                 case MazeEvent.death_player2:
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 2 getötet!"
-                self.switchAndShowPlayerIconOnButton(playerOne:false)
+                //self.switchAndShowPlayerIconOnButton(playerOne:false)
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:true)
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
@@ -370,7 +370,7 @@ class XorGameViewController: UIViewController
                     self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
                     self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                     self.currentPlayground?.justFinished = false
-                    self.currentPlayground?.finished = false
+                    //self.currentPlayground?.finished = false
                 }
                 break
             default:

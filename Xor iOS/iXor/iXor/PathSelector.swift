@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class PathSelector: NSObject {
+class PathSelector: NSObject,UIGestureRecognizerDelegate {
     
     //var panGestureRecognizer  : UIPanGestureRecognizer?
     var longPressGestureRecognizer  : UILongPressGestureRecognizer?
@@ -29,7 +29,19 @@ class PathSelector: NSObject {
         longPressGestureRecognizer?.minimumPressDuration=0.01
         //panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:#selector(PathSelector.handlePanFrom(recognizer:)))
         //panGestureRecognizer?.minimumNumberOfTouches = 1
-
+        longPressGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
+    {
+        if touch.view is UIButton
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
     }
     
     func addGestureSelector(view:UIView)
@@ -38,6 +50,7 @@ class PathSelector: NSObject {
         //view.addGestureRecognizer(panGestureRecognizer!)
     }
     
+
     
     
     func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
