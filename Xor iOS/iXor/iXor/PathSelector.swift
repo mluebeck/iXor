@@ -82,9 +82,22 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
         let coordX = Int(x/Double(segmentX!))
         let coordY = Int(((round(Double(segmentY!)*Double((coordinates?.y)!))/Double(segmentY!))/Double(segmentY!)))
         print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
+        print("cameraPosition: \(playground.cameraLeftTopPosition.x), \(playground.cameraLeftTopPosition.y) ")
         
-        let position = PlaygroundPosition(x:coordX+(playground.cameraLeftTopPosition.x),
-                                          y:coordY+(playground.cameraLeftTopPosition.y))
+        var xPos = coordX+playground.cameraLeftTopPosition.x
+        var yPos = coordY+playground.cameraLeftTopPosition.y
+        
+        if xPos>31
+        {
+            xPos = 31
+        }
+        
+        if yPos>31
+        {
+            yPos = 31
+        }
+        let position = PlaygroundPosition(x:xPos,
+                                          y:yPos)
         //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
         
         print("position: \(position)")
