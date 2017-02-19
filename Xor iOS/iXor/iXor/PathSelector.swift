@@ -225,12 +225,5 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
             }
         }
         movingQueue.append(move)
-    }
-//    func handlePanFrom(recognizer:UIPanGestureRecognizer)
-//    {
-//        let coordinates = recognizer.translation(in: parent Scene.view)
-//        print("handlePanFrom Tapped! \(coordinates) ")
-//    }
-
-    
+    }    
 }

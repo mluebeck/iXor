@@ -238,7 +238,7 @@ class Playground: NSObject {
                     if leftElement?.mazeElementType == MazeElementType.space
                     {
                         x += 1
-                        self.increaseEventCounter(comment: "chicken run!", element: MazeElementType.fish)
+                        self.increaseEventCounter(comment: "chicken run 1!", element: MazeElementType.fish)
                         chickenRun(position: currentPosition,juststarted: true)
                     }
                 }
@@ -419,7 +419,7 @@ class Playground: NSObject {
                                     }
                                     else
                                     {
-                                        self.increaseEventCounter(comment: "chicken run!", element: MazeElementType.chicken)
+                                        self.increaseEventCounter(comment: "chicken run 2!", element: MazeElementType.chicken)
                                         self.chickenRun(position: Playground.newPosition(position: newPosition!, direction: direction),juststarted: true)
                                     }
                                 }
@@ -769,7 +769,7 @@ class Playground: NSObject {
         {
             if element == MazeElementType.chicken || element == MazeElementType.acid
             {
-                self.increaseEventCounter(comment: "chicken run!", element: MazeElementType.chicken)
+                self.increaseEventCounter(comment: "chicken run 3!", element: MazeElementType.chicken)
                 self.chickenRun(position: rightFromPosition,juststarted: true)
                 return
             }
@@ -790,6 +790,11 @@ class Playground: NSObject {
     func createEmptySpaceOnPlayground(position:PlaygroundPosition)
     {
         changeElement(position: position, element: MazeElement(mazeElementType: MazeElementType.space, sprite:nil))
+    }
+    
+    func createWallOnPlayground(position:PlaygroundPosition)
+    {
+        changeElement(position: position, element: MazeElement(mazeElementType: MazeElementType.wall, sprite:nil))
     }
     
     func testForChickenOrFishAction(position:PlaygroundPosition,justStarted:Bool)
@@ -817,7 +822,7 @@ class Playground: NSObject {
             {
                 if justStarted==true
                 {
-                    self.increaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
+                    self.increaseEventCounter(comment: "chicken run 4!", element: MazeElementType.chicken)
                 }
                 chickenRun(position:Playground.right(position: position),juststarted: justStarted)
                 return
@@ -958,18 +963,18 @@ class Playground: NSObject {
                 return
                 
             }
-            break
+            
         case MazeElementType.acid:
             if juststarted==false && (chickenElement?.mazeElementType!) != MazeElementType.space {
                 acidCorrosive(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
-                self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
+                self.decreaseEventCounter(comment: "chicken run acid", element: MazeElementType.chicken)
             
             }
             break
         case MazeElementType.bomb:
             if juststarted==false && (chickenElement?.mazeElementType!) != MazeElementType.space {
                 bombExplode(element:leftElement!,position:position,causedBy: MazeElementType.chicken)
-                self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
+                self.decreaseEventCounter(comment: "chicken run bomb", element: MazeElementType.chicken)
             }
             break
             
@@ -981,7 +986,7 @@ class Playground: NSObject {
              MazeElementType.puppet:
             createEmptySpaceOnPlayground(position: position)
             changeElementAndDrawSprite(position: position, element: chickenElement!, duration: Playground.chickenDuration, completition: {
-                self.decreaseEventCounter(comment: "chicken run", element: MazeElementType.chicken)
+                self.decreaseEventCounter(comment: "chicken run end", element: MazeElementType.chicken)
             })
             return
         default:
@@ -1206,17 +1211,25 @@ class Playground: NSObject {
             if causedBy==MazeElementType.chicken || causedBy == MazeElementType.acid
             {
                 let elementLeft = Playground.left(position: position)
-                 sceneDelegate?.playSoundAcid()
+
+                self.createWallOnPlayground(position: elementLeft)
+                
+                
+                sceneDelegate?.playSoundAcid()
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.9) // chicken/acid
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft),duration:0.9) //  acid up
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft),duration:0.9) // acid down
                 self.increaseEventCounter(comment:"acid corrosive",element: causedBy)
                 sceneDelegate?.doAcidAnimation(element: element,block:{
-                    element.removeSprite(duration: 0.0)
-                    self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementLeft,duration:0.0) // acid
-                    self.testForChickenOrFishAction(position: Playground.up(position: elementLeft),justStarted:false)
-                    self.testForChickenOrFishAction(position: position,justStarted:false)
-                    self.testForChickenOrFishAction(position: Playground.down(position: elementLeft),justStarted:false)
+                    
+                    
+                    element.sprite?.removeFromParent()
+                    self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:elementLeft,duration:0.0)
+
+                    self.testForChickenOrFishAction(position: Playground.up(position: elementLeft),justStarted:true)
+                    self.testForChickenOrFishAction(position: elementLeft,justStarted:true)
+                    self.testForChickenOrFishAction(position: position,justStarted:true)
+                    self.testForChickenOrFishAction(position: Playground.down(position: elementLeft),justStarted:true)
                     self.decreaseEventCounter(comment:"acid corrosive",element: causedBy)
 
                     

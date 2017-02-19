@@ -279,17 +279,17 @@ class XorGameViewController: UIViewController
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
-        currentPlayground = playgrounds[XorGameViewController.currentPlaygroundLevel]
+        self.currentPlayground = playgrounds[XorGameViewController.currentPlaygroundLevel]
         
         if let gesMask = self.currentPlayground?.masken_gesamtanzahl {
             collectedMasksLabel!.text! = "0/\(gesMask)"
         }
         playgroundView.isMultipleTouchEnabled = false
         
-        scene = GameScene(size: playgroundView.bounds.size, playground:self.currentPlayground!)
-        scene.scaleMode = .aspectFill
-        scene.backgroundColor = UIColor.lightGray
-        scene.updateViewController = {
+        self.scene = GameScene(size: playgroundView.bounds.size, playground:self.currentPlayground!)
+        self.scene.scaleMode = .aspectFill
+        self.scene.backgroundColor = UIColor.lightGray
+        self.scene.updateViewController = {
             mazeEvent in
             self.mazeEvent = mazeEvent
             switch(mazeEvent)
@@ -415,14 +415,14 @@ class XorGameViewController: UIViewController
     // Show Map Button
     @IBAction func mapButtonPressed()
     {
-        mapTextView.show(visible: (currentPlayground?.mapsFound.count == 0))
+        mapTextView.show(visible: (self.currentPlayground?.mapsFound.count == 0))
         if map_visible==false {
-            scene.showMap()
+            self.scene.showMap()
             map_visible = true
         }
         else
         {
-            scene.hideMap()
+            self.scene.hideMap()
             mapTextView.show(visible: false)
             map_visible = false
         }
@@ -470,23 +470,23 @@ class XorGameViewController: UIViewController
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
+        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
     }
     
     @IBAction func rightGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
+        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
     }
     @IBAction func upGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
+        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
     }
     @IBAction func downGameButtonPressed(){
-        currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
+        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
     }
     
     // MARK: Switch Player
     @IBAction func switchPlayerPressed()
     {
-        if (currentPlayground?.numberOfKilledPlayer)!==0
+        if (self.currentPlayground?.numberOfKilledPlayer)!==0
         {
             switchAndShowPlayerIconOnButton(playerOne: (currentPlayground?.akt_spieler_ist_playerOne)!)
         }
@@ -497,19 +497,19 @@ class XorGameViewController: UIViewController
         playerChangeButton.isEnabled = true
         if playerOne == true
         {
-            if !(scene==nil)
+            if !(self.scene==nil)
             {
-                scene.switchToPlayerTwo()
+                self.scene.switchToPlayerTwo()
             }
-            currentPlayground?.akt_spieler_ist_playerOne = false
+            self.currentPlayground?.akt_spieler_ist_playerOne = false
         }
         else
         {
-            if !(scene==nil)
+            if !(self.scene==nil)
             {
-                scene.switchToPlayerOne()
+                self.scene.switchToPlayerOne()
             }
-            currentPlayground?.akt_spieler_ist_playerOne = true
+            self.currentPlayground?.akt_spieler_ist_playerOne = true
         }
         self.changePlayerIconOnButton(playerOne: playerOne)
     }

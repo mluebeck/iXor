@@ -356,7 +356,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="KbD-9B-DyD" secondAttribute="height" multiplier="1:1" id="H6o-Dq-UM5"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="up_low">
+                                                        <state key="normal" backgroundImage="up">
                                                             <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -368,7 +368,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zhH-4i-AGq" secondAttribute="height" multiplier="1:1" id="iRL-er-ywl"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="down_low">
+                                                        <state key="normal" backgroundImage="down">
                                                             <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -380,7 +380,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="io0-Pr-ugY" secondAttribute="height" multiplier="1:1" id="8Kv-GK-Tvs"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="left_low">
+                                                        <state key="normal" backgroundImage="left">
                                                             <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -392,7 +392,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="mMX-P1-SqZ" secondAttribute="height" multiplier="1:1" id="0Ol-CU-E9D"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="right_low">
+                                                        <state key="normal" backgroundImage="right">
                                                             <color key="titleColor" red="1" green="0.25676650909999998" blue="0.20143968200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -686,7 +686,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -881,17 +881,17 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
     </scenes>
     <resources>
         <image name="buch" width="50" height="59"/>
-        <image name="down_low" width="60" height="60"/>
-        <image name="iXor" width="320" height="568"/>
+        <image name="down" width="52" height="52"/>
+        <image name="iXor" width="319" height="569"/>
         <image name="karte_lo" width="20" height="21"/>
         <image name="karte_lu" width="20" height="20"/>
         <image name="karte_ro" width="20" height="20"/>
         <image name="karte_ru" width="20" height="20"/>
-        <image name="left_low" width="60" height="60"/>
+        <image name="left" width="52" height="52"/>
         <image name="maske" width="33" height="36"/>
-        <image name="right_low" width="60" height="60"/>
+        <image name="right" width="52" height="52"/>
         <image name="spieler2" width="40" height="40"/>
-        <image name="up_low" width="60" height="60"/>
+        <image name="up" width="52" height="52"/>
         <image name="verbot" width="720" height="720"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

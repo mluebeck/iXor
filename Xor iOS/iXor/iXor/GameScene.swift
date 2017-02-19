@@ -122,6 +122,7 @@ class GameScene: SKScene {
         for i in 1...(numImages)
         {
             let acidTextureName = "saeure_\(i)"
+            print("Saeurename:\(acidTextureName)")
             acidCorrosiveFrames.append(acidAnimatedAtlas.textureNamed(acidTextureName))
         }
         
@@ -131,7 +132,7 @@ class GameScene: SKScene {
     func doAcidAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
     {
         sprite.run(SKAction.repeat(
-            SKAction.animate(with: acidFrames,timePerFrame: 0.2,resize: true,restore: true),
+            SKAction.animate(with: acidFrames,timePerFrame: 0.05,resize: true,restore: true),
             count:1), completion: block
         )
     }
@@ -194,6 +195,9 @@ class GameScene: SKScene {
             for y in 0..<PlaygroundBuilder.Constants.groesseY {
                 if let mazeType = spriteNode(position: PlaygroundPosition(x: y, y: x)) {
                     if let sprite = mazeType.sprite {
+                        if mazeType.mazeElementType == MazeElementType.acid {
+                            print("saure")
+                        }
                         sprite.alpha=1.0
                         sprite.removeFromParent()
                         worldNode.addChild(sprite)
