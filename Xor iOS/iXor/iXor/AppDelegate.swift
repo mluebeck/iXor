@@ -26,6 +26,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var playgrounds : [Int : Playground] = PlaygroundBuilder.playgrounds()
+    
     var window: UIWindow?
 
 

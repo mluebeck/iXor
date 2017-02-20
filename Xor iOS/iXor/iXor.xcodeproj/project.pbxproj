@@ -186,6 +186,42 @@
 			name = "Xibs and Storyboards";
 			sourceTree = "<group>";
 		};
+		108903401E5B4D8E0086E657 /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
+				8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */,
+				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
+				10A03C7F1E5A2F92007D9F1F /* PlaygroundExtension.swift */,
+				10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */,
+			);
+			name = Playground;
+			sourceTree = "<group>";
+		};
+		108903411E5B4DA10086E657 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				107739161E455BE000BBE90D /* DismissSegue.swift */,
+				106DAA071E46A47800E637B0 /* InfoWebViewController.swift */,
+				107739141E45570700BBE90D /* InfoViewController.swift */,
+				8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */,
+				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		108903421E5B4DC90086E657 /* Scenes and Views */ = {
+			isa = PBXGroup;
+			children = (
+				10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */,
+				109E14031E3B4BB1007DB9F8 /* FrostedView.swift */,
+				8C4312B01DF4717800E80996 /* GameScene.swift */,
+				107FF8021E526E6F006B9BCF /* PathSelector.swift */,
+				10BACAFC1E5090380034C42A /* EdgeSprite.swift */,
+			);
+			name = "Scenes and Views";
+			sourceTree = "<group>";
+		};
 		10A03C831E5A5252007D9F1F /* level */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,22 +308,10 @@
 		8C44EBED1E26FFC900229C93 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				107FF8021E526E6F006B9BCF /* PathSelector.swift */,
-				10BACAFC1E5090380034C42A /* EdgeSprite.swift */,
 				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
-				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
-				10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */,
-				10A03C7F1E5A2F92007D9F1F /* PlaygroundExtension.swift */,
-				8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */,
-				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
-				8C4312B01DF4717800E80996 /* GameScene.swift */,
-				8C4312B21DF4717800E80996 /* XorGameViewController.swift */,
-				8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */,
-				109E14031E3B4BB1007DB9F8 /* FrostedView.swift */,
-				107739141E45570700BBE90D /* InfoViewController.swift */,
-				106DAA071E46A47800E637B0 /* InfoWebViewController.swift */,
-				107739161E455BE000BBE90D /* DismissSegue.swift */,
-				10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */,
+				108903421E5B4DC90086E657 /* Scenes and Views */,
+				108903411E5B4DA10086E657 /* View Controller */,
+				108903401E5B4D8E0086E657 /* Playground */,
 			);
 			name = Classes;
 			sourceTree = "<group>";

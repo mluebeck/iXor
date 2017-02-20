@@ -20,6 +20,9 @@ enum Orientation
 
 class XorGameViewController: UIViewController
 {
+    
+    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
@@ -150,7 +153,7 @@ class XorGameViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        switchAndShowPlayerIconOnButton(playerOne: false)
+        switchAndShowPlayerIconOnButton(playerOne: false,reorientCamera: true)
         self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
         if self.scene != nil
         {
@@ -181,7 +184,7 @@ class XorGameViewController: UIViewController
         else
         {
             self.resetMaps()
-            self.playgrounds = PlaygroundBuilder.playgroundsToTest()
+            self.playgrounds = XorGameViewController.appDelegate.playgrounds
             self.replayLabel.isHidden = true
             self.presentPlayground()
         }
@@ -226,6 +229,9 @@ class XorGameViewController: UIViewController
             self.mazeEvent = mazeEvent
             switch(mazeEvent)
             {
+            case MazeEvent.switchPlayer:
+                self.switchPlayerPressedWithoutCameraReorientation()
+                break
             case MazeEvent.map1_found:
                 self.mapLeftUp.alpha = 1.0
                 break;
@@ -259,6 +265,13 @@ class XorGameViewController: UIViewController
             case MazeEvent.bad_mask_found:
                 self.scene.playground.badMaskOperation()
                 break
+            case MazeEvent.movesExceeded:
+                    self.successView.show(visible: true)
+                    self.messageLabel.text = "Oh nein! Du bist zu viele Schritte gegangen!\n\nVersuch' es gleich nochmal!"
+                    self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
+                    self.scene.playground.justFinished = false
+                    //self.currentPlayground?.finished = false
+                break
             case MazeEvent.death_player1:
                 self.replayLabel.isHidden = false
                 self.replayLabel.text="Spieler 1 getötet!"
@@ -266,7 +279,7 @@ class XorGameViewController: UIViewController
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible: true)
                 AppDelegate.delay(bySeconds: 2.0, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
-                    self.switchAndShowPlayerIconOnButton(playerOne: true)
+                    self.switchAndShowPlayerIconOnButton(playerOne: true,reorientCamera: true)
                 }
                 
                 //let sprite = SKSpriteNode.init(imageNamed: "skull")
@@ -293,7 +306,7 @@ class XorGameViewController: UIViewController
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:true)
                 AppDelegate.delay(bySeconds: 1.5, dispatchLevel: .main) {
                     self.replayLabel.isHidden = true
-                    self.switchAndShowPlayerIconOnButton(playerOne: false)
+                    self.switchAndShowPlayerIconOnButton(playerOne: false,reorientCamera: true)
                 }
                 break
             case MazeEvent.death_both:
@@ -369,7 +382,7 @@ class XorGameViewController: UIViewController
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    self.scene.playground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel)
+                    self.scene.playground =  XorGameViewController.appDelegate.playgrounds[selectedPlaygroundLevel]!
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
                     self.navigationBarTitle.text = self.scene.playground.level_name
@@ -416,18 +429,27 @@ class XorGameViewController: UIViewController
     {
         if (self.scene.playground.numberOfKilledPlayer)==0
         {
-            switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne))
+            switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne),reorientCamera: true)
         }
     }
     
-    func switchAndShowPlayerIconOnButton(playerOne:Bool)
+    func switchPlayerPressedWithoutCameraReorientation()
+    {
+        if (self.scene.playground.numberOfKilledPlayer)==0
+        {
+            switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne),reorientCamera: false)
+        }
+    }
+    
+    
+    func switchAndShowPlayerIconOnButton(playerOne:Bool,reorientCamera:Bool)
     {
         playerChangeButton.isEnabled = true
         if playerOne == true
         {
             if !(self.scene==nil)
             {
-                self.scene.switchToPlayerTwo()
+                self.scene.switchToPlayerTwo(reorientCamera:reorientCamera)
                 self.scene.playground.akt_spieler_ist_playerOne = false
             }
         }
@@ -435,7 +457,7 @@ class XorGameViewController: UIViewController
         {
             if !(self.scene==nil)
             {
-                self.scene.switchToPlayerOne()
+                self.scene.switchToPlayerOne(reorientCamera:reorientCamera)
                 self.scene.playground.akt_spieler_ist_playerOne = true
             }
         }
@@ -475,7 +497,7 @@ class XorGameViewController: UIViewController
             self.changePlayerIconOnButton(playerOne: !(Playground.replay.first?.akt_spieler_ist_playerOne)!)
             self.scene.playground = Playground.replay.first!
             self.scene.resetGameScene(playground: self.scene.playground)
-            self.scene.playground.updateCameraPosition(PlayerMoveDirection.UP)
+            self.scene.playground.setCameraPositionToPlayerOne()// updateCameraPosition(PlayerMoveDirection.UP)
             self.resetLabels()
             Playground.replay.removeAll()
             if self.scene.playground.numberOfKilledPlayer>0
@@ -655,7 +677,7 @@ class XorGameViewController: UIViewController
         Playground.replay.removeAll()
         self.scene.updateWithNewPlayground(self.scene.playground)
         self.scene.resetGameScene(playground: self.scene.playground)
-        self.scene.initWithPlayerOne()
+        self.scene.initWithPlayerOne(reorientCamera: true)
         self.resetLabels()
         
         map_visible = false
@@ -677,9 +699,10 @@ class XorGameViewController: UIViewController
             
         }
         else
+        if mazeEvent == MazeEvent.movesExceeded
         {
-            //self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
-            //presentPlayground()
+            successView.show(visible: false)
+            self.gotoFirst()
         }
     }
     

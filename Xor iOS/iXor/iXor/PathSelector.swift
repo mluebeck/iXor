@@ -107,7 +107,7 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
                 (playground.akt_spieler_ist_playerOne==false && (e?.mazeElementType == MazeElementType.player_1)))
                 
             {
-                return
+                playground.changePlayer()
             }
             
             //self.moving(position: position)

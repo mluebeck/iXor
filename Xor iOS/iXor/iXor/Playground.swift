@@ -306,6 +306,12 @@ class Playground: NSObject,NSCoding {
         super.init()
     }
     
+    func changePlayer()
+    {
+        sceneDelegate?.updateViewController(event:MazeEvent.switchPlayer)
+    }
+    
+    
     func movePlayer(queue:Array<PlayerMoveDirection>)
     {
         if queue.count>0
@@ -433,6 +439,10 @@ class Playground: NSObject,NSCoding {
     
     func movePlayer(direction:PlayerMoveDirection,automatic:Bool)
     {
+        if self.numberOfMovesNotExceeded()==false
+        {
+            return
+        }
         let previousPlayground = self.copy() as! Playground
         Playground.replay.append(previousPlayground)
         print("playground history:\(Playground.replay)")
@@ -597,6 +607,10 @@ class Playground: NSObject,NSCoding {
         {
             Playground.replay.removeLast(1)
 
+        }
+        if self.numberOfMovesNotExceeded() == false {
+            print("Ende!")
+            sceneDelegate?.updateViewController(event: MazeEvent.movesExceeded)
         }
     }
 
@@ -778,11 +792,18 @@ class Playground: NSObject,NSCoding {
         }
     }
     
+    func setCameraPositionToPlayerOne()
+    {
+        cameraLeftTopPosition.x = self.positionPlayerOne.x
+        cameraLeftTopPosition.y = self.positionPlayerOne.y
+        self.updateCameraPosition(PlayerMoveDirection.UP)
+    }
+    
     func updateCameraPosition(_ direction:PlayerMoveDirection)
     {
         // CAMERA
         // we moved the player, now check if we have to move the camera
-        var newCameraPosition = cameraLeftTopPosition
+        let newCameraPosition = cameraLeftTopPosition
         
         if (cameraLeftTopPosition.x == playerPosition.x && direction==PlayerMoveDirection.LEFT) ||
             (cameraLeftTopPosition.x == (oldPlayerPosition.x - 6) && direction==PlayerMoveDirection.RIGHT)

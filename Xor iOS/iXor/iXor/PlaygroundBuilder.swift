@@ -11,6 +11,12 @@ import SpriteKit
 
 class PlaygroundBuilder: NSObject {
 
+    static var filePath : String {
+        let manager = FileManager.default
+        let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+        return (url?.appendingPathComponent("playgrounds").path)!
+    }
+    
     static let mazeElementToString : [Character : MazeElementType]=[
         "_":MazeElementType.space,
         "F":MazeElementType.fish,
@@ -84,17 +90,7 @@ class PlaygroundBuilder: NSObject {
         static let groesseY = 32;         // playground dimensions (=32x32)
         static let sichtbareGroesseX = 8  // visible playground
         static let sichtbareGroesseY = 8  // visible playground
-        static let maximumMoves = 1000
-    }
-    
-    enum SceneNotification : Int {
-        case REDRAW = 0,
-        UPDATE_VIEWCONTROLLER,
-        DRAW_PLAYER,
-        MOVE_CAMERA,
-        DRAW_SPRITE,
-        SPRITE_TO_REMOVE,
-        SPRITE_OVERWRITE
+        static let maximumMoves = 10
     }
     
     static func readLevelString(filepath: String) -> Playground {
@@ -247,7 +243,7 @@ class PlaygroundBuilder: NSObject {
     }
     
     
-    static func readLevel(number: Int) -> Playground {
+    static private func readLevel(number: Int) -> Playground {
         var file : String = ""
         if number>9 {
             file = "level\(number)"
@@ -266,61 +262,22 @@ class PlaygroundBuilder: NSObject {
     
     static func archive(_ playgroundList : PlaygroundList)
     {
-        var filePath : String {
-            let manager = FileManager.default
-            let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-            return (url?.appendingPathComponent("objectsArray").path)!
-        }
-        print("\(filePath)")
-
-       // let dirURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/playgrounds.plist")
-        
         let b = NSKeyedArchiver.archiveRootObject(playgroundList, toFile: filePath)
-        
         print("Bool:\(b)")
-        //let data = NSMutableData()
-        //let archiver = NSKeyedArchiver.init(forWritingWith: data)
-        //archiver.encode(playgroundList.playgrounds, forKey: "playgrounds") //(object:self, forKey:"playgrounds")
-        //archiver.finishEncoding()
-        /*do {
-            try data.write(to: dirURL!,options:[])
-        } catch {
-            
-        }*/
     }
 
     static func unarchive()->PlaygroundList
     {
-        do
-        {
-            var filePath : String {
-                let manager = FileManager.default
-                let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
-                return (url?.appendingPathComponent("objectsArray").path)!
-            }
-            let path = filePath
-            print("\(path)")
-            var playgroundList : PlaygroundList?
-            playgroundList = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PlaygroundList
-
-            if playgroundList == nil
-            {
-                return PlaygroundList()
-             }
-            /*let data = try Data.init(contentsOf: dirURL!, options: NSData.ReadingOptions.uncached)
-            let unarchiver =  NSKeyedUnarchiver.init(forReadingWith: data)
-            playgroundList.playgrounds = unarchiver.decodeObject(forKey:"playgrounds") as! [Int : Playground]
-            unarchiver.finishDecoding()
-            */
-            
-            return playgroundList!
-        }
-        catch
+        let path = filePath
+        print("\(path)")
+        var playgroundList : PlaygroundList?
+        playgroundList = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PlaygroundList
+        if playgroundList == nil
         {
             return PlaygroundList()
         }
+        return playgroundList!
     }
-    
     
     static func playgrounds() -> [Int: Playground]
     {

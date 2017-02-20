@@ -50,7 +50,9 @@ enum MazeEvent : Int {
     death_player1,
     death_player2,
     death_both,
-    redraw
+    redraw,
+    switchPlayer,
+    movesExceeded
 }
 
 class MazeElement:NSObject,NSCoding {

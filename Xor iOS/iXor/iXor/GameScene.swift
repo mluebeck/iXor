@@ -65,7 +65,7 @@ class GameScene: SKScene {
         addChild(worldNode)
         self.updateWithNewPlayground(self.playground)
         self.isUserInteractionEnabled = true
-        initWithPlayerOne()
+        initWithPlayerOne(reorientCamera: true)
         prepareAcidAnimation()
         prepareBombAnimation()
         prepareSkullAnimation()
@@ -271,7 +271,7 @@ class GameScene: SKScene {
         return mazeElement
     }
     
-    func initWithPlayerOne()
+    func initWithPlayerOne(reorientCamera:Bool)
     {
         self.playground.akt_spieler_ist_playerOne = true
         let position = PlaygroundPosition(x:playground.positionPlayerOne.x-4,
@@ -283,13 +283,13 @@ class GameScene: SKScene {
         moveCameraToPlaygroundCoordinates(position:position)
     }
     
-    func switchToPlayerOne()
+    func switchToPlayerOne(reorientCamera:Bool)
     {
         self.playground.positionPlayerTwo = self.playground.playerPosition
-        initWithPlayerOne()
+        initWithPlayerOne(reorientCamera:reorientCamera)
     }
     
-    func switchToPlayerTwo()
+    func switchToPlayerTwo(reorientCamera:Bool)
     {
         let position = PlaygroundPosition(x:playground.positionPlayerTwo.x-4,
                                           y:playground.positionPlayerTwo.y-4)
@@ -298,12 +298,15 @@ class GameScene: SKScene {
         self.playground.oldPlayerPosition = self.playground.positionPlayerTwo
         print("player one:\(self.playground.positionPlayerOne)")
         print("player two:\(self.playground.positionPlayerTwo)")
-        moveCameraToPlaygroundCoordinates(position:position)
+        if reorientCamera==true
+        {
+            moveCameraToPlaygroundCoordinates(position:position)
+        }
     }
     
     func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
     {
-        var coord = position
+        let coord = position
         if coord.x<0
         {
             coord.x = 0
@@ -323,7 +326,7 @@ class GameScene: SKScene {
         let xCoord = (CGFloat(coord.x)*CGFloat(segmentSize().x))*CGFloat(-1)
         let yCoord = CGFloat(coord.y)*segmentSize().y
         worldNode.position = CGPoint(x:xCoord,y:yCoord)
-        //print("Camera position:\(coord)")
+        print("Camera position:\(coord.x), \(coord.y)")
         self.playground.cameraLeftTopPosition = coord
     }
     
