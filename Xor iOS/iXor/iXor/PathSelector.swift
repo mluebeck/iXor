@@ -14,7 +14,7 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
     //var panGestureRecognizer  : UIPanGestureRecognizer?
     var longPressGestureRecognizer  : UILongPressGestureRecognizer?
     
-    var intermediateAlreadySpriteDrawnQueue = [PlaygroundPosition : MazeElement]()
+    var intermediateAlreadySpriteDrawnQueue = [Int : MazeElement]()
     var movingQueue = Array<PlayerMoveDirection>()
     var startDrawing = false
     var oldPosition : PlaygroundPosition?
@@ -84,18 +84,9 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
         print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
         print("cameraPosition: \(playground.cameraLeftTopPosition.x), \(playground.cameraLeftTopPosition.y) ")
         
-        var xPos = coordX+playground.cameraLeftTopPosition.x
-        var yPos = coordY+playground.cameraLeftTopPosition.y
+        let xPos = coordX+playground.cameraLeftTopPosition.x
+        let yPos = coordY+playground.cameraLeftTopPosition.y
         
-        if xPos>31
-        {
-            xPos = 31
-        }
-        
-        if yPos>31
-        {
-            yPos = 31
-        }
         let position = PlaygroundPosition(x:xPos,
                                           y:yPos)
         //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
@@ -111,6 +102,14 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
             {
                 return
             }
+            
+            if ((playground.akt_spieler_ist_playerOne==true && (e?.mazeElementType == MazeElementType.player_2)) ||
+                (playground.akt_spieler_ist_playerOne==false && (e?.mazeElementType == MazeElementType.player_1)))
+                
+            {
+                return
+            }
+            
             //self.moving(position: position)
         }
         else
@@ -144,40 +143,42 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
             
             if (e?.mazeElementType == MazeElementType.wall || e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2)
             {
+                print("1-> \(position.hashValue)")
                 if intermediateAlreadySpriteDrawnQueue.count == 1
                 {
                     if let oldPos = oldPosition
                     {
-                        let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPos]
+                        let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPos.hashValue]
                         mazeElement?.sprite?.removeFromParent()
-                        intermediateAlreadySpriteDrawnQueue[oldPos]=nil
+                        intermediateAlreadySpriteDrawnQueue[oldPos.hashValue]=nil
                     }
                 }
                 return
             }
             else
-            if intermediateAlreadySpriteDrawnQueue[position] == nil
+            if intermediateAlreadySpriteDrawnQueue[position.hashValue] == nil
             {
                 let edgeSprite = EdgeSprite.init()
                 edgeSprite.update(number:intermediateAlreadySpriteDrawnQueue.count+1)
                 edgeSprite.zPosition=1
                 playground.sceneDelegate?.addChild(edgeSprite)
                 let mazeElement = MazeElement(mazeElementType: MazeElementType.redCorner, sprite: edgeSprite)
-                intermediateAlreadySpriteDrawnQueue[position] = mazeElement
+                intermediateAlreadySpriteDrawnQueue[position.hashValue] = mazeElement
                 
                 self.moving(position: position)
                 
-                print("-> \(intermediateAlreadySpriteDrawnQueue.count)")
+                print("2-> \(position.hashValue) \(intermediateAlreadySpriteDrawnQueue.count)")
                 playground.sceneDelegate?.drawRelativeToCamera(sprite: edgeSprite, element:mazeElement, position: position, duration: 0.0, completed: nil)
             }
             else
             {
-                if oldPosition != position && oldPosition != nil
+                print("-> \(position.hashValue)")
+                if oldPosition?.hashValue != position.hashValue && oldPosition != nil
                 {
                     print("Schon drin, also nichts tun \(intermediateAlreadySpriteDrawnQueue.count)")
-                    let mazeElement = intermediateAlreadySpriteDrawnQueue[oldPosition!]
+                    let mazeElement = intermediateAlreadySpriteDrawnQueue[(oldPosition?.hashValue)!]
                     mazeElement?.sprite?.removeFromParent()
-                    intermediateAlreadySpriteDrawnQueue[oldPosition!]=nil
+                    intermediateAlreadySpriteDrawnQueue[(oldPosition?.hashValue)!]=nil
                     movingQueue.removeLast()
                 }
             }

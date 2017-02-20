@@ -53,9 +53,49 @@ enum MazeEvent : Int {
     redraw
 }
 
-struct MazeElement {
+class MazeElement:NSObject,NSCoding {
     var mazeElementType : MazeElementType?
     var sprite : SKSpriteNode?
+    
+    init(mazeElementType: MazeElementType?, sprite: SKSpriteNode?)
+    {
+        self.mazeElementType = mazeElementType
+        self.sprite = sprite
+    }
+    
+    required init(coder: NSCoder)
+    {
+        let str = coder.decodeObject(forKey: "mazeElementType")  as! String
+        let character = Character(str)
+        self.mazeElementType = PlaygroundBuilder.mazeElementToString[character]
+        self.sprite = coder.decodeObject(forKey: "sprite") as? SKSpriteNode
+        if self.sprite == nil && PlaygroundBuilder.mazeElementToString[character] != MazeElementType.space
+        {
+            assert(false)
+        }
+        
+        /*if self.sprite==nil
+        {
+            if self.mazeElementType != MazeElementType.space {
+                print("sprite: \(self.mazeElementType)")
+            }
+        }*/
+        
+    }
+    
+    func encode(with aCoder: NSCoder)
+    {
+        if let me = self.mazeElementType 
+        {
+            
+            aCoder.encode(PlaygroundBuilder.stringToMazeElement[me], forKey: "mazeElementType")
+        }
+        if let s = self.sprite
+        {
+            aCoder.encode(s, forKey: "sprite")
+        }
+    }
+    
     
     func removeSprite(duration:TimeInterval) {
         let fadeOut = SKAction.fadeOut(withDuration: 0.25)

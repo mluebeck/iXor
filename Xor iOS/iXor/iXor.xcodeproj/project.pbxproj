@@ -42,6 +42,7 @@
 		10A03CA71E5A5253007D9F1F /* level13.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C941E5A5252007D9F1F /* level13.xor */; };
 		10A03CA81E5A5253007D9F1F /* level14.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C951E5A5252007D9F1F /* level14.xor */; };
 		10A03CA91E5A5253007D9F1F /* level15.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C961E5A5252007D9F1F /* level15.xor */; };
+		10A03CAC1E5A6E69007D9F1F /* PlaygroundList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */; };
 		10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BACAFC1E5090380034C42A /* EdgeSprite.swift */; };
 		10BD350E1E4941A2006298D0 /* Views.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10BD35101E4941A2006298D0 /* Views.xib */; };
 		10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */; };
@@ -113,6 +114,7 @@
 		10A03C941E5A5252007D9F1F /* level13.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level13.xor; sourceTree = "<group>"; };
 		10A03C951E5A5252007D9F1F /* level14.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level14.xor; sourceTree = "<group>"; };
 		10A03C961E5A5252007D9F1F /* level15.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level15.xor; sourceTree = "<group>"; };
+		10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundList.swift; sourceTree = "<group>"; };
 		10BACAFC1E5090380034C42A /* EdgeSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeSprite.swift; sourceTree = "<group>"; };
 		10BD350A1E493EA5006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		10BD350B1E493EA5006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				10BACAFC1E5090380034C42A /* EdgeSprite.swift */,
 				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
 				8C24163E1DF9FF490009FCC6 /* Playground.swift */,
+				10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */,
 				10A03C7F1E5A2F92007D9F1F /* PlaygroundExtension.swift */,
 				8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */,
 				8C24163C1DF9FB4E0009FCC6 /* MazeElement.swift */,
@@ -454,6 +457,7 @@
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
 				106DAA081E46A47800E637B0 /* InfoWebViewController.swift in Sources */,
 				10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */,
+				10A03CAC1E5A6E69007D9F1F /* PlaygroundList.swift in Sources */,
 				10659B0B1E3BE748001D4235 /* UIImage+REFrostedViewController.m in Sources */,
 				107739011E450D3B00BBE90D /* SpeechBubbleView.swift in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,

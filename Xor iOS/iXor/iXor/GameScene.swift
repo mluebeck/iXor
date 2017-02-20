@@ -169,8 +169,9 @@ class GameScene: SKScene {
     
     func doBombAnimation(sprite:SKSpriteNode,block:@escaping ()->Void )
     {
+        sprite.zPosition=1.0
         sprite.run(SKAction.repeat(
-            SKAction.animate(with: bombFrames,timePerFrame: 0.1,resize: true,restore: true),
+            SKAction.animate(with: bombFrames,timePerFrame: 0.05,resize: true,restore: true),
             count:1), completion: block
         )
     }

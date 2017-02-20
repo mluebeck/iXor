@@ -72,7 +72,7 @@ class XorGameViewController: UIViewController
     var map_visible = false
     var playgrounds = [Int: Playground]()
     var mazeEvent = MazeEvent.redraw
-    var currentPlayground : Playground?
+
     
     // motion
     var oldAcceleration : CMAcceleration?
@@ -123,24 +123,24 @@ class XorGameViewController: UIViewController
         }
         if self.currentOrientation != orientation && orientation != Orientation.MyViewOrientationUnspecified
         {
-            var z = 0
-            if let zuege = self.currentPlayground?.anzahl_spielzuege
+            var zuege = 0
+            if self.scene != nil
             {
-                z=zuege
+                zuege = self.scene.playground.anzahl_spielzuege
             }
             if orientation == Orientation.MyViewOrientationPortrait
             {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height / CGFloat(2.25)
                 movesString="/1000"
-                self.countMovesLabel.text = String("\(z)")
+                self.countMovesLabel.text = String("\(zuege)")
             }
             else
             {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width - playgroundViewConstraint.constant - 15
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height
                 movesString=""
-                self.countMovesLabel.text = String("\(z)")
+                self.countMovesLabel.text = String("\(zuege)")
             }
             self.currentOrientation = orientation;
         }
@@ -152,32 +152,11 @@ class XorGameViewController: UIViewController
         super.viewDidLoad()
         switchAndShowPlayerIconOnButton(playerOne: false)
         self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
-
-        /*
-        motionManager = CMMotionManager()
-        motionManager.startAccelerometerUpdates(to:OperationQueue(),withHandler:  {
-            data, error in
-            if let accelerometerData = self.motionManager.accelerometerData {
-                if let oldAcData = self.oldAcceleration {
-                    let x = accelerometerData.acceleration.x
-                    let y = accelerometerData.acceleration.y
-                    let oldX = oldAcData.x
-                    let oldY = oldAcData.y
-                    print("Data X :\(oldX-x) \(x)")
-                    //print("Data Y :\(y-oldY)")
-                    self.oldAcceleration = accelerometerData.acceleration
-                }
-                else
-                {
-                    self.oldAcceleration = accelerometerData.acceleration
-                }
-            }
-            return
-        })
-        */
+        if self.scene != nil
+        {
+            self.navigationBarTitle.text = self.scene.playground.level_name
+        }
         
-        self.navigationBarTitle.text = self.currentPlayground?.level_name
-
         
         //drawCircleSegment(index:2)
     }
@@ -202,74 +181,28 @@ class XorGameViewController: UIViewController
         else
         {
             self.resetMaps()
-            self.playgrounds = PlaygroundBuilder.playgrounds()
+            self.playgrounds = PlaygroundBuilder.playgroundsToTest()
             self.replayLabel.isHidden = true
             self.presentPlayground()
         }
     }
-    /*
-    func drawCircleSegment(index:Int) {
-        let circlePath = UIBezierPath(ovalIn: CGRect(x: 5, y: 5, width: self.countMovesView.frame.height-10, height: self.countMovesView.frame.height-10))
-        var segments: [CAShapeLayer] = []
-        let numberOfAngles = 100
-        let segmentAngle: CGFloat = (360 * 1.0/CGFloat(numberOfAngles)) / 360
-        
-        for i in 0 ..< numberOfAngles {
-            let circleLayer = CAShapeLayer()
-            circleLayer.path = circlePath.cgPath
-            
-            // start angle is number of segments * the segment angle
-            circleLayer.strokeStart = segmentAngle * CGFloat(i)
-            
-            // end angle is the start plus one segment, minus a little to make a gap
-            // you'll have to play with this value to get it to look right at the size you need
-            let gapSize: CGFloat = 0.008
-            circleLayer.strokeEnd = circleLayer.strokeStart + segmentAngle - gapSize
-            
-            circleLayer.lineWidth = 10
-            if i>11 && i<11+index
-            {
-                print("i:\(i)")
-                circleLayer.strokeColor = UIColor(red:0,  green:0.004,  blue:0.549, alpha:1).cgColor
-            }
-            else
-            {
-                circleLayer.strokeColor = UIColor.yellow.cgColor
-            }
-            circleLayer.fillColor = UIColor.clear.cgColor
-            
-            // add the segment to the segments array and to the view
-            segments.insert(circleLayer, at: i)
-            self.countMovesView.layer.addSublayer(segments[i])
-        }
-    }*/
-    
-    
     
     func resetLabels()
     {
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
-        if let gesMask = self.currentPlayground?.masken_gesamtanzahl
-        {
-            collectedMasksLabel!.text! = "0/\(gesMask)"
-        }
+        let gesMask = self.scene.playground.masken_gesamtanzahl
+        collectedMasksLabel!.text! = "0/\(gesMask)"
         
-        self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:!(self.currentPlayground?.numberOfKilledPlayer == 0))
+        self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:!(self.scene.playground.numberOfKilledPlayer == 0))
         
-        if let zuege = self.currentPlayground?.anzahl_spielzuege
-        {
-            self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
-            self.countMovesLabel.text = String("\(zuege)")
-        }
-        if let maskenTotal = self.currentPlayground?.masken_gesamtanzahl
-        {
-            if let masken = self.currentPlayground?.masken_gesammelt
-            {
-                self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
-                
-            }
-        }
+        let zuege = self.scene.playground.anzahl_spielzuege
+        self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
+        self.countMovesLabel.text = String("\(zuege)")
+        let maskenTotal = self.scene.playground.masken_gesamtanzahl
+        let masken = self.scene.playground.masken_gesammelt
+        self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
+        
     }
     
     // MARK:  present the playground
@@ -279,14 +212,13 @@ class XorGameViewController: UIViewController
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
-        self.currentPlayground = playgrounds[XorGameViewController.currentPlaygroundLevel]
         
-        if let gesMask = self.currentPlayground?.masken_gesamtanzahl {
-            collectedMasksLabel!.text! = "0/\(gesMask)"
-        }
+        
+        self.scene = GameScene(size: playgroundView.bounds.size, playground:playgrounds[XorGameViewController.currentPlaygroundLevel]!)
+
+        let gesMask = self.scene.playground.masken_gesamtanzahl
+        collectedMasksLabel!.text! = "0/\(gesMask)"
         playgroundView.isMultipleTouchEnabled = false
-        
-        self.scene = GameScene(size: playgroundView.bounds.size, playground:self.currentPlayground!)
         self.scene.scaleMode = .aspectFill
         self.scene.backgroundColor = UIColor.lightGray
         self.scene.updateViewController = {
@@ -320,12 +252,12 @@ class XorGameViewController: UIViewController
                 
                 self.scene.removeAllChildren()
                 XorGameViewController.currentPlaygroundLevel += 1
-                self.currentPlayground?.finished = true
-                self.currentPlayground?.justFinished = false
+                self.scene.playground.finished = true
+                self.scene.playground.justFinished = false
 
                 break
             case MazeEvent.bad_mask_found:
-                self.currentPlayground?.badMaskOperation()
+                self.scene.playground.badMaskOperation()
                 break
             case MazeEvent.death_player1:
                 self.replayLabel.isHidden = false
@@ -369,7 +301,7 @@ class XorGameViewController: UIViewController
                     self.successView.show(visible: true)
                     self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
                     self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
-                    self.currentPlayground?.justFinished = false
+                    self.scene.playground.justFinished = false
                     //self.currentPlayground?.finished = false
                 }
                 break
@@ -378,26 +310,21 @@ class XorGameViewController: UIViewController
             }
             
             // always : one step further 
-            if let zuege = self.currentPlayground?.anzahl_spielzuege {
-                self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
-                self.countMovesLabel.text = String("\(zuege)")
-            }
-            if let maskenTotal = self.currentPlayground?.masken_gesamtanzahl {
-                if let masken = self.currentPlayground?.masken_gesammelt {
-                    self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
-                    
-                }
-            }
+            let zuege = self.scene.playground.anzahl_spielzuege
+            self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
+            self.countMovesLabel.text = String("\(zuege)")
+            let maskenTotal = self.scene.playground.masken_gesamtanzahl
+            let masken = self.scene.playground.masken_gesammelt
+            self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
         }
 
-        
         // Present the scene.
 
         self.playgroundView.presentScene(self.scene) //, transition: transition)
 
         AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main) {
             self.playgroundView.isHidden=false
-            self.currentPlayground?.testChickenAcidFishBomb()
+            self.scene.playground.testChickenAcidFishBomb()
 
         }
     }
@@ -409,13 +336,15 @@ class XorGameViewController: UIViewController
         self.mapRightUp.alpha = 0.5
         self.mapLeftDown.alpha = 0.5
         self.mapRightDown.alpha = 0.5
-        self.currentPlayground?.mapsFound.removeAll()
+        if self.scene != nil {
+            self.scene.playground.mapsFound.removeAll()
+        }
     }
     
     // Show Map Button
     @IBAction func mapButtonPressed()
     {
-        mapTextView.show(visible: (self.currentPlayground?.mapsFound.count == 0))
+        mapTextView.show(visible: (self.scene.playground.mapsFound.count == 0))
         if map_visible==false {
             self.scene.showMap()
             map_visible = true
@@ -436,16 +365,15 @@ class XorGameViewController: UIViewController
             self.levelButtonPressed = true
             let levelTableViewController = viewController as! XorLevelTableViewController
             levelTableViewController.setPlaygrounds(playgrounds:self.playgrounds)
-            levelTableViewController.currentLevel = self.currentPlayground?.level_number
+            levelTableViewController.currentLevel = self.scene.playground.level_number
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    self.currentPlayground = self.playgrounds[selectedPlaygroundLevel]
-                    self.currentPlayground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel,playground:self.currentPlayground)
+                    self.scene.playground = PlaygroundBuilder.readLevel(number: selectedPlaygroundLevel)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
-                    self.navigationBarTitle.text = self.currentPlayground?.level_name
-                    self.presentPlayground()
+                    self.navigationBarTitle.text = self.scene.playground.level_name
+                    self.resetToBegin()
                     self.resetMaps()
                     
                 }
@@ -470,25 +398,25 @@ class XorGameViewController: UIViewController
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
-        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
     }
     
     @IBAction func rightGameButtonPressed(){
-        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
     }
     @IBAction func upGameButtonPressed(){
-        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
     }
     @IBAction func downGameButtonPressed(){
-        self.currentPlayground?.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
     }
     
     // MARK: Switch Player
     @IBAction func switchPlayerPressed()
     {
-        if (self.currentPlayground?.numberOfKilledPlayer)!==0
+        if (self.scene.playground.numberOfKilledPlayer)==0
         {
-            switchAndShowPlayerIconOnButton(playerOne: (currentPlayground?.akt_spieler_ist_playerOne)!)
+            switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne))
         }
     }
     
@@ -500,16 +428,16 @@ class XorGameViewController: UIViewController
             if !(self.scene==nil)
             {
                 self.scene.switchToPlayerTwo()
+                self.scene.playground.akt_spieler_ist_playerOne = false
             }
-            self.currentPlayground?.akt_spieler_ist_playerOne = false
         }
         else
         {
             if !(self.scene==nil)
             {
                 self.scene.switchToPlayerOne()
+                self.scene.playground.akt_spieler_ist_playerOne = true
             }
-            self.currentPlayground?.akt_spieler_ist_playerOne = true
         }
         self.changePlayerIconOnButton(playerOne: playerOne)
     }
@@ -545,12 +473,12 @@ class XorGameViewController: UIViewController
         if Playground.replay.count>0
         {
             self.changePlayerIconOnButton(playerOne: !(Playground.replay.first?.akt_spieler_ist_playerOne)!)
-            self.currentPlayground = Playground.replay.first
-            self.scene.resetGameScene(playground: self.currentPlayground)
-            self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+            self.scene.playground = Playground.replay.first!
+            self.scene.resetGameScene(playground: self.scene.playground)
+            self.scene.playground.updateCameraPosition(PlayerMoveDirection.UP)
             self.resetLabels()
             Playground.replay.removeAll()
-            if (self.currentPlayground?.numberOfKilledPlayer)!>0
+            if self.scene.playground.numberOfKilledPlayer>0
             {
                 self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:true)
             }
@@ -567,17 +495,17 @@ class XorGameViewController: UIViewController
         self.replayStopPressed = false
         self.changePlayerIconOnButton(playerOne: !(Playground.replay.last?.akt_spieler_ist_playerOne)!)
         
-        self.currentPlayground = Playground.replay.last
-        self.scene.resetGameScene(playground: self.currentPlayground)
-        self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+        self.scene.playground = Playground.replay.last!
+        self.scene.resetGameScene(playground: self.scene.playground)
+        self.scene.playground.updateCameraPosition(PlayerMoveDirection.UP)
         self.resetLabels()
         if Playground.replay.count>0
         {
             Playground.replay.removeLast()
         }
-        if self.currentPlayground?.invisible==true
+        if self.scene.playground.invisible==true
         {
-            self.currentPlayground?.badMaskOperation()
+            self.scene.playground.badMaskOperation()
         }
     }
 
@@ -598,7 +526,7 @@ class XorGameViewController: UIViewController
             var diff = Playground.replay.count-self.currentNumberOfReplayMove
             while !(diff == 0)
             {
-                self.currentPlayground = Playground.replay.last
+                self.scene.playground = Playground.replay.last!
                 Playground.replay.removeLast()
                 diff -= 1
             }
@@ -607,8 +535,8 @@ class XorGameViewController: UIViewController
         {
             self.replayLabel.isHidden = false
             self.replayBlink()
-            Playground.replay.append(self.currentPlayground!)
-            self.currentPlayground = Playground.replay.first
+            Playground.replay.append(self.scene.playground)
+            self.scene.playground = Playground.replay.first!
             self.gameControllerView(active: false)
             self.replayControllerView(active: true)
             self.replayButton.setTitle("EXIT", for: UIControlState.normal)
@@ -650,9 +578,9 @@ class XorGameViewController: UIViewController
         }
         
         self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
-        self.currentPlayground = Playground.replay[position]
-        self.scene.resetGameScene(playground: self.currentPlayground)
-        self.currentPlayground?.updateCameraPosition(PlayerMoveDirection.UP)
+        self.scene.playground = Playground.replay[position]
+        self.scene.resetGameScene(playground: self.scene.playground)
+        self.scene.playground.updateCameraPosition(PlayerMoveDirection.UP)
         self.resetLabels()
         
         self.currentNumberOfReplayMove += 1
@@ -722,18 +650,18 @@ class XorGameViewController: UIViewController
     {
         self.replayStopPressed = false
         if Playground.replay.count > 0 {
-            self.currentPlayground = Playground.replay.first
+            self.scene.playground = Playground.replay.first!
         }
         Playground.replay.removeAll()
-        self.scene.updateWithNewPlayground(self.currentPlayground!)
-        self.scene.resetGameScene(playground: self.currentPlayground)
+        self.scene.updateWithNewPlayground(self.scene.playground)
+        self.scene.resetGameScene(playground: self.scene.playground)
         self.scene.initWithPlayerOne()
         self.resetLabels()
         
         map_visible = false
         playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
         self.changePlayerIconOnButton(playerOne: true)
-        self.navigationBarTitle.text = self.currentPlayground?.level_name
+        self.navigationBarTitle.text = self.scene.playground.level_name
     }
     
     // MARK: Successful Level finished, show next level
@@ -750,8 +678,8 @@ class XorGameViewController: UIViewController
         }
         else
         {
-            self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
-            presentPlayground()
+            //self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
+            //presentPlayground()
         }
     }
     

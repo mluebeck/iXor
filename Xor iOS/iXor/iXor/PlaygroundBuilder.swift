@@ -32,6 +32,28 @@ class PlaygroundBuilder: NSObject {
         "E":MazeElementType.exit,
         "W":MazeElementType.wall   ]
     
+    static let stringToMazeElement : [MazeElementType : String]=[
+        MazeElementType.space : "_",
+        MazeElementType.fish : "F",
+        MazeElementType.chicken : "C" ,
+        MazeElementType.map_1: "m",
+        MazeElementType.map_2: "n",
+        MazeElementType.map_3: "o",
+        MazeElementType.map_4 : "p",
+        MazeElementType.mask : "M",
+        MazeElementType.bad_mask : "X",
+        MazeElementType.h_wave : "H",
+        MazeElementType.v_wave : "V",
+        MazeElementType.puppet : "P",
+        MazeElementType.bomb : "B",
+        MazeElementType.acid : "S",
+        MazeElementType.transporter : "T",
+        MazeElementType.player_1 : "a",
+        MazeElementType.player_2 : "b",
+        MazeElementType.exit : "E",
+        MazeElementType.wall : "W"  ]
+   
+    
     static let MazeElementToFilename : [MazeElementType:String] = [
         MazeElementType.space:      "space_gelb",
         MazeElementType.fish:       "fisch",
@@ -76,17 +98,14 @@ class PlaygroundBuilder: NSObject {
     }
     
     static func readLevelString(filepath: String) -> Playground {
-        return readFromFile(filepath: filepath, playground:nil)
+        return readFromFile(filepath: filepath)
     }
     
-    static func readFromFile(filepath: String, playground:Playground?) -> Playground
+    static func readFromFile(filepath: String) -> Playground
     {
-        var localPlayground = playground
-        if playground == nil {
-            localPlayground = Playground()
-        }
+        let localPlayground = Playground()
         let s = try! String(contentsOfFile: filepath)
-        localPlayground?.contentAsString = s
+        localPlayground.contentAsString = s
         return readFromString(playground:localPlayground)
     }
     
@@ -193,6 +212,9 @@ class PlaygroundBuilder: NSObject {
                                     {
                                         sprite.zPosition = 0.0
                                 }
+                                if mazeElement.mazeElementType == MazeElementType.chicken {
+                                    print("Added Chicken:\(x) \(y)")
+                                }
                                 localArray.append(mazeElement)
                             }
                         }
@@ -219,16 +241,13 @@ class PlaygroundBuilder: NSObject {
                     }
                     x+=1
             }
-            
+            //print("testing \(x), \(y).... \(playground?.element(position: PlaygroundPosition(x:x,y:y)))")
         }
         return playground!
     }
     
-    static func readLevel(number: Int) -> Playground {
-        return readLevel(number:number,playground:nil)!
-    }
     
-    static func readLevel(number: Int, playground: Playground?) -> Playground? {
+    static func readLevel(number: Int) -> Playground {
         var file : String = ""
         if number>9 {
             file = "level\(number)"
@@ -237,20 +256,100 @@ class PlaygroundBuilder: NSObject {
         }
         
         if let s = Bundle.main.path(forResource: file, ofType: "xor") {
-            return self.readFromFile(filepath: s, playground:playground)
+            return self.readFromFile(filepath: s)
         }
-        return nil
+        else {
+            assert(false, "File does not exists")
+        }
     }
+    
+    
+    static func archive(_ playgroundList : PlaygroundList)
+    {
+        var filePath : String {
+            let manager = FileManager.default
+            let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+            return (url?.appendingPathComponent("objectsArray").path)!
+        }
+        print("\(filePath)")
+
+       // let dirURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/playgrounds.plist")
+        
+        let b = NSKeyedArchiver.archiveRootObject(playgroundList, toFile: filePath)
+        
+        print("Bool:\(b)")
+        //let data = NSMutableData()
+        //let archiver = NSKeyedArchiver.init(forWritingWith: data)
+        //archiver.encode(playgroundList.playgrounds, forKey: "playgrounds") //(object:self, forKey:"playgrounds")
+        //archiver.finishEncoding()
+        /*do {
+            try data.write(to: dirURL!,options:[])
+        } catch {
+            
+        }*/
+    }
+
+    static func unarchive()->PlaygroundList
+    {
+        do
+        {
+            var filePath : String {
+                let manager = FileManager.default
+                let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
+                return (url?.appendingPathComponent("objectsArray").path)!
+            }
+            let path = filePath
+            print("\(path)")
+            var playgroundList : PlaygroundList?
+            playgroundList = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PlaygroundList
+
+            if playgroundList == nil
+            {
+                return PlaygroundList()
+             }
+            /*let data = try Data.init(contentsOf: dirURL!, options: NSData.ReadingOptions.uncached)
+            let unarchiver =  NSKeyedUnarchiver.init(forReadingWith: data)
+            playgroundList.playgrounds = unarchiver.decodeObject(forKey:"playgrounds") as! [Int : Playground]
+            unarchiver.finishDecoding()
+            */
+            
+            return playgroundList!
+        }
+        catch
+        {
+            return PlaygroundList()
+        }
+    }
+    
     
     static func playgrounds() -> [Int: Playground]
     {
-        var playgrounds = [Int: Playground]()
-        let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
-        for path in paths {
-            let playground = PlaygroundBuilder.readLevelString(filepath:path)
-            playgrounds[playground.level_number]=playground
+        let playgroundList = self.unarchive()
+        if playgroundList.playgrounds.count == 0
+        {
+            let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
+            for path in paths {
+                let playground = PlaygroundBuilder.readLevelString(filepath:path)
+                playgroundList.playgrounds[playground.level_number]=playground
+            }
+            self.archive(playgroundList)
         }
-        return playgrounds
+        return playgroundList.playgrounds
+    }
+    
+    static func playgroundsToTest() -> [Int: Playground]
+    {
+        let playgroundList = self.unarchive()
+        if playgroundList.playgrounds.count == 0
+        {
+            let paths = Bundle.main.paths(forResourcesOfType: "xor_test", inDirectory: nil)
+            for path in paths {
+                let playground = PlaygroundBuilder.readLevelString(filepath:path)
+                playgroundList.playgrounds[playground.level_number]=playground
+            }
+            self.archive(playgroundList)
+        }
+        return playgroundList.playgrounds
     }
     
 }
