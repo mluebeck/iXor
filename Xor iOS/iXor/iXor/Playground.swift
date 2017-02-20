@@ -182,41 +182,17 @@ class Playground: NSObject,NSCoding {
         self.sceneDelegate = nil
         self.akt_spieler_ist_playerOne = (coder.decodeObject(forKey: "akt_spieler_ist_playerOne") != nil)
         self.ende_erreicht = (coder.decodeObject(forKey: "ende_erreicht") != nil)
-        if let a = coder.decodeObject(forKey: "anzahl_spielzuege")
-        {
-            self.anzahl_spielzuege = a as! Int
-        }
-        
-        if let a = coder.decodeObject(forKey: "masken_gesammelt") {
-            self.masken_gesammelt = a as! Int
-        }
-        if let a = coder.decodeObject(forKey: "masken_gesamtanzahl")  {
-            self.masken_gesamtanzahl = a as! Int
-        }
-        
+        self.anzahl_spielzuege = Int(coder.decodeInt32(forKey: "anzahl_spielzuege"))
+        self.masken_gesammelt = Int(coder.decodeInt32(forKey: "masken_gesammelt"))
+        self.masken_gesamtanzahl = Int(coder.decodeInt32(forKey:"masken_gesamtanzahl"))
         self.invisible = (coder.decodeObject(forKey: "invisible") != nil)
-        if let a = coder.decodeObject(forKey: "numberOfKilledPlayer") {
-            self.numberOfKilledPlayer =  a as! Int
-            
-        }
-        if let a = coder.decodeObject(forKey: "next_step") {
-            self.next_step = a as! Int
-            
-        }
+        self.numberOfKilledPlayer = Int(coder.decodeInt32(forKey: "numberOfKilledPlayer"))
+        self.next_step = Int(coder.decodeInt32(forKey: "next_step"))
         self.level_name = coder.decodeObject(forKey: "level_name") as! String?
-        if let a =  coder.decodeObject(forKey: "level_geschafft")
-        {
-            self.level_geschafft = a as! Int
-        }
-        if let a = coder.decodeObject(forKey: "level_number") {
-            self.level_number = a as! Int
-            
-        }
+        self.level_geschafft = Int(coder.decodeInt32(forKey: "level_geschafft"))
+        self.level_number = Int(coder.decodeInt32(forKey: "level_number"))
         self.justFinished = (coder.decodeObject(forKey: "justFinished") != nil)
-        if let a = coder.decodeObject(forKey: "numberOfMoves") {
-            self.numberOfMoves = a as! Int
-    
-        }
+        self.numberOfMoves = Int(coder.decodeInt32(forKey: "numberOfMoves"))
         self.mapsFound = coder.decodeObject(forKey: "mapsFound") as! Array<MazeElementType>
         self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
         self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition        

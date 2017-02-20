@@ -70,7 +70,7 @@ class XorGameViewController: UIViewController
     var scene: GameScene!
     
     // for game logic
-    var movesString = "/1000"
+    var movesString = "/"+String(PlaygroundBuilder.Constants.maximumMoves)
     static var currentPlaygroundLevel = 1
     var map_visible = false
     var playgrounds = [Int: Playground]()
@@ -135,7 +135,7 @@ class XorGameViewController: UIViewController
             {
                 playerButtonsViewWidthConstraint.constant = self.view.bounds.width
                 playerButtonsViewHeightConstraint.constant = self.view.bounds.height / CGFloat(2.25)
-                movesString="/1000"
+                movesString="/"+String(PlaygroundBuilder.Constants.maximumMoves)
                 self.countMovesLabel.text = String("\(zuege)")
             }
             else
@@ -200,7 +200,7 @@ class XorGameViewController: UIViewController
         self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:!(self.scene.playground.numberOfKilledPlayer == 0))
         
         let zuege = self.scene.playground.anzahl_spielzuege
-        self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
+        self.progressBar.setProgress(Float(zuege)/Float(PlaygroundBuilder.Constants.maximumMoves), animated: true)
         self.countMovesLabel.text = String("\(zuege)")
         let maskenTotal = self.scene.playground.masken_gesamtanzahl
         let masken = self.scene.playground.masken_gesammelt
@@ -255,8 +255,8 @@ class XorGameViewController: UIViewController
                 //[[myButton layer] setBorderWidth:2.0f];
                 //[[myButton layer] setBorderColor:[UIColor greenColor].CGColor];
                 self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
-                
-                self.scene.removeAllChildren()
+                self.scene.isHidden=true
+                //self.scene.removeAllChildren()
                 XorGameViewController.currentPlaygroundLevel += 1
                 self.scene.playground.finished = true
                 self.scene.playground.justFinished = false
@@ -270,6 +270,7 @@ class XorGameViewController: UIViewController
                     self.messageLabel.text = "Oh nein! Du bist zu viele Schritte gegangen!\n\nVersuch' es gleich nochmal!"
                     self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                     self.scene.playground.justFinished = false
+                    self.scene.isHidden=true
                     //self.currentPlayground?.finished = false
                 break
             case MazeEvent.death_player1:
@@ -315,6 +316,8 @@ class XorGameViewController: UIViewController
                     self.messageLabel.text = "Oh nein! Beide Spieler sind tot!\n\nVersuch' es gleich nochmal!"
                     self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                     self.scene.playground.justFinished = false
+                    self.scene.isHidden=true
+
                     //self.currentPlayground?.finished = false
                 }
                 break
@@ -324,7 +327,7 @@ class XorGameViewController: UIViewController
             
             // always : one step further 
             let zuege = self.scene.playground.anzahl_spielzuege
-            self.progressBar.setProgress(Float(zuege)/1000.0, animated: true)
+            self.progressBar.setProgress(Float(zuege)/Float(PlaygroundBuilder.Constants.maximumMoves), animated: true)
             self.countMovesLabel.text = String("\(zuege)")
             let maskenTotal = self.scene.playground.masken_gesamtanzahl
             let masken = self.scene.playground.masken_gesammelt
@@ -694,6 +697,7 @@ class XorGameViewController: UIViewController
             successView.show(visible: false)
             //AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main, closure: {
                 //self.resetToBegin()
+                self.scene.isHidden=false
                 self.gotoFirst()
             //})
             
@@ -702,6 +706,8 @@ class XorGameViewController: UIViewController
         if mazeEvent == MazeEvent.movesExceeded
         {
             successView.show(visible: false)
+            //self.resetToBegin()
+            self.scene.isHidden=false
             self.gotoFirst()
         }
     }
