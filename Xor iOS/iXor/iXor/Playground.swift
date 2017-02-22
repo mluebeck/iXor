@@ -910,9 +910,10 @@ class Playground: NSObject,NSCoding {
     
     func createEmptySpaceOnPlaygroundAndRemoveSprite(position:PlaygroundPosition,duration:TimeInterval)
     {
+        let e = element(position: position)?.mazeElementType
         
-        if (element(position: position)?.mazeElementType==MazeElementType.bomb) {
-            print("removed bomb")
+        if (e==MazeElementType.player_1 || e==MazeElementType.player_2) {
+            self.killCurrentPlayer(e!)
         }
         changeElementAndRemoveSprite(position: position, element: MazeElement(mazeElementType: MazeElementType.space, sprite:nil),duration:duration)
     }

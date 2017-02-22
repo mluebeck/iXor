@@ -62,16 +62,18 @@ extension Playground {
         }
     }
 
-    func testForChickenOrFishAction(position:PlaygroundPosition,justStarted:Bool)
+    func testForChickenOrFishAction(position:PlaygroundPosition,justStarted:Bool,causedby:MazeElementType)
     {
+        let sourceType = causedby
+        
         if let mazeType = elementAboveFrom(position: position)?.mazeElementType
         {
             // ist über dem leeren Feld ein Fish/Bombe?
             // fish, bombe fällt runter von selbst
             if mazeType==MazeElementType.fish || mazeType == MazeElementType.bomb
             {
-                if justStarted==true
-                {
+                if justStarted==true || sourceType==MazeElementType.chicken || sourceType==MazeElementType.acid
+                 {
                     self.increaseEventCounter(comment: "fish fall", element: mazeType)
                 }
                 fishFall(position:Playground.up(position: position),juststarted: justStarted)
@@ -85,7 +87,7 @@ extension Playground {
             // puppet in jede richtung, aber nur wenn sie angeschubst werden
             if mazeType==MazeElementType.chicken || mazeType == MazeElementType.acid
             {
-                if justStarted==true
+                if justStarted==true || sourceType==MazeElementType.fish || sourceType==MazeElementType.bomb
                 {
                     self.increaseEventCounter(comment: "chicken run 4!", element: MazeElementType.chicken)
                 }
@@ -146,7 +148,7 @@ extension Playground {
                                        duration: Playground.chickenDuration,
                                        completition: {
                                         self.chickenRun(position:leftposition,juststarted: false)
-                                        self.testForChickenOrFishAction(position:position,justStarted:juststarted)
+                                        self.testForChickenOrFishAction(position:position,justStarted:juststarted,causedby: (chickenElement?.mazeElementType)!)
             })
             return
         case MazeElementType.player_1, MazeElementType.player_2:
@@ -162,7 +164,7 @@ extension Playground {
                                           duration:Playground.chickenDuration,
                                           completed:{
                                             self.chickenRun(position:leftposition,juststarted: false)
-                                            self.testForChickenOrFishAction(position:position,justStarted:false)
+                                            self.testForChickenOrFishAction(position:position,justStarted:false,causedby: (chickenElement?.mazeElementType)!)
                 })
                 return
             }
@@ -228,7 +230,7 @@ extension Playground {
                                        duration: Playground.fishDuration,
                                        completition: {
                                         self.fishFall(position:bottomposition,juststarted: false)
-                                        self.testForChickenOrFishAction(position:position,justStarted:juststarted)
+                                        self.testForChickenOrFishAction(position:position,justStarted:juststarted,causedby:(fishOrBombElement?.mazeElementType)!)
             })
             return
         case MazeElementType.player_1, MazeElementType.player_2:
@@ -244,7 +246,7 @@ extension Playground {
                                           duration:Playground.fishDuration,
                                           completed:{
                                             self.fishFall(position:bottomposition,juststarted: false)
-                                            self.testForChickenOrFishAction(position:position,justStarted:false)
+                                            self.testForChickenOrFishAction(position:position,justStarted:false,causedby: (fishOrBombElement?.mazeElementType)!)
                 })
                 return
             }
@@ -346,9 +348,9 @@ extension Playground {
                 
                 self.increaseEventCounter(comment: "bomb!", element:causedBy)
 
-                self.testForChickenOrFishAction(position: Playground.left(position: positionDown),justStarted:true)
-                self.testForChickenOrFishAction(position: Playground.right(position: positionDown),justStarted:true)
-                self.testForChickenOrFishAction(position: position,justStarted:true)
+                self.testForChickenOrFishAction(position: Playground.left(position: positionDown),justStarted:true,causedby: causedBy)
+                self.testForChickenOrFishAction(position: Playground.right(position: positionDown),justStarted:true,causedby: causedBy)
+                self.testForChickenOrFishAction(position: position,justStarted:true,causedby: causedBy)
                
                 
                 self.createEmptySpaceOnPlayground(position: positionDown)
@@ -359,7 +361,7 @@ extension Playground {
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionDown,duration:0.0) // bomb
 
                     
-                    self.testForChickenOrFishAction(position: positionDown,justStarted:true)
+                    self.testForChickenOrFishAction(position: positionDown,justStarted:true,causedby: causedBy)
                    
                     self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
                     
@@ -373,8 +375,8 @@ extension Playground {
                 
                 self.cleanBombArea(position,positionLeft)
                 
-                self.testForChickenOrFishAction(position: Playground.left(position: positionLeft),justStarted:true)
-                self.testForChickenOrFishAction(position: Playground.right(position: positionLeft),justStarted:true)
+                self.testForChickenOrFishAction(position: Playground.left(position: positionLeft),justStarted:true,causedby: causedBy)
+                self.testForChickenOrFishAction(position: Playground.right(position: positionLeft),justStarted:true,causedby: causedBy)
                 self.createEmptySpaceOnPlayground(position: positionLeft)
                 self.increaseEventCounter(comment: "bomb!", element: MazeElementType.bomb)
                 
@@ -383,7 +385,7 @@ extension Playground {
                 sceneDelegate?.doBombAnimation(element:element,block:{
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: positionLeft,duration:0.0) // bomb
-                    self.testForChickenOrFishAction(position: positionLeft,justStarted:false)
+                    self.testForChickenOrFishAction(position: positionLeft,justStarted:false,causedby: causedBy)
                     self.decreaseEventCounter(comment:"bomb exploded",element: causedBy)
                     
                 } )
@@ -425,10 +427,10 @@ extension Playground {
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:elementLeft,duration:0.0)
                     
-                    self.testForChickenOrFishAction(position: Playground.up(position: elementLeft),justStarted:true)
-                    self.testForChickenOrFishAction(position: elementLeft,justStarted:true)
-                    self.testForChickenOrFishAction(position: position,justStarted:true)
-                    self.testForChickenOrFishAction(position: Playground.down(position: elementLeft),justStarted:true)
+                    self.testForChickenOrFishAction(position: Playground.up(position: elementLeft),justStarted:true,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: elementLeft,justStarted:true,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: position,justStarted:true,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: Playground.down(position: elementLeft),justStarted:true,causedby: causedBy)
                     self.decreaseEventCounter(comment:"acid corrosive",element: causedBy)
                     
                     
@@ -447,8 +449,8 @@ extension Playground {
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.9) // fish/bomb
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementDownFromAcid,duration:0.9) //  acid down
                 
-                self.testForChickenOrFishAction(position: position,justStarted:true)
-                self.testForChickenOrFishAction(position: elementDownFromAcid,justStarted:true)
+                self.testForChickenOrFishAction(position: position,justStarted:true,causedby: causedBy)
+                self.testForChickenOrFishAction(position: elementDownFromAcid,justStarted:true,causedby: causedBy)
                 
                 self.increaseEventCounter(comment:"acid corrosive",element:causedBy)
                 sceneDelegate?.doAcidAnimation(element: element,block:{
@@ -456,8 +458,8 @@ extension Playground {
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: position),duration:0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementFishAboveAcid,duration:0.0) // acid
-                    self.testForChickenOrFishAction(position: Playground.down(position: position),justStarted:false)
-                    self.testForChickenOrFishAction(position: elementFishAboveAcid,justStarted:false)
+                    self.testForChickenOrFishAction(position: Playground.down(position: position),justStarted:false,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: elementFishAboveAcid,justStarted:false,causedby: causedBy)
                     self.decreaseEventCounter(comment:"acid corrosive",element:causedBy)
                 })
                 

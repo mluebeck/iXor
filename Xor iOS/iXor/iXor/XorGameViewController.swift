@@ -717,6 +717,7 @@ class XorGameViewController: UIViewController
         playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
         self.changePlayerIconOnButton(playerOne: false)
         self.navigationBarTitle.text = self.scene.playground.level_name
+        self.scene.playground.testChickenAcidFishBomb()
         print(self.scene.playground)
 
     }
@@ -737,6 +738,8 @@ class XorGameViewController: UIViewController
             self.changePlayerIconOnButton(playerOne: false)
             self.navigationBarTitle.text = self.scene.playground.level_name
             print(playground)
+            self.scene.playground.testChickenAcidFishBomb()
+
         }
     }
     
