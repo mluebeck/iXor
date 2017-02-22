@@ -23,6 +23,7 @@
 		107FF8031E526E6F006B9BCF /* PathSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107FF8021E526E6F006B9BCF /* PathSelector.swift */; };
 		1099F62E1E57B8230036E3F7 /* acid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1099F62D1E57B8230036E3F7 /* acid.atlas */; };
 		109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E14031E3B4BB1007DB9F8 /* FrostedView.swift */; };
+		109FBE491E5CD75F00597993 /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109FBE481E5CD75F00597993 /* LevelTableViewCell.swift */; };
 		10A03C801E5A2F92007D9F1F /* PlaygroundExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A03C7F1E5A2F92007D9F1F /* PlaygroundExtension.swift */; };
 		10A03C971E5A5252007D9F1F /* level01.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C841E5A5252007D9F1F /* level01.xor */; };
 		10A03C981E5A5252007D9F1F /* level01_acid_test_chicken.xor_test in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C851E5A5252007D9F1F /* level01_acid_test_chicken.xor_test */; };
@@ -95,6 +96,7 @@
 		107FF8021E526E6F006B9BCF /* PathSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathSelector.swift; sourceTree = "<group>"; };
 		1099F62D1E57B8230036E3F7 /* acid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = acid.atlas; sourceTree = "<group>"; };
 		109E14031E3B4BB1007DB9F8 /* FrostedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedView.swift; sourceTree = "<group>"; };
+		109FBE481E5CD75F00597993 /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
 		10A03C7F1E5A2F92007D9F1F /* PlaygroundExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundExtension.swift; sourceTree = "<group>"; };
 		10A03C841E5A5252007D9F1F /* level01.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01.xor; sourceTree = "<group>"; };
 		10A03C851E5A5252007D9F1F /* level01_acid_test_chicken.xor_test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01_acid_test_chicken.xor_test; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		108903421E5B4DC90086E657 /* Scenes and Views */ = {
 			isa = PBXGroup;
 			children = (
+				109FBE481E5CD75F00597993 /* LevelTableViewCell.swift */,
 				10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */,
 				109E14031E3B4BB1007DB9F8 /* FrostedView.swift */,
 				8C4312B01DF4717800E80996 /* GameScene.swift */,
@@ -486,6 +489,7 @@
 				107739011E450D3B00BBE90D /* SpeechBubbleView.swift in Sources */,
 				8C4312AB1DF4717800E80996 /* AppDelegate.swift in Sources */,
 				8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */,
+				109FBE491E5CD75F00597993 /* LevelTableViewCell.swift in Sources */,
 				109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */,
 				107739151E45570700BBE90D /* InfoViewController.swift in Sources */,
 				107739171E455BE000BBE90D /* DismissSegue.swift in Sources */,

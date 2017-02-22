@@ -279,7 +279,7 @@ class PlaygroundBuilder: NSObject {
         return playgroundList!
     }
     
-    static func playgrounds() -> [Int: Playground]
+    static func playgrounds() -> PlaygroundList
     {
         let playgroundList = self.unarchive()
         if playgroundList.playgrounds.count == 0
@@ -291,10 +291,10 @@ class PlaygroundBuilder: NSObject {
             }
             self.archive(playgroundList)
         }
-        return playgroundList.playgrounds
+        return playgroundList
     }
     
-    static func playgroundsToTest() -> [Int: Playground]
+    static func playgroundsToTest() -> PlaygroundList
     {
         let playgroundList = self.unarchive()
         if playgroundList.playgrounds.count == 0
@@ -306,7 +306,7 @@ class PlaygroundBuilder: NSObject {
             }
             self.archive(playgroundList)
         }
-        return playgroundList.playgrounds
+        return playgroundList
     }
     
 }

@@ -479,7 +479,7 @@ extension Playground {
         print("\(self) decrease!  events down at \(comment): \(self.eventCounter)")
         if self.eventCounter==0
         {
-            print("All  Events done! \(self.toString())")
+            print("All  Events done! \(self)")
             self.endOfAnimation()
             return
         }

@@ -20,6 +20,10 @@ enum PlayerMoveDirection  : Int {
 
 class PlaygroundPosition : NSObject,NSCoding {
     
+    override public var description: String {
+        return "(\(x),\(y))"
+    }
+    
     init(x:Int,y:Int) {
         self.x=x
         self.y=y
@@ -166,13 +170,47 @@ class Playground: NSObject,NSCoding {
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     
+    override public var description : String {
+        var strX = ""
+        var strY = "\n"
+        for y in 0..<PlaygroundBuilder.Constants.groesseX
+        {
+            for x in 0..<PlaygroundBuilder.Constants.groesseY
+            {
+                let element = self.element(position: PlaygroundPosition(x:x,y:y))
+                if let mazetype = element?.mazeElementType
+                {
+                    if let s = PlaygroundBuilder.stringToMazeElement[mazetype]
+                    {
+                        strX = strX.appending(s)
+                    }
+                    else
+                    {
+                        strX = strX.appending("_")
+                    }
+                }
+                else
+                {
+                    strX = strX.appending("_")
+                }
+                
+            }
+            strY = strY.appending(strX).appending("\n")
+            strX=""
+        }
+        
+       strY = strY.appending("Position Player One:\(self.positionPlayerOne),\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished)")
+        return strY
+    }
+
+    // MARK: Init Methods
     // NSCoder
     required init(coder: NSCoder)
     {
         self.positionPlayerOne = coder.decodeObject(forKey: "positionPlayerOne") as! PlaygroundPosition
         self.positionPlayerTwo = coder.decodeObject(forKey: "positionPlayerTwo") as! PlaygroundPosition
         self.cameraLeftTopPosition    = coder.decodeObject(forKey: "cameraLeftTopPosition") as! PlaygroundPosition
-        self.playerPosition    = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
+        self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
         self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition
         super.init()
         self.beamerArray = coder.decodeObject(forKey: "beamerArray") as! Array<Beamer>
@@ -194,23 +232,36 @@ class Playground: NSObject,NSCoding {
         self.justFinished = (coder.decodeObject(forKey: "justFinished") != nil)
         self.numberOfMoves = Int(coder.decodeInt32(forKey: "numberOfMoves"))
         self.mapsFound = coder.decodeObject(forKey: "mapsFound") as! Array<MazeElementType>
-        self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
-        self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition        
-    }
+        self.finished = (coder.decodeObject(forKey: "finished") != nil)
+        if self.level_number==1
+        {
+            print(self)
+        }
+        
+     }
     
     func encode(with aCoder: NSCoder) {
+        if self.akt_spieler_ist_playerOne == true
+        {
+            self.positionPlayerOne = self.playerPosition
+        }
+        else
+        {
+            self.positionPlayerTwo = self.playerPosition
+        }
+        
+        aCoder.encode(positionPlayerOne, forKey: "positionPlayerOne")
         aCoder.encode(positionPlayerTwo, forKey: "positionPlayerTwo")
         aCoder.encode(cameraLeftTopPosition, forKey: "cameraLeftTopPosition")
         aCoder.encode(playerPosition, forKey: "playerPosition")
         aCoder.encode(oldPlayerPosition, forKey: "oldPlayerPosition")
+        
         aCoder.encode(beamerArray, forKey: "beamerArray")
-        aCoder.encode(positionPlayerOne, forKey: "positionPlayerOne")
+        aCoder.encode(playgroundArray, forKey: "playgroundArray")
         aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
         aCoder.encode(playerTwoMazeElement, forKey: "playerTwoMazeElement")
-        
         aCoder.encode(akt_spieler_ist_playerOne, forKey: "akt_spieler_ist_playerOne")
         aCoder.encode(ende_erreicht, forKey: "ende_erreicht")
-        
         aCoder.encode(anzahl_spielzuege, forKey: "anzahl_spielzuege")
         aCoder.encode(masken_gesammelt, forKey: "masken_gesammelt")
         aCoder.encode(masken_gesamtanzahl, forKey: "masken_gesamtanzahl")
@@ -220,13 +271,24 @@ class Playground: NSObject,NSCoding {
         aCoder.encode(level_name, forKey: "level_name")
         aCoder.encode(level_geschafft, forKey: "level_geschafft")
         aCoder.encode(level_number, forKey: "level_number")
-        aCoder.encode(justFinished, forKey: "justFinished")
+        
         aCoder.encode(numberOfMoves, forKey: "numberOfMoves")
         aCoder.encode(mapsFound, forKey: "mapsFound")
-        aCoder.encode(cameraLeftTopPosition, forKey: "cameraLeftTopPosition")
-        aCoder.encode(playgroundArray, forKey: "playgroundArray")
-       // aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
+        if finished==true
+        {
+            aCoder.encode("1",forKey:"finished")
+        }
+        if justFinished==true
+        {
+            aCoder.encode("1", forKey: "justFinished")
+        }
+        // aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
        // aCoder.encode(playerTwoMazeElement, forKey: "playerTwoMazeElement")
+        
+        if self.level_number==1 {
+            print(self)
+        }
+        
         
     }
     
@@ -257,6 +319,7 @@ class Playground: NSObject,NSCoding {
         playground.level_geschafft = self.level_geschafft
         playground.level_number = self.level_number
         playground.justFinished = self.justFinished
+        playground.finished = self.finished
         playground.numberOfMoves = self.numberOfMoves
         playground.mapsFound = self.mapsFound
         playground.playerPosition = self.playerPosition
@@ -281,6 +344,8 @@ class Playground: NSObject,NSCoding {
         self.oldPlayerPosition = PlaygroundPosition(x: -1, y: -1)
         super.init()
     }
+    
+    // MARK: Player changes
     
     func changePlayer()
     {
@@ -341,7 +406,7 @@ class Playground: NSObject,NSCoding {
         
     func allMasksCollected() -> Bool
     {
-        return self.masken_gesamtanzahl == self.masken_gesammelt
+        return true // self.masken_gesamtanzahl == self.masken_gesammelt
     }
     // fish, bombe fällt runter von selbst
     // chicken, acid fliegen nach links von selbst
@@ -415,7 +480,7 @@ class Playground: NSObject,NSCoding {
     
     func movePlayer(direction:PlayerMoveDirection,automatic:Bool)
     {
-        if self.numberOfMovesNotExceeded()==false
+        if self.numberOfMovesNotExceeded()==false 
         {
             return
         }
@@ -987,36 +1052,6 @@ class Playground: NSObject,NSCoding {
     
     
     
-    func toString()->String
-    {
-        var strX = ""
-        var strY = "\n"
-        for y in 0..<PlaygroundBuilder.Constants.groesseX
-        {
-            for x in 0..<PlaygroundBuilder.Constants.groesseY
-            {
-                let element = self.element(position: PlaygroundPosition(x:x,y:y))
-                if let mazetype = element?.mazeElementType
-                {
-                    if let s = PlaygroundBuilder.stringToMazeElement[mazetype]
-                    {
-                        strX = strX.appending(s)
-                    }
-                    else
-                    {
-                        strX = strX.appending("_")
-                    }
-                }
-                else
-                {
-                    strX = strX.appending("_")
-                }
-                
-            }
-            strY = strY.appending(strX).appending("\n")
-            strX=""
-        }
-        return strY
-    }
+    
     
 }

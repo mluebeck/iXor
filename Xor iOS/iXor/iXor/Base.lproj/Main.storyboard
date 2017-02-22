@@ -208,7 +208,6 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="nextLevelButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="TS6-ZI-LNX"/>
                                                             <segue destination="uMF-bP-LeY" kind="show" id="Cvd-rF-hfp"/>
                                                         </connections>
                                                     </button>
@@ -686,7 +685,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -841,31 +840,53 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="D9y-Mb-GOs" detailTextLabel="RqV-m3-9qz" style="IBUITableViewCellStyleValue1" id="Uai-03-lx7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelTableViewCell" id="Uai-03-lx7" customClass="LevelTableViewCell" customModule="iXor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9y-Mb-GOs">
-                                            <rect key="frame" x="15" y="17" width="45" height="9"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="9"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">
+                                            <rect key="frame" x="8" y="0.0" width="82" height="43"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RqV-m3-9qz">
-                                            <rect key="frame" x="312" y="18" width="48" height="8"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="8"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imX-0Q-qKJ">
+                                            <rect key="frame" x="98" y="0.0" width="233.5" height="44"/>
+                                            <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-YO-9Q5">
+                                            <rect key="frame" x="339.5" y="8" width="27.5" height="27.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="zzf-YO-9Q5" secondAttribute="height" multiplier="1:1" id="NJN-3S-tg3"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="imX-0Q-qKJ" firstAttribute="top" secondItem="OuG-26-7An" secondAttribute="top" id="2Gg-Mq-k7H"/>
+                                        <constraint firstItem="jOZ-Wh-yWL" firstAttribute="leading" secondItem="OuG-26-7An" secondAttribute="leading" constant="8" id="BSa-sn-a7v"/>
+                                        <constraint firstAttribute="trailing" secondItem="zzf-YO-9Q5" secondAttribute="trailing" constant="8" id="D4H-uT-Noi"/>
+                                        <constraint firstAttribute="bottom" secondItem="zzf-YO-9Q5" secondAttribute="bottom" constant="8" id="JRM-93-3f1"/>
+                                        <constraint firstAttribute="bottom" secondItem="imX-0Q-qKJ" secondAttribute="bottom" constant="-1" id="Tyh-aI-4ZD"/>
+                                        <constraint firstItem="imX-0Q-qKJ" firstAttribute="width" secondItem="jOZ-Wh-yWL" secondAttribute="width" multiplier="6" constant="-259" id="em2-eo-GMX"/>
+                                        <constraint firstItem="zzf-YO-9Q5" firstAttribute="top" secondItem="OuG-26-7An" secondAttribute="top" constant="8" id="fWF-RS-HKx"/>
+                                        <constraint firstItem="jOZ-Wh-yWL" firstAttribute="top" secondItem="OuG-26-7An" secondAttribute="top" id="gI6-3f-lCi"/>
+                                        <constraint firstItem="imX-0Q-qKJ" firstAttribute="leading" secondItem="jOZ-Wh-yWL" secondAttribute="trailing" constant="8" id="iV6-Oc-nGX"/>
+                                        <constraint firstAttribute="bottom" secondItem="jOZ-Wh-yWL" secondAttribute="bottom" id="o5m-9Z-ZE5"/>
+                                        <constraint firstItem="zzf-YO-9Q5" firstAttribute="leading" secondItem="imX-0Q-qKJ" secondAttribute="trailing" constant="8" id="xF8-MJ-nsZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" hint="Hint" identifier="reuseIdentifier" label="Label"/>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="imX-0Q-qKJ" id="faY-0g-NjD"/>
+                                    <outlet property="finishedImageView" destination="zzf-YO-9Q5" id="YMM-F4-KaH"/>
+                                    <outlet property="levelLabel" destination="jOZ-Wh-yWL" id="ucE-6b-YXr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -876,7 +897,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sc0-p1-LhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="269"/>
+            <point key="canvasLocation" x="936.79999999999995" y="268.51574212893553"/>
         </scene>
     </scenes>
     <resources>

@@ -16,6 +16,7 @@ class XorLevelTableViewController: UITableViewController
     var currentLevel : Int?
     var selectionFinishedClosure : ((Int) -> ())?
     var resetPressedClosure : (() ->())?
+    var lastPlayground : Playground?
     
     var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
     
@@ -68,32 +69,47 @@ class XorLevelTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "levelTableViewCell", for: indexPath) as! LevelTableViewCell
 
         let playground = playgrounds?[playgroundIndices[indexPath.row]]
         print("adding playground \(playground?.level_name) to Cell")
         if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
-            cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
+            
+            cell.levelLabel?.text = "Level \(playgroundIndices[indexPath.row])"
+            cell.descriptionLabel?.text = playground?.level_name
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
             if playground?.finished == true
             {
-                cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
+                cell.finishedImageView.image = UIImage(named: "green")
+                //cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
             } else {
-                cell.detailTextLabel?.text = NSLocalizedString("Pending", comment: "")
+                cell.finishedImageView.image = UIImage(named: "yellow")
+                //cell.detailTextLabel?.text = NSLocalizedString("Pending", comment: "")
             }
         }
         else
         {
-            cell.textLabel?.text = "Level \(playgroundIndices[indexPath.row]) - "+(playground?.level_name)!
+            let lastPlayground = playgrounds?[playgroundIndices[indexPath.row-1]]
+            cell.levelLabel?.text = "Level \(playgroundIndices[indexPath.row])"
+            cell.descriptionLabel?.text = playground?.level_name
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
             if playground?.finished == true
             {
-                cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
+                cell.finishedImageView.image = UIImage(named: "green")
+                //cell.detailTextLabel?.text = NSLocalizedString("Completed!", comment: "")
             }
             else
             {
-                cell.detailTextLabel?.text = NSLocalizedString("Locked!", comment: "")
+                if !(lastPlayground == nil) && lastPlayground?.finished == true && playground?.finished==false
+                {
+                    cell.finishedImageView.image = UIImage(named: "yellow")
+                }
+                else
+                {
+                    cell.finishedImageView.image = UIImage(named: "red")
+                    //                cell.detailTextLabel?.text = NSLocalizedString("Locked!", comment: "")
+                }
             }
         }
         return cell
@@ -115,10 +131,10 @@ class XorLevelTableViewController: UITableViewController
     
     func enabled(level:Int) -> Bool
     {
-        var previousLevelFinished=false
+        var previousLevelFinished=true
         if level>1 && level<(playgrounds?.count)!
         {
-            let playground = playgrounds?[self.playgroundIndices[level-1]]
+            let playground = playgrounds?[level-1]
             if playground?.finished==false
             {
                 previousLevelFinished = false

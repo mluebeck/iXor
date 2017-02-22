@@ -89,7 +89,14 @@ class GameScene: SKScene {
     {
         self.playground = playground
         self.playground.sceneDelegate = SceneDelegateImplementation(scene:self)
-        pathSelector = PathSelector(scene:self.playground.sceneDelegate!)
+        if pathSelector == nil
+        {
+            pathSelector = PathSelector(scene:self.playground.sceneDelegate!)
+        }
+        else
+        {
+            pathSelector?.playground = playground
+        }
         remove_all_children()
         for x in 0..<PlaygroundBuilder.Constants.groesseX
         {
@@ -188,8 +195,9 @@ class GameScene: SKScene {
             self.playground = playgrnd
         }
         self.playground.sceneDelegate = SceneDelegateImplementation(scene: self)
-        self.pathSelector?.playground=self.playground
-            
+        
+        pathSelector?.playground = self.playground
+
         //segmentX = self.size.width / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseX)
         //segmentY = self.size.height / CGFloat(PlaygroundBuilder.Constants.sichtbareGroesseY)
         for x in 0..<PlaygroundBuilder.Constants.groesseX {
@@ -332,7 +340,7 @@ class GameScene: SKScene {
     
     func drawPlayer(position:PlaygroundPosition,previousPosition:PlaygroundPosition,beamed:Bool,completition:(()->Void)?)
     {
-        //print("zeichne player an position \(position)  ")
+        print("zeichne player an position \(playground)  ")
         let sprite = (playground.element(position: position)?.sprite)!// (playground.playerOneMazeElement?.sprite)!
         let point = CGPoint(x: CGFloat(position.x)*segmentSize().x+segmentSize().x/2.0, y: self.size.height - CGFloat(position.y)*segmentSize().y-segmentSize().y/2.0)
         if beamed==true

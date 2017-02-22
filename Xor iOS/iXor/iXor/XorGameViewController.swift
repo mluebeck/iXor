@@ -73,7 +73,6 @@ class XorGameViewController: UIViewController
     var movesString = "/"+String(PlaygroundBuilder.Constants.maximumMoves)
     static var currentPlaygroundLevel = 1
     var map_visible = false
-    var playgrounds = [Int: Playground]()
     var mazeEvent = MazeEvent.redraw
 
     
@@ -180,13 +179,24 @@ class XorGameViewController: UIViewController
         if self.levelButtonPressed==true
         {
             self.levelButtonPressed=false
+            if self.mazeEvent==MazeEvent.exit_found
+            {
+                levelSuccessfulFinished()
+            }
         }
         else
         {
             self.resetMaps()
-            self.playgrounds = XorGameViewController.appDelegate.playgrounds
             self.replayLabel.isHidden = true
             self.presentPlayground()
+        }
+        if self.scene.playground.akt_spieler_ist_playerOne == true
+        {
+            self.scene.playground.playerPosition = self.scene.playground.positionPlayerOne
+        }
+        else
+        {
+            self.scene.playground.playerPosition = self.scene.playground.positionPlayerTwo
         }
     }
     
@@ -217,7 +227,7 @@ class XorGameViewController: UIViewController
         
         
         
-        self.scene = GameScene(size: playgroundView.bounds.size, playground:playgrounds[XorGameViewController.currentPlaygroundLevel]!)
+        self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundList.playgrounds[XorGameViewController.currentPlaygroundLevel]!)
 
         let gesMask = self.scene.playground.masken_gesamtanzahl
         collectedMasksLabel!.text! = "0/\(gesMask)"
@@ -248,15 +258,11 @@ class XorGameViewController: UIViewController
                 break;
             case MazeEvent.exit_found:
                 // Hier Erfolg animieren und Level freischalten
+
                 self.successView.show(visible: true)
                 self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
-                self.okButton.layer.borderWidth=2.0
-                self.okButton.layer.borderColor=UIColor.gray.cgColor
-                //[[myButton layer] setBorderWidth:2.0f];
-                //[[myButton layer] setBorderColor:[UIColor greenColor].CGColor];
                 self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                 self.scene.isHidden=true
-                //self.scene.removeAllChildren()
                 XorGameViewController.currentPlaygroundLevel += 1
                 self.scene.playground.finished = true
                 self.scene.playground.justFinished = false
@@ -268,6 +274,8 @@ class XorGameViewController: UIViewController
             case MazeEvent.movesExceeded:
                     self.successView.show(visible: true)
                     self.messageLabel.text = "Oh nein! Du bist zu viele Schritte gegangen!\n\nVersuch' es gleich nochmal!"
+                    self.okButton.layer.borderWidth=2.0
+                    self.okButton.layer.borderColor=UIColor.gray.cgColor
                     self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
                     self.scene.playground.justFinished = false
                     self.scene.isHidden=true
@@ -380,17 +388,19 @@ class XorGameViewController: UIViewController
         if viewController is XorLevelTableViewController {
             self.levelButtonPressed = true
             let levelTableViewController = viewController as! XorLevelTableViewController
-            levelTableViewController.setPlaygrounds(playgrounds:self.playgrounds)
+            levelTableViewController.setPlaygrounds(playgrounds:XorGameViewController.appDelegate.playgroundList.playgrounds)
             levelTableViewController.currentLevel = self.scene.playground.level_number
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    self.scene.playground =  XorGameViewController.appDelegate.playgrounds[selectedPlaygroundLevel]!
+                    self.scene.playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[selectedPlaygroundLevel]!
+                    //self.scene.resetGameScene(playground: self.scene.playground)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
                     self.navigationBarTitle.text = self.scene.playground.level_name
                     self.resetToBegin()
                     self.resetMaps()
+                    print(self.scene.playground)
                     
                 }
                 return
@@ -414,22 +424,42 @@ class XorGameViewController: UIViewController
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
+        if mazeEvent==MazeEvent.exit_found
+        {
+            return
+        }
         self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
     }
     
     @IBAction func rightGameButtonPressed(){
+        if mazeEvent==MazeEvent.exit_found
+        {
+            return
+        }
         self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
     }
     @IBAction func upGameButtonPressed(){
+        if mazeEvent==MazeEvent.exit_found
+        {
+            return
+        }
         self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
     }
     @IBAction func downGameButtonPressed(){
+        if mazeEvent==MazeEvent.exit_found
+        {
+            return
+        }
         self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
     }
     
     // MARK: Switch Player
     @IBAction func switchPlayerPressed()
     {
+        if mazeEvent==MazeEvent.exit_found
+        {
+            return
+        }
         if (self.scene.playground.numberOfKilledPlayer)==0
         {
             switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne),reorientCamera: true)
@@ -671,29 +701,51 @@ class XorGameViewController: UIViewController
     }
     
     // MARK: Reset
-    @IBAction func resetToBegin()
+    
+    func resetToBegin()
     {
-        self.replayStopPressed = false
         if Playground.replay.count > 0 {
             self.scene.playground = Playground.replay.first!
         }
+        self.replayStopPressed = false
         Playground.replay.removeAll()
         self.scene.updateWithNewPlayground(self.scene.playground)
         self.scene.resetGameScene(playground: self.scene.playground)
         self.scene.initWithPlayerOne(reorientCamera: true)
         self.resetLabels()
-        
         map_visible = false
         playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
-        self.changePlayerIconOnButton(playerOne: true)
+        self.changePlayerIconOnButton(playerOne: false)
         self.navigationBarTitle.text = self.scene.playground.level_name
+        print(self.scene.playground)
+
     }
     
-    // MARK: Successful Level finished, show next level
+    func reset(level:Int)
+    {
+        if let playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[level]
+        {
+            self.scene.playground = playground
+            self.replayStopPressed = false
+            Playground.replay.removeAll()
+            self.scene.updateWithNewPlayground(self.scene.playground)
+            self.scene.resetGameScene(playground: self.scene.playground)
+            self.scene.initWithPlayerOne(reorientCamera: true)
+            self.resetLabels()
+            map_visible = false
+            playerChangeNotAllowedImageOverPlayerChangeButton(visible:false)
+            self.changePlayerIconOnButton(playerOne: false)
+            self.navigationBarTitle.text = self.scene.playground.level_name
+            print(playground)
+        }
+    }
+    
+    // MARK: Level finished, show next level
     @IBAction func nextLevelButtonPressed()
     {
-        if mazeEvent == MazeEvent.death_both
+        switch(mazeEvent)
         {
+        case MazeEvent.death_both:
             successView.show(visible: false)
             //AppDelegate.delay(bySeconds: 0.5, dispatchLevel: .main, closure: {
                 //self.resetToBegin()
@@ -701,17 +753,36 @@ class XorGameViewController: UIViewController
                 self.gotoFirst()
             //})
             
-        }
-        else
-        if mazeEvent == MazeEvent.movesExceeded
-        {
+            break
+        case  MazeEvent.movesExceeded:
+        
             successView.show(visible: false)
             //self.resetToBegin()
             self.scene.isHidden=false
             self.gotoFirst()
+            break
+        case MazeEvent.exit_found:
+            self.levelSuccessfulFinished()
+            break
+        default:
+            break
         }
+        
     }
     
+    func levelSuccessfulFinished()
+    {
+        successView.show(visible: false)
+        self.scene.isHidden=false
+        self.resetToBegin()
+        self.scene.playground.finished = true
+        self.scene.playground.justFinished = false
+        XorGameViewController.appDelegate.playgroundList.playgrounds[self.scene.playground.level_number] = self.scene.playground
+        
+        self.reset(level: self.scene.playground.level_number+1)
+        mazeEvent = MazeEvent.none
+    }
+
     func gameControllerView(active:Bool)
     {
         for view in self.controllerView.subviews
