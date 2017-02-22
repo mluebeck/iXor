@@ -90,7 +90,7 @@ class PlaygroundBuilder: NSObject {
         static let groesseY = 32;         // playground dimensions (=32x32)
         static let sichtbareGroesseX = 8  // visible playground
         static let sichtbareGroesseY = 8  // visible playground
-        static let maximumMoves = 10
+        static let maximumMoves = 1000
     }
     
     static func readLevelString(filepath: String) -> Playground {
@@ -279,7 +279,7 @@ class PlaygroundBuilder: NSObject {
         return playgroundList!
     }
     
-    static func playgrounds() -> PlaygroundList
+    static func playgroundsToTest() -> PlaygroundList
     {
         let playgroundList = self.unarchive()
         if playgroundList.playgrounds.count == 0
@@ -294,7 +294,7 @@ class PlaygroundBuilder: NSObject {
         return playgroundList
     }
     
-    static func playgroundsToTest() -> PlaygroundList
+    static func playgrounds() -> PlaygroundList
     {
         let playgroundList = self.unarchive()
         if playgroundList.playgrounds.count == 0

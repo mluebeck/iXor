@@ -28,7 +28,7 @@ extension Playground {
                 {
                     let leftPosition = Playground.left(position: currentPosition)
                     let leftElement = playgroundCopy[leftPosition.y][leftPosition.x]
-                    if leftElement.mazeElementType == MazeElementType.space
+                    if leftElement.mazeElementType == MazeElementType.space || leftElement.mazeElementType == MazeElementType.v_wave
                     {
                         //x += 1
                         self.increaseEventCounter(comment: "chicken run 1!", element: MazeElementType.fish)
@@ -40,7 +40,7 @@ extension Playground {
                     {
                         let downPosition = Playground.down(position: currentPosition)
                         let downElement = playgroundCopy[downPosition.y][downPosition.x]
-                        if downElement.mazeElementType == MazeElementType.space
+                        if downElement.mazeElementType == MazeElementType.space || downElement.mazeElementType == MazeElementType.h_wave
                         {
                             //y += 1
                             self.increaseEventCounter(comment: "fish fall!", element: MazeElementType.fish)
@@ -72,9 +72,9 @@ extension Playground {
             {
                 if justStarted==true
                 {
-                    self.increaseEventCounter(comment: "fish fall", element: MazeElementType.fish)
+                    self.increaseEventCounter(comment: "fish fall", element: mazeType)
                 }
-                fishFall(position:Playground.up(position: position),juststarted: false)
+                fishFall(position:Playground.up(position: position),juststarted: justStarted)
                 return
             }
         }
@@ -103,7 +103,7 @@ extension Playground {
         {
             if element == MazeElementType.fish || element == MazeElementType.bomb
             {
-                self.increaseEventCounter(comment: "fish fall!", element: MazeElementType.chicken)
+                self.increaseEventCounter(comment: "fish fall!", element: element)
                 self.fishFall(position: upFromPosition,juststarted: true)
                 return
             }
@@ -270,7 +270,7 @@ extension Playground {
             if juststarted==false && (fishOrBombElement?.mazeElementType!) != MazeElementType.space
             {
                 bombExplode(element:bottomElement!,position:position,causedBy:MazeElementType.fish)
-                self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+                self.decreaseEventCounter(comment:"move fish down, der die Bombe zur Explosion gebracht hat",element: MazeElementType.fish)
             }
             return
             
@@ -283,7 +283,7 @@ extension Playground {
              MazeElementType.mask:
             createEmptySpaceOnPlayground(position: position)
             changeElementAndDrawSprite(position: position, element: fishOrBombElement!, duration: Playground.fishDuration, completition: {
-                self.decreaseEventCounter(comment:"move fish down",element: MazeElementType.fish)
+                self.decreaseEventCounter(comment:"move fish down",element: elementType)
             })
             return
         default:
@@ -344,7 +344,7 @@ extension Playground {
                 // remove all items the bomb destroyed
                 self.cleanBombArea(position,positionDown)
                 
-                self.increaseEventCounter(comment: "bomb!", element: MazeElementType.bomb)
+                self.increaseEventCounter(comment: "bomb!", element:causedBy)
 
                 self.testForChickenOrFishAction(position: Playground.left(position: positionDown),justStarted:true)
                 self.testForChickenOrFishAction(position: Playground.right(position: positionDown),justStarted:true)
@@ -469,17 +469,17 @@ extension Playground {
     func increaseEventCounter(comment:String,element:MazeElementType)
     {
         self.eventCounter = self.eventCounter + 1
-        print("\(self)  increase!  events up at \(comment): \(self.eventCounter)")
+        print("  increase!  events up at \(comment): \(self.eventCounter) because: \(element)")
     }
     
     func decreaseEventCounter(comment:String,element:MazeElementType)
     {
         
         self.eventCounter = self.eventCounter - 1
-        print("\(self) decrease!  events down at \(comment): \(self.eventCounter)")
+        print(" decrease!  events down at \(comment): \(self.eventCounter) because: \(element)")
         if self.eventCounter==0
         {
-            print("All  Events done! \(self)")
+            print("All  Events done!")
             self.endOfAnimation()
             return
         }
