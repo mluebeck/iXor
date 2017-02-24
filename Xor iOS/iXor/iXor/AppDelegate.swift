@@ -26,13 +26,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds()
+    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds("xor",fromArchive: true)
+    var musicBox = MusicBox()
     
     var window: UIWindow?
-
-
+    
+     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.musicBox.playBackgroundMusic()
         return true
     }
 
@@ -78,5 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+ 
 }
 

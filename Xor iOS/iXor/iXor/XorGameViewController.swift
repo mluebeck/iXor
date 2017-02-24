@@ -23,6 +23,7 @@ class XorGameViewController: UIViewController
     
     static let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    @IBOutlet var musicButton : UIButton!
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
@@ -62,7 +63,7 @@ class XorGameViewController: UIViewController
     @IBOutlet var replayLabel : UILabel!
     
     var currentOrientation : Orientation!
-    
+    var reloadFlag = false
     
     var levelButtonPressed = false
     
@@ -190,13 +191,21 @@ class XorGameViewController: UIViewController
             self.replayLabel.isHidden = true
             self.presentPlayground()
         }
+        /*
         if self.scene.playground.akt_spieler_ist_playerOne == true
         {
-            self.scene.playground.playerPosition = self.scene.playground.positionPlayerOne
+            self.scene.playground.positionPlayerOne = self.scene.playground.playerPosition
         }
         else
         {
-            self.scene.playground.playerPosition = self.scene.playground.positionPlayerTwo
+            self.scene.playground.positionPlayerTwo = self.scene.playground.playerPosition
+        }
+         */
+        if self.reloadFlag == true
+        {
+            self.scene.updateViewController!(MazeEvent.reloadAll)
+            self.reloadFlag = false
+            
         }
     }
     
@@ -329,6 +338,34 @@ class XorGameViewController: UIViewController
                     //self.currentPlayground?.finished = false
                 }
                 break
+            case MazeEvent.reloadAll:
+                
+                self.successView.show(visible: true)
+                self.messageLabel.text = "Resetting all..."
+                self.okButton.isHidden=true
+                self.scene.isHidden = true
+                
+                DispatchQueue.global().async {
+
+                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor", fromArchive: false)
+                        self.countMovesLabel.text = "0"
+                        let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
+                    
+                        self.scene.playground = playgroundDict[1]!
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.resetToBegin(clearReplay: true)
+                        self.resetMaps()
+                        self.okButton.isHidden=false
+                        self.scene.isHidden = false
+                    })
+                    
+                }
+                
+                
+                
+                break
+                
             default:
                 break;
             }
@@ -398,7 +435,7 @@ class XorGameViewController: UIViewController
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
                     self.navigationBarTitle.text = self.scene.playground.level_name
-                    self.resetToBegin()
+                    self.resetToBegin(clearReplay: true)
                     self.resetMaps()
                     print(self.scene.playground)
                     
@@ -406,9 +443,17 @@ class XorGameViewController: UIViewController
                 return
             }
             levelTableViewController.resetPressedClosure = {
+                if self.replayMode==true
+                {
+                    self.replayButtonPressed()
+                }
                 self.countMovesLabel.text = "0"
-                self.resetToBegin()
+                self.resetToBegin(clearReplay: true)
                 self.resetMaps()
+                
+            }
+            levelTableViewController.resetAllPressedClosure = {
+                self.reloadFlag = true
             }
         }
         else
@@ -421,6 +466,28 @@ class XorGameViewController: UIViewController
     
     
     
+    func reloadAll()
+    {
+        self.successView.show(visible: true)
+        self.view.bringSubview(toFront: self.successView)
+        self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
+        self.okButton.isHidden=true
+        self.scene.isHidden=true
+        
+        
+        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor", fromArchive: false)
+        self.countMovesLabel.text = "0"
+        let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
+        self.scene.playground = playgroundDict[1]!
+        
+        self.resetToBegin(clearReplay: true)
+        self.resetMaps()
+        
+        self.successView.show(visible: false)
+        self.okButton.isHidden=false
+        self.scene.isHidden=false
+    }
+    
     
     // MARK: Direction controls
     @IBAction func leftGameButtonPressed(){
@@ -428,7 +495,7 @@ class XorGameViewController: UIViewController
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,replaying:false)
     }
     
     @IBAction func rightGameButtonPressed(){
@@ -436,21 +503,21 @@ class XorGameViewController: UIViewController
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,replaying:false)
     }
     @IBAction func upGameButtonPressed(){
         if mazeEvent==MazeEvent.exit_found
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,replaying:false)
     }
     @IBAction func downGameButtonPressed(){
         if mazeEvent==MazeEvent.exit_found
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,automatic:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,replaying:false)
     }
     
     // MARK: Switch Player
@@ -599,7 +666,7 @@ class XorGameViewController: UIViewController
             self.replayMode = true
             self.replayTime = 0.5
             self.currentNumberOfReplayMove = 0
-            self.resetToBegin()
+            self.resetToBegin(clearReplay: false)
         }
     }
 
@@ -632,15 +699,23 @@ class XorGameViewController: UIViewController
             return
         }
         
+        
         self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
         self.scene.playground = Playground.replay[position]
+        
+        //self.scene.playground.movePlayer(queue:[self.scene.playground.moveDirection])
+        
+        
         self.scene.resetGameScene(playground: self.scene.playground)
-        self.scene.playground.updateCameraPosition(PlayerMoveDirection.UP)
+        self.scene.playground.updateCameraPosition(self.scene.playground.moveDirection)
+        print(self.scene.playground)
         self.resetLabels()
         
         self.currentNumberOfReplayMove += 1
         print("currentNumberOfReplayMove:\(self.currentNumberOfReplayMove)")
         print("position:\(position)")
+        
+        
         AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
         {
             if recursive==true
@@ -648,8 +723,50 @@ class XorGameViewController: UIViewController
                 self.fastForward(position:position+1,recursive: recursive)
             }
         }
-        
+    }
+    
+    func fastForward2(position:Int,recursive:Bool)
+    {
+        if position>=Playground.replay.count-1  || self.replayStopPressed == true
+        {
+            fastForwardButton.setTitle("FF", for: UIControlState.normal)
+            fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
+            self.replayStopPressed = true
+            self.scene.playground.endOfAnimation = {}
+            return
+        }
        
+        self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
+        self.scene.playground = Playground.replay[position]
+        self.scene.resetGameScene(playground: self.scene.playground)
+        if recursive==true
+        {
+            self.scene.playground.endOfAnimation =
+            {
+                if self.scene.playground.playerJustKilled==false
+                {
+                    self.fastForward2(position: position+1, recursive: true)
+                }
+                else
+                {
+                    self.scene.playground.playerJustKilled = false
+                }
+            }
+        }
+        if self.scene.playground.moveDirection == PlayerMoveDirection.PLAYERCHANGED
+        {
+            self.scene.playground.changePlayer()
+        }
+        else
+        if self.scene.playground.moveDirection != PlayerMoveDirection.NONE
+        {
+            self.scene.playground.movePlayer(direction: self.scene.playground.moveDirection,replaying:true)
+        }
+        else
+        {
+           self.fastForward2(position: position+1, recursive: true)
+        }
+        
     }
     
     func fastForwardButtonState()
@@ -680,10 +797,10 @@ class XorGameViewController: UIViewController
         self.fastForwardButtonState()
         self.replayStopPressed = false
         self.currentNumberOfReplayMove=0
-        self.resetToBegin()
+        self.resetToBegin(clearReplay: false)
         AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
         {
-            self.fastForward(position:1,recursive: true)
+            self.fastForward(position:0,recursive: true)
         }
     }
     
@@ -702,13 +819,16 @@ class XorGameViewController: UIViewController
     
     // MARK: Reset
     
-    func resetToBegin()
+    func resetToBegin(clearReplay:Bool)
     {
         if Playground.replay.count > 0 {
             self.scene.playground = Playground.replay.first!
         }
         self.replayStopPressed = false
-        Playground.replay.removeAll()
+        if clearReplay==true
+        {
+            Playground.replay.removeAll()
+        }
         self.scene.updateWithNewPlayground(self.scene.playground)
         self.scene.resetGameScene(playground: self.scene.playground)
         self.scene.initWithPlayerOne(reorientCamera: true)
@@ -777,7 +897,7 @@ class XorGameViewController: UIViewController
     {
         successView.show(visible: false)
         self.scene.isHidden=false
-        self.resetToBegin()
+        self.resetToBegin(clearReplay: true)
         self.scene.playground.finished = true
         self.scene.playground.justFinished = false
         XorGameViewController.appDelegate.playgroundList.playgrounds[self.scene.playground.level_number] = self.scene.playground
@@ -801,6 +921,22 @@ class XorGameViewController: UIViewController
             }
         }
         
+    }
+    
+    @IBAction func musicButtonPressed()
+    {
+        if XorGameViewController.appDelegate.musicBox.isPlaying()
+        {
+            XorGameViewController.appDelegate.musicBox.pause()
+            musicButton.setImage(UIImage.init(named: "music_off"), for: UIControlState.normal)
+            
+        }
+        else
+        {
+            XorGameViewController.appDelegate.musicBox.play()
+            musicButton.setImage(UIImage.init(named: "music"), for: UIControlState.normal)
+            
+        }
     }
     
     func replayControllerView(active:Bool)

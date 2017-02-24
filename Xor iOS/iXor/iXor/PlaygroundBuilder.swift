@@ -279,12 +279,21 @@ class PlaygroundBuilder: NSObject {
         return playgroundList!
     }
     
-    static func playgroundsToTest() -> PlaygroundList
+    static func playgrounds(_ name:String,fromArchive:Bool) -> PlaygroundList
     {
-        let playgroundList = self.unarchive()
+        var playgroundList : PlaygroundList
+        if fromArchive == true
+        {
+            playgroundList = self.unarchive()
+        }
+        else
+        {
+            playgroundList = PlaygroundList()
+        }
+        
         if playgroundList.playgrounds.count == 0
         {
-            let paths = Bundle.main.paths(forResourcesOfType: "xor", inDirectory: nil)
+            let paths = Bundle.main.paths(forResourcesOfType: name, inDirectory: nil)
             for path in paths {
                 let playground = PlaygroundBuilder.readLevelString(filepath:path)
                 playgroundList.playgrounds[playground.level_number]=playground
@@ -294,19 +303,6 @@ class PlaygroundBuilder: NSObject {
         return playgroundList
     }
     
-    static func playgrounds() -> PlaygroundList
-    {
-        let playgroundList = self.unarchive()
-        if playgroundList.playgrounds.count == 0
-        {
-            let paths = Bundle.main.paths(forResourcesOfType: "xor_test", inDirectory: nil)
-            for path in paths {
-                let playground = PlaygroundBuilder.readLevelString(filepath:path)
-                playgroundList.playgrounds[playground.level_number]=playground
-            }
-            self.archive(playgroundList)
-        }
-        return playgroundList
-    }
+    
     
 }

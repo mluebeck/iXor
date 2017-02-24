@@ -8,14 +8,17 @@
 
 import UIKit
 
-class XorLevelTableViewController: UITableViewController
+class XorLevelTableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
 
+    @IBOutlet var tableView: UITableView!
+    
     private var playgrounds : [Int:Playground]?
     var playgroundIndices = Array<Int>()
     var currentLevel : Int?
     var selectionFinishedClosure : ((Int) -> ())?
     var resetPressedClosure : (() ->())?
+    var resetAllPressedClosure : (() ->())?
     var lastPlayground : Playground?
     
     var selectedItem : NSIndexPath = NSIndexPath(row: -1, section: 0)
@@ -56,18 +59,18 @@ class XorLevelTableViewController: UITableViewController
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return playgrounds!.count
     }
 
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelTableViewCell", for: indexPath) as! LevelTableViewCell
 
@@ -115,7 +118,7 @@ class XorLevelTableViewController: UITableViewController
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let isEnabled = enabled(level: self.playgroundIndices[indexPath.row])
         if isEnabled == true
@@ -146,6 +149,19 @@ class XorLevelTableViewController: UITableViewController
                 return true
         }
         return previousLevelFinished
+    }
+    
+    @IBAction func resetAll()
+    {
+        self.resetAllPressedClosure!()
+        self.dismiss(animated: true, completion: {
+            
+        });
+    }
+    
+    @IBAction func dismiss()
+    {
+        self.dismiss(animated: true, completion: {});
     }
 
 }

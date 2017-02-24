@@ -53,6 +53,7 @@ enum MazeEvent : Int {
     redraw,
     switchPlayer,
     movesExceeded,
+    reloadAll,
     none
 }
 

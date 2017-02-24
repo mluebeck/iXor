@@ -14,7 +14,9 @@ enum PlayerMoveDirection  : Int {
     UP = 0,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT,
+    PLAYERCHANGED,
+    NONE
 }
 
 
@@ -127,6 +129,8 @@ class Playground: NSObject,NSCoding {
             return left(position: position)
         case PlayerMoveDirection.RIGHT:
             return right(position: position)
+        default:
+            return position
         }
     }
 
@@ -163,7 +167,7 @@ class Playground: NSObject,NSCoding {
     var playerJustKilled = false
     // screen co-ordinates of the current player
     var playerPosition : PlaygroundPosition
-    
+    var moveDirection : PlayerMoveDirection
     // old screen co-ordinates
     var oldPlayerPosition : PlaygroundPosition
     var cameraLeftTopPosition : PlaygroundPosition  // the part of the playground, which should be shown: clipper
@@ -199,7 +203,7 @@ class Playground: NSObject,NSCoding {
             strX=""
         }
         
-       strY = strY.appending("Position Player One:\(self.positionPlayerOne),\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished)")
+       strY = strY.appending("Position Player One:\(self.positionPlayerOne),\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
         return strY
     }
 
@@ -212,6 +216,7 @@ class Playground: NSObject,NSCoding {
         self.cameraLeftTopPosition    = coder.decodeObject(forKey: "cameraLeftTopPosition") as! PlaygroundPosition
         self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
         self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition
+        self.moveDirection = PlayerMoveDirection.NONE
         super.init()
         self.beamerArray = coder.decodeObject(forKey: "beamerArray") as! Array<Beamer>
         self.playgroundArray = coder.decodeObject(forKey: "playgroundArray") as! Array<Array<MazeElement>>
@@ -255,7 +260,7 @@ class Playground: NSObject,NSCoding {
         aCoder.encode(cameraLeftTopPosition, forKey: "cameraLeftTopPosition")
         aCoder.encode(playerPosition, forKey: "playerPosition")
         aCoder.encode(oldPlayerPosition, forKey: "oldPlayerPosition")
-        
+        aCoder.encode(moveDirection,forKey:"moveDirection")
         aCoder.encode(beamerArray, forKey: "beamerArray")
         aCoder.encode(playgroundArray, forKey: "playgroundArray")
         aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
@@ -327,8 +332,7 @@ class Playground: NSObject,NSCoding {
         playground.cameraLeftTopPosition = self.cameraLeftTopPosition
         playground.positionPlayerOne = self.positionPlayerOne
         playground.positionPlayerTwo = self.positionPlayerTwo
-       
-        
+        playground.moveDirection = self.moveDirection
         
         return playground
     }
@@ -342,6 +346,7 @@ class Playground: NSObject,NSCoding {
         self.cameraLeftTopPosition    = Playground.Null()
         self.playerPosition    = PlaygroundPosition(x: -1, y: -1)
         self.oldPlayerPosition = PlaygroundPosition(x: -1, y: -1)
+        self.moveDirection=PlayerMoveDirection.NONE
         super.init()
     }
     
@@ -349,7 +354,13 @@ class Playground: NSObject,NSCoding {
     
     func changePlayer()
     {
+        self.moveDirection = PlayerMoveDirection.PLAYERCHANGED
+        let previousPlayground = self.copy() as! Playground
+        Playground.replay.append(previousPlayground)
+        self.anzahl_spielzuege += 1
         sceneDelegate?.updateViewController(event:MazeEvent.switchPlayer)
+        sceneDelegate?.updateViewController(event:MazeEvent.step_done)
+
     }
     
     
@@ -373,7 +384,7 @@ class Playground: NSObject,NSCoding {
                     }
                 }
             }
-            self.movePlayer(direction: firstElement!,automatic:true)
+            self.movePlayer(direction: firstElement!,replaying:false)
         }
     }
     
@@ -478,15 +489,18 @@ class Playground: NSObject,NSCoding {
         return false
     }
     
-    func movePlayer(direction:PlayerMoveDirection,automatic:Bool)
+    func movePlayer(direction:PlayerMoveDirection,replaying:Bool)
     {
         if self.numberOfMovesNotExceeded()==false 
         {
             return
         }
+        self.moveDirection = direction
         let previousPlayground = self.copy() as! Playground
-        Playground.replay.append(previousPlayground)
-        print("playground history:\(Playground.replay)")
+        if replaying==false
+        {
+            Playground.replay.append(previousPlayground)
+        }
         var canMove = true
         var mazeElementType : MazeElementType?
         var newPosition : PlaygroundPosition?
@@ -811,6 +825,8 @@ class Playground: NSObject,NSCoding {
             case PlayerMoveDirection.RIGHT:
                 playerPosition.x = oldPlayerPosition.x + 1
                 break
+            default:
+                break
             }
             // move player 1 to new position in the playground array
         }
@@ -831,6 +847,7 @@ class Playground: NSObject,NSCoding {
         {
             self.updateCameraPosition(direction)
         }
+        
     }
     
     func setCameraPositionToPlayerOne()
@@ -847,13 +864,13 @@ class Playground: NSObject,NSCoding {
         let newCameraPosition = cameraLeftTopPosition
         
         if (cameraLeftTopPosition.x == playerPosition.x && direction==PlayerMoveDirection.LEFT) ||
-            (cameraLeftTopPosition.x == (oldPlayerPosition.x - 6) && direction==PlayerMoveDirection.RIGHT)
+           (abs(cameraLeftTopPosition.x-playerPosition.x)>6 && direction==PlayerMoveDirection.RIGHT)
         {
             newCameraPosition.x = oldPlayerPosition.x - 3
         }
         else
         if (cameraLeftTopPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
-            (cameraLeftTopPosition.y == (playerPosition.y - 6) && direction==PlayerMoveDirection.DOWN)
+            (abs(cameraLeftTopPosition.y-playerPosition.y)>6 && direction==PlayerMoveDirection.DOWN)
         {
                 newCameraPosition.y = playerPosition.y - 3
         }
@@ -866,7 +883,7 @@ class Playground: NSObject,NSCoding {
             newCameraPosition.x = PlaygroundBuilder.Constants.groesseX-PlaygroundBuilder.Constants.sichtbareGroesseX
         }
         
-         sceneDelegate?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
+        sceneDelegate?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
         cameraLeftTopPosition = newCameraPosition
         print("\n\n update scene ende \n\n")
         
