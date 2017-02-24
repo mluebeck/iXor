@@ -26,7 +26,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds("xor",fromArchive: true)
+    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds("xor_test",fromArchive: true)
     var musicBox = MusicBox()
     
     var window: UIWindow?

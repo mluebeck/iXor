@@ -89,7 +89,7 @@ extension Playground {
             {
                 if justStarted==true || sourceType==MazeElementType.fish || sourceType==MazeElementType.bomb
                 {
-                    self.increaseEventCounter(comment: "chicken run 4!", element: MazeElementType.chicken)
+                    self.increaseEventCounter(comment: "chicken run 4!", element: mazeType)
                 }
                 chickenRun(position:Playground.right(position: position),juststarted: justStarted)
                 return
@@ -414,13 +414,13 @@ extension Playground {
                 self.createWallOnPlayground(position: elementLeft)
                 
                 sceneDelegate?.playSoundAcid()
-                
+                self.increaseEventCounter(comment:"acid corrosive",element: causedBy)
+
                 // remove all items destroyed by acid
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:position,duration:0.9) // chicken/acid
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.up(position: elementLeft),duration:0.9) //  acid up
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft),duration:0.9) // acid down
                 
-                self.increaseEventCounter(comment:"acid corrosive",element: causedBy)
                 sceneDelegate?.doAcidAnimation(element: element,block:{
                     
                     
@@ -458,8 +458,8 @@ extension Playground {
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: position),duration:0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementFishAboveAcid,duration:0.0) // acid
-                    self.testForChickenOrFishAction(position: Playground.down(position: position),justStarted:false,causedby: causedBy)
-                    self.testForChickenOrFishAction(position: elementFishAboveAcid,justStarted:false,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: Playground.down(position: position),justStarted:true,causedby: causedBy)
+                    self.testForChickenOrFishAction(position: elementFishAboveAcid,justStarted:true,causedby: causedBy)
                     self.decreaseEventCounter(comment:"acid corrosive",element:causedBy)
                 })
                 

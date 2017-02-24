@@ -251,7 +251,7 @@ class PlaygroundBuilder: NSObject {
             file = "level0\(number)"
         }
         
-        if let s = Bundle.main.path(forResource: file, ofType: "xor") {
+        if let s = Bundle.main.path(forResource: file, ofType: "xor_test") {
             return self.readFromFile(filepath: s)
         }
         else {

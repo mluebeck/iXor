@@ -347,7 +347,7 @@ class XorGameViewController: UIViewController
                 
                 DispatchQueue.global().async {
 
-                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor", fromArchive: false)
+                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor_test", fromArchive: false)
                         self.countMovesLabel.text = "0"
                         let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
                     
@@ -475,7 +475,7 @@ class XorGameViewController: UIViewController
         self.scene.isHidden=true
         
         
-        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor", fromArchive: false)
+        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor_test", fromArchive: false)
         self.countMovesLabel.text = "0"
         let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
         self.scene.playground = playgroundDict[1]!

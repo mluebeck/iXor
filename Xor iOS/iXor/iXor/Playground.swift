@@ -216,7 +216,7 @@ class Playground: NSObject,NSCoding {
         self.cameraLeftTopPosition    = coder.decodeObject(forKey: "cameraLeftTopPosition") as! PlaygroundPosition
         self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
         self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition
-        self.moveDirection = PlayerMoveDirection.NONE
+        self.moveDirection = PlayerMoveDirection(rawValue: Int(coder.decodeInt32(forKey: "moveDirection")))!
         super.init()
         self.beamerArray = coder.decodeObject(forKey: "beamerArray") as! Array<Beamer>
         self.playgroundArray = coder.decodeObject(forKey: "playgroundArray") as! Array<Array<MazeElement>>
@@ -260,7 +260,7 @@ class Playground: NSObject,NSCoding {
         aCoder.encode(cameraLeftTopPosition, forKey: "cameraLeftTopPosition")
         aCoder.encode(playerPosition, forKey: "playerPosition")
         aCoder.encode(oldPlayerPosition, forKey: "oldPlayerPosition")
-        aCoder.encode(moveDirection,forKey:"moveDirection")
+        aCoder.encode(Int(moveDirection.rawValue),forKey:"moveDirection")
         aCoder.encode(beamerArray, forKey: "beamerArray")
         aCoder.encode(playgroundArray, forKey: "playgroundArray")
         aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
