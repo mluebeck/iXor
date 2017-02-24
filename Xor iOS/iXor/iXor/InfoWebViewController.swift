@@ -13,7 +13,8 @@ class InfoWebViewController: UIViewController {
     @IBOutlet var view1:  UIView!
     //@IBOutlet var view2:  UIView!
     @IBOutlet var contentHeight : NSLayoutConstraint!
-    @IBOutlet var webView : UIWebView!
+    @IBOutlet var scrollView : UIScrollView!
+    var v : UIView?
     
     override var prefersStatusBarHidden: Bool
     {
@@ -33,10 +34,10 @@ class InfoWebViewController: UIViewController {
         super.viewDidLoad()
                 
         let views = Bundle.main.loadNibNamed("Views", owner: self, options: nil)
-        let v = views?[0] as! UIView
-        v.frame.size.width = self.view.frame.size.width
-        self.view1.addSubview(v)
-        contentHeight.constant = v.frame.size.height
+        v = views?[0] as! UIView?
+        v?.frame.size.width = self.view.frame.size.width
+        self.view1.addSubview(v!)
+        contentHeight.constant = (v?.frame.size.height)!
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +45,19 @@ class InfoWebViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "infowebviewcontrollerscrollingatbeginning") == false
+        {
+            UIView.animate(withDuration:12.0,delay:0,options:UIViewAnimationOptions.curveLinear,
+                           animations:{
+                            self.scrollView.contentOffset = CGPoint(x:0, y:(self.v?.frame.size.height)!-self.view.frame.size.height)
+            },completion:nil)
+            defaults.set(true, forKey: "infowebviewcontrollerscrollingatbeginning")
+        }
+    }
 
     /*
     // MARK: - Navigation

@@ -2,23 +2,27 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "xor.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "xor-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "xor.png",
+      "filename" : "xor-2.png",
       "scale" : "3x"
     },
     {
       "idiom" : "iphone",
+      "filename" : "xor-3.png",
       "scale" : "1x"
     },
     {
       "idiom" : "iphone",
+      "filename" : "xor-4.png",
       "scale" : "2x"
     },
     {

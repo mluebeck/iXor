@@ -483,6 +483,7 @@ extension Playground {
         {
             print("All  Events done!")
             self.endOfAnimation()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: drawEndedNotificationKey), object: self)
             return
         }
         assert(self.eventCounter>=0,"event counter must be nonnegative ")

@@ -34,6 +34,8 @@ protocol SceneDelegate
                               position:PlaygroundPosition,
                               duration:TimeInterval,
                               completed:(()->Void)?)
+    func playApplause()
+    
 }
 
 class SceneDelegateImplementation: NSObject,SceneDelegate
@@ -93,7 +95,7 @@ class SceneDelegateImplementation: NSObject,SceneDelegate
     
     func playSoundAcid()
     {
-        scene.run(SKAction.playSoundFileNamed("acid.wav" ,waitForCompletion:false))
+        scene.run(SKAction.playSoundFileNamed("acid2.wav" ,waitForCompletion:false))
         
     }
     
@@ -102,6 +104,13 @@ class SceneDelegateImplementation: NSObject,SceneDelegate
         scene.run(SKAction.playSoundFileNamed("bomb.caf" ,waitForCompletion:false))
         
     }
+    
+    func playApplause()
+    {
+        scene.run(SKAction.playSoundFileNamed("applause.wav" ,waitForCompletion:false))
+        
+    }
+
     
     func doAcidAnimation(element:MazeElement,block:@escaping ()->())
     {

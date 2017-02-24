@@ -160,13 +160,23 @@ class XorGameViewController: UIViewController
             self.navigationBarTitle.text = self.scene.playground.level_name
         }
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(XorGameViewController.updateNotificationSent),
+                                               name: NSNotification.Name(rawValue: drawEndedNotificationKey), object: nil)
+
         //drawCircleSegment(index:2)
+    }
+    
+    func updateNotificationSent()
+    {
+        print("notifcation end event!")
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
+       
         super.viewWillAppear(animated)
+        
+        //                
         if map_visible == false
         {
             mapTextView.show(visible: map_visible)
@@ -268,14 +278,27 @@ class XorGameViewController: UIViewController
             case MazeEvent.exit_found:
                 // Hier Erfolg animieren und Level freischalten
 
-                self.successView.show(visible: true)
-                self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
-                self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
-                self.scene.isHidden=true
-                XorGameViewController.currentPlaygroundLevel += 1
-                self.scene.playground.finished = true
-                self.scene.playground.justFinished = false
-
+                if Playground.finalLevel == self.scene.playground.level_number
+                {
+                    self.successView.show(visible: true)
+                    self.messageLabel.text = "Du hast ALLE LEVEL geschafft!\n\nGratulation!"
+                    self.okButton.setTitle("OK!", for: UIControlState.normal)
+                    self.scene.isHidden=true
+                    XorGameViewController.currentPlaygroundLevel = 1
+                    self.scene.playground.finished = true
+                    self.scene.playground.justFinished = false
+                }
+                else
+                {
+                    self.successView.show(visible: true)
+                    self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
+                    self.okButton.setTitle("OK, weiter geht's!", for: UIControlState.normal)
+                    self.scene.isHidden=true
+                    XorGameViewController.currentPlaygroundLevel += 1
+                    self.scene.playground.finished = true
+                    self.scene.playground.justFinished = false
+                }
+                
                 break
             case MazeEvent.bad_mask_found:
                 self.scene.playground.badMaskOperation()
@@ -347,7 +370,7 @@ class XorGameViewController: UIViewController
                 
                 DispatchQueue.global().async {
 
-                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor_test", fromArchive: false)
+                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds(levelsToLoad, fromArchive: false)
                         self.countMovesLabel.text = "0"
                         let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
                     
@@ -435,6 +458,7 @@ class XorGameViewController: UIViewController
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
                     self.navigationBarTitle.text = self.scene.playground.level_name
+                    Playground.replay.removeAll()
                     self.resetToBegin(clearReplay: true)
                     self.resetMaps()
                     print(self.scene.playground)
@@ -470,12 +494,12 @@ class XorGameViewController: UIViewController
     {
         self.successView.show(visible: true)
         self.view.bringSubview(toFront: self.successView)
-        self.messageLabel.text = "Du hast es geschafft!\n\nBereit für den nächsten Level?"
+        self.messageLabel.text = "Reload all..."
         self.okButton.isHidden=true
         self.scene.isHidden=true
         
         
-        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds("xor_test", fromArchive: false)
+        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds(levelsToLoad, fromArchive: false)
         self.countMovesLabel.text = "0"
         let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
         self.scene.playground = playgroundDict[1]!

@@ -54,9 +54,10 @@ class MusicBox: NSObject,AVAudioPlayerDelegate {
     
     func playBackgroundMusic() {
         do {
+            print("now playing song no. \(songindex): \(songs[songindex])")
             backgroundMusicPlayer = try AVAudioPlayer(contentsOf: songs[songindex])
             backgroundMusicPlayer.delegate = self
-            backgroundMusicPlayer.numberOfLoops = 1
+            backgroundMusicPlayer.numberOfLoops = 0
             backgroundMusicPlayer.prepareToPlay()
             backgroundMusicPlayer.play()
         } catch let error as NSError {

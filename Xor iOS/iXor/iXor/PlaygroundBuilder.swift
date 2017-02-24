@@ -160,6 +160,9 @@ class PlaygroundBuilder: NSObject {
         var localArray = Array<MazeElement>()
         
         for char in mazeString.characters {
+            if char == "z" {
+                Playground.finalLevel=(playground?.level_number)!
+            } else
             if char == "\n" {
                 x = 0
                 y = y + 1
@@ -251,7 +254,7 @@ class PlaygroundBuilder: NSObject {
             file = "level0\(number)"
         }
         
-        if let s = Bundle.main.path(forResource: file, ofType: "xor_test") {
+        if let s = Bundle.main.path(forResource: file, ofType: levelsToLoad) {
             return self.readFromFile(filepath: s)
         }
         else {

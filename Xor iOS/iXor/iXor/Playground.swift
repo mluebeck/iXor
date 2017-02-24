@@ -140,6 +140,8 @@ class Playground: NSObject,NSCoding {
     
     static var replay = Array<Playground>()
 
+    static var finalLevel = 15
+    
     var playgroundArray : Array<Array<MazeElement>> = Array()  // Das spielfeld
     var beamerArray = Array<Beamer>() // transporter start co-ordinates
     var playerOneMazeElement : MazeElement?
@@ -241,6 +243,10 @@ class Playground: NSObject,NSCoding {
         if self.level_number==1
         {
             print(self)
+        }
+        if qaTesting==true
+        {
+            self.finished = true
         }
         
      }
@@ -483,6 +489,7 @@ class Playground: NSObject,NSCoding {
             {
                 justFinished=true
                 finished = true
+                sceneDelegate?.playApplause()
                 return true
             }
         }

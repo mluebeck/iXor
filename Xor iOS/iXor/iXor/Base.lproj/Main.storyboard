@@ -399,10 +399,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZy-4Z-Tc4">
-                                                        <rect key="frame" x="7" y="8" width="40" height="40"/>
+                                                        <rect key="frame" x="4" y="160" width="40" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="8fy-L4-flF"/>
-                                                            <constraint firstAttribute="width" constant="40" id="yYF-aQ-Cce"/>
+                                                            <constraint firstAttribute="width" constant="40" id="1Jc-RL-K2O"/>
+                                                            <constraint firstAttribute="height" constant="40" id="VP9-aj-LFQ"/>
                                                         </constraints>
                                                         <state key="normal" image="music">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -415,6 +415,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <constraints>
                                                     <constraint firstItem="5NA-LN-4Bz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="io0-Pr-ugY" secondAttribute="trailing" id="1vX-At-7U3"/>
                                                     <constraint firstItem="5NA-LN-4Bz" firstAttribute="width" secondItem="io0-Pr-ugY" secondAttribute="width" id="8r3-0x-9AT"/>
+                                                    <constraint firstAttribute="bottom" secondItem="GZy-4Z-Tc4" secondAttribute="bottom" constant="8" id="9tR-YD-tXG"/>
                                                     <constraint firstItem="mMX-P1-SqZ" firstAttribute="width" secondItem="io0-Pr-ugY" secondAttribute="width" id="AaH-Gd-KdE"/>
                                                     <constraint firstAttribute="height" constant="208" id="AxD-5O-bwz"/>
                                                     <constraint firstAttribute="bottom" secondItem="zhH-4i-AGq" secondAttribute="bottom" constant="4" id="FZw-DC-WvM"/>
@@ -430,10 +431,9 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <constraint firstItem="zhH-4i-AGq" firstAttribute="height" secondItem="KbD-9B-DyD" secondAttribute="height" id="YC7-4z-CLS"/>
                                                     <constraint firstItem="mMX-P1-SqZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5NA-LN-4Bz" secondAttribute="trailing" id="Zdy-Og-EGx"/>
                                                     <constraint firstItem="zhH-4i-AGq" firstAttribute="height" secondItem="5NA-LN-4Bz" secondAttribute="height" id="b7E-x6-HSY"/>
-                                                    <constraint firstItem="GZy-4Z-Tc4" firstAttribute="leading" secondItem="Xk7-eV-XZv" secondAttribute="leading" constant="7" id="btj-gD-D4A"/>
                                                     <constraint firstItem="KbD-9B-DyD" firstAttribute="centerX" secondItem="Xk7-eV-XZv" secondAttribute="centerX" id="cWM-X4-W7U"/>
                                                     <constraint firstItem="mMX-P1-SqZ" firstAttribute="centerY" secondItem="Xk7-eV-XZv" secondAttribute="centerY" id="ciU-V3-3Iw"/>
-                                                    <constraint firstItem="GZy-4Z-Tc4" firstAttribute="top" secondItem="Xk7-eV-XZv" secondAttribute="top" constant="8" id="d6Z-nx-CCT"/>
+                                                    <constraint firstItem="GZy-4Z-Tc4" firstAttribute="leading" secondItem="Xk7-eV-XZv" secondAttribute="leading" constant="4" id="cym-pn-9Fj"/>
                                                     <constraint firstItem="io0-Pr-ugY" firstAttribute="centerY" secondItem="Xk7-eV-XZv" secondAttribute="centerY" id="gU1-95-waa"/>
                                                     <constraint firstItem="5NA-LN-4Bz" firstAttribute="top" secondItem="KbD-9B-DyD" secondAttribute="bottom" constant="10" id="lM0-vs-off"/>
                                                     <constraint firstItem="5NA-LN-4Bz" firstAttribute="centerX" secondItem="Xk7-eV-XZv" secondAttribute="centerX" id="nV8-FM-zs3"/>
@@ -633,7 +633,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="270"/>
+            <point key="canvasLocation" x="140" y="269.41529235382313"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="jRx-Vq-24A">
@@ -701,7 +701,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -788,12 +788,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                     </navigationItem>
                     <connections>
                         <outlet property="contentHeight" destination="T5w-JV-nce" id="3JV-tq-p1A"/>
+                        <outlet property="scrollView" destination="5Xc-sM-AuI" id="wFZ-J7-Tp0"/>
                         <outlet property="view1" destination="f5a-pL-N60" id="rsx-E6-Jie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1AP-gZ-m1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="994"/>
+            <point key="canvasLocation" x="936.79999999999995" y="993.55322338830592"/>
         </scene>
         <!--Xor Level Table View Controller-->
         <scene sceneID="7iH-WD-us6">

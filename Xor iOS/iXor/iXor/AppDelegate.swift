@@ -23,10 +23,15 @@ import UIKit
 //    }
 //}
 
+let drawEndedNotificationKey = "drawEndedNotification"
+let levelsToLoad = "xor"
+
+let qaTesting = true
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds("xor_test",fromArchive: true)
+    var playgroundList : PlaygroundList = PlaygroundBuilder.playgrounds(levelsToLoad,fromArchive: true)
     var musicBox = MusicBox()
     
     var window: UIWindow?

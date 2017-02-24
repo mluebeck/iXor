@@ -79,7 +79,7 @@ class XorLevelTableViewController: UIViewController,UITableViewDelegate,UITableV
         if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
             
-            cell.levelLabel?.text = "Level \(playgroundIndices[indexPath.row])"
+            cell.levelLabel?.text = "Lvl \(playgroundIndices[indexPath.row])"
             cell.descriptionLabel?.text = playground?.level_name
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Bold", size: 18)
             if playground?.finished == true
@@ -94,7 +94,7 @@ class XorLevelTableViewController: UIViewController,UITableViewDelegate,UITableV
         else
         {
             let lastPlayground = playgrounds?[playgroundIndices[indexPath.row-1]]
-            cell.levelLabel?.text = "Level \(playgroundIndices[indexPath.row])"
+            cell.levelLabel?.text = "Lvl \(playgroundIndices[indexPath.row])"
             cell.descriptionLabel?.text = playground?.level_name
             //cell.textLabel?.font = UIFont(name: "TrebuchetMS-Italic", size: 18)
             if playground?.finished == true
