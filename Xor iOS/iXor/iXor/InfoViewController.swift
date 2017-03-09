@@ -10,6 +10,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
+    var hintNr = 1
     @IBOutlet var imageView : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,11 @@ class InfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override var prefersStatusBarHidden: Bool
+    {
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -35,32 +40,54 @@ class InfoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let secs = 2.0
-        AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-            self.imageView.image = UIImage.init(named: "xanadoo_1.png")
-            AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                self.imageView.image = UIImage.init(named: "xanadoo_2.png")
-                AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                    self.imageView.image = UIImage.init(named: "xanadoo_3.png")
-                    AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                        self.imageView.image = UIImage.init(named: "xanadoo_4.png")
-                        AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                            self.imageView.image = UIImage.init(named: "xanadoo_5.png")
-                            AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                                self.imageView.image = UIImage.init(named: "xanadoo_6.png")
-                                AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                                    self.imageView.image = UIImage.init(named: "xanadoo_7.png")
-                                    AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
-                                        self.imageView.image = UIImage.init(named: "xanadoo_8.png")
-                                        
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        let secs = 4.0 as Double
+        self.showHints(secs:secs)
+        self.title = "Controller Übersicht (1/7)"
+    }
+    @IBAction func nextHint()
+    {
+        hintNr += 1
+        self.title = "Controller Übersicht (\(hintNr)/7)"
+
+        switch hintNr {
+        case 1:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_4.png")
+            break
+        case 4:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_7.png")
+            break
+        case 2:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_6.png")
+            break
+        case 3:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_1.png")
+            break
+        case 5:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_2.png")
+            break
+        case 6:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_3.png")
+            break
+        case 7:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_5.png")
+            hintNr = 0
+            break
+        default:
+            break
+            
+
         }
+    }
+    
+    func showHints(secs:Double)
+    {
+        return
+            /*
+        AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
+            self.nextHint()
+            self.showHints(secs: secs)
+        }*/
+
     }
     
     @IBAction func doneButtonPressed()
