@@ -21,6 +21,7 @@
 		107739151E45570700BBE90D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107739141E45570700BBE90D /* InfoViewController.swift */; };
 		107739171E455BE000BBE90D /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107739161E455BE000BBE90D /* DismissSegue.swift */; };
 		107FF8031E526E6F006B9BCF /* PathSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107FF8021E526E6F006B9BCF /* PathSelector.swift */; };
+		1084F7A81E7081FF00114131 /* level01_acid_test_chicken2.xor_test in Resources */ = {isa = PBXBuildFile; fileRef = 1084F7A71E7081FF00114131 /* level01_acid_test_chicken2.xor_test */; };
 		1099F62E1E57B8230036E3F7 /* acid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1099F62D1E57B8230036E3F7 /* acid.atlas */; };
 		109E14041E3B4BB1007DB9F8 /* FrostedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E14031E3B4BB1007DB9F8 /* FrostedView.swift */; };
 		109FBE491E5CD75F00597993 /* LevelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109FBE481E5CD75F00597993 /* LevelTableViewCell.swift */; };
@@ -98,6 +99,7 @@
 		107739141E45570700BBE90D /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		107739161E455BE000BBE90D /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		107FF8021E526E6F006B9BCF /* PathSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathSelector.swift; sourceTree = "<group>"; };
+		1084F7A71E7081FF00114131 /* level01_acid_test_chicken2.xor_test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level01_acid_test_chicken2.xor_test; sourceTree = "<group>"; };
 		1099F62D1E57B8230036E3F7 /* acid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = acid.atlas; sourceTree = "<group>"; };
 		109E14031E3B4BB1007DB9F8 /* FrostedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedView.swift; sourceTree = "<group>"; };
 		109FBE481E5CD75F00597993 /* LevelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewCell.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		10A03CAA1E5A5279007D9F1F /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				1084F7A71E7081FF00114131 /* level01_acid_test_chicken2.xor_test */,
 				10A03C851E5A5252007D9F1F /* level01_acid_test_chicken.xor_test */,
 				10A03C871E5A5252007D9F1F /* level01_acid_test_fish.xor_test */,
 				10A03C881E5A5252007D9F1F /* level01_bombe_test_chicken.xor_test */,
@@ -450,6 +453,7 @@
 				106DAA061E46A0BE00E637B0 /* Introduction.xib in Resources */,
 				10A03CA31E5A5253007D9F1F /* level09.xor in Resources */,
 				10BD350E1E4941A2006298D0 /* Views.xib in Resources */,
+				1084F7A81E7081FF00114131 /* level01_acid_test_chicken2.xor_test in Resources */,
 				10A03C9F1E5A5253007D9F1F /* level05.xor in Resources */,
 				10A03CA01E5A5253007D9F1F /* level06.xor in Resources */,
 				8C4312B61DF4717800E80996 /* Main.storyboard in Resources */,

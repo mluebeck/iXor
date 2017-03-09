@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +20,7 @@
         <!--Xor Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="XorGameViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="XorGameViewController" customModule="Xanadoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
@@ -41,7 +42,7 @@
                                         <color key="textColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTD-rJ-Cdm" customClass="FrostedView" customModule="iXor" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTD-rJ-Cdm" customClass="FrostedView" customModule="Xanadoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
@@ -61,7 +62,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstAttribute="trailing" secondItem="gqB-Sb-UYk" secondAttribute="trailing" constant="50" id="mlR-Wf-miw"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1" customClass="FrostedView" customModule="iXor" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1" customClass="FrostedView" customModule="Xanadoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
@@ -320,7 +321,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiK-qK-abw" userLabel="Spielerwechsel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                                <state key="normal" image="spieler2">
+                                                                <state key="normal">
                                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
                                                                 <connections>
@@ -352,6 +353,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbD-9B-DyD">
                                                         <rect key="frame" x="74" y="4" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="top"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="KbD-9B-DyD" secondAttribute="height" multiplier="1:1" id="H6o-Dq-UM5"/>
                                                         </constraints>
@@ -360,10 +363,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="upGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="xgi-1d-WG3"/>
+                                                            <outletCollection property="gestureRecognizers" destination="BLt-sT-3ku" appends="YES" id="LcM-rr-FKC"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhH-4i-AGq">
                                                         <rect key="frame" x="74" y="144" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="down"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="zhH-4i-AGq" secondAttribute="height" multiplier="1:1" id="iRL-er-ywl"/>
                                                         </constraints>
@@ -372,10 +378,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="downGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="o7h-Bg-lhi"/>
+                                                            <outletCollection property="gestureRecognizers" destination="K9m-e7-gvL" appends="YES" id="a09-Zc-QZ3"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Pr-ugY">
                                                         <rect key="frame" x="4" y="74" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="left"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="io0-Pr-ugY" secondAttribute="height" multiplier="1:1" id="8Kv-GK-Tvs"/>
                                                         </constraints>
@@ -384,10 +393,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="leftGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="Ws1-WP-5ry"/>
+                                                            <outletCollection property="gestureRecognizers" destination="Zw8-a7-uBZ" appends="YES" id="HO8-Ug-DpB"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMX-P1-SqZ">
                                                         <rect key="frame" x="144" y="74" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="right"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="mMX-P1-SqZ" secondAttribute="height" multiplier="1:1" id="0Ol-CU-E9D"/>
                                                         </constraints>
@@ -396,6 +408,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="rightGameButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="xBA-Ha-Mxd"/>
+                                                            <outletCollection property="gestureRecognizers" destination="Ind-XR-N3f" appends="YES" id="PfK-l1-HxO"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZy-4Z-Tc4">
@@ -591,13 +604,106 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <constraint firstItem="5q4-F4-zqL" firstAttribute="leading" secondItem="vrw-AF-AtW" secondAttribute="leading" id="wTY-eE-Mg5"/>
                                 </constraints>
                             </view>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-gq-x8N">
+                                <rect key="frame" x="20" y="40" width="335" height="427"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQG-eh-Dse" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1005" height="427"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK4-2Y-GZS" userLabel="View 1">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-7T-p5Z">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="QXq-7T-p5Z" secondAttribute="trailing" id="D32-vV-LJn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QXq-7T-p5Z" secondAttribute="bottom" id="Hfm-5e-5aO"/>
+                                                    <constraint firstItem="QXq-7T-p5Z" firstAttribute="leading" secondItem="vK4-2Y-GZS" secondAttribute="leading" id="Zam-fb-Dwq"/>
+                                                    <constraint firstItem="QXq-7T-p5Z" firstAttribute="top" secondItem="vK4-2Y-GZS" secondAttribute="top" id="ajk-3f-RN7"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-ZF-OeP" userLabel="View 2">
+                                                <rect key="frame" x="335" y="0.0" width="335" height="427"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3iR-FG-B3u">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="3iR-FG-B3u" firstAttribute="leading" secondItem="Mos-ZF-OeP" secondAttribute="leading" id="GJt-3s-fj5"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3iR-FG-B3u" secondAttribute="bottom" id="K6A-7Z-MMD"/>
+                                                    <constraint firstItem="3iR-FG-B3u" firstAttribute="top" secondItem="Mos-ZF-OeP" secondAttribute="top" id="UlD-Me-CRK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3iR-FG-B3u" secondAttribute="trailing" id="rrx-SE-MSj"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apR-P9-oYb" userLabel="View 3">
+                                                <rect key="frame" x="670" y="0.0" width="335" height="427"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0g2-wU-yZE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="0g2-wU-yZE" secondAttribute="trailing" id="2CT-XD-xCB"/>
+                                                    <constraint firstItem="0g2-wU-yZE" firstAttribute="top" secondItem="apR-P9-oYb" secondAttribute="top" id="RAh-m9-NVM"/>
+                                                    <constraint firstItem="0g2-wU-yZE" firstAttribute="leading" secondItem="apR-P9-oYb" secondAttribute="leading" id="gFd-cW-aPb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0g2-wU-yZE" secondAttribute="bottom" id="h13-bT-3D2"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="vK4-2Y-GZS" firstAttribute="leading" secondItem="WQG-eh-Dse" secondAttribute="leading" id="2Tx-gR-o7V"/>
+                                            <constraint firstAttribute="bottom" secondItem="apR-P9-oYb" secondAttribute="bottom" id="F8c-jt-zgK"/>
+                                            <constraint firstItem="apR-P9-oYb" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="Fgu-5s-33H"/>
+                                            <constraint firstItem="Mos-ZF-OeP" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="Huo-lb-p6e"/>
+                                            <constraint firstAttribute="bottom" secondItem="vK4-2Y-GZS" secondAttribute="bottom" id="d40-S4-4bn"/>
+                                            <constraint firstItem="apR-P9-oYb" firstAttribute="leading" secondItem="Mos-ZF-OeP" secondAttribute="trailing" id="dQQ-Yw-X4L"/>
+                                            <constraint firstAttribute="bottom" secondItem="Mos-ZF-OeP" secondAttribute="bottom" id="khf-ug-KVq"/>
+                                            <constraint firstItem="Mos-ZF-OeP" firstAttribute="leading" secondItem="vK4-2Y-GZS" secondAttribute="trailing" id="mwx-Oj-oKD"/>
+                                            <constraint firstItem="vK4-2Y-GZS" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="swi-jd-fmZ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Mos-ZF-OeP" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="0Ua-KN-1yG"/>
+                                    <constraint firstItem="apR-P9-oYb" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="QAz-Q2-WUC"/>
+                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" multiplier="3" id="Y42-hx-bgD"/>
+                                    <constraint firstAttribute="bottom" secondItem="WQG-eh-Dse" secondAttribute="bottom" id="b4P-Cx-ff0"/>
+                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="leading" secondItem="YSs-gq-x8N" secondAttribute="leading" id="gZp-AI-Hyh"/>
+                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="centerY" secondItem="YSs-gq-x8N" secondAttribute="centerY" id="kIs-99-r3i"/>
+                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="top" id="ui6-Ac-mVV"/>
+                                    <constraint firstAttribute="trailing" secondItem="WQG-eh-Dse" secondAttribute="trailing" constant="20" symbolic="YES" id="wOb-zF-A1T"/>
+                                    <constraint firstItem="vK4-2Y-GZS" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="yNL-Bf-9jh"/>
+                                </constraints>
+                            </scrollView>
+                            <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="FMQ-CN-cin">
+                                <rect key="frame" x="137" y="417" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Pqc-2m-F70"/>
+                                    <constraint firstAttribute="width" constant="100" id="bdX-qU-dVY"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="YSs-gq-x8N" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="20" id="6Qb-dQ-t6I"/>
                             <constraint firstAttribute="trailing" secondItem="vrw-AF-AtW" secondAttribute="trailing" id="Ej9-My-Fta"/>
                             <constraint firstItem="mOW-CJ-XDb" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="10" id="FSb-zP-wfI"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="bottom" constant="200" id="KAK-VI-cBS"/>
+                            <constraint firstItem="FMQ-CN-cin" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="NsY-RP-mca"/>
+                            <constraint firstAttribute="trailing" secondItem="YSs-gq-x8N" secondAttribute="trailing" constant="20" id="QwZ-NN-qQ5"/>
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="vrw-AF-AtW" secondAttribute="bottom" id="lYw-7U-h2i"/>
                             <constraint firstItem="mOW-CJ-XDb" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="pLq-hC-aUR"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="FMQ-CN-cin" secondAttribute="bottom" constant="210" id="r3R-7C-f2y"/>
+                            <constraint firstItem="YSs-gq-x8N" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="20" id="vGc-vd-H8v"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -627,18 +733,39 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="replayButton" destination="HNQ-MT-zeI" id="pgl-2o-Vsf"/>
                         <outlet property="replayButtonsView" destination="5q4-F4-zqL" id="weP-fa-4Xs"/>
                         <outlet property="replayLabel" destination="0u8-dk-IhO" id="Xm3-aZ-Dxh"/>
+                        <outlet property="scrollView" destination="YSs-gq-x8N" id="KgV-Iq-bAZ"/>
                         <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
                         <outlet property="verbotImage" destination="x8a-hn-qaM" id="jOE-jd-jJs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="K9m-e7-gvL">
+                    <connections>
+                        <action selector="longButtonPressedGestureDownWithGuesture:" destination="BV1-FR-VrT" id="eCS-e6-0gp"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Zw8-a7-uBZ">
+                    <connections>
+                        <action selector="longButtonPressedGestureLeftWithGuesture:" destination="BV1-FR-VrT" id="bXB-dp-KAl"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="BLt-sT-3ku">
+                    <connections>
+                        <action selector="longButtonPressedGestureUpWithGuesture:" destination="BV1-FR-VrT" id="UxA-Ec-g48"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Ind-XR-N3f">
+                    <connections>
+                        <action selector="longButtonPressedGestureRightWithGuesture:" destination="BV1-FR-VrT" id="hcf-Zz-r2e"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="140" y="269.41529235382313"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="jRx-Vq-24A">
             <objects>
-                <viewController id="tPD-Yu-quZ" customClass="InfoViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tPD-Yu-quZ" customClass="InfoViewController" customModule="Xanadoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7gm-f2-FDW"/>
                         <viewControllerLayoutGuide type="bottom" id="wyQ-Oc-Aa4"/>
@@ -650,23 +777,29 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YD6-98-UaS">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iXor" translatesAutoresizingMaskIntoConstraints="NO" id="Pip-mr-HNh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Xanadoo Anleitung_4" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-0e-9Ae">
+                                        <rect key="frame" x="12" y="0.0" width="352" height="563"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fQN-0e-9Ae" secondAttribute="height" multiplier="10:16" id="na0-K4-cTz"/>
+                                        </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iXor" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-0e-9Ae">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-cy-UAR">
+                                        <rect key="frame" x="0.0" y="563" width="375" height="60"/>
+                                        <state key="normal" title="Weiter"/>
+                                        <connections>
+                                            <action selector="nextHint" destination="tPD-Yu-quZ" eventType="touchUpInside" id="SuV-ac-CNE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="fQN-0e-9Ae" firstAttribute="top" secondItem="YD6-98-UaS" secondAttribute="top" id="3kE-iJ-FiH"/>
-                                    <constraint firstAttribute="trailing" secondItem="fQN-0e-9Ae" secondAttribute="trailing" id="6Rx-0u-NfV"/>
-                                    <constraint firstAttribute="bottom" secondItem="fQN-0e-9Ae" secondAttribute="bottom" id="ZPZ-U7-9bb"/>
-                                    <constraint firstAttribute="bottom" secondItem="Pip-mr-HNh" secondAttribute="bottom" id="aHy-4W-TUu"/>
-                                    <constraint firstAttribute="trailing" secondItem="Pip-mr-HNh" secondAttribute="trailing" id="bo5-L9-AKG"/>
-                                    <constraint firstItem="fQN-0e-9Ae" firstAttribute="leading" secondItem="YD6-98-UaS" secondAttribute="leading" id="d3K-Tr-qUY"/>
-                                    <constraint firstItem="Pip-mr-HNh" firstAttribute="leading" secondItem="YD6-98-UaS" secondAttribute="leading" id="otG-5b-vmZ"/>
-                                    <constraint firstItem="Pip-mr-HNh" firstAttribute="top" secondItem="YD6-98-UaS" secondAttribute="top" id="pVe-ax-IhG"/>
+                                    <constraint firstAttribute="trailing" secondItem="xHc-cy-UAR" secondAttribute="trailing" id="H1z-Wx-HYm"/>
+                                    <constraint firstItem="xHc-cy-UAR" firstAttribute="top" secondItem="fQN-0e-9Ae" secondAttribute="bottom" id="TFu-8i-rjL"/>
+                                    <constraint firstAttribute="bottom" secondItem="fQN-0e-9Ae" secondAttribute="bottom" constant="60" id="ZPZ-U7-9bb"/>
+                                    <constraint firstItem="xHc-cy-UAR" firstAttribute="leading" secondItem="YD6-98-UaS" secondAttribute="leading" id="akC-ag-Fkg"/>
+                                    <constraint firstAttribute="bottom" secondItem="xHc-cy-UAR" secondAttribute="bottom" id="k5e-2D-zZY"/>
+                                    <constraint firstItem="fQN-0e-9Ae" firstAttribute="top" secondItem="YD6-98-UaS" secondAttribute="top" id="qJU-n4-p6J"/>
+                                    <constraint firstItem="fQN-0e-9Ae" firstAttribute="centerX" secondItem="YD6-98-UaS" secondAttribute="centerX" id="uPU-mI-4dZ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -693,7 +826,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSB-k4-SUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="994"/>
+            <point key="canvasLocation" x="1668" y="993.55322338830592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YLx-kD-Dxb">
@@ -717,7 +850,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         <!--How to play!-->
         <scene sceneID="u9D-5O-gtJ">
             <objects>
-                <viewController title="How to play!" id="VPD-f1-3XW" customClass="InfoWebViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="How to play!" id="VPD-f1-3XW" customClass="InfoWebViewController" customModule="Xanadoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="raG-KX-Moe"/>
                         <viewControllerLayoutGuide type="bottom" id="cib-b6-7WV"/>
@@ -799,7 +932,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         <!--Xor Level Table View Controller-->
         <scene sceneID="7iH-WD-us6">
             <objects>
-                <viewController id="cPb-wU-qXl" customClass="XorLevelTableViewController" customModule="iXor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cPb-wU-qXl" customClass="XorLevelTableViewController" customModule="Xanadoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8bi-Q0-P8V"/>
                         <viewControllerLayoutGuide type="bottom" id="GnE-b0-98O"/>
@@ -890,7 +1023,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     </items>
                                 </navigationBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelTableViewCell" id="Uai-03-lx7" customClass="LevelTableViewCell" customModule="iXor" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelTableViewCell" id="Uai-03-lx7" customClass="LevelTableViewCell" customModule="Xanadoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
@@ -966,9 +1099,9 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Xanadoo Anleitung_4" width="640" height="1133"/>
         <image name="buch" width="50" height="59"/>
         <image name="down" width="52" height="52"/>
-        <image name="iXor" width="319" height="569"/>
         <image name="karte_lo" width="20" height="21"/>
         <image name="karte_lu" width="20" height="20"/>
         <image name="karte_ro" width="20" height="20"/>

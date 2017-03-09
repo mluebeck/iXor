@@ -218,25 +218,25 @@ Lasst uns nun einen Blick auf die Bewohner von Xana werfen:
                     <rect key="frame" x="0.0" y="962" width="320" height="205"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler1" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-vI-Gh7">
-                            <rect key="frame" x="8" y="10.5" width="49" height="87.5"/>
+                            <rect key="frame" x="8" y="10" width="49" height="87.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="wGL-cY-Yo3"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Dies ist Dein zweiter Avatar, genannt &quot;Questor&quot;!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfX-Qw-enE">
-                            <rect key="frame" x="77" y="102" width="233" height="101.5"/>
+                            <rect key="frame" x="77" y="101.5" width="233" height="101.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spieler2" translatesAutoresizingMaskIntoConstraints="NO" id="qfj-oY-dKK">
-                            <rect key="frame" x="8" y="108" width="49" height="87.5"/>
+                            <rect key="frame" x="8" y="107.5" width="49" height="87.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="dod-Gk-lhq"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Xanadoo hast Du zwei Avatare, dieser hier ist Magus!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbf-Jb-LNx">
-                            <rect key="frame" x="77" y="0.5" width="233" height="101.5"/>
+                            <rect key="frame" x="77" y="0.0" width="233" height="101.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -310,16 +310,16 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ms2-QE-3Cw" userLabel="View 3">
-                    <rect key="frame" x="0.0" y="1372" width="320" height="204.5"/>
+                    <rect key="frame" x="0.0" y="1372" width="320" height="205"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huhn" translatesAutoresizingMaskIntoConstraints="NO" id="rHq-ew-uwC">
-                            <rect key="frame" x="8" y="105.5" width="49" height="87"/>
+                            <rect key="frame" x="8" y="105.5" width="49" height="87.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="pXY-ge-pLA"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dies ist ein Hähnchen. Du kannst es nach oben oder unten. Es bewegt sich immer von rechts nach links, wenn nichts im Wege ist." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mr3-Tr-wm2">
-                            <rect key="frame" x="78" y="102.5" width="232" height="102"/>
+                            <rect key="frame" x="78" y="102.5" width="232" height="102.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -357,7 +357,7 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qu-Xc-0pQ" userLabel="View 4">
-                    <rect key="frame" x="0.0" y="1577.5" width="320" height="205"/>
+                    <rect key="frame" x="0.0" y="1578" width="320" height="205.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wellen" translatesAutoresizingMaskIntoConstraints="NO" id="iXT-B5-y4B">
                             <rect key="frame" x="8" y="10" width="49" height="91.5"/>
@@ -366,7 +366,7 @@ Sammle sie alle!</string>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wellen_vertikal" translatesAutoresizingMaskIntoConstraints="NO" id="lMT-FF-txu">
-                            <rect key="frame" x="8" y="101.5" width="49" height="91.5"/>
+                            <rect key="frame" x="8" y="101.5" width="49" height="92"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="kPy-67-Y8u"/>
@@ -379,7 +379,7 @@ Sammle sie alle!</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diese Punkte kannst Du nur seitwärts durchschreiten." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph6-AX-8dN">
-                            <rect key="frame" x="80" y="104.5" width="232" height="100.5"/>
+                            <rect key="frame" x="80" y="104.5" width="232" height="101"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -403,7 +403,7 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Jv-8y-7vk" userLabel="View 5">
-                    <rect key="frame" x="0.0" y="1782.5" width="320" height="205"/>
+                    <rect key="frame" x="0.0" y="1783.5" width="320" height="205"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fisch" translatesAutoresizingMaskIntoConstraints="NO" id="Kb2-YC-jnK">
                             <rect key="frame" x="8" y="8" width="49" height="94.5"/>
@@ -449,7 +449,7 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-Dj-OAU" userLabel="View 6">
-                    <rect key="frame" x="0.0" y="1987.5" width="320" height="205.5"/>
+                    <rect key="frame" x="0.0" y="1988.5" width="320" height="205"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maske_trauer" translatesAutoresizingMaskIntoConstraints="NO" id="2SD-jW-7P5">
                             <rect key="frame" x="8" y="8" width="49" height="94.5"/>
@@ -458,7 +458,8 @@ Sammle sie alle!</string>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kompass" translatesAutoresizingMaskIntoConstraints="NO" id="eD7-tV-fEt">
-                            <rect key="frame" x="8" y="102.5" width="49" height="95"/>
+                            <rect key="frame" x="8" y="102.5" width="49" height="94.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="BTa-3h-Fbj"/>
                             </constraints>
@@ -471,7 +472,7 @@ Sammle sie alle!</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dies ist ein Teleporter. Er bringt Dich zu einem anderen Teil des Labyriths!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYe-sf-Ghm">
-                            <rect key="frame" x="80" y="110.5" width="232" height="95"/>
+                            <rect key="frame" x="80" y="110.5" width="232" height="94.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -495,16 +496,18 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0o-o9-5sl" userLabel="View 7">
-                    <rect key="frame" x="0.0" y="2193" width="320" height="205.5"/>
+                    <rect key="frame" x="0.0" y="2193.5" width="320" height="205"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="puppe" translatesAutoresizingMaskIntoConstraints="NO" id="Aon-Hk-4hi">
                             <rect key="frame" x="8" y="8" width="49" height="94.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="ZJZ-sQ-zsx"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bombe" translatesAutoresizingMaskIntoConstraints="NO" id="RE8-b1-ZI1">
-                            <rect key="frame" x="8" y="102.5" width="49" height="95"/>
+                            <rect key="frame" x="8" y="102.5" width="49" height="94.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="EoF-L9-eSY"/>
                             </constraints>
@@ -518,7 +521,7 @@ Sammle sie alle!</string>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KG-Wc-F9F">
-                            <rect key="frame" x="80" y="106.5" width="232" height="99"/>
+                            <rect key="frame" x="80" y="106.5" width="232" height="98.5"/>
                             <string key="text">Dies ist eine Bombe. Wenn ein Hähnchen oder ein Fisch die Bombe, wird sie explodieren und alles links und rechts zerstören. Sehr nützlich, um Barrieren aus dem Weg zu räumen!</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
@@ -543,16 +546,17 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ggf-L6-woJ" userLabel="View 8">
-                    <rect key="frame" x="0.0" y="2398.5" width="320" height="143"/>
+                    <rect key="frame" x="0.0" y="2398.5" width="320" height="143.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="saeure" translatesAutoresizingMaskIntoConstraints="NO" id="N02-xN-oJO">
-                            <rect key="frame" x="8" y="8" width="49" height="127"/>
+                            <rect key="frame" x="8" y="8" width="49" height="127.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="NL2-eB-mBt"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hb-Jv-UNH">
-                            <rect key="frame" x="78" y="8" width="234" height="127"/>
+                            <rect key="frame" x="78" y="8" width="234" height="127.5"/>
                             <string key="text">Dies ist Säure. Getroffen von einem Fisch oder Hähnchen, zerbricht es und die Dämpfe zerstören alles ober- und unterhalb der Säure. Du kannst es nach oben oder unten verschieben und es bewegt sich gerne nach links.</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <nil key="textColor"/>
@@ -572,23 +576,23 @@ Sammle sie alle!</string>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSD-q2-vTj" userLabel="impressum">
-                    <rect key="frame" x="0.0" y="2541.5" width="320" height="511.5"/>
+                    <rect key="frame" x="0.0" y="2542" width="320" height="511"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_info" translatesAutoresizingMaskIntoConstraints="NO" id="GRQ-TX-PfY">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="511.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="511"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="GRQ-TX-PfY" secondAttribute="height" multiplier="10:16" id="2dM-GB-qfY"/>
                             </constraints>
                         </imageView>
                         <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAe-9U-uvl" userLabel="alpha view">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="511.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="511"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="QAe-9U-uvl" secondAttribute="height" multiplier="10:16" id="YBr-BD-WhD"/>
                             </constraints>
                         </view>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovs-AM-AoX" userLabel="Impressum">
-                            <rect key="frame" x="50" y="50" width="220" height="411.5"/>
+                            <rect key="frame" x="50" y="50" width="220" height="411"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <attributedString key="attributedText">
                                 <fragment>
