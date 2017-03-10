@@ -159,13 +159,18 @@ class PlaygroundBuilder: NSObject {
         var i = 0
         var localArray = Array<MazeElement>()
         
-        for char in mazeString.characters {
-            if char == "z" {
+        for char in mazeString.characters
+        {
+            if char == "z"
+            {
                 Playground.finalLevel=(playground?.level_number)!
-            } else
-            if char == "\n" {
+                y -= 1
+            }
+            else
+            if char == "\n"
+            {
                 x = 0
-                y = y + 1
+                y += 1
                 if localArray.count>0
                 {
                     playground?.playgroundArray.append(localArray)
@@ -174,71 +179,96 @@ class PlaygroundBuilder: NSObject {
                 }
             }
             else
-                if !(char == " ")
+            if !(char == " ")
+            {
+                if char == "a"
                 {
-                    if char == "a" {
+                    if !((playground?.positionPlayerOne.x)!>0 && (playground?.positionPlayerOne.y)!>0)
+                    {
                         playground?.positionPlayerOne.x = x
                         playground?.positionPlayerOne.y = y
                         playground?.playerPosition.x = x
                         playground?.playerPosition.y = y
                         playground?.oldPlayerPosition = (playground?.playerPosition)!
-                    } else
-                        if char == "b" {
-                            playground?.positionPlayerTwo.x = x
-                            playground?.positionPlayerTwo.y = y
-                        }
-                        else if char == "M" {
-                            playground?.masken_gesamtanzahl += 1
                     }
-                    if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" ) {
-                        if let element = PlaygroundBuilder.mazeElementToString[char]! as MazeElementType? {
-                            if element == MazeElementType.space {
-                                let mazeElement = MazeElement(mazeElementType: MazeElementType.space, sprite:nil)
-                                localArray.append(mazeElement)
-                            } else {
-                                let sprite = SKSpriteNode(imageNamed:PlaygroundBuilder.MazeElementToFilename[element]!)
-                                let mazeElement = MazeElement(mazeElementType: element, sprite:sprite)
-                                if char == "a" {
-                                    sprite.zPosition = 1.0
-                                    playground?.playerOneMazeElement = mazeElement
-                                    
-                                } else
-                                    if char == "b" {
-                                        sprite.zPosition = 1.0
-                                        playground?.playerTwoMazeElement = mazeElement
-                                    }
-                                    else
-                                    {
-                                        sprite.zPosition = 0.0
-                                }
-                                if mazeElement.mazeElementType == MazeElementType.chicken {
-                                    print("Added Chicken:\(x) \(y)")
-                                }
-                                localArray.append(mazeElement)
+                }
+                else
+                if char == "b"
+                {
+                    playground?.positionPlayerTwo.x = x
+                    playground?.positionPlayerTwo.y = y
+                }
+                else
+                if char == "M"
+                {
+                    playground?.masken_gesamtanzahl += 1
+                }
+                
+                if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" )
+                {
+                    if let element = PlaygroundBuilder.mazeElementToString[char]! as MazeElementType?
+                    {
+                        if element == MazeElementType.space
+                        {
+                            let mazeElement = MazeElement(mazeElementType: MazeElementType.space, sprite:nil)
+                            localArray.append(mazeElement)
+                        }
+                        else
+                        {
+                            let sprite = SKSpriteNode(imageNamed:PlaygroundBuilder.MazeElementToFilename[element]!)
+                            let mazeElement = MazeElement(mazeElementType: element, sprite:sprite)
+                            if char == "a"
+                            {
+                                sprite.zPosition = 1.0
+                                playground?.playerOneMazeElement = mazeElement
+                                
                             }
-                        }
-                    } else {
-                        // Transporter coordinates!
-                        
-                        let kl = Int(String(char))
-                        if x % 4 == 0 {
-                            beamerCoordinates.from.x = kl!
-                        } else
-                        if x % 4 == 1 {
-                            beamerCoordinates.from.y = kl!//playground?.beam_from[index][1] = kl!;
-                        }
-                        else
-                        if x % 4 == 2 {
-                            beamerCoordinates.to.x = kl!
-                        }
-                        else
-                        if x % 4 == 3 {
-                            beamerCoordinates.to.y = kl!//playground?.beam_from[index][1] = kl!;
-                            playground?.beamerArray.append(beamerCoordinates)
-                            beamerCoordinates = Beamer(from:Playground.Null(),to:Playground.Null())
+                            else
+                            if char == "b"
+                            {
+                                sprite.zPosition = 1.0
+                                playground?.playerTwoMazeElement = mazeElement
+                            }
+                            else
+                            {
+                                sprite.zPosition = 0.0
+                            }
+                            if mazeElement.mazeElementType == MazeElementType.chicken
+                            {
+                                print("Added Chicken:\(x) \(y)")
+                            }
+                            localArray.append(mazeElement)
                         }
                     }
-                    x+=1
+                }
+                else
+                {
+                    // Transporter coordinates!
+                        
+                    let kl = Int(String(char))
+                    if x % 4 == 0
+                    {
+                        beamerCoordinates.from.x = kl!
+                    }
+                    else
+                    if x % 4 == 1
+                    {
+                        beamerCoordinates.from.y = kl!//playground?.beam_from[index][1] = kl!;
+                    }
+                    else
+                    if x % 4 == 2
+                    {
+                        beamerCoordinates.to.x = kl!
+                    }
+                    else
+                    if x % 4 == 3
+                    {
+                        beamerCoordinates.to.y = kl!//playground?.beam_from[index][1] = kl!;
+                        playground?.beamerArray.append(beamerCoordinates)
+                        beamerCoordinates = Beamer(from:Playground.Null(),to:Playground.Null())
+                    }
+                }
+                x+=1
             }
             //print("testing \(x), \(y).... \(playground?.element(position: PlaygroundPosition(x:x,y:y)))")
         }
@@ -294,15 +324,15 @@ class PlaygroundBuilder: NSObject {
             playgroundList = PlaygroundList()
         }
         
-        if playgroundList.playgrounds.count == 0
-        {
+        //if playgroundList.playgrounds.count == 0
+        //{
             let paths = Bundle.main.paths(forResourcesOfType: name, inDirectory: nil)
             for path in paths {
                 let playground = PlaygroundBuilder.readLevelString(filepath:path)
                 playgroundList.playgrounds[playground.level_number]=playground
             }
             self.archive(playgroundList)
-        }
+        //}
         return playgroundList
     }
     
