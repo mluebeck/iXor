@@ -165,7 +165,7 @@ extension Playground {
                                           completed:{
                                             self.chickenRun(position:leftposition,juststarted: false)
                                             self.testForChickenOrFishAction(position:position,justStarted:false,causedby: (chickenElement?.mazeElementType)!)
-                })
+                },relativeToCamera: false)
                 return
             }
             else
@@ -247,7 +247,7 @@ extension Playground {
                                           completed:{
                                             self.fishFall(position:bottomposition,juststarted: false)
                                             self.testForChickenOrFishAction(position:position,justStarted:false,causedby: (fishOrBombElement?.mazeElementType)!)
-                })
+                },relativeToCamera: false)
                 return
             }
             else
@@ -441,7 +441,7 @@ extension Playground {
                 let elementFishAboveAcid = Playground.up(position: position)
                 let elementDownFromAcid = Playground.down(position: Playground.down(position: position))
                 
-                self.createWallOnPlayground(position: elementDownFromAcid)
+                //self.createWallOnPlayground(position: elementDownFromAcid)
                 
                 sceneDelegate?.playSoundAcid()
                 
