@@ -1031,7 +1031,7 @@ class Playground: NSObject,NSCoding {
          sceneDelegate?.drawSprite(element:element,
                           position:position,
                           duration:Playground.chickenDuration,
-                          completed:completition)
+                          completed:completition,relativeToCamera: false)
 
     }
     

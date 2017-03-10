@@ -168,7 +168,14 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
                 self.moving(position: position)
                 
                 print("2-> \(position.hashValue) \(intermediateAlreadySpriteDrawnQueue.count)")
-                playground.sceneDelegate?.drawRelativeToCamera(sprite: edgeSprite, element:mazeElement, position: position, duration: 0.0, completed: nil)
+                //playground.sceneDelegate?.drawRelativeToCamera(sprite: edgeSprite, element:mazeElement, position: position, duration: 0.0, completed: nil)
+                
+                playground.sceneDelegate?.drawSprite(element:mazeElement,
+                                 position:position,
+                                 duration:0.0,
+                                 completed:nil,
+                                 relativeToCamera:true)
+                
             }
             else
             {
