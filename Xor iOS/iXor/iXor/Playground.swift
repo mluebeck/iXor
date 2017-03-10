@@ -160,7 +160,7 @@ class Playground: NSObject,NSCoding {
     var level_geschafft = 0           // how many level have you completed ??
     var level_number : Int = 0
     var justFinished = false
-    var finished = false
+    var finished = qaTesting
     var numberOfMoves = 0
     var mapsFound = Array<MazeElementType>()
     var eventCounter = 0
@@ -205,7 +205,7 @@ class Playground: NSObject,NSCoding {
             strX=""
         }
         
-       strY = strY.appending("Position Player One:\(self.positionPlayerOne),\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
+       strY = strY.appending("Position Player One:\(self.positionPlayerOne),Position Player Two:\(self.positionPlayerTwo),\ncurrent Position:\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
         return strY
     }
 
@@ -240,15 +240,7 @@ class Playground: NSObject,NSCoding {
         self.numberOfMoves = Int(coder.decodeInt32(forKey: "numberOfMoves"))
         self.mapsFound = coder.decodeObject(forKey: "mapsFound") as! Array<MazeElementType>
         self.finished = (coder.decodeObject(forKey: "finished") != nil)
-        if self.level_number==1
-        {
-            print(self)
-        }
-        if qaTesting==true
-        {
-            self.finished = true
-        }
-        
+        self.finished = qaTesting
      }
     
     func encode(with aCoder: NSCoder) {
@@ -353,6 +345,7 @@ class Playground: NSObject,NSCoding {
         self.playerPosition    = PlaygroundPosition(x: -1, y: -1)
         self.oldPlayerPosition = PlaygroundPosition(x: -1, y: -1)
         self.moveDirection=PlayerMoveDirection.NONE
+        self.finished = qaTesting
         super.init()
     }
     
@@ -423,7 +416,14 @@ class Playground: NSObject,NSCoding {
         
     func allMasksCollected() -> Bool
     {
-        return true // self.masken_gesamtanzahl == self.masken_gesammelt
+        if qaTesting==true
+        {
+            return true
+        }
+        else
+        {
+            return self.masken_gesamtanzahl == self.masken_gesammelt
+        }
     }
     // fish, bombe fällt runter von selbst
     // chicken, acid fliegen nach links von selbst
@@ -581,6 +581,7 @@ class Playground: NSObject,NSCoding {
                                         self.chickenRun(position: Playground.newPosition(position: newPosition!, direction: direction),juststarted: true)
                                     }
                                 }
+                                
                         })
                     }
                 }
@@ -657,6 +658,7 @@ class Playground: NSObject,NSCoding {
                                     self.fishFall(position: Playground.newPosition(position:newPosition!,direction: direction),juststarted:true)
                                 }
                             }
+                            
                         })
                 }
             }
@@ -842,6 +844,10 @@ class Playground: NSObject,NSCoding {
         sceneDelegate?.drawPlayer(position: playerPosition, previousPosition: oldPlayerPosition, player: self.akt_spieler_ist_playerOne, beamed:beamed, completition:
             {
                 self.doTheFishChickenMoving(position: self.oldPlayerPosition)
+                if self.eventCounter==0
+                {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: drawEndedNotificationKey), object: self)
+                }
             }
         )
         
@@ -891,9 +897,7 @@ class Playground: NSObject,NSCoding {
         }
         
         sceneDelegate?.moveCameraToPlaygroundCoordinates(position: newCameraPosition)
-        cameraLeftTopPosition = newCameraPosition
-        print("\n\n update scene ende \n\n")
-        
+        cameraLeftTopPosition = newCameraPosition        
     }
     
     func removeItemFromPlayground(mazeElementType:MazeElementType?,position:PlaygroundPosition)
