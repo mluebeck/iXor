@@ -83,7 +83,8 @@ class InfoViewController: UIViewController {
     {
         return
             /*
-        AppDelegate.delay(bySeconds: secs, dispatchLevel: .main) {
+        AppDelegate.delay(bySeconds: secs
+         , dispatchLevel: .main) {
             self.nextHint()
             self.showHints(secs: secs)
         }*/
