@@ -8,10 +8,12 @@
 
 import UIKit
 
-class PlaygroundList: NSObject,NSCoding {
+class PlaygroundList: NSObject,NSCoding
+{
     var playgrounds : [Int: Playground]
     
-    override init() {
+    override init()
+    {
         playgrounds = [Int: Playground]()
         super.init()
     }
@@ -21,7 +23,8 @@ class PlaygroundList: NSObject,NSCoding {
         self.playgrounds = coder.decodeObject(forKey: "playgrounds") as! [Int : Playground]
     }
     
-    func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder)
+    {
         aCoder.encode(self.playgrounds, forKey: "playgrounds")
     }
 }

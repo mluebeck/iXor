@@ -8,8 +8,8 @@
 
 import UIKit
 
-extension Playground {
-    
+extension Playground
+{
     func testChickenAcidFishBomb()
     {
         let playgroundCopy = self.playgroundArray.map{$0}
@@ -36,24 +36,24 @@ extension Playground {
                     }
                 }
                 else
-                    if mazetype.mazeElementType==MazeElementType.fish || mazetype.mazeElementType==MazeElementType.bomb
+                if mazetype.mazeElementType==MazeElementType.fish || mazetype.mazeElementType==MazeElementType.bomb
+                {
+                    let downPosition = Playground.down(position: currentPosition)
+                    let downElement = playgroundCopy[downPosition.y][downPosition.x]
+                    if downElement.mazeElementType == MazeElementType.space || downElement.mazeElementType == MazeElementType.h_wave
                     {
-                        let downPosition = Playground.down(position: currentPosition)
-                        let downElement = playgroundCopy[downPosition.y][downPosition.x]
-                        if downElement.mazeElementType == MazeElementType.space || downElement.mazeElementType == MazeElementType.h_wave
-                        {
-                            //y += 1
-                            self.increaseEventCounter(comment: "fish fall!", element: MazeElementType.fish)
-                            fishFall(position: currentPosition,juststarted:true)
-                        }
+                        //y += 1
+                        self.increaseEventCounter(comment: "fish fall!", element: MazeElementType.fish)
+                        fishFall(position: currentPosition,juststarted:true)
+                    }
                 }
-                y=y+1
+                y+=1
                 if y == PlaygroundBuilder.Constants.groesseY
                 {
                     break
                 }
             }
-            x=x+1
+            x+=1
             y=0
             if x==PlaygroundBuilder.Constants.groesseX
             {
@@ -332,7 +332,6 @@ extension Playground {
     
     func bombExplode(element:MazeElement,position:PlaygroundPosition,causedBy:MazeElementType)
     {
-        //        increaseEventCounter(comment: "bomb explode", element: MazeElementType.exit)
         if let _ = element.sprite
         {
             if causedBy==MazeElementType.fish || causedBy == MazeElementType.bomb
@@ -372,9 +371,7 @@ extension Playground {
             else
             {   // chicken or acid
                 let positionLeft = Playground.left(position: position) // position bomb
-                
                 self.cleanBombArea(position,positionLeft)
-                
                 self.testForChickenOrFishAction(position: Playground.left(position: positionLeft),justStarted:true,causedby: causedBy)
                 self.testForChickenOrFishAction(position: Playground.right(position: positionLeft),justStarted:true,causedby: causedBy)
                 self.createEmptySpaceOnPlayground(position: positionLeft)
@@ -390,7 +387,6 @@ extension Playground {
                     
                 } )
                 return
-                
             }
         }
     }
@@ -422,27 +418,19 @@ extension Playground {
                 self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: elementLeft),duration:0.9) // acid down
                 
                 sceneDelegate?.doAcidAnimation(element: element,block:{
-                    
-                    
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position:elementLeft,duration:0.0)
-                    
                     self.testForChickenOrFishAction(position: Playground.up(position: elementLeft),justStarted:true,causedby: causedBy)
                     self.testForChickenOrFishAction(position: elementLeft,justStarted:true,causedby: causedBy)
                     self.testForChickenOrFishAction(position: position,justStarted:true,causedby: causedBy)
                     self.testForChickenOrFishAction(position: Playground.down(position: elementLeft),justStarted:true,causedby: causedBy)
                     self.decreaseEventCounter(comment:"acid corrosive",element: causedBy)
-                    
-                    
                 })
             }
             else // causedBy==MazeElementType.fish || causedBy == MazeElementType.bomb
             {
                 let elementFishAboveAcid = Playground.up(position: position)
                 let elementDownFromAcid = Playground.down(position: Playground.down(position: position))
-                
-                //self.createWallOnPlayground(position: elementDownFromAcid)
-                
                 sceneDelegate?.playSoundAcid()
                 
                 // remove all items destroyed by acid
@@ -454,7 +442,6 @@ extension Playground {
                 
                 self.increaseEventCounter(comment:"acid corrosive",element:causedBy)
                 sceneDelegate?.doAcidAnimation(element: element,block:{
-                    
                     element.sprite?.removeFromParent()
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: Playground.down(position: position),duration:0.0)
                     self.createEmptySpaceOnPlaygroundAndRemoveSprite(position: elementFishAboveAcid,duration:0.0) // acid
@@ -476,7 +463,6 @@ extension Playground {
     
     func decreaseEventCounter(comment:String,element:MazeElementType)
     {
-        
         self.eventCounter = self.eventCounter - 1
         print(" decrease!  events down at \(comment): \(self.eventCounter) because: \(element)")
         if self.eventCounter==0

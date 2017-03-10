@@ -9,7 +9,8 @@
 import UIKit
 import SpriteKit
 
-enum PlayerMoveDirection  : Int {
+enum PlayerMoveDirection  : Int
+{
     case
     UP = 0,
     DOWN,
@@ -20,31 +21,32 @@ enum PlayerMoveDirection  : Int {
 }
 
 
-class PlaygroundPosition : NSObject,NSCoding {
+class PlaygroundPosition : NSObject,NSCoding
+{
     
-    override public var description: String {
+    override public var description: String
+    {
         return "(\(x),\(y))"
     }
     
-    init(x:Int,y:Int) {
+    init(x:Int,y:Int)
+    {
         self.x=x
         self.y=y
     }
     
-    override var hashValue: Int {
+    override var hashValue: Int
+    {
         return x.hashValue ^ y.hashValue*32
     }
 
-    
-    /*var hashValue: Int {
-        return x.hashValue ^ y.hashValue
-    }
-    */
-    static func == (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool {
+    static func == (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool
+    {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
     
-    static func != (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool {
+    static func != (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool
+    {
         return lhs.x != rhs.x || lhs.y != rhs.y
     }
 
@@ -59,14 +61,16 @@ class PlaygroundPosition : NSObject,NSCoding {
         
     }
     
-    func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder)
+    {
         aCoder.encode(self.x, forKey: "x")
         aCoder.encode(self.y, forKey: "y")
     }
 }
 
 
-class Beamer : NSObject,NSCoding {
+class Beamer : NSObject,NSCoding
+{
     var from : PlaygroundPosition
     var to : PlaygroundPosition
     
@@ -83,7 +87,8 @@ class Beamer : NSObject,NSCoding {
         
     }
     
-    func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder)
+    {
         aCoder.encode(self.from, forKey: "from")
         aCoder.encode(self.to, forKey: "to")
     }
@@ -91,7 +96,8 @@ class Beamer : NSObject,NSCoding {
 
 
 
-class Playground: NSObject,NSCoding {
+class Playground: NSObject,NSCoding
+{
     
     static func up(position:PlaygroundPosition)->PlaygroundPosition
     {
@@ -137,9 +143,7 @@ class Playground: NSObject,NSCoding {
     static let chickenDuration = 0.1
     static let fishDuration = 0.1
     static let puppetMove = 0.1
-    
     static var replay = Array<Playground>()
-
     static var finalLevel = 15
     
     var playgroundArray : Array<Array<MazeElement>> = Array()  // Das spielfeld
@@ -176,7 +180,8 @@ class Playground: NSObject,NSCoding {
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     
-    override public var description : String {
+    override public var description : String
+    {
         var strX = ""
         var strY = "\n"
         for y in 0..<PlaygroundBuilder.Constants.groesseX
@@ -204,8 +209,7 @@ class Playground: NSObject,NSCoding {
             strY = strY.appending(strX).appending("\n")
             strX=""
         }
-        
-       strY = strY.appending("Position Player One:\(self.positionPlayerOne),Position Player Two:\(self.positionPlayerTwo),\ncurrent Position:\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
+        strY = strY.appending("Position Player One:\(self.positionPlayerOne),Position Player Two:\(self.positionPlayerTwo),\ncurrent Position:\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
         return strY
     }
 
@@ -243,7 +247,8 @@ class Playground: NSObject,NSCoding {
         self.finished = qaTesting
      }
     
-    func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder)
+    {
         if self.akt_spieler_ist_playerOne == true
         {
             self.positionPlayerOne = self.playerPosition
@@ -252,7 +257,6 @@ class Playground: NSObject,NSCoding {
         {
             self.positionPlayerTwo = self.playerPosition
         }
-        
         aCoder.encode(positionPlayerOne, forKey: "positionPlayerOne")
         aCoder.encode(positionPlayerTwo, forKey: "positionPlayerTwo")
         aCoder.encode(cameraLeftTopPosition, forKey: "cameraLeftTopPosition")
@@ -274,7 +278,6 @@ class Playground: NSObject,NSCoding {
         aCoder.encode(level_name, forKey: "level_name")
         aCoder.encode(level_geschafft, forKey: "level_geschafft")
         aCoder.encode(level_number, forKey: "level_number")
-        
         aCoder.encode(numberOfMoves, forKey: "numberOfMoves")
         aCoder.encode(mapsFound, forKey: "mapsFound")
         if finished==true
@@ -285,27 +288,16 @@ class Playground: NSObject,NSCoding {
         {
             aCoder.encode("1", forKey: "justFinished")
         }
-        // aCoder.encode(playerOneMazeElement, forKey: "playerOneMazeElement")
-       // aCoder.encode(playerTwoMazeElement, forKey: "playerTwoMazeElement")
-        
-        if self.level_number==1 {
+        if self.level_number==1
+        {
             print(self)
         }
-        
-        
     }
     
     override func copy() -> Any
     {
         let playground = Playground()
         playground.playgroundArray = self.playgroundArray.map{$0}
-//        for i in playgroundArray
-//        {
-//            for var j in i
-//            {
-//                j.sprite=nil
-//            }
-//        }
         playground.beamerArray = self.beamerArray
         playground.playerOneMazeElement = self.playerOneMazeElement
         playground.playerTwoMazeElement = self.playerTwoMazeElement
@@ -331,12 +323,9 @@ class Playground: NSObject,NSCoding {
         playground.positionPlayerOne = self.positionPlayerOne
         playground.positionPlayerTwo = self.positionPlayerTwo
         playground.moveDirection = self.moveDirection
-        
         return playground
     }
-    
-    
-    
+
     override init()
     {
         self.positionPlayerOne = Playground.Null()
@@ -484,7 +473,8 @@ class Playground: NSObject,NSCoding {
     
     func levelFinishedAndExitReached(item:MazeElementType?) -> Bool
     {
-        if let mazeitem = item {
+        if let mazeitem = item
+        {
             if numberOfMovesNotExceeded() && allMasksCollected() && mazeitem  == MazeElementType.exit
             {
                 justFinished=true
@@ -670,9 +660,9 @@ class Playground: NSObject,NSCoding {
         else
         {
             Playground.replay.removeLast(1)
-
         }
-        if self.numberOfMovesNotExceeded() == false {
+        if self.numberOfMovesNotExceeded() == false
+        {
             print("Ende!")
             sceneDelegate?.updateViewController(event: MazeEvent.movesExceeded)
         }
@@ -738,15 +728,18 @@ class Playground: NSObject,NSCoding {
         return true
     }
     
-    func canMoveChickenAcidPuppetUpDown(direction:PlayerMoveDirection) -> Bool {
+    func canMoveChickenAcidPuppetUpDown(direction:PlayerMoveDirection) -> Bool
+    {
         if direction==PlayerMoveDirection.UP {
             let upPosition = Playground.up(position: self.playerPosition)
             let upElement = element(position: upPosition)
             let item = upElement?.mazeElementType
-            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet {
+            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet
+            {
                 let upupPosition = Playground.up(position:upPosition)
                 let upupElement = element(position: upupPosition)
-                if upupElement?.mazeElementType == MazeElementType.space || upupElement?.mazeElementType == MazeElementType.h_wave{
+                if upupElement?.mazeElementType == MazeElementType.space || upupElement?.mazeElementType == MazeElementType.h_wave
+                {
                     upupElement?.removeSprite()
                     createEmptySpaceOnPlayground(position:upPosition)
                     
@@ -765,15 +758,19 @@ class Playground: NSObject,NSCoding {
             {
                 return false
             }
-        } else
-        if direction==PlayerMoveDirection.DOWN {
+        }
+        else
+        if direction==PlayerMoveDirection.DOWN
+        {
             let downPosition = Playground.down(position: self.playerPosition)
             let downElement = element(position: downPosition)
             let item = downElement?.mazeElementType
-            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet {
+            if item == MazeElementType.chicken || item == MazeElementType.acid || item == MazeElementType.puppet
+            {
                 let downdownPosition = Playground.down(position:downPosition)
                 let downdownElement = element(position: downdownPosition)
-                if downdownElement?.mazeElementType == MazeElementType.space || downdownElement?.mazeElementType == MazeElementType.h_wave {
+                if downdownElement?.mazeElementType == MazeElementType.space || downdownElement?.mazeElementType == MazeElementType.h_wave
+                {
                     downdownElement?.removeSprite()
                     
                     createEmptySpaceOnPlayground(position:downPosition)

@@ -9,9 +9,11 @@
 import UIKit
 import SpriteKit
 
-class PlaygroundBuilder: NSObject {
+class PlaygroundBuilder: NSObject
+{
 
-    static var filePath : String {
+    static var filePath : String
+    {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
         return (url?.appendingPathComponent("playgrounds").path)!
@@ -85,7 +87,8 @@ class PlaygroundBuilder: NSObject {
     ]
     
     
-    struct Constants {
+    struct Constants
+    {
         static let groesseX = 32;         // playground dimensions (=32x32)
         static let groesseY = 32;         // playground dimensions (=32x32)
         static let sichtbareGroesseX = 8  // visible playground
@@ -93,7 +96,8 @@ class PlaygroundBuilder: NSObject {
         static let maximumMoves = 1000
     }
     
-    static func readLevelString(filepath: String) -> Playground {
+    static func readLevelString(filepath: String) -> Playground
+    {
         return readFromFile(filepath: filepath)
     }
     
@@ -123,19 +127,27 @@ class PlaygroundBuilder: NSObject {
 
         let language = Bundle.main.preferredLocalizations.first
 
-        for char in (playground?.contentAsString.characters)! {
-            if commentMode == true {
-                if char == "#" {
+        for char in (playground?.contentAsString.characters)!
+        {
+            if commentMode == true
+            {
+                if char == "#"
+                {
                     commentMode = false
-                } else {
+                }
+                else
+                {
                     levelTitleWithNumber.append(char)
                 }
-            } else
+            }
+            else
             {
-                if char == "#" {
+                if char == "#"
+                {
                     commentMode = true
                 }
-                else {
+                else
+                {
                     if !(char == "\n" && mazeString.characters.count == 0)
                     {
                         mazeString.append(char)
@@ -276,18 +288,24 @@ class PlaygroundBuilder: NSObject {
     }
     
     
-    static private func readLevel(number: Int) -> Playground {
+    static private func readLevel(number: Int) -> Playground
+    {
         var file : String = ""
-        if number>9 {
+        if number>9
+        {
             file = "level\(number)"
-        } else {
+        }
+        else
+        {
             file = "level0\(number)"
         }
         
-        if let s = Bundle.main.path(forResource: file, ofType: levelsToLoad) {
+        if let s = Bundle.main.path(forResource: file, ofType: levelsToLoad)
+        {
             return self.readFromFile(filepath: s)
         }
-        else {
+        else
+        {
             assert(false, "File does not exists")
         }
     }
@@ -323,16 +341,13 @@ class PlaygroundBuilder: NSObject {
         {
             playgroundList = PlaygroundList()
         }
-        
-        //if playgroundList.playgrounds.count == 0
-        //{
-            let paths = Bundle.main.paths(forResourcesOfType: name, inDirectory: nil)
-            for path in paths {
-                let playground = PlaygroundBuilder.readLevelString(filepath:path)
-                playgroundList.playgrounds[playground.level_number]=playground
-            }
-            self.archive(playgroundList)
-        //}
+        let paths = Bundle.main.paths(forResourcesOfType: name, inDirectory: nil)
+        for path in paths
+        {
+            let playground = PlaygroundBuilder.readLevelString(filepath:path)
+            playgroundList.playgrounds[playground.level_number]=playground
+        }
+        self.archive(playgroundList)
         return playgroundList
     }
     

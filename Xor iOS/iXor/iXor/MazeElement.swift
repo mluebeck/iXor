@@ -10,7 +10,8 @@
 import SpriteKit
 
 
-enum MazeElementType: Int {
+enum MazeElementType: Int
+{
     case space = 0,
     fish,
     chicken,
@@ -37,7 +38,8 @@ enum MazeElementType: Int {
     redCorner
 }
 
-enum MazeEvent : Int {
+enum MazeEvent : Int
+{
     case step_done = 0,
     map1_found,
     map2_found,
@@ -57,7 +59,8 @@ enum MazeEvent : Int {
     none
 }
 
-class MazeElement:NSObject,NSCoding {
+class MazeElement:NSObject,NSCoding
+{
     var mazeElementType : MazeElementType?
     var sprite : SKSpriteNode?
     
@@ -77,21 +80,12 @@ class MazeElement:NSObject,NSCoding {
         {
             assert(false)
         }
-        
-        /*if self.sprite==nil
-        {
-            if self.mazeElementType != MazeElementType.space {
-                print("sprite: \(self.mazeElementType)")
-            }
-        }*/
-        
     }
     
     func encode(with aCoder: NSCoder)
     {
         if let me = self.mazeElementType 
         {
-            
             aCoder.encode(PlaygroundBuilder.stringToMazeElement[me], forKey: "mazeElementType")
         }
         if let s = self.sprite
@@ -100,8 +94,8 @@ class MazeElement:NSObject,NSCoding {
         }
     }
     
-    
-    func removeSprite(duration:TimeInterval) {
+    func removeSprite(duration:TimeInterval)
+    {
         let fadeOut = SKAction.fadeOut(withDuration: 0.25)
         sprite?.run(fadeOut, completion: {
             self.sprite?.removeFromParent()
@@ -112,25 +106,34 @@ class MazeElement:NSObject,NSCoding {
         removeSprite(duration: 0.25)
     }
     
-    static func isMap(_ item:MazeElementType) -> Bool {
+    static func isMap(_ item:MazeElementType) -> Bool
+    {
         return item==MazeElementType.map_1 || item==MazeElementType.map_2  || item==MazeElementType.map_3 || item==MazeElementType.map_4
     }
     
-    static func canMoveUpDown(item:MazeElementType?) -> Bool {
-        if let mazeitem = item  {
+    static func canMoveUpDown(item:MazeElementType?) -> Bool
+    {
+        if let mazeitem = item
+        {
             let canMove = isMap(mazeitem) || mazeitem == MazeElementType.h_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
             return canMove
-        } else {
+        }
+        else
+        {
             return true
         }
     }
     
-    static func canMoveLeftRight(item:MazeElementType?) -> Bool {
-        if let mazeitem = item  {
+    static func canMoveLeftRight(item:MazeElementType?) -> Bool
+    {
+        if let mazeitem = item
+        {
             let canMove = isMap(mazeitem) || mazeitem == MazeElementType.v_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
             return canMove
             
-        } else {
+        }
+        else
+        {
             return true
         }
     }
