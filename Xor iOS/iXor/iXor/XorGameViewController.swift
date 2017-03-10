@@ -17,12 +17,22 @@ enum Orientation
     case MyViewOrientationLandscape
 }
 
+enum ButtonPressed
+{
+    case NONE
+    case LEFT
+    case RIGHT
+    case UP
+    case DOWN
+}
 
 class XorGameViewController: UIViewController
 {
     
     static let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    var longButtonPressMode = ButtonPressed.NONE
+    
     @IBOutlet var musicButton : UIButton!
     @IBOutlet var playgroundViewConstraint : NSLayoutConstraint!
     @IBOutlet var playerButtonsViewWidthConstraint : NSLayoutConstraint!
@@ -61,6 +71,7 @@ class XorGameViewController: UIViewController
     @IBOutlet var fastForwardButton : UIButton!
     @IBOutlet var replayButton : UIButton!
     @IBOutlet var replayLabel : UILabel!
+    @IBOutlet var scrollView : UIScrollView!
     
     var currentOrientation : Orientation!
     var reloadFlag = false
@@ -169,6 +180,24 @@ class XorGameViewController: UIViewController
     func updateNotificationSent()
     {
         print("notifcation end event!")
+        switch(self.longButtonPressMode)
+        {
+        case ButtonPressed.LEFT:
+            self.leftGameButtonPressed()
+            break
+        case ButtonPressed.RIGHT:
+            self.rightGameButtonPressed()
+            break
+        case ButtonPressed.UP:
+            self.upGameButtonPressed()
+            break
+        case ButtonPressed.DOWN:
+            self.downGameButtonPressed()
+            break
+        default:
+            break
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -371,7 +400,6 @@ class XorGameViewController: UIViewController
                 DispatchQueue.global().async {
 
                         XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds(levelsToLoad, fromArchive: false)
-                        self.countMovesLabel.text = "0"
                         let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
                     
                         self.scene.playground = playgroundDict[1]!
@@ -381,6 +409,8 @@ class XorGameViewController: UIViewController
                         self.resetMaps()
                         self.okButton.isHidden=false
                         self.scene.isHidden = false
+                        self.countMovesLabel.text = "0"
+
                     })
                     
                 }
@@ -592,15 +622,15 @@ class XorGameViewController: UIViewController
         if playerOne == true
         {
             let playerOneImage = UIImage(named:"spieler1")
-            playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-            playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+            //playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+            //playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
             playerChangeImage.image = playerOneImage
         }
         else
         {
             let playerOneImage = UIImage(named:"spieler2")
-            playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
-            playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
+            //playerChangeButton.setImage(playerOneImage, for: UIControlState.highlighted)
+            //playerChangeButton.setImage(playerOneImage, for: UIControlState.normal)
             playerChangeImage.image = playerOneImage
         }
     }
@@ -853,6 +883,7 @@ class XorGameViewController: UIViewController
         {
             Playground.replay.removeAll()
         }
+        self.scene.playground.anzahl_spielzuege = 0
         self.scene.updateWithNewPlayground(self.scene.playground)
         self.scene.resetGameScene(playground: self.scene.playground)
         self.scene.initWithPlayerOne(reorientCamera: true)
@@ -981,4 +1012,68 @@ class XorGameViewController: UIViewController
             }
         }
     }
+    
+    @IBAction func longButtonPressedGestureUp(guesture: UILongPressGestureRecognizer)
+    {
+        if guesture.state == UIGestureRecognizerState.ended
+        {
+            self.longButtonPressMode=ButtonPressed.NONE
+        }
+        else
+        {
+            self.longButtonPressMode=ButtonPressed.UP
+            self.upGameButtonPressed()
+        }
+        //   let button = sender
+     //   print("Sender:\(button.accessibilityIdentifier)")
+    }
+    @IBAction func longButtonPressedGestureDown(guesture: UILongPressGestureRecognizer)
+    {
+        if guesture.state == UIGestureRecognizerState.ended
+        {
+            self.longButtonPressMode=ButtonPressed.NONE
+        }
+        else
+        {
+            self.longButtonPressMode=ButtonPressed.DOWN
+            self.downGameButtonPressed()
+        }
+        //   let button = sender
+        //   print("Sender:\(button.accessibilityIdentifier)")
+    }
+    @IBAction func longButtonPressedGestureLeft(guesture: UILongPressGestureRecognizer)
+    {
+        if guesture.state == UIGestureRecognizerState.ended
+        {
+            self.longButtonPressMode=ButtonPressed.NONE
+        }
+        else
+        {
+            self.longButtonPressMode=ButtonPressed.LEFT
+            self.leftGameButtonPressed()
+        }
+        //   let button = sender
+        //   print("Sender:\(button.accessibilityIdentifier)")
+    }
+    @IBAction func longButtonPressedGestureRight(guesture: UILongPressGestureRecognizer)
+    {
+        if guesture.state == UIGestureRecognizerState.ended
+        {
+            self.longButtonPressMode=ButtonPressed.NONE
+        }
+        else
+        {
+            self.longButtonPressMode=ButtonPressed.RIGHT
+            self.rightGameButtonPressed()
+        }
+        //   let button = sender
+        //   print("Sender:\(button.accessibilityIdentifier)")
+    }
+    
+    @IBAction func buttonReleased()
+    {
+        
+    }
+    
+    
 }
