@@ -313,7 +313,7 @@ class GameScene: SKScene {
                 }
             }
             
-            print(" sprite size: \(sprite.size)")
+           // print(" sprite size: \(sprite.size)")
         })
     }
     

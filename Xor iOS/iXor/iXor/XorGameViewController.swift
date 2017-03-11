@@ -583,6 +583,12 @@ class XorGameViewController: UIViewController
         }
         if (self.scene.playground.numberOfKilledPlayer)==0
         {
+            let previousPlayground = self.scene.playground.copy() as! Playground
+            previousPlayground.moveDirection=PlayerMoveDirection.PLAYERCHANGED
+            if self.replayMode==false
+            {
+                Playground.replay.append(previousPlayground)
+            }
             switchAndShowPlayerIconOnButton(playerOne: (self.scene.playground.akt_spieler_ist_playerOne),reorientCamera: true)
         }
     }
@@ -753,21 +759,26 @@ class XorGameViewController: UIViewController
             return
         }
         
-        
-        self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
+        let changePlayer = Playground.replay[position].moveDirection==PlayerMoveDirection.PLAYERCHANGED
+            
+        self.changePlayerIconOnButton(playerOne: changePlayer)
         self.scene.playground = Playground.replay[position]
         
         //self.scene.playground.movePlayer(queue:[self.scene.playground.moveDirection])
         
         
         self.scene.resetGameScene(playground: self.scene.playground)
-        self.scene.playground.updateCameraPosition(self.scene.playground.moveDirection)
+        
+        //self.scene.playground.updateCameraPosition(self.scene.playground.moveDirection)
         print(self.scene.playground)
         self.resetLabels()
         
         self.currentNumberOfReplayMove += 1
         print("currentNumberOfReplayMove:\(self.currentNumberOfReplayMove)")
         print("position:\(position)")
+        
+        self.scene.moveCameraToPlaygroundCoordinates(position: self.scene.playground.cameraLeftTopPosition)
+        
         
         
         AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)

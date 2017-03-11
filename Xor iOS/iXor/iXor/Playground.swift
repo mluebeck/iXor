@@ -209,7 +209,7 @@ class Playground: NSObject,NSCoding
             strY = strY.appending(strX).appending("\n")
             strX=""
         }
-        strY = strY.appending("Position Player One:\(self.positionPlayerOne),Position Player Two:\(self.positionPlayerTwo),\ncurrent Position:\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection)")
+        strY = strY.appending("Position Player One:\(self.positionPlayerOne),Position Player Two:\(self.positionPlayerTwo),\ncurrent Position:\(self.playerPosition), finished:\(self.finished),justFinished:\(self.justFinished), Direction:\(self.moveDirection) \n CameraPosition:\(self.cameraLeftTopPosition)")
         return strY
     }
 
@@ -317,11 +317,11 @@ class Playground: NSObject,NSCoding
         playground.finished = self.finished
         playground.numberOfMoves = self.numberOfMoves
         playground.mapsFound = self.mapsFound
-        playground.playerPosition = self.playerPosition
-        playground.oldPlayerPosition = self.oldPlayerPosition
-        playground.cameraLeftTopPosition = self.cameraLeftTopPosition
-        playground.positionPlayerOne = self.positionPlayerOne
-        playground.positionPlayerTwo = self.positionPlayerTwo
+        playground.playerPosition = PlaygroundPosition(x:self.playerPosition.x,y:self.playerPosition.y)
+        playground.oldPlayerPosition = PlaygroundPosition(x:self.oldPlayerPosition.x,y:self.oldPlayerPosition.y)
+        playground.cameraLeftTopPosition = PlaygroundPosition(x:self.cameraLeftTopPosition.x,y:self.cameraLeftTopPosition.y)
+        playground.positionPlayerOne = PlaygroundPosition(x:self.positionPlayerOne.x,y:self.positionPlayerOne.y)
+        playground.positionPlayerTwo = PlaygroundPosition(x:self.positionPlayerTwo.x,y:self.positionPlayerTwo.y)
         playground.moveDirection = self.moveDirection
         return playground
     }
@@ -873,6 +873,11 @@ class Playground: NSObject,NSCoding
         // we moved the player, now check if we have to move the camera
         let newCameraPosition = cameraLeftTopPosition
         
+        if direction==PlayerMoveDirection.NONE {
+            newCameraPosition.x = playerPosition.x - 3
+            newCameraPosition.y = playerPosition.y - 3
+        }
+        else 
         if (cameraLeftTopPosition.x == playerPosition.x && direction==PlayerMoveDirection.LEFT) ||
            (abs(cameraLeftTopPosition.x-playerPosition.x)>6 && direction==PlayerMoveDirection.RIGHT)
         {
