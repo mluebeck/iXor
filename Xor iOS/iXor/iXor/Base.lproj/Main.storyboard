@@ -714,6 +714,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="countMovesLabel" destination="guq-I0-gJG" id="CZX-KS-ZYf"/>
                         <outlet property="countMovesView" destination="FkF-Hj-52b" id="53X-Di-bkR"/>
                         <outlet property="fastForwardButton" destination="E5M-6t-tUw" id="kHW-pq-ItD"/>
+                        <outlet property="forwardButton" destination="PRY-QW-Yhk" id="h0N-hx-Wn5"/>
                         <outlet property="mapLeftDown" destination="uZZ-Jv-m8d" id="Ky1-t8-Ex0"/>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
@@ -834,7 +835,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IMA-2e-8UH" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Si1-Zw-LDD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -986,7 +987,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </connections>
                                             </barButtonItem>
                                             <view key="titleView" contentMode="scaleToFill" id="SbD-Y1-an4">
-                                                <rect key="frame" x="121" y="6" width="134" height="33"/>
+                                                <rect key="frame" x="120.5" y="5.5" width="134" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
@@ -1027,7 +1028,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">

@@ -69,6 +69,7 @@ class XorGameViewController: UIViewController
     @IBOutlet var verbotImage : UIImageView!
     
     @IBOutlet var fastForwardButton : UIButton!
+    @IBOutlet var forwardButton : UIButton!
     @IBOutlet var replayButton : UIButton!
     @IBOutlet var replayLabel : UILabel!
     @IBOutlet var scrollView : UIScrollView!
@@ -96,6 +97,7 @@ class XorGameViewController: UIViewController
     var replays = [String : Array<Playground>]()
     var replayTime = 2.0
     var replayMode = false
+    var replayModeRecursive = false
     var replayStopPressed = false
     var currentNumberOfReplayMove = 0
     
@@ -177,28 +179,7 @@ class XorGameViewController: UIViewController
         //drawCircleSegment(index:2)
     }
     
-    func updateNotificationSent()
-    {
-        print("notifcation end event!")
-        switch(self.longButtonPressMode)
-        {
-        case ButtonPressed.LEFT:
-            self.leftGameButtonPressed()
-            break
-        case ButtonPressed.RIGHT:
-            self.rightGameButtonPressed()
-            break
-        case ButtonPressed.UP:
-            self.upGameButtonPressed()
-            break
-        case ButtonPressed.DOWN:
-            self.downGameButtonPressed()
-            break
-        default:
-            break
-        }
-        
-    }
+    
     
     override func viewWillAppear(_ animated: Bool)
     {
@@ -230,22 +211,12 @@ class XorGameViewController: UIViewController
             self.replayLabel.isHidden = true
             self.presentPlayground()
         }
-        /*
-        if self.scene.playground.akt_spieler_ist_playerOne == true
-        {
-            self.scene.playground.positionPlayerOne = self.scene.playground.playerPosition
-        }
-        else
-        {
-            self.scene.playground.positionPlayerTwo = self.scene.playground.playerPosition
-        }
-         */
         if self.reloadFlag == true
         {
             self.scene.updateViewController!(MazeEvent.reloadAll)
             self.reloadFlag = false
-            
         }
+        self.disableReplayMode()
     }
     
     func resetLabels()
@@ -254,16 +225,13 @@ class XorGameViewController: UIViewController
         collectedMasksLabel.text = String("0")
         let gesMask = self.scene.playground.masken_gesamtanzahl
         collectedMasksLabel!.text! = "0/\(gesMask)"
-        
         self.playerChangeNotAllowedImageOverPlayerChangeButton(visible:!(self.scene.playground.numberOfKilledPlayer == 0))
-        
         let zuege = self.scene.playground.anzahl_spielzuege
         self.progressBar.setProgress(Float(zuege)/Float(PlaygroundBuilder.Constants.maximumMoves), animated: true)
         self.countMovesLabel.text = String("\(zuege)")
         let maskenTotal = self.scene.playground.masken_gesamtanzahl
         let masken = self.scene.playground.masken_gesammelt
         self.collectedMasksLabel!.text! = String("\(masken)/\(maskenTotal)")
-        
     }
     
     // MARK:  present the playground
@@ -275,7 +243,7 @@ class XorGameViewController: UIViewController
         
         
         
-        self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundList.playgrounds[XorGameViewController.currentPlaygroundLevel]!)
+        self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundList.playgrounds[XorGameViewController.currentPlaygroundLevel]?.copy() as! Playground)
 
         let gesMask = self.scene.playground.masken_gesamtanzahl
         collectedMasksLabel!.text! = "0/\(gesMask)"
@@ -483,7 +451,7 @@ class XorGameViewController: UIViewController
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    self.scene.playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[selectedPlaygroundLevel]!
+                    self.scene.playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[selectedPlaygroundLevel]?.copy() as! Playground
                     //self.scene.resetGameScene(playground: self.scene.playground)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
@@ -549,7 +517,7 @@ class XorGameViewController: UIViewController
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,replaying:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.LEFT,replaying:self.replayMode)
     }
     
     @IBAction func rightGameButtonPressed(){
@@ -557,21 +525,21 @@ class XorGameViewController: UIViewController
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,replaying:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.RIGHT,replaying:self.replayMode)
     }
     @IBAction func upGameButtonPressed(){
         if mazeEvent==MazeEvent.exit_found
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,replaying:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.UP,replaying:self.replayMode)
     }
     @IBAction func downGameButtonPressed(){
         if mazeEvent==MazeEvent.exit_found
         {
             return
         }
-        self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,replaying:false)
+        self.scene.playground.movePlayer(direction: PlayerMoveDirection.DOWN,replaying:self.replayMode)
     }
     
     // MARK: Switch Player
@@ -650,6 +618,81 @@ class XorGameViewController: UIViewController
     
     // MARK: UNDO AND REPLAY
     
+    func updateNotificationSent()
+    {
+        print("notifcation end event!")
+        if replayMode==true && self.replayModeRecursive == true
+        {
+            self.fastForward(position:  self.currentNumberOfReplayMove)
+        }
+        else
+        {
+            switch(self.longButtonPressMode)
+            {
+            case ButtonPressed.LEFT:
+                self.leftGameButtonPressed()
+                break
+            case ButtonPressed.RIGHT:
+                self.rightGameButtonPressed()
+                break
+            case ButtonPressed.UP:
+                self.upGameButtonPressed()
+                break
+            case ButtonPressed.DOWN:
+                self.downGameButtonPressed()
+                break
+            default:
+                
+                break
+            }
+        }
+        
+    }
+    
+    func fastForward(position:Int)
+    {
+        if Playground.replay.count<=position || self.replayStopPressed == true
+        {
+            fastForwardButton.setTitle("FF", for: UIControlState.normal)
+            fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
+            self.replayStopPressed = true
+            //self.replayMode = false
+            print(self.scene.playground)
+            return
+        }
+        
+        let playground = Playground.replay[position]
+        let playerMoveDirection = playground.moveDirection
+        self.currentNumberOfReplayMove+=1
+        
+        switch(playerMoveDirection)
+        {
+        case PlayerMoveDirection.UP:
+            self.upGameButtonPressed()
+            break
+        case PlayerMoveDirection.DOWN:
+            self.downGameButtonPressed()
+            break
+        case PlayerMoveDirection.LEFT:
+            self.leftGameButtonPressed()
+            break
+        case PlayerMoveDirection.RIGHT:
+            self.rightGameButtonPressed()
+            break
+        case PlayerMoveDirection.PLAYERCHANGED:
+            self.switchPlayerPressed()
+            if self.replayModeRecursive==true
+            {
+                self.fastForward(position: position+1)
+            }
+            break
+        default:
+            print(self.scene.playground)
+            break
+        }
+    }
+
+    
     func gotoFirst()
     {
         if Playground.replay.count>0
@@ -691,6 +734,35 @@ class XorGameViewController: UIViewController
         }
     }
 
+    func disableReplayMode()
+    {
+        self.replayLabel.isHidden = true
+        self.replayMode = false
+        self.gameControllerView(active: true)
+        self.replayControllerView(active: false)
+        self.replayButton.setTitle("Replay", for: UIControlState.normal)
+        self.replayButton.setTitle("Replay", for: UIControlState.highlighted)
+    }
+    
+    func enableReplayMode()
+    {
+        
+        self.replayLabel.isHidden = false
+        self.replayBlink()
+        //Playground.replay.append(self.scene.playground)
+        self.scene.playground =  Playground.replay.first!.copy() as! Playground
+        self.gameControllerView(active: false)
+        self.replayControllerView(active: true)
+        self.replayButton.setTitle("EXIT", for: UIControlState.normal)
+        self.replayButton.setTitle("EXIT", for: UIControlState.highlighted)
+        self.replayMode = true
+        self.replayTime = 0.5
+        self.currentNumberOfReplayMove = 0
+        self.scene.resetGameScene(playground: self.scene.playground)
+        self.resetToBegin(clearReplay: false)
+        
+    }
+    
     @IBAction func replayButtonPressed()
     {
         if Playground.replay.count==0
@@ -699,37 +771,15 @@ class XorGameViewController: UIViewController
         }
         if self.replayMode==true
         {
-            self.replayLabel.isHidden = true
-            self.replayMode = false
-            self.gameControllerView(active: true)
-            self.replayControllerView(active: false)
-            self.replayButton.setTitle("Replay", for: UIControlState.normal)
-            self.replayButton.setTitle("Replay", for: UIControlState.highlighted)
-            var diff = Playground.replay.count-self.currentNumberOfReplayMove
-            while !(diff == 0)
-            {
-                self.scene.playground = Playground.replay.last!
-                Playground.replay.removeLast()
-                diff -= 1
-            }
+            self.disableReplayMode()
         }
         else
         {
-            self.replayLabel.isHidden = false
-            self.replayBlink()
-            Playground.replay.append(self.scene.playground)
-            self.scene.playground = Playground.replay.first!
-            self.gameControllerView(active: false)
-            self.replayControllerView(active: true)
-            self.replayButton.setTitle("EXIT", for: UIControlState.normal)
-            self.replayButton.setTitle("EXIT", for: UIControlState.highlighted)
-            self.replayMode = true
-            self.replayTime = 0.5
-            self.currentNumberOfReplayMove = 0
-            self.resetToBegin(clearReplay: false)
+            self.enableReplayMode()
         }
     }
 
+    
     func replayBlink()
     {
         if self.replayLabel.isHidden==false
@@ -749,91 +799,6 @@ class XorGameViewController: UIViewController
         }
     }
     
-    func fastForward(position:Int,recursive:Bool)
-    {
-        if Playground.replay.count<=position || self.replayStopPressed == true
-        {
-            fastForwardButton.setTitle("FF", for: UIControlState.normal)
-            fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
-            self.replayStopPressed = true
-            return
-        }
-        
-        let changePlayer = Playground.replay[position].moveDirection==PlayerMoveDirection.PLAYERCHANGED
-            
-        self.changePlayerIconOnButton(playerOne: changePlayer)
-        self.scene.playground = Playground.replay[position]
-        
-        //self.scene.playground.movePlayer(queue:[self.scene.playground.moveDirection])
-        
-        
-        self.scene.resetGameScene(playground: self.scene.playground)
-        
-        //self.scene.playground.updateCameraPosition(self.scene.playground.moveDirection)
-        print(self.scene.playground)
-        self.resetLabels()
-        
-        self.currentNumberOfReplayMove += 1
-        print("currentNumberOfReplayMove:\(self.currentNumberOfReplayMove)")
-        print("position:\(position)")
-        
-        self.scene.moveCameraToPlaygroundCoordinates(position: self.scene.playground.cameraLeftTopPosition)
-        
-        
-        
-        AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
-        {
-            if recursive==true
-            {
-                self.fastForward(position:position+1,recursive: recursive)
-            }
-        }
-    }
-    
-    func fastForward2(position:Int,recursive:Bool)
-    {
-        if position>=Playground.replay.count-1  || self.replayStopPressed == true
-        {
-            fastForwardButton.setTitle("FF", for: UIControlState.normal)
-            fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
-            self.replayStopPressed = true
-            self.scene.playground.endOfAnimation = {}
-            return
-        }
-       
-        self.changePlayerIconOnButton(playerOne: !(Playground.replay[position].akt_spieler_ist_playerOne))
-        self.scene.playground = Playground.replay[position]
-        self.scene.resetGameScene(playground: self.scene.playground)
-        if recursive==true
-        {
-            self.scene.playground.endOfAnimation =
-            {
-                if self.scene.playground.playerJustKilled==false
-                {
-                    self.fastForward2(position: position+1, recursive: true)
-                }
-                else
-                {
-                    self.scene.playground.playerJustKilled = false
-                }
-            }
-        }
-        if self.scene.playground.moveDirection == PlayerMoveDirection.PLAYERCHANGED
-        {
-            self.scene.playground.changePlayer()
-        }
-        else
-        if self.scene.playground.moveDirection != PlayerMoveDirection.NONE
-        {
-            self.scene.playground.movePlayer(direction: self.scene.playground.moveDirection,replaying:true)
-        }
-        else
-        {
-           self.fastForward2(position: position+1, recursive: true)
-        }
-        
-    }
-    
     func fastForwardButtonState()
     {
         if fastForwardButton.titleLabel?.text == "FF"
@@ -848,10 +813,14 @@ class XorGameViewController: UIViewController
             fastForwardButton.setTitle("FF", for: UIControlState.highlighted)
             self.replayStopPressed = true
         }
+        print(self.scene.playground)
+
     }
     
     @IBAction func fastforwarButtonPressed()
     {
+        self.replayModeRecursive = true
+        self.currentNumberOfReplayMove=0
         if fastForwardButton.titleLabel?.text == "STOP"
         {
             fastForwardButton.setTitle("FF", for: UIControlState.normal)
@@ -865,15 +834,21 @@ class XorGameViewController: UIViewController
         self.resetToBegin(clearReplay: false)
         AppDelegate.delay(bySeconds: self.replayTime, dispatchLevel: .main)
         {
-            self.fastForward(position:0,recursive: true)
+            self.fastForward(position:0)
         }
     }
     
     @IBAction func forwardButtonPressed()
     {
+        self.replayModeRecursive = false
         if Playground.replay.count>self.currentNumberOfReplayMove
         {
-            fastForward(position: self.currentNumberOfReplayMove+1,recursive: false)
+            fastForward(position:self.currentNumberOfReplayMove )
+        }
+        else
+        {
+            forwardButton.isUserInteractionEnabled = false
+            forwardButton.alpha = 0.5
         }
     }
     
@@ -887,7 +862,7 @@ class XorGameViewController: UIViewController
     func resetToBegin(clearReplay:Bool)
     {
         if Playground.replay.count > 0 {
-            self.scene.playground = Playground.replay.first!
+            self.scene.playground = Playground.replay.first?.copy() as! Playground
         }
         self.replayStopPressed = false
         if clearReplay==true
