@@ -53,6 +53,10 @@ class MusicBox: NSObject,AVAudioPlayerDelegate {
     }
     
     func playBackgroundMusic() {
+//        if qaTesting==true
+//        {
+//            return
+//        }
         do {
             print("now playing song no. \(songindex): \(songs[songindex])")
             backgroundMusicPlayer = try AVAudioPlayer(contentsOf: songs[songindex])
