@@ -26,7 +26,7 @@ enum ButtonPressed
     case DOWN
 }
 
-class XorGameViewController: UIViewController
+class XorGameViewController: UIViewController,UIScrollViewDelegate
 {
     
     static let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -73,6 +73,8 @@ class XorGameViewController: UIViewController
     @IBOutlet var replayButton : UIButton!
     @IBOutlet var replayLabel : UILabel!
     @IBOutlet var scrollView : UIScrollView!
+    @IBOutlet var pageControl : UIPageControl!
+    @IBOutlet var scrollViewButton : UIButton!
     
     var currentOrientation : Orientation!
     var reloadFlag = false
@@ -196,6 +198,22 @@ class XorGameViewController: UIViewController
     
     override func viewDidAppear(_ animated: Bool)
     {
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "scrollviewuser") == false
+        {
+            self.scrollViewButton.isHidden=false
+            self.pageControl.isHidden = false
+            self.scrollView.isHidden=false
+            defaults.set(true, forKey: "scrollviewuser")
+        }
+        else
+        {
+            self.scrollViewButton.isHidden=true
+            self.pageControl.isHidden = true
+            self.scrollView.isHidden=true
+            
+        }
+        
         super.viewDidAppear(animated)
         if self.levelButtonPressed==true
         {
@@ -1061,5 +1079,62 @@ class XorGameViewController: UIViewController
         
     }
     
+    
+    
+    
+    
+    //MARK: Next Hint 
+    /*
+    func nextHint()
+    {
+        hintNr += 1
+        self.title = "Controller Übersicht (\(hintNr)/7)"
+        
+        switch hintNr {
+        case 1:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_4.png")
+            break
+        case 4:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_7.png")
+            break
+        case 2:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_6.png")
+            break
+        case 3:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_1.png")
+            break
+        case 5:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_2.png")
+            break
+        case 6:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_3.png")
+            break
+        case 7:
+            self.imageView.image = UIImage.init(named: "Xanadoo Anleitung_5.png")
+            hintNr = 0
+            break
+        default:
+            break
+            
+            
+        }
+    }
+*/
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        // Update the page when more than 50% of the previous/next page is visible
+        let pageWidth = self.scrollView.frame.size.width
+        let page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+        self.pageControl.currentPage = Int(page);
+    }
+    
+    @IBAction func scrollViewButtonPressed()
+    {
+        self.scrollView.isHidden=true
+        self.scrollViewButton.isHidden=true
+        self.pageControl.isHidden=true
+    }
     
 }

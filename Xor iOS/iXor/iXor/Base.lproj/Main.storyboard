@@ -604,17 +604,17 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <constraint firstItem="5q4-F4-zqL" firstAttribute="leading" secondItem="vrw-AF-AtW" secondAttribute="leading" id="wTY-eE-Mg5"/>
                                 </constraints>
                             </view>
-                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-gq-x8N">
-                                <rect key="frame" x="20" y="40" width="335" height="427"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-gq-x8N">
+                                <rect key="frame" x="10" y="20" width="355" height="627"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQG-eh-Dse" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="1005" height="427"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="4615" height="627"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK4-2Y-GZS" userLabel="View 1">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-7T-p5Z">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 1 start" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-7T-p5Z">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -626,10 +626,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-ZF-OeP" userLabel="View 2">
-                                                <rect key="frame" x="335" y="0.0" width="335" height="427"/>
+                                                <rect key="frame" x="355" y="0.0" width="355" height="627"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3iR-FG-B3u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 2 start" translatesAutoresizingMaskIntoConstraints="NO" id="3iR-FG-B3u">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -641,10 +641,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apR-P9-oYb" userLabel="View 3">
-                                                <rect key="frame" x="670" y="0.0" width="335" height="427"/>
+                                                <rect key="frame" x="710" y="0.0" width="355" height="627"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0g2-wU-yZE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="427"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 3 magus " translatesAutoresizingMaskIntoConstraints="NO" id="0g2-wU-yZE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -655,55 +655,266 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                     <constraint firstAttribute="bottom" secondItem="0g2-wU-yZE" secondAttribute="bottom" id="h13-bT-3D2"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qw-aK-pcI" userLabel="View 4">
+                                                <rect key="frame" x="1065" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 3 kontrolltasten " translatesAutoresizingMaskIntoConstraints="NO" id="RZN-9p-wG8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="RZN-9p-wG8" firstAttribute="leading" secondItem="1qw-aK-pcI" secondAttribute="leading" id="Enl-7V-MZO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RZN-9p-wG8" secondAttribute="trailing" id="SpQ-wy-rqj"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RZN-9p-wG8" secondAttribute="bottom" id="kLL-du-grp"/>
+                                                    <constraint firstItem="RZN-9p-wG8" firstAttribute="top" secondItem="1qw-aK-pcI" secondAttribute="top" id="ySL-ss-xOI"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-SU-c4e" userLabel="View 5">
+                                                <rect key="frame" x="1420" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 4 touchgeste" translatesAutoresizingMaskIntoConstraints="NO" id="JiP-SV-VRN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="JiP-SV-VRN" firstAttribute="leading" secondItem="mQq-SU-c4e" secondAttribute="leading" id="9Jz-NY-TZ3"/>
+                                                    <constraint firstItem="JiP-SV-VRN" firstAttribute="top" secondItem="mQq-SU-c4e" secondAttribute="top" id="GxG-iL-oH6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JiP-SV-VRN" secondAttribute="bottom" id="VDR-aW-7s0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JiP-SV-VRN" secondAttribute="trailing" id="xcV-IU-diR"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEJ-dx-2Tn" userLabel="View 6">
+                                                <rect key="frame" x="1775" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 5 spielerwechsel" translatesAutoresizingMaskIntoConstraints="NO" id="Xsp-zx-v3M">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Xsp-zx-v3M" secondAttribute="bottom" id="4Be-hk-3l8"/>
+                                                    <constraint firstItem="Xsp-zx-v3M" firstAttribute="leading" secondItem="JEJ-dx-2Tn" secondAttribute="leading" id="4g3-Ev-L35"/>
+                                                    <constraint firstItem="Xsp-zx-v3M" firstAttribute="top" secondItem="JEJ-dx-2Tn" secondAttribute="top" id="UVr-KM-V8s"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Xsp-zx-v3M" secondAttribute="trailing" id="hvF-hE-8hr"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6P-3i-45b" userLabel="View 7">
+                                                <rect key="frame" x="2130" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 6 questor" translatesAutoresizingMaskIntoConstraints="NO" id="Mzi-6k-pOb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="Mzi-6k-pOb" firstAttribute="leading" secondItem="F6P-3i-45b" secondAttribute="leading" id="K7C-6a-LbZ"/>
+                                                    <constraint firstItem="Mzi-6k-pOb" firstAttribute="top" secondItem="F6P-3i-45b" secondAttribute="top" id="QHa-qd-vZp"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Mzi-6k-pOb" secondAttribute="bottom" id="sEc-dO-Yhc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Mzi-6k-pOb" secondAttribute="trailing" id="sZ0-AB-dYa"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VH-Ed-G4N" userLabel="View 8">
+                                                <rect key="frame" x="2485" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 7 hintergrundmusik" translatesAutoresizingMaskIntoConstraints="NO" id="cge-Qc-pn3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="cge-Qc-pn3" firstAttribute="leading" secondItem="5VH-Ed-G4N" secondAttribute="leading" id="SZN-MH-dI5"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cge-Qc-pn3" secondAttribute="bottom" id="amS-KG-0Dn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cge-Qc-pn3" secondAttribute="trailing" id="ihZ-k9-sqa"/>
+                                                    <constraint firstItem="cge-Qc-pn3" firstAttribute="top" secondItem="5VH-Ed-G4N" secondAttribute="top" id="tIe-DD-qR9"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-3F-C6E" userLabel="View 9">
+                                                <rect key="frame" x="2840" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 8 spielanleitung und Karte" translatesAutoresizingMaskIntoConstraints="NO" id="bJk-cF-gR0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="bJk-cF-gR0" secondAttribute="trailing" id="AZb-z3-WAb"/>
+                                                    <constraint firstItem="bJk-cF-gR0" firstAttribute="top" secondItem="hwj-3F-C6E" secondAttribute="top" id="BJm-58-But"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bJk-cF-gR0" secondAttribute="bottom" id="QE7-YV-TMU"/>
+                                                    <constraint firstItem="bJk-cF-gR0" firstAttribute="leading" secondItem="hwj-3F-C6E" secondAttribute="leading" id="idI-ka-5yj"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAK-fh-Nrr" userLabel="View 10">
+                                                <rect key="frame" x="3195" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 9 Anzeigen" translatesAutoresizingMaskIntoConstraints="NO" id="uD2-aV-H2x">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="uD2-aV-H2x" firstAttribute="top" secondItem="HAK-fh-Nrr" secondAttribute="top" id="7db-nN-Awo"/>
+                                                    <constraint firstItem="uD2-aV-H2x" firstAttribute="leading" secondItem="HAK-fh-Nrr" secondAttribute="leading" id="L8E-Cc-vaW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uD2-aV-H2x" secondAttribute="trailing" id="Une-Kt-ydS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uD2-aV-H2x" secondAttribute="bottom" id="sc7-s0-hNX"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7z-ts-acC" userLabel="View 11">
+                                                <rect key="frame" x="3550" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 10 Level" translatesAutoresizingMaskIntoConstraints="NO" id="Kec-v1-hSB">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="Kec-v1-hSB" firstAttribute="top" secondItem="b7z-ts-acC" secondAttribute="top" id="N41-eX-8l9"/>
+                                                    <constraint firstItem="Kec-v1-hSB" firstAttribute="leading" secondItem="b7z-ts-acC" secondAttribute="leading" id="WGB-Tr-oKE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Kec-v1-hSB" secondAttribute="trailing" id="d07-bd-7eh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Kec-v1-hSB" secondAttribute="bottom" id="fs3-Kj-fI4"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUN-5W-Y45" userLabel="View 12">
+                                                <rect key="frame" x="3905" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 11 replay" translatesAutoresizingMaskIntoConstraints="NO" id="Mre-Ij-Fxd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="Mre-Ij-Fxd" firstAttribute="leading" secondItem="GUN-5W-Y45" secondAttribute="leading" id="1be-XZ-sSL"/>
+                                                    <constraint firstItem="Mre-Ij-Fxd" firstAttribute="top" secondItem="GUN-5W-Y45" secondAttribute="top" id="CYJ-mB-ShY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Mre-Ij-Fxd" secondAttribute="bottom" id="Ear-f8-Nsh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Mre-Ij-Fxd" secondAttribute="trailing" id="h3Z-GR-JFa"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Aw-S9-4sA" userLabel="View 13">
+                                                <rect key="frame" x="4260" y="0.0" width="355" height="627"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 12 Ausgang" translatesAutoresizingMaskIntoConstraints="NO" id="MFR-eK-YxI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="MFR-eK-YxI" secondAttribute="bottom" id="aRe-vB-0Jz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MFR-eK-YxI" secondAttribute="trailing" id="djh-ki-69Q"/>
+                                                    <constraint firstItem="MFR-eK-YxI" firstAttribute="top" secondItem="6Aw-S9-4sA" secondAttribute="top" id="mO5-Gn-9GN"/>
+                                                    <constraint firstItem="MFR-eK-YxI" firstAttribute="leading" secondItem="6Aw-S9-4sA" secondAttribute="leading" id="mlD-oU-cUH"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="vK4-2Y-GZS" firstAttribute="leading" secondItem="WQG-eh-Dse" secondAttribute="leading" id="2Tx-gR-o7V"/>
+                                            <constraint firstItem="GUN-5W-Y45" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="3Ub-PK-OMu"/>
+                                            <constraint firstItem="F6P-3i-45b" firstAttribute="leading" secondItem="JEJ-dx-2Tn" secondAttribute="trailing" id="3VE-jA-d6W"/>
+                                            <constraint firstItem="b7z-ts-acC" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="8gL-E3-qKK"/>
+                                            <constraint firstItem="mQq-SU-c4e" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="AMT-1s-Tta"/>
+                                            <constraint firstItem="5VH-Ed-G4N" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="D5b-p1-JhR"/>
                                             <constraint firstAttribute="bottom" secondItem="apR-P9-oYb" secondAttribute="bottom" id="F8c-jt-zgK"/>
                                             <constraint firstItem="apR-P9-oYb" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="Fgu-5s-33H"/>
+                                            <constraint firstAttribute="bottom" secondItem="GUN-5W-Y45" secondAttribute="bottom" id="Flo-sO-rH4"/>
                                             <constraint firstItem="Mos-ZF-OeP" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="Huo-lb-p6e"/>
+                                            <constraint firstItem="HAK-fh-Nrr" firstAttribute="leading" secondItem="hwj-3F-C6E" secondAttribute="trailing" id="NFk-KA-SMu"/>
+                                            <constraint firstItem="F6P-3i-45b" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="QI9-e4-1sf"/>
+                                            <constraint firstItem="GUN-5W-Y45" firstAttribute="leading" secondItem="b7z-ts-acC" secondAttribute="trailing" id="T7H-bQ-xPM"/>
+                                            <constraint firstAttribute="bottom" secondItem="HAK-fh-Nrr" secondAttribute="bottom" id="TSi-Bg-nl1"/>
+                                            <constraint firstAttribute="bottom" secondItem="F6P-3i-45b" secondAttribute="bottom" id="VEr-xV-xxB"/>
+                                            <constraint firstItem="b7z-ts-acC" firstAttribute="leading" secondItem="HAK-fh-Nrr" secondAttribute="trailing" id="Vkx-Uk-2WD"/>
+                                            <constraint firstItem="hwj-3F-C6E" firstAttribute="leading" secondItem="5VH-Ed-G4N" secondAttribute="trailing" id="Vtj-m6-956"/>
+                                            <constraint firstAttribute="trailing" secondItem="6Aw-S9-4sA" secondAttribute="trailing" id="Ws8-z1-Dml"/>
+                                            <constraint firstItem="1qw-aK-pcI" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="YgI-9w-OMS"/>
+                                            <constraint firstAttribute="bottom" secondItem="b7z-ts-acC" secondAttribute="bottom" id="ZwP-N2-hWu"/>
+                                            <constraint firstAttribute="bottom" secondItem="mQq-SU-c4e" secondAttribute="bottom" id="aXq-Co-TWf"/>
+                                            <constraint firstAttribute="bottom" secondItem="JEJ-dx-2Tn" secondAttribute="bottom" id="agC-nR-gTQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="5VH-Ed-G4N" secondAttribute="bottom" id="bGV-Xr-aU0"/>
+                                            <constraint firstItem="5VH-Ed-G4N" firstAttribute="leading" secondItem="F6P-3i-45b" secondAttribute="trailing" id="bdr-1D-e0r"/>
+                                            <constraint firstAttribute="bottom" secondItem="hwj-3F-C6E" secondAttribute="bottom" id="cIu-U7-Rne"/>
                                             <constraint firstAttribute="bottom" secondItem="vK4-2Y-GZS" secondAttribute="bottom" id="d40-S4-4bn"/>
                                             <constraint firstItem="apR-P9-oYb" firstAttribute="leading" secondItem="Mos-ZF-OeP" secondAttribute="trailing" id="dQQ-Yw-X4L"/>
                                             <constraint firstAttribute="bottom" secondItem="Mos-ZF-OeP" secondAttribute="bottom" id="khf-ug-KVq"/>
+                                            <constraint firstItem="JEJ-dx-2Tn" firstAttribute="leading" secondItem="mQq-SU-c4e" secondAttribute="trailing" id="kmr-xY-nDR"/>
                                             <constraint firstItem="Mos-ZF-OeP" firstAttribute="leading" secondItem="vK4-2Y-GZS" secondAttribute="trailing" id="mwx-Oj-oKD"/>
+                                            <constraint firstItem="hwj-3F-C6E" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="oSs-Sa-OP1"/>
+                                            <constraint firstItem="6Aw-S9-4sA" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="oi9-b8-kSz"/>
+                                            <constraint firstItem="JEJ-dx-2Tn" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="pNb-Mu-YSn"/>
+                                            <constraint firstItem="6Aw-S9-4sA" firstAttribute="leading" secondItem="GUN-5W-Y45" secondAttribute="trailing" id="qaN-Ki-yOG"/>
+                                            <constraint firstAttribute="bottom" secondItem="1qw-aK-pcI" secondAttribute="bottom" id="rOz-vQ-6VV"/>
                                             <constraint firstItem="vK4-2Y-GZS" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="swi-jd-fmZ"/>
+                                            <constraint firstItem="1qw-aK-pcI" firstAttribute="leading" secondItem="apR-P9-oYb" secondAttribute="trailing" id="txa-d1-ofL"/>
+                                            <constraint firstAttribute="bottom" secondItem="6Aw-S9-4sA" secondAttribute="bottom" id="uEX-ca-d1d"/>
+                                            <constraint firstItem="HAK-fh-Nrr" firstAttribute="top" secondItem="WQG-eh-Dse" secondAttribute="top" id="wRe-2x-6pV"/>
+                                            <constraint firstItem="mQq-SU-c4e" firstAttribute="leading" secondItem="1qw-aK-pcI" secondAttribute="trailing" id="y8e-d3-p2J"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Mos-ZF-OeP" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="0Ua-KN-1yG"/>
+                                    <constraint firstItem="hwj-3F-C6E" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="ENC-ii-mYY"/>
+                                    <constraint firstItem="HAK-fh-Nrr" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="Of8-aG-0iw"/>
+                                    <constraint firstItem="5VH-Ed-G4N" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="P7f-IX-91Y"/>
                                     <constraint firstItem="apR-P9-oYb" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="QAz-Q2-WUC"/>
-                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" multiplier="3" id="Y42-hx-bgD"/>
+                                    <constraint firstItem="6Aw-S9-4sA" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="Smh-xO-KO1"/>
+                                    <constraint firstItem="WQG-eh-Dse" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" multiplier="13" id="Y42-hx-bgD"/>
+                                    <constraint firstItem="mQq-SU-c4e" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="YxK-zk-J3e"/>
+                                    <constraint firstItem="b7z-ts-acC" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="am8-N7-DTv"/>
                                     <constraint firstAttribute="bottom" secondItem="WQG-eh-Dse" secondAttribute="bottom" id="b4P-Cx-ff0"/>
+                                    <constraint firstItem="F6P-3i-45b" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="dnR-fz-8bV"/>
+                                    <constraint firstItem="GUN-5W-Y45" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="ezO-Vf-Als"/>
+                                    <constraint firstItem="JEJ-dx-2Tn" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="fMx-0u-ch8"/>
                                     <constraint firstItem="WQG-eh-Dse" firstAttribute="leading" secondItem="YSs-gq-x8N" secondAttribute="leading" id="gZp-AI-Hyh"/>
                                     <constraint firstItem="WQG-eh-Dse" firstAttribute="centerY" secondItem="YSs-gq-x8N" secondAttribute="centerY" id="kIs-99-r3i"/>
+                                    <constraint firstItem="1qw-aK-pcI" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="uDo-l4-enK"/>
                                     <constraint firstItem="WQG-eh-Dse" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="top" id="ui6-Ac-mVV"/>
                                     <constraint firstAttribute="trailing" secondItem="WQG-eh-Dse" secondAttribute="trailing" constant="20" symbolic="YES" id="wOb-zF-A1T"/>
                                     <constraint firstItem="vK4-2Y-GZS" firstAttribute="width" secondItem="YSs-gq-x8N" secondAttribute="width" id="yNL-Bf-9jh"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BV1-FR-VrT" id="7Ai-vC-ot6"/>
+                                </connections>
                             </scrollView>
-                            <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="FMQ-CN-cin">
-                                <rect key="frame" x="137" y="417" width="100" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EV-uv-Pcn">
+                                <rect key="frame" x="300" y="25" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Pqc-2m-F70"/>
-                                    <constraint firstAttribute="width" constant="100" id="bdX-qU-dVY"/>
+                                    <constraint firstAttribute="width" constant="46" id="IE1-R0-Kve"/>
+                                    <constraint firstAttribute="height" constant="30" id="ZVu-NE-soM"/>
                                 </constraints>
-                                <color key="pageIndicatorTintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="(X)">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="scrollViewButtonPressed" destination="BV1-FR-VrT" eventType="touchUpInside" id="G5s-WP-lD6"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="12" translatesAutoresizingMaskIntoConstraints="NO" id="FMQ-CN-cin">
+                                <rect key="frame" x="10" y="647" width="355" height="20"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Pqc-2m-F70"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="YSs-gq-x8N" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="20" id="6Qb-dQ-t6I"/>
+                            <constraint firstItem="YSs-gq-x8N" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="6Qb-dQ-t6I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9EV-uv-Pcn" secondAttribute="trailing" constant="13" id="6k0-hm-EWt"/>
+                            <constraint firstItem="9EV-uv-Pcn" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="5" id="BMp-17-iIy"/>
                             <constraint firstAttribute="trailing" secondItem="vrw-AF-AtW" secondAttribute="trailing" id="Ej9-My-Fta"/>
                             <constraint firstItem="mOW-CJ-XDb" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="10" id="FSb-zP-wfI"/>
-                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="bottom" constant="200" id="KAK-VI-cBS"/>
-                            <constraint firstItem="FMQ-CN-cin" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="NsY-RP-mca"/>
-                            <constraint firstAttribute="trailing" secondItem="YSs-gq-x8N" secondAttribute="trailing" constant="20" id="QwZ-NN-qQ5"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="bottom" constant="20" id="KAK-VI-cBS"/>
+                            <constraint firstAttribute="trailing" secondItem="YSs-gq-x8N" secondAttribute="trailing" constant="10" id="QwZ-NN-qQ5"/>
+                            <constraint firstItem="FMQ-CN-cin" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="d0p-gS-Qrd"/>
+                            <constraint firstAttribute="trailing" secondItem="FMQ-CN-cin" secondAttribute="trailing" constant="10" id="dQZ-EI-g2h"/>
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="vrw-AF-AtW" secondAttribute="bottom" id="lYw-7U-h2i"/>
                             <constraint firstItem="mOW-CJ-XDb" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="pLq-hC-aUR"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="FMQ-CN-cin" secondAttribute="bottom" constant="210" id="r3R-7C-f2y"/>
-                            <constraint firstItem="YSs-gq-x8N" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="20" id="vGc-vd-H8v"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="FMQ-CN-cin" secondAttribute="bottom" id="r3R-7C-f2y"/>
+                            <constraint firstItem="YSs-gq-x8N" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="vGc-vd-H8v"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -724,6 +935,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="musicButton" destination="GZy-4Z-Tc4" id="x6E-0f-7C2"/>
                         <outlet property="navigationBarTitle" destination="g86-dt-vrk" id="Pwf-BT-x6f"/>
                         <outlet property="okButton" destination="yah-3T-933" id="jfc-Np-Luc"/>
+                        <outlet property="pageControl" destination="FMQ-CN-cin" id="r0g-Px-p05"/>
                         <outlet property="playerButtonsViewHeightConstraint" destination="gI4-2p-Vfi" id="LvP-4l-dfH"/>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="jzI-IL-TzW"/>
                         <outlet property="playerChangeButton" destination="fiK-qK-abw" id="uwn-zB-Ku5"/>
@@ -735,6 +947,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="replayButtonsView" destination="5q4-F4-zqL" id="weP-fa-4Xs"/>
                         <outlet property="replayLabel" destination="0u8-dk-IhO" id="Xm3-aZ-Dxh"/>
                         <outlet property="scrollView" destination="YSs-gq-x8N" id="KgV-Iq-bAZ"/>
+                        <outlet property="scrollViewButton" destination="9EV-uv-Pcn" id="fFk-m0-0tx"/>
                         <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
                         <outlet property="verbotImage" destination="x8a-hn-qaM" id="jOE-jd-jJs"/>
                     </connections>
@@ -987,7 +1200,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </connections>
                                             </barButtonItem>
                                             <view key="titleView" contentMode="scaleToFill" id="SbD-Y1-an4">
-                                                <rect key="frame" x="120.5" y="5.5" width="134" height="33"/>
+                                                <rect key="frame" x="121" y="6" width="134" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
@@ -1028,7 +1241,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">
@@ -1114,6 +1327,19 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         <image name="spieler2" width="40" height="40"/>
         <image name="up" width="52" height="52"/>
         <image name="verbot" width="720" height="720"/>
+        <image name="xanadoo anleitung 1 start" width="750" height="1334"/>
+        <image name="xanadoo anleitung 10 Level" width="480" height="852"/>
+        <image name="xanadoo anleitung 11 replay" width="750" height="1334"/>
+        <image name="xanadoo anleitung 12 Ausgang" width="750" height="1334"/>
+        <image name="xanadoo anleitung 2 start" width="750" height="1334"/>
+        <image name="xanadoo anleitung 3 kontrolltasten " width="750" height="1334"/>
+        <image name="xanadoo anleitung 3 magus " width="750" height="1334"/>
+        <image name="xanadoo anleitung 4 touchgeste" width="479" height="850"/>
+        <image name="xanadoo anleitung 5 spielerwechsel" width="750" height="1334"/>
+        <image name="xanadoo anleitung 6 questor" width="750" height="1334"/>
+        <image name="xanadoo anleitung 7 hintergrundmusik" width="750" height="1334"/>
+        <image name="xanadoo anleitung 8 spielanleitung und Karte" width="750" height="1334"/>
+        <image name="xanadoo anleitung 9 Anzeigen" width="750" height="1334"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
