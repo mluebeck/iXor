@@ -53,6 +53,8 @@
 		10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BACAFC1E5090380034C42A /* EdgeSprite.swift */; };
 		10BD350E1E4941A2006298D0 /* Views.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10BD35101E4941A2006298D0 /* Views.xib */; };
 		10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */; };
+		4A2F3E791E965446005B64D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F3E771E965446005B64D0 /* Crashlytics.framework */; };
+		4A2F3E7A1E965446005B64D0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F3E781E965446005B64D0 /* Fabric.framework */; };
 		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
 		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
@@ -137,6 +139,8 @@
 		10BD35121E4941A7006298D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Views.strings; sourceTree = "<group>"; };
 		10BD35141E4941C3006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Views.strings; sourceTree = "<group>"; };
 		10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegateImplementation.swift; sourceTree = "<group>"; };
+		4A2F3E771E965446005B64D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		4A2F3E781E965446005B64D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2F3E791E965446005B64D0 /* Crashlytics.framework in Frameworks */,
+				4A2F3E7A1E965446005B64D0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +292,8 @@
 		8C43129E1DF4717800E80996 = {
 			isa = PBXGroup;
 			children = (
+				4A2F3E771E965446005B64D0 /* Crashlytics.framework */,
+				4A2F3E781E965446005B64D0 /* Fabric.framework */,
 				109FBE4A1E5E6DF000597993 /* music */,
 				106DAA0B1E46AD6800E637B0 /* html */,
 				107739001E450D3B00BBE90D /* SpeechBubbleView.swift */,
@@ -365,6 +373,7 @@
 				8C4312A31DF4717800E80996 /* Sources */,
 				8C4312A41DF4717800E80996 /* Frameworks */,
 				8C4312A51DF4717800E80996 /* Resources */,
+				4A2F3E7B1E96564D005B64D0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -492,6 +501,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A2F3E7B1E96564D005B64D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" f66c99451b7372cba1506d08eac42635dbd7bf84 a2294a237aa493b7a8a4d7c47d06e44c163ebcf060995f400f4295c72b51ca0f";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C4312A31DF4717800E80996 /* Sources */ = {
@@ -691,6 +716,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = HH3JD7K438;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -711,6 +740,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = HH3JD7K438;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
