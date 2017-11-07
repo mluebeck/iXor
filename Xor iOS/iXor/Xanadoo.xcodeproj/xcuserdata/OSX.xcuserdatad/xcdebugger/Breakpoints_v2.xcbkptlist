@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "754"
-            endingLineNumber = "754"
-            landmarkName = "fastForward(position:recursive:)"
+            startingLineNumber = "772"
+            endingLineNumber = "772"
+            landmarkName = "enableReplayMode()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873"
-            landmarkName = "forwardButtonPressed()"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
+            landmarkName = "resetToBegin(clearReplay:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "709"
-            endingLineNumber = "709"
-            landmarkName = "replayButtonPressed()"
+            startingLineNumber = "727"
+            endingLineNumber = "727"
+            landmarkName = "gotoFirst()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
             <Locations>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
             <Locations>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
-            landmarkName = "undoButtonPressed()"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
+            landmarkName = "fastForward(position:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -232,12 +232,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
-            landmarkName = "switchAndShowPlayerIconOnButton(playerOne:reorientCamera:)"
+            startingLineNumber = "625"
+            endingLineNumber = "625"
+            landmarkName = "changePlayerIconOnButton(playerOne:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -360,13 +360,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xanadoo.XorGameViewController.(presentPlayground () -&gt; ()).(closure #1)"
+                  moduleName = "Xanadoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/XorGameViewController.swift"
+                  timestampString = "524782185.314892"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "403"
+                  endingLineNumber = "403"
+                  offsetFromSymbolStart = "9579">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xanadoo.XorGameViewController.(presentPlayground () -&gt; ()).(closure #1).(closure #4)"
+                  moduleName = "Xanadoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/XorGameViewController.swift"
+                  timestampString = "524782185.31729"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "403"
+                  endingLineNumber = "403"
+                  offsetFromSymbolStart = "984">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -712,12 +744,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "955"
-            endingLineNumber = "955"
-            landmarkName = "nextLevelButtonPressed()"
+            startingLineNumber = "973"
+            endingLineNumber = "973"
+            landmarkName = "gameControllerView(active:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1080,12 +1112,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.825319"
+                  timestampString = "524782185.353592"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "69"
                   endingLineNumber = "69"
-                  offsetFromSymbolStart = "52">
+                  offsetFromSymbolStart = "45">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1095,12 +1127,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.827421"
+                  timestampString = "524782185.356124"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "69"
                   endingLineNumber = "69"
-                  offsetFromSymbolStart = "238">
+                  offsetFromSymbolStart = "243">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1128,11 +1160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1144,12 +1176,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "655"
-            endingLineNumber = "655"
-            landmarkName = "gotoFirst()"
+            startingLineNumber = "673"
+            endingLineNumber = "673"
+            landmarkName = "fastForward(position:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1160,12 +1192,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510878136.793198"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
-            landmarkName = "replayButtonPressed()"
+            startingLineNumber = "714"
+            endingLineNumber = "714"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iXor/XorGameViewController.swift"
+            timestampString = "511743982.596231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "813"
+            endingLineNumber = "813"
+            landmarkName = "replayBlink()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1176,12 +1224,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "795"
-            endingLineNumber = "795"
-            landmarkName = "fastForward2(position:recursive:)"
+            startingLineNumber = "815"
+            endingLineNumber = "815"
+            landmarkName = "replayBlink()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1192,28 +1240,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "797"
-            endingLineNumber = "797"
-            landmarkName = "fastForward2(position:recursive:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
+            landmarkName = "reloadAll()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1272,13 +1304,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xanadoo.XorGameViewController.(presentPlayground () -&gt; ()).(closure #1)"
+                  moduleName = "Xanadoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/XorGameViewController.swift"
+                  timestampString = "524782185.385057"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "7511">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Xanadoo.XorGameViewController.(presentPlayground () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Xanadoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/XorGameViewController.swift"
+                  timestampString = "524782185.387982"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "211">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1304,12 +1368,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "reloadAll()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1320,11 +1384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/PlaygroundBuilder.swift"
-            timestampString = "510613962.1706"
+            timestampString = "511745219.795659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "playgrounds(_:fromArchive:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1336,11 +1400,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/PlaygroundBuilder.swift"
-            timestampString = "510613962.1706"
+            timestampString = "511745219.795659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362">
+            startingLineNumber = "369"
+            endingLineNumber = "369">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1398,12 +1462,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.869022"
+                  timestampString = "524782185.411583"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "388"
                   endingLineNumber = "388"
-                  offsetFromSymbolStart = "2964">
+                  offsetFromSymbolStart = "2816">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1413,12 +1477,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.871148"
+                  timestampString = "524782185.413927"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "388"
                   endingLineNumber = "388"
-                  offsetFromSymbolStart = "351">
+                  offsetFromSymbolStart = "292">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1446,12 +1510,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.875473"
+                  timestampString = "524782185.419558"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "428"
                   endingLineNumber = "428"
-                  offsetFromSymbolStart = "1645">
+                  offsetFromSymbolStart = "1561">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1461,12 +1525,12 @@
                   moduleName = "Xanadoo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/OSX/ixor/Xor%20iOS/iXor/iXor/PlaygroundExtension.swift"
-                  timestampString = "510887844.877611"
+                  timestampString = "524782185.422246"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "428"
                   endingLineNumber = "428"
-                  offsetFromSymbolStart = "572">
+                  offsetFromSymbolStart = "468">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1622,13 +1686,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "908"
-            endingLineNumber = "908"
-            landmarkName = "resetToBegin(clearReplay:)"
-            landmarkType = "7">
+            startingLineNumber = "926"
+            endingLineNumber = "926"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1734,12 +1798,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
-            landmarkName = "reloadAll()"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
+            landmarkName = "rightGameButtonPressed()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1750,13 +1814,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "907"
-            endingLineNumber = "907"
-            landmarkName = "resetToBegin(clearReplay:)"
-            landmarkType = "7">
+            startingLineNumber = "925"
+            endingLineNumber = "925"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1766,11 +1830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1782,11 +1846,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1798,11 +1862,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511309738.927698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "updateCurrentConstraintsToSize(size:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1814,11 +1878,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511309738.927698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "updateCurrentConstraintsToSize(size:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1830,12 +1894,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "resetLabels()"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1846,12 +1910,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
-            landmarkName = "presentPlayground()"
+            startingLineNumber = "447"
+            endingLineNumber = "447"
+            landmarkName = "mapButtonPressed()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1862,13 +1926,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1066"
-            endingLineNumber = "1066"
-            landmarkName = "longButtonPressedGestureLeft(guesture:)"
-            landmarkType = "7">
+            startingLineNumber = "1141"
+            endingLineNumber = "1141"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1878,11 +1942,25 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1080"
-            endingLineNumber = "1080"
+            startingLineNumber = "1155"
+            endingLineNumber = "1155">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iXor/XorGameViewController.swift"
+            timestampString = "511743982.596231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1070"
+            endingLineNumber = "1070"
             landmarkName = "longButtonPressedGestureRight(guesture:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1894,28 +1972,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1052"
-            endingLineNumber = "1052"
-            landmarkName = "longButtonPressedGestureDown(guesture:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1037"
-            endingLineNumber = "1037"
-            landmarkName = "longButtonPressedGestureUp(guesture:)"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
+            landmarkName = "longButtonPressedGestureLeft(guesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1926,12 +1988,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510709475.923164"
+            timestampString = "511309738.927698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "updateNotificationSent()"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2006,12 +2068,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885476.682157"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1029"
-            endingLineNumber = "1029"
-            landmarkName = "longButtonPressedGestureUp(guesture:)"
+            startingLineNumber = "1047"
+            endingLineNumber = "1047"
+            landmarkName = "longButtonPressedGestureDown(guesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2134,12 +2196,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510883411.949376"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
-            landmarkName = "switchPlayerPressed()"
+            startingLineNumber = "606"
+            endingLineNumber = "606"
+            landmarkName = "switchAndShowPlayerIconOnButton(playerOne:reorientCamera:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2182,12 +2244,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iXor/XorGameViewController.swift"
-            timestampString = "510885759.792715"
+            timestampString = "511743982.596231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
-            landmarkName = "fastForward(position:recursive:)"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
+            landmarkName = "replayButtonPressed()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iXor/GameScene.swift"
+            timestampString = "511744037.992013"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "init(size:playground:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iXor/XorGameViewController.swift"
+            timestampString = "511744216.331087"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "presentPlayground()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -876,14 +876,13 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <outlet property="delegate" destination="BV1-FR-VrT" id="7Ai-vC-ot6"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EV-uv-Pcn">
-                                <rect key="frame" x="300" y="25" width="46" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EV-uv-Pcn">
+                                <rect key="frame" x="319" y="20" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="IE1-R0-Kve"/>
-                                    <constraint firstAttribute="height" constant="30" id="ZVu-NE-soM"/>
+                                    <constraint firstAttribute="width" constant="40" id="IE1-R0-Kve"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZVu-NE-soM"/>
                                 </constraints>
-                                <state key="normal" title="(X)">
+                                <state key="normal" image="Close">
                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 </state>
                                 <connections>
@@ -903,8 +902,8 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YSs-gq-x8N" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="6Qb-dQ-t6I"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9EV-uv-Pcn" secondAttribute="trailing" constant="13" id="6k0-hm-EWt"/>
-                            <constraint firstItem="9EV-uv-Pcn" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="5" id="BMp-17-iIy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9EV-uv-Pcn" secondAttribute="trailing" id="6k0-hm-EWt"/>
+                            <constraint firstItem="9EV-uv-Pcn" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="BMp-17-iIy"/>
                             <constraint firstAttribute="trailing" secondItem="vrw-AF-AtW" secondAttribute="trailing" id="Ej9-My-Fta"/>
                             <constraint firstItem="mOW-CJ-XDb" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="10" id="FSb-zP-wfI"/>
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="bottom" constant="20" id="KAK-VI-cBS"/>
@@ -1200,7 +1199,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </connections>
                                             </barButtonItem>
                                             <view key="titleView" contentMode="scaleToFill" id="SbD-Y1-an4">
-                                                <rect key="frame" x="121" y="6" width="134" height="33"/>
+                                                <rect key="frame" x="120.5" y="5.5" width="134" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
@@ -1241,7 +1240,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">
@@ -1313,6 +1312,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Close" width="84" height="84"/>
         <image name="Xanadoo Anleitung_4" width="640" height="1133"/>
         <image name="buch" width="50" height="59"/>
         <image name="down" width="52" height="52"/>

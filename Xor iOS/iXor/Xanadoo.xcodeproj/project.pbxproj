@@ -47,6 +47,7 @@
 		10A03CA81E5A5253007D9F1F /* level14.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C951E5A5252007D9F1F /* level14.xor */; };
 		10A03CA91E5A5253007D9F1F /* level15.xor in Resources */ = {isa = PBXBuildFile; fileRef = 10A03C961E5A5252007D9F1F /* level15.xor */; };
 		10A03CAC1E5A6E69007D9F1F /* PlaygroundList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */; };
+		10A4F9181E81394000345B71 /* pics in Resources */ = {isa = PBXBuildFile; fileRef = 10A4F9171E81394000345B71 /* pics */; };
 		10ABA46E1E607ADF00784571 /* applause.wav in Resources */ = {isa = PBXBuildFile; fileRef = 10ABA46D1E607ADF00784571 /* applause.wav */; };
 		10ABA4721E607C6B00784571 /* acid2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 10ABA4711E607C6B00784571 /* acid2.wav */; };
 		10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BACAFC1E5090380034C42A /* EdgeSprite.swift */; };
@@ -125,6 +126,7 @@
 		10A03C951E5A5252007D9F1F /* level14.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level14.xor; sourceTree = "<group>"; };
 		10A03C961E5A5252007D9F1F /* level15.xor */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level15.xor; sourceTree = "<group>"; };
 		10A03CAB1E5A6E69007D9F1F /* PlaygroundList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundList.swift; sourceTree = "<group>"; };
+		10A4F9171E81394000345B71 /* pics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pics; sourceTree = "<group>"; };
 		10ABA46D1E607ADF00784571 /* applause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = applause.wav; sourceTree = "<group>"; };
 		10ABA4711E607C6B00784571 /* acid2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = acid2.wav; sourceTree = "<group>"; };
 		10BACAFC1E5090380034C42A /* EdgeSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeSprite.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				10A4F9171E81394000345B71 /* pics */,
 				10A03C831E5A5252007D9F1F /* level */,
 				10659AFC1E3BDBB0001D4235 /* FrostedView */,
 				8C564AA91E2BF38F00C89298 /* Resources */,
@@ -477,6 +480,7 @@
 				10A03C9A1E5A5252007D9F1F /* level01_acid_test_fish.xor_test in Resources */,
 				10A03CA21E5A5253007D9F1F /* level08.xor in Resources */,
 				8C0483251E285DC000F29B4D /* acid.caf in Resources */,
+				10A4F9181E81394000345B71 /* pics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,7 +692,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,6 +700,7 @@
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "iXor-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -707,12 +712,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				INFOPLIST_FILE = iXor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iXorTests/iXor-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

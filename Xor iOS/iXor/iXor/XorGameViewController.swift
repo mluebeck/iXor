@@ -199,7 +199,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         let defaults = UserDefaults.standard
-        if defaults.bool(forKey: "scrollviewuser") == false
+        if defaults.bool(forKey: "scrollviewuser") == false || 1==1
         {
             self.scrollViewButton.isHidden=false
             self.pageControl.isHidden = false
@@ -209,6 +209,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         else
         {
             self.scrollViewButton.isHidden=true
+            
             self.pageControl.isHidden = true
             self.scrollView.isHidden=true
             
@@ -259,7 +260,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
-        
+        assert(XorGameViewController.appDelegate.playgroundList.playgrounds.count>0)
         
         self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundList.playgrounds[XorGameViewController.currentPlaygroundLevel]?.copy() as! Playground)
 
