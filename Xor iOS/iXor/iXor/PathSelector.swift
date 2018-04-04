@@ -53,7 +53,7 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
 
     
     
-    func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
+    @objc func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
     {
         if recognizer.state==UIGestureRecognizerState.ended {
             oldcoordinates=nil
@@ -78,7 +78,7 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
         let x = Double((coordinates?.x)!)//+Double(self.playground.cameraLeftTopPosition.x)
         //let y = Double(height-coordinates.y)//+Double(self.playground.cameraLeftTopPosition.y)
         
-        print("handleLongPressFrom Tapped! \(x), \(coordinates?.y) ")
+        //print("handleLongPressFrom Tapped! \(x), \(coordinates?.y) ")
         let coordX = Int(x/Double(segmentX!))
         let coordY = Int(((round(Double(segmentY!)*Double((coordinates?.y)!))/Double(segmentY!))/Double(segmentY!)))
         print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")

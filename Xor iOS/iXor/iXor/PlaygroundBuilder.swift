@@ -127,7 +127,7 @@ class PlaygroundBuilder: NSObject
 
         let language = Bundle.main.preferredLocalizations.first
 
-        for char in (playground?.contentAsString.characters)!
+        for char in (playground?.contentAsString)!
         {
             if commentMode == true
             {
@@ -148,7 +148,7 @@ class PlaygroundBuilder: NSObject
                 }
                 else
                 {
-                    if !(char == "\n" && mazeString.characters.count == 0)
+                    if !(char == "\n" && mazeString.count == 0)
                     {
                         mazeString.append(char)
                     }
@@ -171,7 +171,7 @@ class PlaygroundBuilder: NSObject
         var i = 0
         var localArray = Array<MazeElement>()
         
-        for char in mazeString.characters
+        for char in mazeString
         {
             if char == "z"
             {

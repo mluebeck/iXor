@@ -39,6 +39,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     @IBOutlet var playerButtonsViewHeightConstraint : NSLayoutConstraint!
     @IBOutlet var countMovesViewWidthConstraint : NSLayoutConstraint!
     
+    @IBOutlet var playgroundToConstraint : NSLayoutConstraint!
     @IBOutlet var gameControllerViewHeightConstraint :  NSLayoutConstraint!
     @IBOutlet var gameControllerViewWidthConstraint :  NSLayoutConstraint!
     @IBOutlet var controllerView  :  UIView!
@@ -124,6 +125,14 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     {
         super.viewDidLayoutSubviews()
         updateCurrentConstraintsToSize(size: self.view.bounds.size)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) {
+            let screenSize = UIScreen.main.bounds.size
+            if screenSize.height == 812 {
+                self.playgroundToConstraint.constant = 44.0
+            } else {
+                self.playgroundToConstraint.constant = 10.0
+            }
+        }
     }
     
     func updateCurrentConstraintsToSize(size:CGSize)
@@ -637,7 +646,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     
     // MARK: UNDO AND REPLAY
     
-    func updateNotificationSent()
+    @objc func updateNotificationSent()
     {
         print("notifcation end event!")
         if replayMode==true && self.replayModeRecursive == true

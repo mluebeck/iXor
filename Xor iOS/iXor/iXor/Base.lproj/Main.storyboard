@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -26,11 +26,11 @@
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOW-CJ-XDb" userLabel="Playground View" customClass="SKView">
-                                <rect key="frame" x="10" y="10" width="355" height="355"/>
+                                <rect key="frame" x="10" y="44" width="355" height="355"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REPLAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u8-dk-IhO">
                                         <rect key="frame" x="20" y="20" width="315" height="40"/>
@@ -46,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
-                                                <rect key="frame" x="50" y="50" width="255" height="255"/>
+                                                <rect key="frame" x="50" y="50" width="224" height="255"/>
                                                 <string key="text">Keine Karte verfügbar.
 
 Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
@@ -59,20 +59,20 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstItem="gqB-Sb-UYk" firstAttribute="top" secondItem="fTD-rJ-Cdm" secondAttribute="top" constant="50" id="2lq-Pv-yCe"/>
                                             <constraint firstItem="gqB-Sb-UYk" firstAttribute="leading" secondItem="fTD-rJ-Cdm" secondAttribute="leading" constant="50" id="fun-w1-RY7"/>
                                             <constraint firstAttribute="bottom" secondItem="gqB-Sb-UYk" secondAttribute="bottom" constant="50" id="knN-BG-HqI"/>
-                                            <constraint firstAttribute="trailing" secondItem="gqB-Sb-UYk" secondAttribute="trailing" constant="50" id="mlR-Wf-miw"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gqB-Sb-UYk" secondAttribute="trailing" id="mlR-Wf-miw"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-Mx-aj1" customClass="FrostedView" customModule="Xanadoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="40" y="0.0" width="275" height="265"/>
+                                                <rect key="frame" x="40" y="0.0" width="234" height="265"/>
                                                 <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="18"/>
                                                 <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yah-3T-933">
-                                                <rect key="frame" x="40" y="265" width="275" height="60"/>
+                                                <rect key="frame" x="40" y="265" width="209" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="5BC-FC-Ec2"/>
@@ -88,10 +88,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="5ly-yJ-b44"/>
                                             <constraint firstItem="yah-3T-933" firstAttribute="top" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="ENj-a3-r9f"/>
                                             <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="30" id="Ntw-JQ-7vD"/>
-                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" constant="40" id="YuU-x8-cfu"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yah-3T-933" secondAttribute="trailing" id="YuU-x8-cfu"/>
                                             <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="tFC-YB-AQw"/>
                                             <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="uWN-kh-FAv"/>
-                                            <constraint firstAttribute="trailing" secondItem="JLV-6w-TxB" secondAttribute="trailing" constant="40" id="zRP-Mi-ujt"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="zRP-Mi-ujt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -113,7 +113,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vrw-AF-AtW" userLabel="Player Buttons View">
-                                <rect key="frame" x="0.0" y="381" width="375" height="286"/>
+                                <rect key="frame" x="0.0" y="492" width="375" height="286"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y75-mf-JCq" userLabel="Navigation Bar View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -605,16 +605,16 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-gq-x8N">
-                                <rect key="frame" x="10" y="20" width="355" height="627"/>
+                                <rect key="frame" x="10" y="44" width="355" height="714"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQG-eh-Dse" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="4615" height="627"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="4615" height="714"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK4-2Y-GZS" userLabel="View 1">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 1 start" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-7T-p5Z">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.47367288749999997" blue="0.2375045476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -626,10 +626,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-ZF-OeP" userLabel="View 2">
-                                                <rect key="frame" x="355" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="355" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 2 start" translatesAutoresizingMaskIntoConstraints="NO" id="3iR-FG-B3u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -641,10 +641,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apR-P9-oYb" userLabel="View 3">
-                                                <rect key="frame" x="710" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="710" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 3 magus " translatesAutoresizingMaskIntoConstraints="NO" id="0g2-wU-yZE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -656,10 +656,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1qw-aK-pcI" userLabel="View 4">
-                                                <rect key="frame" x="1065" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="1065" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 3 kontrolltasten " translatesAutoresizingMaskIntoConstraints="NO" id="RZN-9p-wG8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -671,10 +671,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-SU-c4e" userLabel="View 5">
-                                                <rect key="frame" x="1420" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="1420" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 4 touchgeste" translatesAutoresizingMaskIntoConstraints="NO" id="JiP-SV-VRN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -686,10 +686,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEJ-dx-2Tn" userLabel="View 6">
-                                                <rect key="frame" x="1775" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="1775" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 5 spielerwechsel" translatesAutoresizingMaskIntoConstraints="NO" id="Xsp-zx-v3M">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -701,10 +701,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6P-3i-45b" userLabel="View 7">
-                                                <rect key="frame" x="2130" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="2130" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 6 questor" translatesAutoresizingMaskIntoConstraints="NO" id="Mzi-6k-pOb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -716,10 +716,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VH-Ed-G4N" userLabel="View 8">
-                                                <rect key="frame" x="2485" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="2485" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 7 hintergrundmusik" translatesAutoresizingMaskIntoConstraints="NO" id="cge-Qc-pn3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -731,10 +731,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-3F-C6E" userLabel="View 9">
-                                                <rect key="frame" x="2840" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="2840" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 8 spielanleitung und Karte" translatesAutoresizingMaskIntoConstraints="NO" id="bJk-cF-gR0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -746,10 +746,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAK-fh-Nrr" userLabel="View 10">
-                                                <rect key="frame" x="3195" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="3195" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 9 Anzeigen" translatesAutoresizingMaskIntoConstraints="NO" id="uD2-aV-H2x">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -761,10 +761,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7z-ts-acC" userLabel="View 11">
-                                                <rect key="frame" x="3550" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="3550" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 10 Level" translatesAutoresizingMaskIntoConstraints="NO" id="Kec-v1-hSB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -776,10 +776,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUN-5W-Y45" userLabel="View 12">
-                                                <rect key="frame" x="3905" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="3905" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 11 replay" translatesAutoresizingMaskIntoConstraints="NO" id="Mre-Ij-Fxd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -791,10 +791,10 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Aw-S9-4sA" userLabel="View 13">
-                                                <rect key="frame" x="4260" y="0.0" width="355" height="627"/>
+                                                <rect key="frame" x="4260" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 12 Ausgang" translatesAutoresizingMaskIntoConstraints="NO" id="MFR-eK-YxI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="627"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -877,7 +877,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EV-uv-Pcn">
-                                <rect key="frame" x="319" y="20" width="40" height="40"/>
+                                <rect key="frame" x="319" y="44" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="IE1-R0-Kve"/>
                                     <constraint firstAttribute="height" constant="40" id="ZVu-NE-soM"/>
@@ -890,7 +890,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="12" translatesAutoresizingMaskIntoConstraints="NO" id="FMQ-CN-cin">
-                                <rect key="frame" x="10" y="647" width="355" height="20"/>
+                                <rect key="frame" x="10" y="758" width="355" height="20"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pqc-2m-F70"/>
@@ -905,7 +905,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             <constraint firstAttribute="trailingMargin" secondItem="9EV-uv-Pcn" secondAttribute="trailing" id="6k0-hm-EWt"/>
                             <constraint firstItem="9EV-uv-Pcn" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="BMp-17-iIy"/>
                             <constraint firstAttribute="trailing" secondItem="vrw-AF-AtW" secondAttribute="trailing" id="Ej9-My-Fta"/>
-                            <constraint firstItem="mOW-CJ-XDb" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="10" id="FSb-zP-wfI"/>
+                            <constraint firstItem="mOW-CJ-XDb" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="44" id="FSb-zP-wfI"/>
                             <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="YSs-gq-x8N" secondAttribute="bottom" constant="20" id="KAK-VI-cBS"/>
                             <constraint firstAttribute="trailing" secondItem="YSs-gq-x8N" secondAttribute="trailing" constant="10" id="QwZ-NN-qQ5"/>
                             <constraint firstItem="FMQ-CN-cin" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="d0p-gS-Qrd"/>
@@ -916,8 +916,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                             <constraint firstItem="YSs-gq-x8N" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="10" id="vGc-vd-H8v"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="collectedMasksLabel" destination="2T9-Pg-lbt" id="fGa-M3-wEw"/>
                         <outlet property="controllerView" destination="Xk7-eV-XZv" id="fBi-p1-WGy"/>
@@ -939,6 +938,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="playerButtonsViewWidthConstraint" destination="3JK-hO-1fE" id="jzI-IL-TzW"/>
                         <outlet property="playerChangeButton" destination="fiK-qK-abw" id="uwn-zB-Ku5"/>
                         <outlet property="playerChangeImage" destination="9xH-EE-ocQ" id="81j-1Z-YrF"/>
+                        <outlet property="playgroundToConstraint" destination="FSb-zP-wfI" id="n1z-mK-OaE"/>
                         <outlet property="playgroundView" destination="mOW-CJ-XDb" id="FZ2-il-eMX"/>
                         <outlet property="playgroundViewConstraint" destination="F3G-0e-RbR" id="NTZ-i0-V0z"/>
                         <outlet property="progressBar" destination="rVe-Np-qVK" id="a7c-sX-bEy"/>
@@ -973,7 +973,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="140" y="269.41529235382313"/>
+            <point key="canvasLocation" x="140" y="268.9655172413793"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="jRx-Vq-24A">
@@ -988,16 +988,16 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YD6-98-UaS">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="545"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Xanadoo Anleitung_4" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-0e-9Ae">
-                                        <rect key="frame" x="12" y="0.0" width="352" height="563"/>
+                                        <rect key="frame" x="36.666666666666657" y="0.0" width="303.33333333333337" height="485"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="fQN-0e-9Ae" secondAttribute="height" multiplier="10:16" id="na0-K4-cTz"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-cy-UAR">
-                                        <rect key="frame" x="0.0" y="563" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="485" width="375" height="60"/>
                                         <state key="normal" title="Weiter"/>
                                         <connections>
                                             <action selector="nextHint" destination="tPD-Yu-quZ" eventType="touchUpInside" id="SuV-ac-CNE"/>
@@ -1021,7 +1021,6 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <constraints>
                             <constraint firstItem="YD6-98-UaS" firstAttribute="top" secondItem="7gm-f2-FDW" secondAttribute="bottom" id="4IN-Px-0oG"/>
                             <constraint firstItem="YD6-98-UaS" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leading" id="6Lj-jX-Lus"/>
-                            <constraint firstItem="YD6-98-UaS" firstAttribute="top" secondItem="2Cg-do-f3L" secondAttribute="top" constant="44" id="KMY-r0-MdS"/>
                             <constraint firstAttribute="trailing" secondItem="YD6-98-UaS" secondAttribute="trailing" id="TGA-Pj-7ce"/>
                             <constraint firstItem="YD6-98-UaS" firstAttribute="leading" secondItem="2Cg-do-f3L" secondAttribute="leading" id="W5s-A5-whI"/>
                             <constraint firstItem="wyQ-Oc-Aa4" firstAttribute="top" secondItem="YD6-98-UaS" secondAttribute="bottom" id="cHg-UF-6sn"/>
@@ -1048,7 +1047,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Si1-Zw-LDD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
@@ -1073,7 +1072,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Xc-sM-AuI" customClass="UIScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="633"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hn4-o6-gGj" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -1098,7 +1097,6 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                     <constraint firstItem="hn4-o6-gGj" firstAttribute="width" secondItem="5Xc-sM-AuI" secondAttribute="width" id="FI0-qg-fNI"/>
                                     <constraint firstAttribute="trailing" secondItem="hn4-o6-gGj" secondAttribute="trailing" id="Gq0-ba-Csq"/>
                                     <constraint firstItem="hn4-o6-gGj" firstAttribute="leading" secondItem="5Xc-sM-AuI" secondAttribute="leading" id="JIs-eb-GGR"/>
-                                    <constraint firstAttribute="bottom" secondItem="hn4-o6-gGj" secondAttribute="bottom" constant="667" id="T5w-JV-nce"/>
                                     <constraint firstItem="hn4-o6-gGj" firstAttribute="top" secondItem="5Xc-sM-AuI" secondAttribute="top" id="hC6-xq-hcZ"/>
                                 </constraints>
                             </view>
@@ -1133,7 +1131,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentHeight" destination="T5w-JV-nce" id="3JV-tq-p1A"/>
+                        <outlet property="contentHeight" destination="77O-kR-eBC" id="j22-Ac-yAp"/>
                         <outlet property="scrollView" destination="5Xc-sM-AuI" id="wFZ-J7-Tp0"/>
                         <outlet property="view1" destination="f5a-pL-N60" id="rsx-E6-Jie"/>
                     </connections>
@@ -1151,18 +1149,18 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <viewControllerLayoutGuide type="bottom" id="GnE-b0-98O"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="K2Y-4e-o2u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xI7-hR-2AH">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="734" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="9YN-re-V8X"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="0hh-WT-hTL">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cRH-Pk-NbG">
-                                            <rect key="frame" x="16" y="7" width="138" height="30"/>
+                                            <rect key="frame" x="16" y="7" width="343" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="13"/>
                                             <state key="normal" title="RESET ALL"/>
@@ -1175,7 +1173,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="59n-7u-dfu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="DkK-nE-Nlt">
@@ -1199,7 +1197,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 </connections>
                                             </barButtonItem>
                                             <view key="titleView" contentMode="scaleToFill" id="SbD-Y1-an4">
-                                                <rect key="frame" x="120.5" y="5.5" width="134" height="33"/>
+                                                <rect key="frame" x="120.66666666666669" y="5.6666666666666679" width="134" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nK-Yz-5aJ">
@@ -1240,7 +1238,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uai-03-lx7" id="OuG-26-7An">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">

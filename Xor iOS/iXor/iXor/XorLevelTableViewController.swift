@@ -75,7 +75,7 @@ class XorLevelTableViewController: UIViewController,UITableViewDelegate,UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelTableViewCell", for: indexPath) as! LevelTableViewCell
 
         let playground = playgrounds?[playgroundIndices[indexPath.row]]
-        print("adding playground \(playground?.level_name) to Cell")
+        print("adding playground \(playground?.level_name ?? "no name") to Cell")
         if indexPath.row == 0 || playground?.finished == true || indexPath.row==currentLevel!-1
         {
             

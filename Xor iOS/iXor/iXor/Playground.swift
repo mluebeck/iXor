@@ -519,7 +519,7 @@ class Playground: NSObject,NSCoding
             }
             
             mazeElementType = element(position: newPosition!)?.mazeElementType
-            print("Can move: \(mazeElementType)")
+            //print("Can move: \(mazeElementType ?? "maze element type")")
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
                 if mazeElementType == MazeElementType.transporter
@@ -593,7 +593,7 @@ class Playground: NSObject,NSCoding
             
             // fetch element at new position
             mazeElementType = element(position: newPosition!)?.mazeElementType
-            print("Can move: \(mazeElementType)")
+            //print("Can move: \(mazeElementType ?? <#default value#>)")
 
             if !levelFinishedAndExitReached(item:mazeElementType)
             {
