@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import CoreMotion
+import Popover
 
 enum Orientation
 {
@@ -45,7 +46,16 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     @IBOutlet var controllerView  :  UIView!
     
     @IBOutlet var playerChangeButton : UIButton!
+    
+    @IBOutlet var howToPlay      : UIButton!
+    @IBOutlet var upButton      : UIButton!
+    @IBOutlet var downButton    : UIButton!
+    @IBOutlet var leftButton    : UIButton!
+    @IBOutlet var rightButton   : UIButton!
+    
     @IBOutlet var playerChangeImage: UIImageView!
+    
+    
     
     @IBOutlet var playgroundView : SKView!
     
@@ -208,7 +218,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         let defaults = UserDefaults.standard
-        if defaults.bool(forKey: "scrollviewuser") == false || 1==1
+        if defaults.bool(forKey: "scrollviewuser") == false || 1==0
         {
             self.scrollViewButton.isHidden=false
             self.pageControl.isHidden = false
@@ -245,6 +255,69 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
             self.reloadFlag = false
         }
         self.disableReplayMode()
+        
+        
+        self.showPopover(text: "Turn the music on/off!", height:100,view:self.musicButton, done: {
+            self.showPopover(text: "Switch your player!", height: 100, view:self.playerChangeButton,done: {
+                self.showPopover(text: "Move your player up!", height: 100, view:self.upButton,done: {
+                    self.showPopover(text: "Move your player down!", height: 100, view:self.downButton,done: {
+                        self.showPopover(text: "Move your player left!", height: 100, view:self.leftButton,done: {
+                            self.showPopover(text: "Move your player right!", height: 100, view:self.rightButton,done: {
+                                self.showPopover(text: "Show the maze's map!", height: 100, view:self.mapLeftUp,done: {
+                                    self.showPopover(text: "Show the player's guide!", height: 100, view:self.howToPlay,done: {
+                                        
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+        
+    }
+    
+    func showPopover(text:String,height:CGFloat,view:UIView, done:(()->Void)? ) {
+        let aView = UITextView.init()
+        aView.text=text
+        //aView.numberOfLines=0
+        //aView.textAlignment = NSTextAlignment.center
+        aView.frame = CGRect.init(x: 0, y: 0, width: 200, height: height)
+        aView.backgroundColor = UIColor.red
+        aView.font = UIFont.init(name: "PressStart2P", size: 15.0)
+        aView.textAlignment = NSTextAlignment.center
+        
+        var frame = aView.frame
+        frame.size.height = aView.contentSize.height
+        aView.frame = frame
+        
+        //aView.numberOfLines = 0
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        //
+        //        let attributes : [NSAttributedStringKey : AnyObject] = [kCTFontAttributeName as NSAttributedStringKey : UIFont(name: "HelveticaNeue", size: 15)!, kCTParagraphStyleAttributeName as NSAttributedStringKey: paragraphStyle]
+        //
+        //        let attributedText = NSAttributedString.init(string: "ABC\nDEF", attributes: attributes)
+        //        aView.attributedText = attributedText
+        //
+        let options = [
+            .type(.up),
+            .cornerRadius(10 / 2),
+            .animationIn(0.3),
+            .blackOverlayColor(UIColor.clear),
+            .arrowSize(CGSize.init(width: 20, height: 30))
+            ] as [PopoverOption]
+        let popover = Popover(options: options, showHandler: nil, dismissHandler: {
+            print("done")
+        })
+        popover.show(aView, fromView: view)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
+            popover.dismiss()
+            if let d = done {
+                d()
+            }
+        }
+        
     }
     
     func resetLabels()

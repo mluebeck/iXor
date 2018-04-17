@@ -922,8 +922,11 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="controllerView" destination="Xk7-eV-XZv" id="fBi-p1-WGy"/>
                         <outlet property="countMovesLabel" destination="guq-I0-gJG" id="CZX-KS-ZYf"/>
                         <outlet property="countMovesView" destination="FkF-Hj-52b" id="53X-Di-bkR"/>
+                        <outlet property="downButton" destination="zhH-4i-AGq" id="Kwc-LJ-YEV"/>
                         <outlet property="fastForwardButton" destination="E5M-6t-tUw" id="kHW-pq-ItD"/>
                         <outlet property="forwardButton" destination="PRY-QW-Yhk" id="h0N-hx-Wn5"/>
+                        <outlet property="howToPlay" destination="a0X-IC-dSy" id="ydN-G0-xhn"/>
+                        <outlet property="leftButton" destination="io0-Pr-ugY" id="9gd-3h-e59"/>
                         <outlet property="mapLeftDown" destination="uZZ-Jv-m8d" id="Ky1-t8-Ex0"/>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
@@ -945,9 +948,11 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="replayButton" destination="HNQ-MT-zeI" id="pgl-2o-Vsf"/>
                         <outlet property="replayButtonsView" destination="5q4-F4-zqL" id="weP-fa-4Xs"/>
                         <outlet property="replayLabel" destination="0u8-dk-IhO" id="Xm3-aZ-Dxh"/>
+                        <outlet property="rightButton" destination="mMX-P1-SqZ" id="96V-Hz-29Y"/>
                         <outlet property="scrollView" destination="YSs-gq-x8N" id="KgV-Iq-bAZ"/>
                         <outlet property="scrollViewButton" destination="9EV-uv-Pcn" id="fFk-m0-0tx"/>
                         <outlet property="successView" destination="Emc-Mx-aj1" id="JmK-YW-kN5"/>
+                        <outlet property="upButton" destination="KbD-9B-DyD" id="eJA-zp-bFL"/>
                         <outlet property="verbotImage" destination="x8a-hn-qaM" id="jOE-jd-jJs"/>
                     </connections>
                 </viewController>
