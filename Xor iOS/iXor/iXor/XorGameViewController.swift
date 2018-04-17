@@ -47,6 +47,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     
     @IBOutlet var playerChangeButton : UIButton!
     
+    @IBOutlet var levelName      : UIButton!
     @IBOutlet var howToPlay      : UIButton!
     @IBOutlet var upButton      : UIButton!
     @IBOutlet var downButton    : UIButton!
@@ -265,7 +266,15 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
                             self.showPopover(text: "Move your player right!", height: 100, view:self.rightButton,done: {
                                 self.showPopover(text: "Show the maze's map!", height: 100, view:self.mapLeftUp,done: {
                                     self.showPopover(text: "Show the player's guide!", height: 100, view:self.howToPlay,done: {
-                                        
+                                        self.showPopover(text: "Shows your colleted masks!", height: 100, view:self.collectedMasksLabel,done: {
+                                            self.showPopover(text: "Shows your moves!", height: 100, view:self.countMovesLabel,done: {
+                                                self.showPopover(text: "Shows your level name!", height: 100, view:self.navigationBarTitle,done: {
+                                                    self.showPopover(text: "Tap to switch level!", height: 100, view:self.levelName,done: {
+                                                        
+                                                    })
+                                                })
+                                            })
+                                        })
                                     })
                                 })
                             })

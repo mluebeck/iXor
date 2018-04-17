@@ -72,7 +72,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yah-3T-933">
-                                                <rect key="frame" x="40" y="265" width="209" height="60"/>
+                                                <rect key="frame" x="40" y="265" width="275" height="60"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="5BC-FC-Ec2"/>
@@ -88,7 +88,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <constraint firstItem="yah-3T-933" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="5ly-yJ-b44"/>
                                             <constraint firstItem="yah-3T-933" firstAttribute="top" secondItem="JLV-6w-TxB" secondAttribute="bottom" id="ENj-a3-r9f"/>
                                             <constraint firstAttribute="bottom" secondItem="yah-3T-933" secondAttribute="bottom" constant="30" id="Ntw-JQ-7vD"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yah-3T-933" secondAttribute="trailing" id="YuU-x8-cfu"/>
+                                            <constraint firstAttribute="trailing" secondItem="yah-3T-933" secondAttribute="trailing" constant="40" id="YuU-x8-cfu"/>
                                             <constraint firstItem="JLV-6w-TxB" firstAttribute="leading" secondItem="Emc-Mx-aj1" secondAttribute="leading" constant="40" id="tFC-YB-AQw"/>
                                             <constraint firstItem="JLV-6w-TxB" firstAttribute="top" secondItem="Emc-Mx-aj1" secondAttribute="top" id="uWN-kh-FAv"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JLV-6w-TxB" secondAttribute="trailing" id="zRP-Mi-ujt"/>
@@ -927,6 +927,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                         <outlet property="forwardButton" destination="PRY-QW-Yhk" id="h0N-hx-Wn5"/>
                         <outlet property="howToPlay" destination="a0X-IC-dSy" id="ydN-G0-xhn"/>
                         <outlet property="leftButton" destination="io0-Pr-ugY" id="9gd-3h-e59"/>
+                        <outlet property="levelName" destination="bEa-IU-Pdq" id="xsE-Y9-aXD"/>
                         <outlet property="mapLeftDown" destination="uZZ-Jv-m8d" id="Ky1-t8-Ex0"/>
                         <outlet property="mapLeftUp" destination="rG9-v4-g3s" id="bQZ-hD-O5u"/>
                         <outlet property="mapRightDown" destination="H0C-0F-fVv" id="gHh-El-yWM"/>
