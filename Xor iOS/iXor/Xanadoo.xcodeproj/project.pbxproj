@@ -53,8 +53,8 @@
 		10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BACAFC1E5090380034C42A /* EdgeSprite.swift */; };
 		10BD350E1E4941A2006298D0 /* Views.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10BD35101E4941A2006298D0 /* Views.xib */; };
 		10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */; };
-		4A2F3E791E965446005B64D0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F3E771E965446005B64D0 /* Crashlytics.framework */; };
-		4A2F3E7A1E965446005B64D0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F3E781E965446005B64D0 /* Fabric.framework */; };
+		2B5B8EB7BD2EEC199FA5BC96 /* Pods_Xanadoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A30677AEFC29E4F5338FB2E9 /* Pods_Xanadoo.framework */; };
+		2ECD5FA1F5E3C418E8B77464 /* Pods_XanadooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9C1CC9EBD7E3380D1987E6 /* Pods_XanadooTests.framework */; };
 		8C03ACCB1E34C85F00A9D86D /* PlaygroundBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */; };
 		8C0483251E285DC000F29B4D /* acid.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483231E285DC000F29B4D /* acid.caf */; };
 		8C0483261E285DC000F29B4D /* bomb.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8C0483241E285DC000F29B4D /* bomb.caf */; };
@@ -139,8 +139,10 @@
 		10BD35121E4941A7006298D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Views.strings; sourceTree = "<group>"; };
 		10BD35141E4941C3006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Views.strings; sourceTree = "<group>"; };
 		10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegateImplementation.swift; sourceTree = "<group>"; };
-		4A2F3E771E965446005B64D0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		4A2F3E781E965446005B64D0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		174B2EFA0BECE88926B8959E /* Pods-XanadooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XanadooTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1FC3857BFD3C97CE680921A9 /* Pods-Xanadoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xanadoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.release.xcconfig"; sourceTree = "<group>"; };
+		4AC3FA0020867FAE0028F814 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Pods/Fabric/iOS/Fabric.framework; sourceTree = "<group>"; };
+		5C48ECB405EA923BFB1A1334 /* Pods-Xanadoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xanadoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.debug.xcconfig"; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
 		8C0483241E285DC000F29B4D /* bomb.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bomb.caf; sourceTree = "<group>"; };
@@ -160,6 +162,9 @@
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		8CF054941E302BE100771C7B /* Playground.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = Playground.java; sourceTree = "<group>"; };
+		9E9C1CC9EBD7E3380D1987E6 /* Pods_XanadooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XanadooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30677AEFC29E4F5338FB2E9 /* Pods_Xanadoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xanadoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C44E9335DD0B8B1F29A4302D /* Pods-XanadooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XanadooTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A2F3E791E965446005B64D0 /* Crashlytics.framework in Frameworks */,
-				4A2F3E7A1E965446005B64D0 /* Fabric.framework in Frameworks */,
+				2B5B8EB7BD2EEC199FA5BC96 /* Pods_Xanadoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECD5FA1F5E3C418E8B77464 /* Pods_XanadooTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,14 +297,14 @@
 		8C43129E1DF4717800E80996 = {
 			isa = PBXGroup;
 			children = (
-				4A2F3E771E965446005B64D0 /* Crashlytics.framework */,
-				4A2F3E781E965446005B64D0 /* Fabric.framework */,
 				109FBE4A1E5E6DF000597993 /* music */,
 				106DAA0B1E46AD6800E637B0 /* html */,
 				107739001E450D3B00BBE90D /* SpeechBubbleView.swift */,
 				8C4312A91DF4717800E80996 /* iXor */,
 				8C4312C41DF4717900E80996 /* iXorTests */,
 				8C4312A81DF4717800E80996 /* Products */,
+				F8B0EAD21F049B014C0EB256 /* Pods */,
+				919E26735B6DA13EF623D66E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -363,6 +368,27 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		919E26735B6DA13EF623D66E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AC3FA0020867FAE0028F814 /* Fabric.framework */,
+				A30677AEFC29E4F5338FB2E9 /* Pods_Xanadoo.framework */,
+				9E9C1CC9EBD7E3380D1987E6 /* Pods_XanadooTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8B0EAD21F049B014C0EB256 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C48ECB405EA923BFB1A1334 /* Pods-Xanadoo.debug.xcconfig */,
+				1FC3857BFD3C97CE680921A9 /* Pods-Xanadoo.release.xcconfig */,
+				174B2EFA0BECE88926B8959E /* Pods-XanadooTests.debug.xcconfig */,
+				C44E9335DD0B8B1F29A4302D /* Pods-XanadooTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -370,10 +396,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C4312CA1DF4717900E80996 /* Build configuration list for PBXNativeTarget "Xanadoo" */;
 			buildPhases = (
+				7508468AA17F647051F0083F /* [CP] Check Pods Manifest.lock */,
 				8C4312A31DF4717800E80996 /* Sources */,
 				8C4312A41DF4717800E80996 /* Frameworks */,
 				8C4312A51DF4717800E80996 /* Resources */,
 				4A2F3E7B1E96564D005B64D0 /* ShellScript */,
+				D9B0F24059A6A09640CC5712 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -388,6 +416,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C4312CD1DF4717900E80996 /* Build configuration list for PBXNativeTarget "XanadooTests" */;
 			buildPhases = (
+				214E37D237609DBD6B626B50 /* [CP] Check Pods Manifest.lock */,
 				8C4312BD1DF4717900E80996 /* Sources */,
 				8C4312BE1DF4717900E80996 /* Frameworks */,
 				8C4312BF1DF4717900E80996 /* Resources */,
@@ -503,6 +532,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		214E37D237609DBD6B626B50 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XanadooTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4A2F3E7B1E96564D005B64D0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,7 +561,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Fabric.framework/run\" f66c99451b7372cba1506d08eac42635dbd7bf84 a2294a237aa493b7a8a4d7c47d06e44c163ebcf060995f400f4295c72b51ca0f";
+			shellScript = "\"${PROJECT_DIR}/Pods/Fabric/iOS/Fabric.framework/run\" f66c99451b7372cba1506d08eac42635dbd7bf84 a2294a237aa493b7a8a4d7c47d06e44c163ebcf060995f400f4295c72b51ca0f";
+		};
+		7508468AA17F647051F0083F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Xanadoo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9B0F24059A6A09640CC5712 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Popover.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -727,6 +810,7 @@
 		};
 		8C4312CB1DF4717900E80996 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C48ECB405EA923BFB1A1334 /* Pods-Xanadoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -735,6 +819,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -752,6 +837,7 @@
 		};
 		8C4312CC1DF4717900E80996 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FC3857BFD3C97CE680921A9 /* Pods-Xanadoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -760,6 +846,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -775,6 +862,7 @@
 		};
 		8C4312CE1DF4717900E80996 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 174B2EFA0BECE88926B8959E /* Pods-XanadooTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -794,6 +882,7 @@
 		};
 		8C4312CF1DF4717900E80996 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C44E9335DD0B8B1F29A4302D /* Pods-XanadooTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
