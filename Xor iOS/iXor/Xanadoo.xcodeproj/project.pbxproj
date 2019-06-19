@@ -65,7 +65,6 @@
 		8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312B21DF4717800E80996 /* XorGameViewController.swift */; };
 		8C4312B61DF4717800E80996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B41DF4717800E80996 /* Main.storyboard */; };
 		8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B91DF4717800E80996 /* LaunchScreen.storyboard */; };
-		8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4312C51DF4717900E80996 /* iXorTests.swift */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
 		8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */; };
@@ -135,13 +134,12 @@
 		10BD350A1E493EA5006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		10BD350B1E493EA5006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		10BD350D1E494189006298D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		10BD350F1E4941A2006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Views.xib; sourceTree = "<group>"; };
-		10BD35121E4941A7006298D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Views.strings; sourceTree = "<group>"; };
 		10BD35141E4941C3006298D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Views.strings; sourceTree = "<group>"; };
 		10F560A11E4A913A000B26B0 /* SceneDelegateImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegateImplementation.swift; sourceTree = "<group>"; };
 		174B2EFA0BECE88926B8959E /* Pods-XanadooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XanadooTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1FC3857BFD3C97CE680921A9 /* Pods-Xanadoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xanadoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.release.xcconfig"; sourceTree = "<group>"; };
 		4AC3FA0020867FAE0028F814 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Pods/Fabric/iOS/Fabric.framework; sourceTree = "<group>"; };
+		4ADD43D322BA62E500D25283 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Views.strings; sourceTree = "<group>"; };
 		5C48ECB405EA923BFB1A1334 /* Pods-Xanadoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xanadoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.debug.xcconfig"; sourceTree = "<group>"; };
 		8C03ACCA1E34C85F00A9D86D /* PlaygroundBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundBuilder.swift; sourceTree = "<group>"; };
 		8C0483231E285DC000F29B4D /* acid.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = acid.caf; sourceTree = "<group>"; };
@@ -458,7 +456,7 @@
 			};
 			buildConfigurationList = 8C4312A21DF4717800E80996 /* Build configuration list for PBXProject "Xanadoo" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -587,7 +585,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Popover/Popover.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -596,7 +594,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -634,7 +632,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C4312C61DF4717900E80996 /* iXorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,10 +660,9 @@
 		10BD35101E4941A2006298D0 /* Views.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				10BD350F1E4941A2006298D0 /* de */,
-				10BD35121E4941A7006298D0 /* en */,
 				10BD35141E4941C3006298D0 /* de */,
 				100B179F1E4941D600BFBCFF /* Base */,
+				4ADD43D322BA62E500D25283 /* en */,
 			);
 			name = Views.xib;
 			sourceTree = "<group>";
@@ -815,6 +811,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -824,8 +821,9 @@
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
+				PRODUCT_BUNDLE_IDENTIFIER = test.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iXorTests/iXor-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "iXor-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -842,6 +840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HH3JD7K438;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -851,8 +850,9 @@
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.mariorotz.iXor;
+				PRODUCT_BUNDLE_IDENTIFIER = test.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "iXorTests/iXor-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

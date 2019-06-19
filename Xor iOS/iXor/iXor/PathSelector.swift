@@ -143,7 +143,6 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
             
             if (e?.mazeElementType == MazeElementType.wall || e?.mazeElementType == MazeElementType.player_1 || e?.mazeElementType == MazeElementType.player_2)
             {
-                print("1-> \(position.hashValue)")
                 if intermediateAlreadySpriteDrawnQueue.count == 1
                 {
                     if let oldPos = oldPosition

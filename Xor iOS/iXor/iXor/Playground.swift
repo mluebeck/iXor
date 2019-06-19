@@ -35,9 +35,9 @@ class PlaygroundPosition : NSObject,NSCoding
         self.y=y
     }
     
-    override var hashValue: Int
+    override var hash: Int
     {
-        return x.hashValue ^ y.hashValue*32
+        return x.hashValue ^ y.hashValue
     }
 
     static func == (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool

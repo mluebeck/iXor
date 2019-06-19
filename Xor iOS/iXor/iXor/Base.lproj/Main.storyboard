@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -46,7 +43,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
-                                                <rect key="frame" x="50" y="50" width="224" height="255"/>
+                                                <rect key="frame" x="50" y="50" width="242" height="255"/>
                                                 <string key="text">Keine Karte verfügbar.
 
 Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
@@ -66,7 +63,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="40" y="0.0" width="234" height="265"/>
+                                                <rect key="frame" x="40" y="0.0" width="170" height="265"/>
                                                 <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="18"/>
                                                 <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -539,7 +536,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <rect key="frame" x="275" y="127" width="100" height="81"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0X-IC-dSy">
-                                                        <rect key="frame" x="15" y="0.0" width="70" height="59"/>
+                                                        <rect key="frame" x="15" y="0.0" width="70" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="70" id="eLh-GJ-QDa"/>
                                                         </constraints>
@@ -997,7 +994,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                 <rect key="frame" x="0.0" y="88" width="375" height="545"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Xanadoo Anleitung_4" translatesAutoresizingMaskIntoConstraints="NO" id="fQN-0e-9Ae">
-                                        <rect key="frame" x="36.666666666666657" y="0.0" width="303.33333333333337" height="485"/>
+                                        <rect key="frame" x="36" y="0.0" width="303" height="485"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="fQN-0e-9Ae" secondAttribute="height" multiplier="10:16" id="na0-K4-cTz"/>
                                         </constraints>
@@ -1248,19 +1245,19 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOZ-Wh-yWL">
-                                                    <rect key="frame" x="8" y="0.0" width="82" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="82" height="43.666666666666664"/>
                                                     <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imX-0Q-qKJ">
-                                                    <rect key="frame" x="98" y="0.0" width="234" height="44"/>
+                                                    <rect key="frame" x="98.000000000000014" y="0.0" width="233.33333333333337" height="44.666666666666664"/>
                                                     <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-YO-9Q5">
-                                                    <rect key="frame" x="340" y="8" width="27" height="27"/>
+                                                    <rect key="frame" x="339.33333333333331" y="8.0000000000000018" width="27.666666666666686" height="27.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="zzf-YO-9Q5" secondAttribute="height" multiplier="1:1" id="NJN-3S-tg3"/>
                                                     </constraints>
