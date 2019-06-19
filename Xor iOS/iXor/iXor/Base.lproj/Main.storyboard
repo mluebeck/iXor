@@ -43,7 +43,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-Sb-UYk">
-                                                <rect key="frame" x="50" y="50" width="242" height="255"/>
+                                                <rect key="frame" x="50" y="50" width="224" height="255"/>
                                                 <string key="text">Keine Karte verfügbar.
 
 Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
@@ -63,7 +63,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="355"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast es geschafft!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLV-6w-TxB">
-                                                <rect key="frame" x="40" y="0.0" width="170" height="265"/>
+                                                <rect key="frame" x="40" y="0.0" width="234" height="265"/>
                                                 <fontDescription key="fontDescription" name="PressStart2P" family="Press Start 2P" pointSize="18"/>
                                                 <color key="textColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -536,7 +536,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <rect key="frame" x="275" y="127" width="100" height="81"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0X-IC-dSy">
-                                                        <rect key="frame" x="15" y="0.0" width="70" height="20"/>
+                                                        <rect key="frame" x="15" y="0.0" width="70" height="59"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="70" id="eLh-GJ-QDa"/>
                                                         </constraints>
@@ -671,7 +671,7 @@ Finde alle vier Teile, um sie vollständig anzuzeigen!</string>
                                                 <rect key="frame" x="1420" y="0.0" width="355" height="714"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xanadoo anleitung 4 touchgeste" translatesAutoresizingMaskIntoConstraints="NO" id="JiP-SV-VRN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="714"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355.00000000000011" height="714.00000000000023"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
