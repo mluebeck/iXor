@@ -1,0 +1,67 @@
+Xor iOS/iXor/Pods/Manifest.lock
+Xor iOS/iXor/Pods/Crashlytics/README.md
+Xor iOS/iXor/Pods/Crashlytics/submit
+Xor iOS/iXor/Pods/Crashlytics/Crashlytics.framework/README
+Xor iOS/iXor/Pods/Crashlytics/Crashlytics.framework/submit
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Crashlytics
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Info.plist
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/run
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/submit
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/upload-symbols
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/ANSCompatibility.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/Answers.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/CLSAttributes.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/CLSLogging.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/CLSReport.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/CLSStackFrame.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Headers/Crashlytics.h
+Xor iOS/iXor/Pods/Crashlytics/iOS/Crashlytics.framework/Modules/module.modulemap
+Xor iOS/iXor/Pods/Fabric/README.md
+Xor iOS/iXor/Pods/Fabric/run
+Xor iOS/iXor/Pods/Fabric/upload-symbols
+Xor iOS/iXor/Pods/Fabric/Fabric.framework/README
+Xor iOS/iXor/Pods/Fabric/Fabric.framework/run
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/Fabric
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/Info.plist
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/run
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/upload-symbols
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/Headers/FABAttributes.h
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/Headers/Fabric.h
+Xor iOS/iXor/Pods/Fabric/iOS/Fabric.framework/Modules/module.modulemap
+Xor iOS/iXor/Pods/Pods.xcodeproj/project.pbxproj
+Xor iOS/iXor/Pods/Pods.xcodeproj/xcuserdata/mrz.xcuserdatad/xcschemes/Crashlytics.xcscheme
+Xor iOS/iXor/Pods/Pods.xcodeproj/xcuserdata/mrz.xcuserdatad/xcschemes/Fabric.xcscheme
+Xor iOS/iXor/Pods/Pods.xcodeproj/xcuserdata/mrz.xcuserdatad/xcschemes/Pods-Xanadoo.xcscheme
+Xor iOS/iXor/Pods/Pods.xcodeproj/xcuserdata/mrz.xcuserdatad/xcschemes/Pods-XanadooTests.xcscheme
+Xor iOS/iXor/Pods/Pods.xcodeproj/xcuserdata/mrz.xcuserdatad/xcschemes/Popover.xcscheme
+Xor iOS/iXor/Pods/Popover/LICENSE
+Xor iOS/iXor/Pods/Popover/README.md
+Xor iOS/iXor/Pods/Popover/Classes/Popover.swift
+Xor iOS/iXor/Pods/Target Support Files/Crashlytics/Crashlytics.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Fabric/Fabric.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-acknowledgements.markdown
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-acknowledgements.plist
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-dummy.m
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-frameworks.sh
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-Info.plist
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo-umbrella.h
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.debug.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.modulemap
+Xor iOS/iXor/Pods/Target Support Files/Pods-Xanadoo/Pods-Xanadoo.release.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests-acknowledgements.markdown
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests-acknowledgements.plist
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests-dummy.m
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests-Info.plist
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests-umbrella.h
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.debug.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.modulemap
+Xor iOS/iXor/Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.release.xcconfig
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover-dummy.m
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover-Info.plist
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover-prefix.pch
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover-umbrella.h
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover.modulemap
+Xor iOS/iXor/Pods/Target Support Files/Popover/Popover.xcconfig
+Xor iOS/iXor/Xanadoo.xcworkspace/contents.xcworkspacedata
+Xor iOS/iXor/Xanadoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+Xor iOS/iXor/Xanadoo.xcworkspace/xcuserdata/mrz.xcuserdatad/UserInterfaceState.xcuserstate
