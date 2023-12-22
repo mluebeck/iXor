@@ -36,6 +36,23 @@ enum MazeElementType: Int
     death_both,
     skull,
     redCorner
+    
+    func isMap()->Bool {
+        return self==MazeElementType.map_1 || self==MazeElementType.map_2  || self==MazeElementType.map_3 || self==MazeElementType.map_4
+
+    }
+    
+    func canMoveUpDown() -> Bool
+    {
+        let canMove = self.isMap() || self == MazeElementType.h_wave || self == MazeElementType.space || self == MazeElementType.mask || self == MazeElementType.bad_mask
+        return canMove
+    }
+    
+    func canMoveLeftRight() -> Bool
+    {
+        let canMove = self.isMap() || self == MazeElementType.v_wave || self == MazeElementType.space || self == MazeElementType.mask || self == MazeElementType.bad_mask
+        return canMove
+    }
 }
 
 enum MazeEvent : Int
@@ -59,7 +76,7 @@ enum MazeEvent : Int
     none
 }
 
-class MazeElement:NSObject,NSCoding
+class MazeElement:NSObject
 {
     var mazeElementType : MazeElementType?
     var sprite : SKSpriteNode?
@@ -69,31 +86,7 @@ class MazeElement:NSObject,NSCoding
         self.mazeElementType = mazeElementType
         self.sprite = sprite
     }
-    
-    required init(coder: NSCoder)
-    {
-        let str = coder.decodeObject(forKey: "mazeElementType")  as! String
-        let character = Character(str)
-        self.mazeElementType = PlaygroundBuilder.mazeElementToString[character]
-        self.sprite = coder.decodeObject(forKey: "sprite") as? SKSpriteNode
-        if self.sprite == nil && PlaygroundBuilder.mazeElementToString[character] != MazeElementType.space
-        {
-            assert(false)
-        }
-    }
-    
-    func encode(with aCoder: NSCoder)
-    {
-        if let me = self.mazeElementType 
-        {
-            aCoder.encode(PlaygroundBuilder.stringToMazeElement[me], forKey: "mazeElementType")
-        }
-        if let s = self.sprite
-        {
-            aCoder.encode(s, forKey: "sprite")
-        }
-    }
-    
+      
     func removeSprite(duration:TimeInterval)
     {
         let fadeOut = SKAction.fadeOut(withDuration: 0.25)
@@ -106,35 +99,4 @@ class MazeElement:NSObject,NSCoding
         removeSprite(duration: 0.25)
     }
     
-    static func isMap(_ item:MazeElementType) -> Bool
-    {
-        return item==MazeElementType.map_1 || item==MazeElementType.map_2  || item==MazeElementType.map_3 || item==MazeElementType.map_4
-    }
-    
-    static func canMoveUpDown(item:MazeElementType?) -> Bool
-    {
-        if let mazeitem = item
-        {
-            let canMove = isMap(mazeitem) || mazeitem == MazeElementType.h_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
-            return canMove
-        }
-        else
-        {
-            return true
-        }
-    }
-    
-    static func canMoveLeftRight(item:MazeElementType?) -> Bool
-    {
-        if let mazeitem = item
-        {
-            let canMove = isMap(mazeitem) || mazeitem == MazeElementType.v_wave || mazeitem == MazeElementType.space || mazeitem == MazeElementType.mask || mazeitem == MazeElementType.bad_mask
-            return canMove
-            
-        }
-        else
-        {
-            return true
-        }
-    }
 }

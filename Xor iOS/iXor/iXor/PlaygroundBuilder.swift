@@ -11,15 +11,15 @@ import SpriteKit
 
 class PlaygroundBuilder: NSObject
 {
-
-    static var filePath : String
+    var playgroundList : PlaygroundList?
+    var filePath : String
     {
         let manager = FileManager.default
         let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first
         return (url?.appendingPathComponent("playgrounds").path)!
     }
     
-    static let mazeElementToString : [Character : MazeElementType]=[
+    let mazeElementToString : [Character : MazeElementType]=[
         "_":MazeElementType.space,
         "F":MazeElementType.fish,
         "C":MazeElementType.chicken,
@@ -62,7 +62,7 @@ class PlaygroundBuilder: NSObject
         MazeElementType.wall : "W"  ]
    
     
-    static let MazeElementToFilename : [MazeElementType:String] = [
+    let MazeElementToFilename : [MazeElementType:String] = [
         MazeElementType.space:      "space_gelb",
         MazeElementType.fish:       "fisch",
         MazeElementType.chicken:    "huhn",
@@ -96,12 +96,12 @@ class PlaygroundBuilder: NSObject
         static let maximumMoves = 1000
     }
     
-    static func readLevelString(filepath: String) -> Playground
+    func readLevelString(filepath: String) -> Playground
     {
         return readFromFile(filepath: filepath)
     }
     
-    static func readFromFile(filepath: String) -> Playground
+    func readFromFile(filepath: String) -> Playground
     {
         let localPlayground = Playground()
         let s = try! String(contentsOfFile: filepath)
@@ -109,7 +109,7 @@ class PlaygroundBuilder: NSObject
         return readFromString(playground:localPlayground)
     }
     
-    static func readFromString(playground:Playground?) -> Playground
+    func readFromString(playground:Playground?) -> Playground
     {
         var x = 0
         var y = 0
@@ -218,7 +218,7 @@ class PlaygroundBuilder: NSObject
                 
                 if !(char == "1" || char == "2" || char == "3" || char == "4" || char == "5" || char == "6" || char == "7" || char == "8" || char == "9" || char == "0" )
                 {
-                    if let element = PlaygroundBuilder.mazeElementToString[char]! as MazeElementType?
+                    if let element = self.mazeElementToString[char]! as MazeElementType?
                     {
                         if element == MazeElementType.space
                         {
@@ -227,7 +227,7 @@ class PlaygroundBuilder: NSObject
                         }
                         else
                         {
-                            let sprite = SKSpriteNode(imageNamed:PlaygroundBuilder.MazeElementToFilename[element]!)
+                            let sprite = SKSpriteNode(imageNamed:self.MazeElementToFilename[element]!)
                             let mazeElement = MazeElement(mazeElementType: element, sprite:sprite)
                             if char == "a"
                             {
@@ -288,7 +288,7 @@ class PlaygroundBuilder: NSObject
     }
     
     
-    static private func readLevel(number: Int) -> Playground
+    private func readLevel(number: Int) -> Playground
     {
         var file : String = ""
         if number>9
@@ -311,53 +311,21 @@ class PlaygroundBuilder: NSObject
     }
     
     
-    static func archive(_ playgroundList : PlaygroundList)
+    func playgrounds(_ name:String = "xor") -> PlaygroundList
     {
-        let b = NSKeyedArchiver.archiveRootObject(playgroundList, toFile: filePath)
-        print("Bool:\(b)")
-    }
-
-    static func unarchive()->PlaygroundList
-    {
-        let path = filePath
-        print("\(path)")
-        var playgroundList : PlaygroundList?
-        playgroundList = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? PlaygroundList
-        if playgroundList == nil
-        {
-            return PlaygroundList()
-        }
-        return playgroundList!
-    }
-    
-    static func playgrounds(_ name:String,fromArchive:Bool) -> PlaygroundList
-    {
-        if fromArchive == true
-        {
-            let  playgroundList = self.unarchive()
-            if playgroundList.playgrounds.count == 0
-            {
-                return self.playgrounds(name, fromArchive: false)
-            }
-            else
-            {
-                return playgroundList
-            }
-        }
-        else
-        {
-            let playgroundList = PlaygroundList()
+        if let pl = playgroundList {
+            return pl
+        } else {
+            let aplaygroundList = PlaygroundList()
             let paths = Bundle.main.paths(forResourcesOfType: name, inDirectory: nil)
             for path in paths
             {
-                let playground = PlaygroundBuilder.readLevelString(filepath:path)
-                playgroundList.playgrounds[playground.level_number]=playground
+                let playground = self.readLevelString(filepath:path)
+                aplaygroundList.playgrounds[playground.level_number]=playground
             }
-            self.archive(playgroundList)
-            return playgroundList
+            playgroundList = aplaygroundList
+            return aplaygroundList
         }
     }
-    
-    
     
 }

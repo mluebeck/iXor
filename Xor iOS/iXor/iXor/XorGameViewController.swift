@@ -9,7 +9,6 @@
 import UIKit
 import SpriteKit
 import CoreMotion
-import Popover
 
 enum Orientation
 {
@@ -252,77 +251,12 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         }
         self.disableReplayMode()
         
-        
-        self.showPopover(text: "Turn the music on/off!", height:100,view:self.musicButton, done: {
-            self.showPopover(text: "Switch your player!", height: 100, view:self.playerChangeButton,done: {
-                self.showPopover(text: "Move your player up!", height: 100, view:self.upButton,done: {
-                    self.showPopover(text: "Move your player down!", height: 100, view:self.downButton,done: {
-                        self.showPopover(text: "Move your player left!", height: 100, view:self.leftButton,done: {
-                            self.showPopover(text: "Move your player right!", height: 100, view:self.rightButton,done: {
-                                self.showPopover(text: "Show the maze's map!", height: 100, view:self.mapLeftUp,done: {
-                                    self.showPopover(text: "Show the player's guide!", height: 100, view:self.howToPlay,done: {
-                                        self.showPopover(text: "Shows your colleted masks!", height: 100, view:self.collectedMasksLabel,done: {
-                                            self.showPopover(text: "Shows your moves!", height: 100, view:self.countMovesLabel,done: {
-                                                self.showPopover(text: "Shows your level name!", height: 100, view:self.navigationBarTitle,done: {
-                                                    self.showPopover(text: "Tap to switch level!", height: 100, view:self.levelName,done: {
-                                                        
-                                                    })
-                                                })
-                                            })
-                                        })
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
+      
         
     }
-    
-    func showPopover(text:String,height:CGFloat,view:UIView, done:(()->Void)? ) {
-        let aView = UITextView.init()
-        aView.text=text
-        //aView.numberOfLines=0
-        //aView.textAlignment = NSTextAlignment.center
-        aView.frame = CGRect.init(x: 0, y: 0, width: 200, height: height)
-        aView.backgroundColor = UIColor.red
-        aView.font = UIFont.init(name: "PressStart2P", size: 15.0)
-        aView.textAlignment = NSTextAlignment.center
+     
         
-        var frame = aView.frame
-        frame.size.height = aView.contentSize.height
-        aView.frame = frame
-        
-        //aView.numberOfLines = 0
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        //
-        //        let attributes : [NSAttributedStringKey : AnyObject] = [kCTFontAttributeName as NSAttributedStringKey : UIFont(name: "HelveticaNeue", size: 15)!, kCTParagraphStyleAttributeName as NSAttributedStringKey: paragraphStyle]
-        //
-        //        let attributedText = NSAttributedString.init(string: "ABC\nDEF", attributes: attributes)
-        //        aView.attributedText = attributedText
-        //
-        let options = [
-            .type(.up),
-            .cornerRadius(10 / 2),
-            .animationIn(0.3),
-            .blackOverlayColor(UIColor.clear),
-            .arrowSize(CGSize.init(width: 20, height: 30))
-            ] as [PopoverOption]
-        let popover = Popover(options: options, showHandler: nil, dismissHandler: {
-            print("done")
-        })
-        popover.show(aView, fromView: view)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.1) {
-            popover.dismiss()
-            if let d = done {
-                d()
-            }
-        }
-        
-    }
+   
     
     func resetLabels()
     {
@@ -346,9 +280,9 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         successView.show(visible: false)
         collectedMasksLabel.text = String("0")
         
-        assert(XorGameViewController.appDelegate.playgroundList.playgrounds.count>0)
+        assert(XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds.count>0)
         
-        self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundList.playgrounds[XorGameViewController.currentPlaygroundLevel]?.copy() as! Playground)
+        self.scene = GameScene(size: playgroundView.bounds.size, playground:XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds[XorGameViewController.currentPlaygroundLevel]?.copy() as! Playground)
 
         let gesMask = self.scene.playground.masken_gesamtanzahl
         collectedMasksLabel!.text! = "0/\(gesMask)"
@@ -471,9 +405,9 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
                 self.scene.isHidden = true
                 
                 DispatchQueue.global().async {
-
-                        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds(levelsToLoad, fromArchive: false)
-                        let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                     
+                    let playgroundDict  = appDelegate.playgroundBuilder.playgrounds().playgrounds
                     
                         self.scene.playground = playgroundDict[1]!
                     
@@ -551,12 +485,12 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         if viewController is XorLevelTableViewController {
             self.levelButtonPressed = true
             let levelTableViewController = viewController as! XorLevelTableViewController
-            levelTableViewController.setPlaygrounds(playgrounds:XorGameViewController.appDelegate.playgroundList.playgrounds)
+            levelTableViewController.setPlaygrounds(playgrounds:XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds)
             levelTableViewController.currentLevel = self.scene.playground.level_number
             levelTableViewController.selectionFinishedClosure = {
                 selectedPlaygroundLevel in
                 if selectedPlaygroundLevel >= 0 {
-                    self.scene.playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[selectedPlaygroundLevel]?.copy() as! Playground
+                    self.scene.playground =  XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds[selectedPlaygroundLevel]?.copy() as! Playground
                     //self.scene.resetGameScene(playground: self.scene.playground)
                     XorGameViewController.currentPlaygroundLevel=selectedPlaygroundLevel
                     self.countMovesLabel.text = "0"
@@ -600,11 +534,8 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         self.messageLabel.text = "Reload all..."
         self.okButton.isHidden=true
         self.scene.isHidden=true
-        
-        
-        XorGameViewController.appDelegate.playgroundList = PlaygroundBuilder.playgrounds(levelsToLoad, fromArchive: false)
         self.countMovesLabel.text = "0"
-        let playgroundDict  = XorGameViewController.appDelegate.playgroundList.playgrounds
+        let playgroundDict  = XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds
         self.scene.playground = playgroundDict[1]!
         
         self.resetToBegin(clearReplay: true)
@@ -990,7 +921,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     
     func reset(level:Int)
     {
-        if let playground =  XorGameViewController.appDelegate.playgroundList.playgrounds[level]
+        if let playground =  XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds[level]
         {
             self.scene.playground = playground
             self.replayStopPressed = false
@@ -1046,7 +977,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         self.resetToBegin(clearReplay: true)
         self.scene.playground.finished = true
         self.scene.playground.justFinished = false
-        XorGameViewController.appDelegate.playgroundList.playgrounds[self.scene.playground.level_number] = self.scene.playground
+        XorGameViewController.appDelegate.playgroundBuilder.playgrounds().playgrounds[self.scene.playground.level_number] = self.scene.playground
         
         self.reset(level: self.scene.playground.level_number+1)
         mazeEvent = MazeEvent.none

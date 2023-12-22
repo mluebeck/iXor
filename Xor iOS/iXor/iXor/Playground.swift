@@ -21,51 +21,12 @@ enum PlayerMoveDirection  : Int
 }
 
 
-class PlaygroundPosition : NSObject,NSCoding
+struct PlaygroundPosition : Equatable, Hashable 
 {
+     
     
-    override public var description: String
-    {
-        return "(\(x),\(y))"
-    }
-    
-    init(x:Int,y:Int)
-    {
-        self.x=x
-        self.y=y
-    }
-    
-    override var hash: Int
-    {
-        return x.hashValue ^ y.hashValue
-    }
-
-    static func == (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool
-    {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-    
-    static func != (lhs: PlaygroundPosition, rhs: PlaygroundPosition) -> Bool
-    {
-        return lhs.x != rhs.x || lhs.y != rhs.y
-    }
-
     var x : Int
     var y : Int
-    
-    
-    required init(coder: NSCoder)
-    {
-        self.x = Int(coder.decodeInt32(forKey: "x"))
-        self.y = Int(coder.decodeInt32(forKey: "y"))
-        
-    }
-    
-    func encode(with aCoder: NSCoder)
-    {
-        aCoder.encode(self.x, forKey: "x")
-        aCoder.encode(self.y, forKey: "y")
-    }
 }
 
 
@@ -96,7 +57,7 @@ class Beamer : NSObject,NSCoding
 
 
 
-class Playground: NSObject,NSCoding
+class Playground
 {
     
     static func up(position:PlaygroundPosition)->PlaygroundPosition
@@ -180,7 +141,7 @@ class Playground: NSObject,NSCoding
     var positionPlayerOne : PlaygroundPosition // current and startposition of Player One
     var positionPlayerTwo : PlaygroundPosition // current and startposition of Player Two
     
-    override public var description : String
+    public var description : String
     {
         var strX = ""
         var strY = "\n"
@@ -223,7 +184,6 @@ class Playground: NSObject,NSCoding
         self.playerPosition = coder.decodeObject(forKey: "playerPosition") as! PlaygroundPosition
         self.oldPlayerPosition = coder.decodeObject(forKey: "oldPlayerPosition") as! PlaygroundPosition
         self.moveDirection = PlayerMoveDirection(rawValue: Int(coder.decodeInt32(forKey: "moveDirection")))!
-        super.init()
         self.beamerArray = coder.decodeObject(forKey: "beamerArray") as! Array<Beamer>
         self.playgroundArray = coder.decodeObject(forKey: "playgroundArray") as! Array<Array<MazeElement>>
         self.playerOneMazeElement = coder.decodeObject(forKey: "playerOneMazeElement") as? MazeElement
@@ -294,7 +254,7 @@ class Playground: NSObject,NSCoding
         }
     }
     
-    override func copy() -> Any
+    func copy() -> Any
     {
         let playground = Playground()
         playground.playgroundArray = self.playgroundArray.map{$0}
@@ -326,7 +286,7 @@ class Playground: NSObject,NSCoding
         return playground
     }
 
-    override init()
+    init()
     {
         self.positionPlayerOne = Playground.Null()
         self.positionPlayerTwo = Playground.Null()
@@ -335,7 +295,6 @@ class Playground: NSObject,NSCoding
         self.oldPlayerPosition = PlaygroundPosition(x: -1, y: -1)
         self.moveDirection=PlayerMoveDirection.NONE
         self.finished = qaTesting
-        super.init()
     }
     
     // MARK: Player changes
@@ -541,7 +500,7 @@ class Playground: NSObject,NSCoding
                 else
                 {
                     canMoveChicken = canMoveChickenAcidPuppetUpDown(direction:direction)
-                    if MazeElement.canMoveUpDown(item: mazeElementType) == true || canMoveChicken
+                    if let mzE = mazeElementType, mzE.canMoveUpDown() == true || canMoveChicken
                     {
                         anzahl_spielzuege += 1
                         // Alte position löschen und den View Controller updaten.
@@ -551,6 +510,8 @@ class Playground: NSObject,NSCoding
                     {
                         canMove = false
                     }
+                    
+                    
                     if canMove == true
                     {
                         sceneDelegate?.animationCompleted(function:
@@ -616,7 +577,7 @@ class Playground: NSObject,NSCoding
                 else
                 {
                     canMoveFish = canMoveFishBombPuppetLeftOrRight(direction:direction)
-                    if  MazeElement.canMoveLeftRight(item: mazeElementType) == true || canMoveFish == true
+                    if let mzE = mazeElementType, mzE.canMoveLeftRight() == true || canMoveFish == true
                     {
                         anzahl_spielzuege += 1
                         removeItemFromPlayground(mazeElementType: mazeElementType, position: newPosition!)
@@ -871,7 +832,7 @@ class Playground: NSObject,NSCoding
     {
         // CAMERA
         // we moved the player, now check if we have to move the camera
-        let newCameraPosition = cameraLeftTopPosition
+        var newCameraPosition = cameraLeftTopPosition
         
         if direction==PlayerMoveDirection.NONE {
             newCameraPosition.x = playerPosition.x - 3
@@ -906,7 +867,7 @@ class Playground: NSObject,NSCoding
     {
         if let mazeelementtype = mazeElementType
         {
-            if MazeElement.isMap(mazeelementtype)
+            if mazeelementtype.isMap()
             {
                 mapsFound.append(mazeelementtype)
                 sceneDelegate?.updateViewController(type: mazeelementtype)

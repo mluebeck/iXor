@@ -9,27 +9,10 @@
 import UIKit
 import SpriteKit
 
-class PathSelector: NSObject,UIGestureRecognizerDelegate {
+extension PathSelector : UIGestureRecognizerDelegate {
     
-    //var panGestureRecognizer  : UIPanGestureRecognizer?
-    var longPressGestureRecognizer  : UILongPressGestureRecognizer?
-    
-    var intermediateAlreadySpriteDrawnQueue = [Int : MazeElement]()
-    var movingQueue = Array<PlayerMoveDirection>()
-    var startDrawing = false
-    var oldPosition : PlaygroundPosition?
-    var oldcoordinates : CGPoint?
-    var playground : Playground
-    
-    init(scene:SceneDelegate) {
-        playground = scene.getSceneDataSource()
-        playground.sceneDelegate = scene
-        super.init()
-        longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(PathSelector.handleLongPressFrom(recognizer:)))
-        longPressGestureRecognizer?.minimumPressDuration=0.01
-        //panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action:#selector(PathSelector.handlePanFrom(recognizer:)))
-        //panGestureRecognizer?.minimumNumberOfTouches = 1
-        longPressGestureRecognizer?.delegate = self
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
@@ -44,17 +27,108 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
         }
     }
     
+    
+}
+
+class PathSelector: NSObject  {
+    
+    //var panGestureRecognizer  : UIPanGestureRecognizer?
+    var longPressGestureRecognizer  : UILongPressGestureRecognizer?
+    var tapGestureRecognizer  : UITapGestureRecognizer?
+
+    var intermediateAlreadySpriteDrawnQueue = [Int : MazeElement]()
+    var movingQueue = Array<PlayerMoveDirection>()
+    var startDrawing = false
+    var oldPosition : PlaygroundPosition?
+    var oldcoordinates : CGPoint?
+    var playground : Playground
+    
+    init(scene:SceneDelegate) {
+        playground = scene.getSceneDataSource()
+        playground.sceneDelegate = scene
+        super.init()
+        
+        self.longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(PathSelector.handleLongPressFrom(recognizer:)))
+        self.longPressGestureRecognizer?.minimumPressDuration=0.1
+        self.longPressGestureRecognizer?.delegate = self
+       
+        self.tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action:#selector(PathSelector.handleTapFrom(recognizer:)))
+        self.tapGestureRecognizer?.delegate = self
+    }
+    
+    
+    
     func addGestureSelector(view:UIView)
     {
         view.addGestureRecognizer(longPressGestureRecognizer!)
+        view.addGestureRecognizer(tapGestureRecognizer!)
         //view.addGestureRecognizer(panGestureRecognizer!)
     }
     
-
+    @objc func handleTapFrom(recognizer:UILongPressGestureRecognizer)
+    {
+       print("Tap!")
+        let segment = playground.sceneDelegate?.segmentSize()
+        let segmentX = segment?.x
+        let segmentY = segment?.y
+        let coordinates = playground.sceneDelegate?.fetchGestureTapCoordinates(gesture: longPressGestureRecognizer!)
+        // recognizer.location(in: parentScene.view)
+        let x = Double((coordinates?.x)!)//+Double(self.playground.cameraLeftTopPosition.x)
+        //let y = Double(height-coordinates.y)//+Double(self.playground.cameraLeftTopPosition.y)
+        
+        //print("handleLongPressFrom Tapped! \(x), \(coordinates?.y) ")
+        let coordX = Int(x/Double(segmentX!))
+        let coordY = Int(((round(Double(segmentY!)*Double((coordinates?.y)!))/Double(segmentY!))/Double(segmentY!)))
+        print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
+        print("cameraPosition: \(playground.cameraLeftTopPosition.x), \(playground.cameraLeftTopPosition.y) ")
+        
+        let xPos = coordX+playground.cameraLeftTopPosition.x
+        let yPos = coordY+playground.cameraLeftTopPosition.y
+        
+        let position = PlaygroundPosition(x:xPos,
+                                          y:yPos)
+        //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
+        
+        print("position: \(position) \(playground.playerPosition)")
+        let xTap = position.x
+        let yTap = position.y
+        
+        let playerX = playground.playerPosition.x
+        let playerY = playground.playerPosition.y
+        
+        if xTap == playerX {
+            if yTap < playerY {
+                self.moving(position: PlaygroundPosition(x:playerX  , y:playerY-1  ))
+                playground.movePlayer(queue: movingQueue)
+                movingQueue.removeAll()
+            }
+            if yTap > playerY {
+                self.moving(position: PlaygroundPosition(x:playerX  , y:playerY+1  ))
+                playground.movePlayer(queue: movingQueue)
+                movingQueue.removeAll()
+            }
+        }
+        
+        if yTap == playerY {
+            if xTap < playerX {
+                self.moving(position: PlaygroundPosition(x:playerX-1  , y:playerY  ))
+                playground.movePlayer(queue: movingQueue)
+                movingQueue.removeAll()
+            }
+            if xTap > playerX {
+                self.moving(position: PlaygroundPosition(x:playerX+1  , y:playerY  ))
+                playground.movePlayer(queue: movingQueue)
+                movingQueue.removeAll()
+            }
+        }
+        
+     }
     
     
     @objc func handleLongPressFrom(recognizer:UILongPressGestureRecognizer)
     {
+        print("handleLongPressFrom!")
+
         if recognizer.state==UIGestureRecognizerState.ended {
             oldcoordinates=nil
             startDrawing = false
@@ -178,8 +252,8 @@ class PathSelector: NSObject,UIGestureRecognizerDelegate {
             }
             else
             {
-                print("-> \(position.hashValue)")
-                if oldPosition?.hashValue != position.hashValue && oldPosition != nil
+                print("-> \(position)")
+                if let op = oldPosition, op != position
                 {
                     print("Schon drin, also nichts tun \(intermediateAlreadySpriteDrawnQueue.count)")
                     let mazeElement = intermediateAlreadySpriteDrawnQueue[(oldPosition?.hashValue)!]

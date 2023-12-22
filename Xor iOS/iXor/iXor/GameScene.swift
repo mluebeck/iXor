@@ -319,7 +319,7 @@ class GameScene: SKScene {
     
     func moveCameraToPlaygroundCoordinates(position:PlaygroundPosition)
     {
-        let coord = position
+        var coord = position
         if coord.x<0
         {
             coord.x = 0
