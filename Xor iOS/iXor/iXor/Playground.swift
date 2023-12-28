@@ -299,16 +299,17 @@ class Playground
     
     // MARK: Player changes
     
-    func changePlayer()
+    func changePlayerVisible()
     {
         self.moveDirection = PlayerMoveDirection.PLAYERCHANGED
         let previousPlayground = self.copy() as! Playground
         Playground.replay.append(previousPlayground)
         self.anzahl_spielzuege += 1
-        sceneDelegate?.updateViewController(event:MazeEvent.switchPlayer)
+        sceneDelegate?.updateViewController(event:MazeEvent.switchPlayerVisible)
         sceneDelegate?.updateViewController(event:MazeEvent.step_done)
 
     }
+    
     
     
     func movePlayer(queue:Array<PlayerMoveDirection>)

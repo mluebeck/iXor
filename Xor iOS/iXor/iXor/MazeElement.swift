@@ -70,7 +70,8 @@ enum MazeEvent : Int
     death_player2,
     death_both,
     redraw,
-    switchPlayer,
+    switchPlayerSilent,
+    switchPlayerVisible,
     movesExceeded,
     reloadAll,
     none

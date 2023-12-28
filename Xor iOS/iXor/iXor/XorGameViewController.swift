@@ -294,8 +294,11 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
             self.mazeEvent = mazeEvent
             switch(mazeEvent)
             {
-            case MazeEvent.switchPlayer:
+            case MazeEvent.switchPlayerSilent:
                 self.switchPlayerPressedWithoutCameraReorientation()
+                break
+            case MazeEvent.switchPlayerVisible:
+                self.switchPlayerPressed()
                 break
             case MazeEvent.map1_found:
                 self.mapLeftUp.alpha = 1.0

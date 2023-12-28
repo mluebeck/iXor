@@ -35,6 +35,7 @@ class PathSelector: NSObject  {
     //var panGestureRecognizer  : UIPanGestureRecognizer?
     var longPressGestureRecognizer  : UILongPressGestureRecognizer?
     var tapGestureRecognizer  : UITapGestureRecognizer?
+    var doubleTapGestureRecognizer  : UITapGestureRecognizer?
 
     var intermediateAlreadySpriteDrawnQueue = [Int : MazeElement]()
     var movingQueue = Array<PlayerMoveDirection>()
@@ -49,11 +50,18 @@ class PathSelector: NSObject  {
         super.init()
         
         self.longPressGestureRecognizer = UILongPressGestureRecognizer.init(target: self, action:#selector(PathSelector.handleLongPressFrom(recognizer:)))
-        self.longPressGestureRecognizer?.minimumPressDuration=0.1
+        self.longPressGestureRecognizer?.minimumPressDuration=0.5
         self.longPressGestureRecognizer?.delegate = self
        
         self.tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action:#selector(PathSelector.handleTapFrom(recognizer:)))
+        self.tapGestureRecognizer?.numberOfTapsRequired = 1
         self.tapGestureRecognizer?.delegate = self
+       
+        self.doubleTapGestureRecognizer = UITapGestureRecognizer.init(target: self, action:#selector(PathSelector.handleDoubleTapFrom(recognizer:)))
+        self.doubleTapGestureRecognizer?.numberOfTapsRequired = 2
+        self.doubleTapGestureRecognizer?.delegate = self
+       
+        
     }
     
     
@@ -65,6 +73,15 @@ class PathSelector: NSObject  {
         //view.addGestureRecognizer(panGestureRecognizer!)
     }
     
+    @objc func handleDoubleTapFrom(recognizer:UILongPressGestureRecognizer)
+    {
+        
+    }
+    
+    func handleDoubleTap()
+    {
+        self.playground.changePlayerVisible()
+    }
     @objc func handleTapFrom(recognizer:UILongPressGestureRecognizer)
     {
        print("Tap!")
@@ -79,7 +96,7 @@ class PathSelector: NSObject  {
         //print("handleLongPressFrom Tapped! \(x), \(coordinates?.y) ")
         let coordX = Int(x/Double(segmentX!))
         let coordY = Int(((round(Double(segmentY!)*Double((coordinates?.y)!))/Double(segmentY!))/Double(segmentY!)))
-        print("handleLongPressFrom Tapped! \(coordX), \(coordY) ")
+        print("Tap! \(coordX), \(coordY) ")
         print("cameraPosition: \(playground.cameraLeftTopPosition.x), \(playground.cameraLeftTopPosition.y) ")
         
         let xPos = coordX+playground.cameraLeftTopPosition.x
@@ -90,6 +107,10 @@ class PathSelector: NSObject  {
         //let position2 = PlaygroundPosition(x:position.x,y:position.y-1)
         
         print("position: \(position) \(playground.playerPosition)")
+        if position.x == playground.playerPosition.x && position.y == playground.playerPosition.y {
+            self.handleDoubleTap()
+            return
+        }
         let xTap = position.x
         let yTap = position.y
         
@@ -181,7 +202,7 @@ class PathSelector: NSObject  {
                 (playground.akt_spieler_ist_playerOne==false && (e?.mazeElementType == MazeElementType.player_1)))
                 
             {
-                playground.changePlayer()
+                playground.changePlayerVisible()
             }
             
             //self.moving(position: position)
