@@ -848,7 +848,11 @@ class Playground
         if (cameraLeftTopPosition.y == (playerPosition.y) && direction==PlayerMoveDirection.UP) ||
             (abs(cameraLeftTopPosition.y-playerPosition.y)>6 && direction==PlayerMoveDirection.DOWN)
         {
+            if playerPosition.y - 3 >= 0 {
                 newCameraPosition.y = playerPosition.y - 3
+            } else {
+                newCameraPosition.y = 0 
+            }
         }
         if newCameraPosition.y > (PlaygroundBuilder.Constants.groesseY-PlaygroundBuilder.Constants.sichtbareGroesseY)
         {
