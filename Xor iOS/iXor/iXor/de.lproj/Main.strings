@@ -51,7 +51,7 @@
 "dvu-ei-zaP.text" = "Karte";
 
 /* Class = "UILabel"; text = "In the Beginning"; ObjectID = "g86-dt-vrk"; */
-"g86-dt-vrk.text" = "An Anfang";
+"g86-dt-vrk.text" = "Am Anfang";
 
 /* Class = "UILabel"; text = "Keine Karte verfügbar.\n\nFinde alle vier Teile, um sie vollständig anzuzeigen!"; ObjectID = "gqB-Sb-UYk"; */
 "gqB-Sb-UYk.text" = "Keine Karte verfügbar.\n\nFinde alle vier Teile, um sie vollständig anzuzeigen!";

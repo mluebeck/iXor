@@ -136,7 +136,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         super.viewDidLayoutSubviews()
         updateCurrentConstraintsToSize(size: self.view.bounds.size)
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) {
-            self.playgroundToConstraint.constant = 44.0
+            //self.playgroundToConstraint.constant = 44.0
         }
     }
     
