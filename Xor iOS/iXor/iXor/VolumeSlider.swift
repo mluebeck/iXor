@@ -135,8 +135,20 @@ class VolumeSlider: UIView {
         
         self.sliderMusic.addTarget(self, action: #selector(sliderMusicChanged), for: .valueChanged)
         self.sliderSoundeffects.addTarget(self, action: #selector(sliderSoundEffectsChanged), for: .valueChanged)
-        
-        
+        if let v = self.volumeControl {
+            switch v.valueMusic() {
+            case .music(let value):
+                self.sliderMusic.value = Float(value)
+            case .sound(let value):
+                self.sliderSoundeffects.value = Float(value)
+            }
+            switch v.valueSound() {
+            case .music(let value):
+                self.sliderMusic.value = Float(value)
+            case .sound(let value):
+                self.sliderSoundeffects.value = Float(value)
+            }
+        }
     }
     
     required init?(coder: NSCoder) {

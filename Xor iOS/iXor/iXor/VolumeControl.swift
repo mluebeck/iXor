@@ -15,5 +15,7 @@ enum Volume {
 
 protocol VolumeControl {
     func changed(value:Volume)
+    func valueMusic()->Volume
+    func valueSound()->Volume
 }
 
