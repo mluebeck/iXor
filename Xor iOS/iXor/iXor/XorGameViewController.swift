@@ -26,6 +26,14 @@ enum ButtonPressed
     case DOWN
 }
 
+class MyVolumeControl : VolumeControl {
+    func changed(value: Volume) {
+        print("Volume changed: \(value)")
+    }
+    
+    
+}
+
 class XorGameViewController: UIViewController,UIScrollViewDelegate
 {
     
@@ -113,6 +121,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     var replayModeRecursive = false
     var replayStopPressed = false
     var currentNumberOfReplayMove = 0
+    var volumeSlider = VolumeSlider(frame: CGRectZero, volumeControl: MyVolumeControl())
     
     // MARK: Rotation and Status Bar
     override var prefersStatusBarHidden: Bool
@@ -135,8 +144,51 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     {
         super.viewDidLayoutSubviews()
         updateCurrentConstraintsToSize(size: self.view.bounds.size)
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) {
-            //self.playgroundToConstraint.constant = 44.0
+         
+    }
+    
+    @IBAction func closeMusicContainerView() {
+        self.containerView?.removeFromSuperview()
+        self.containerView=nil
+    }
+    
+    var containerView : UIView?
+    
+    func makeContainerView() {
+        let containerView = UIView.init(frame: self.view.bounds)
+        containerView.backgroundColor = .black.withAlphaComponent(0.3)
+        self.view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: self.view.topAnchor,constant: 0.0),
+            containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 0.0),
+            containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: 0.0),
+            containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,constant: 0.0)
+        ])
+        let gesture = UITapGestureRecognizer()
+        gesture.numberOfTapsRequired = 1
+        gesture.addTarget(self, action: #selector(closeMusicContainerView) )
+        containerView.addGestureRecognizer(gesture)
+        self.view.bringSubview(toFront: containerView)
+        self.containerView = containerView
+
+    }
+    
+    @IBAction func musicButtonPressed(_ sender: UIButton) {
+        if self.containerView == nil {
+            self.makeContainerView()
+            self.containerView?.addSubview(self.volumeSlider)
+            self.volumeSlider.backgroundColor = .lightGray
+            self.volumeSlider.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                self.volumeSlider.heightAnchor.constraint(equalToConstant: 150.0),
+                self.volumeSlider.widthAnchor.constraint(equalToConstant: self.view.frame.size.width/2.0),
+                self.volumeSlider.centerXAnchor.constraint(equalTo: self.view.centerXAnchor,constant: 0.0),
+                self.volumeSlider.centerYAnchor.constraint(equalTo: self.view.centerYAnchor,constant: 0.0),
+            ])
+        } else {
+            self.volumeSlider.removeFromSuperview()
+            self.containerView?.removeFromSuperview()
         }
     }
     
@@ -212,6 +264,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
     
     override func viewDidAppear(_ animated: Bool)
     {
+ 
         let defaults = UserDefaults.standard
         if defaults.bool(forKey: "scrollviewuser") == false || 1==0
         {
@@ -1003,6 +1056,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
         
     }
     
+    /*
     @IBAction func musicButtonPressed()
     {
         if XorGameViewController.appDelegate.musicBox.isPlaying()
@@ -1017,7 +1071,7 @@ class XorGameViewController: UIViewController,UIScrollViewDelegate
             musicButton.setImage(UIImage.init(named: "music"), for: UIControlState.normal)
             
         }
-    }
+    }*/
     
     func replayControllerView(active:Bool)
     {

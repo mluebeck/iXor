@@ -67,7 +67,9 @@
 		8C4312BB1DF4717800E80996 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C4312B91DF4717800E80996 /* LaunchScreen.storyboard */; };
 		8C44EBEC1E26C0CC00229C93 /* XorLevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */; };
 		8C564AA81E2BF36A00C89298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C564AA71E2BF36A00C89298 /* Assets.xcassets */; };
+		8CEDF7972B61A13600BD7974 /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEDF7962B61A13600BD7974 /* VolumeSlider.swift */; };
 		8CEFF07A1E39774D00944FB3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */; };
+		8CF79DB72B8E35830048559A /* VolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF79DB62B8E35830048559A /* VolumeControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +160,9 @@
 		8C4312C71DF4717900E80996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C44EBEB1E26C0CC00229C93 /* XorLevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XorLevelTableViewController.swift; sourceTree = "<group>"; };
 		8C564AA71E2BF36A00C89298 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CEDF7962B61A13600BD7974 /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
 		8CEFF0791E39774D00944FB3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
+		8CF79DB62B8E35830048559A /* VolumeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeControl.swift; sourceTree = "<group>"; };
 		9E9C1CC9EBD7E3380D1987E6 /* Pods_XanadooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XanadooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30677AEFC29E4F5338FB2E9 /* Pods_Xanadoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xanadoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44E9335DD0B8B1F29A4302D /* Pods-XanadooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XanadooTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XanadooTests/Pods-XanadooTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 		8C4312A91DF4717800E80996 /* iXor */ = {
 			isa = PBXGroup;
 			children = (
+				8CEDF7962B61A13600BD7974 /* VolumeSlider.swift */,
 				8C4312AA1DF4717800E80996 /* AppDelegate.swift */,
 				109FBE4C1E5E72E000597993 /* MusicBox.swift */,
 				108903411E5B4DA10086E657 /* View Controller */,
@@ -326,6 +331,7 @@
 				10A03C831E5A5252007D9F1F /* level */,
 				10659AFC1E3BDBB0001D4235 /* FrostedView */,
 				8C564AA91E2BF38F00C89298 /* Resources */,
+				8CF79DB62B8E35830048559A /* VolumeControl.swift */,
 			);
 			path = iXor;
 			sourceTree = "<group>";
@@ -425,7 +431,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = MarioRotz;
 				TargetAttributes = {
 					8C4312A61DF4717800E80996 = {
@@ -565,8 +571,10 @@
 				8C4312B11DF4717800E80996 /* GameScene.swift in Sources */,
 				10F560A21E4A913A000B26B0 /* SceneDelegateImplementation.swift in Sources */,
 				10659B0C1E3BE748001D4235 /* UIView+REFrostedViewController.m in Sources */,
+				8CEDF7972B61A13600BD7974 /* VolumeSlider.swift in Sources */,
 				8C24163F1DF9FF490009FCC6 /* Playground.swift in Sources */,
 				107FF8031E526E6F006B9BCF /* PathSelector.swift in Sources */,
+				8CF79DB72B8E35830048559A /* VolumeControl.swift in Sources */,
 				8C4312B31DF4717800E80996 /* XorGameViewController.swift in Sources */,
 				106DAA081E46A47800E637B0 /* InfoWebViewController.swift in Sources */,
 				10BACAFD1E5090380034C42A /* EdgeSprite.swift in Sources */,
@@ -779,7 +787,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -812,7 +819,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = iXor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;

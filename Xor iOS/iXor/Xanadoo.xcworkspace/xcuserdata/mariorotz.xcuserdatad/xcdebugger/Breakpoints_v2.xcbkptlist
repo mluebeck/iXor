@@ -23,32 +23,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DDCB0F26-59E0-4EAD-9CF3-AC5D82D2AC9E"
-            shouldBeEnabled = "Yes"
+            uuid = "E0A4B95B-B45E-4054-895A-D89E3723C31E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iXor/PathSelector.swift"
+            filePath = "iXor/XorGameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "handleTapFrom(recognizer:)"
-            landmarkType = "7">
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E6680BA7-FEFD-4D5D-B5AD-60C4F5F48288"
+            uuid = "F0B8B610-D519-43C6-9CAD-1DFFD844AA98"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iXor/Playground.swift"
+            filePath = "iXor/XorGameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "762"
-            endingLineNumber = "762"
-            landmarkName = "movePlayerToNewPositionAndUpdateScene(direction:currentPosition:newPosition:beamed:)"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "XorGameViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F20E8811-ED34-4B42-BEE5-98467B8F33DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iXor/XorGameViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "changed(value:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
